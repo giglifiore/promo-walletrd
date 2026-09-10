@@ -337,6 +337,180 @@
         }
 
         /* =========================================
+           PROMOTION LIST
+        ========================================= */
+
+        .promotions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .promotion-card {
+            border: 1px solid #e4ece9;
+            border-radius: 14px;
+
+            padding: 17px;
+
+            background: #fbfdfc;
+
+            transition: .2s;
+        }
+
+        .promotion-card:hover {
+            border-color: #b7dccb;
+            background: #f8fcfa;
+        }
+
+        .promotion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            gap: 15px;
+
+            margin-bottom: 9px;
+        }
+
+        .promotion-title {
+            margin: 0;
+
+            font-size: 17px;
+            font-weight: 800;
+
+            color: #263238;
+        }
+
+        .promotion-category {
+            display: inline-block;
+
+            margin-top: 6px;
+
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            background: #edf8f4;
+            color: #168f60;
+
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .promotion-status {
+            flex-shrink: 0;
+
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .promotion-status.active {
+            background: #eaf8f1;
+            color: #168f60;
+        }
+
+        .promotion-status.inactive {
+            background: #f1f3f4;
+            color: #78909c;
+        }
+
+        .promotion-description {
+            margin: 11px 0 14px;
+
+            color: #607d8b;
+
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .promotion-price {
+            display: flex;
+            align-items: baseline;
+            gap: 9px;
+
+            margin-bottom: 14px;
+        }
+
+        .price-promo {
+            font-size: 22px;
+            font-weight: 800;
+
+            color: #168f60;
+        }
+
+        .price-normal {
+            font-size: 13px;
+
+            color: #90a4ae;
+
+            text-decoration: line-through;
+        }
+
+        .discount-badge {
+            padding: 4px 7px;
+
+            border-radius: 7px;
+
+            background: #fff3e0;
+            color: #ef8b00;
+
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .promotion-details {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 8px;
+
+            border-top: 1px solid #e9efed;
+
+            padding-top: 12px;
+        }
+
+        .promotion-detail {
+            font-size: 11px;
+            color: #78909c;
+        }
+
+        .promotion-detail strong {
+            display: block;
+
+            margin-top: 3px;
+
+            color: #455a64;
+
+            font-size: 12px;
+        }
+
+        .promotion-metrics {
+            display: flex;
+
+            gap: 18px;
+
+            margin-top: 13px;
+
+            padding-top: 12px;
+
+            border-top: 1px solid #e9efed;
+
+            font-size: 11px;
+
+            color: #78909c;
+        }
+
+        .promotion-metric strong {
+            color: #455a64;
+        }
+
+        /* =========================================
            EMPTY PROMOTIONS
         ========================================= */
 
@@ -611,6 +785,10 @@
                 grid-template-columns: 1fr;
             }
 
+            .promotion-header {
+                flex-direction: column;
+            }
+
         }
 
     </style>
@@ -865,7 +1043,22 @@
             </div>
 
 
-            <div class="empty">
+            <!-- LISTA DINAMICA -->
+
+            <div
+                id="promotionsList"
+                class="promotions-list"
+            >
+            </div>
+
+
+            <!-- EMPTY -->
+
+            <div
+                class="empty"
+                id="emptyPromotions"
+                style="display:none;"
+            >
 
                 <div class="empty-icon">
                     🎟️
@@ -1090,7 +1283,11 @@
 
 
     import {
-        getFirestore,
+        initializeFirestore,
+        collection,
+        query,
+        where,
+        getDocs,
         doc,
         getDoc
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
@@ -1102,14 +1299,14 @@
     // =====================================================
 
     const firebaseConfig = {
-		  apiKey: "AIzaSyA_5TT1VTLkDSjYfrzTGWZ1Uv_o1yZqQYQ",
-		  authDomain: "promo-walletrd.firebaseapp.com",
-		  projectId: "promo-walletrd",
-		  storageBucket: "promo-walletrd.firebasestorage.app",
-		  messagingSenderId: "933468918139",
-		  appId: "1:933468918139:web:5bf2ec7e4dc37d7c3e2dde",
-		  measurementId: "G-DYXCNPBH62"
-		};
+        apiKey: "AIzaSyA_5TT1VTLkDSjYfrzTGWZ1Uv_o1yZqQYQ",
+        authDomain: "promo-walletrd.firebaseapp.com",
+        projectId: "promo-walletrd",
+        storageBucket: "promo-walletrd.firebasestorage.app",
+        messagingSenderId: "933468918139",
+        appId: "1:933468918139:web:5bf2ec7e4dc37d7c3e2dde",
+        measurementId: "G-DYXCNPBH62"
+    };
 
 
 
@@ -1126,7 +1323,9 @@
 
 
     const db =
-        getFirestore(app);
+        initializeFirestore(app, {
+            experimentalForceLongPolling: true
+        });
 
 
 
@@ -1172,6 +1371,522 @@
 
     const logoutButton =
         document.getElementById("logoutButton");
+
+
+    const totalPromociones =
+        document.getElementById("totalPromociones");
+
+
+    const promocionesActivas =
+        document.getElementById("promocionesActivas");
+
+
+    const totalClientes =
+        document.getElementById("totalClientes");
+
+
+    const totalRedenciones =
+        document.getElementById("totalRedenciones");
+
+
+    const promotionsList =
+        document.getElementById("promotionsList");
+
+
+    const emptyPromotions =
+        document.getElementById("emptyPromotions");
+
+
+
+    // =====================================================
+    // FORMATEAR NUMERO
+    // =====================================================
+
+    function formatNumber(value) {
+
+        return Number(value || 0)
+            .toLocaleString("es-DO");
+
+    }
+
+
+
+    // =====================================================
+    // FORMATEAR PRECIO
+    // =====================================================
+
+    function formatPrice(value) {
+
+        const numero =
+            Number(value || 0);
+
+        return "RD$ " +
+            numero.toLocaleString(
+                "es-DO",
+                {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }
+            );
+
+    }
+
+
+
+    // =====================================================
+    // FORMATEAR FECHA
+    // =====================================================
+
+    function formatDate(value) {
+
+        if (!value) {
+            return "—";
+        }
+
+
+        try {
+
+            const fecha =
+                new Date(value + "T00:00:00");
+
+
+            return fecha.toLocaleDateString(
+                "es-DO",
+                {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric"
+                }
+            );
+
+        }
+        catch (error) {
+
+            return value;
+
+        }
+
+    }
+
+
+
+    // =====================================================
+    // ESCAPAR HTML
+    // =====================================================
+
+    function escapeHtml(value) {
+
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+
+    // =====================================================
+    // RENDER PROMOCIONES
+    // =====================================================
+
+    function renderPromotions(promociones) {
+
+        promotionsList.innerHTML = "";
+
+
+        // -----------------------------------------------
+        // SIN PROMOCIONES
+        // -----------------------------------------------
+
+        if (promociones.length === 0) {
+
+            promotionsList.style.display =
+                "none";
+
+            emptyPromotions.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        // -----------------------------------------------
+        // CON PROMOCIONES
+        // -----------------------------------------------
+
+        promotionsList.style.display =
+            "flex";
+
+        emptyPromotions.style.display =
+            "none";
+
+
+        promociones.forEach(
+            (promo) => {
+
+                const activa =
+                    promo.activa === true ||
+                    promo.estado === "activa";
+
+
+                const estadoTexto =
+                    activa
+                        ? "Activa"
+                        : "Inactiva";
+
+
+                const estadoClass =
+                    activa
+                        ? "active"
+                        : "inactive";
+
+
+                const nombre =
+                    promo.nombre ||
+                    "Promoción sin nombre";
+
+
+                const descripcion =
+                    promo.descripcion ||
+                    "Sin descripción";
+
+
+                const categoria =
+                    promo.categoria ||
+                    "General";
+
+
+                const precioNormal =
+                    promo.precioNormal;
+
+
+                const precioPromo =
+                    promo.precioPromo;
+
+
+                const descuento =
+                    promo.descuento || 0;
+
+
+                const cantidad =
+                    promo.cantidadDisponible ?? 0;
+
+
+                const vistas =
+                    promo.vistas ?? 0;
+
+
+                const redenciones =
+                    promo.redenciones ?? 0;
+
+
+                const fechaInicio =
+                    formatDate(
+                        promo.fechaInicio
+                    );
+
+
+                const fechaFin =
+                    formatDate(
+                        promo.fechaFin
+                    );
+
+
+
+                const card =
+                    document.createElement("div");
+
+
+                card.className =
+                    "promotion-card";
+
+
+                card.innerHTML = `
+
+                    <div class="promotion-header">
+
+                        <div>
+
+                            <h3 class="promotion-title">
+                                ${escapeHtml(nombre)}
+                            </h3>
+
+                            <span class="promotion-category">
+                                ${escapeHtml(categoria)}
+                            </span>
+
+                        </div>
+
+                        <span class="promotion-status ${estadoClass}">
+                            ${estadoTexto}
+                        </span>
+
+                    </div>
+
+
+                    <div class="promotion-description">
+                        ${escapeHtml(descripcion)}
+                    </div>
+
+
+                    <div class="promotion-price">
+
+                        <span class="price-promo">
+                            ${formatPrice(precioPromo)}
+                        </span>
+
+                        <span class="price-normal">
+                            ${formatPrice(precioNormal)}
+                        </span>
+
+                        <span class="discount-badge">
+                            ${formatNumber(descuento)}% OFF
+                        </span>
+
+                    </div>
+
+
+                    <div class="promotion-details">
+
+                        <div class="promotion-detail">
+
+                            Vigencia
+
+                            <strong>
+                                ${fechaInicio}
+                                -
+                                ${fechaFin}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="promotion-detail">
+
+                            Disponibles
+
+                            <strong>
+                                ${formatNumber(cantidad)}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="promotion-metrics">
+
+                        <div class="promotion-metric">
+                            👁️
+                            <strong>
+                                ${formatNumber(vistas)}
+                            </strong>
+                            vistas
+                        </div>
+
+
+                        <div class="promotion-metric">
+                            🎁
+                            <strong>
+                                ${formatNumber(redenciones)}
+                            </strong>
+                            redenciones
+                        </div>
+
+                    </div>
+
+                `;
+
+
+                promotionsList.appendChild(card);
+
+            }
+        );
+
+    }
+
+
+
+    // =====================================================
+    // CARGAR PROMOCIONES
+    // =====================================================
+
+    async function loadPromotions(user) {
+
+        try {
+
+            const promocionesRef =
+                collection(
+                    db,
+                    "promociones"
+                );
+
+
+            const promocionesQuery =
+                query(
+                    promocionesRef,
+                    where(
+                        "negocioId",
+                        "==",
+                        user.uid
+                    )
+                );
+
+
+            const snapshot =
+                await getDocs(
+                    promocionesQuery
+                );
+
+
+            const promociones =
+                snapshot.docs.map(
+                    (item) => {
+
+                        return {
+                            id: item.id,
+                            ...item.data()
+                        };
+
+                    }
+                );
+
+
+            console.log(
+                "Promociones del negocio:",
+                promociones
+            );
+
+
+            // ---------------------------------------------
+            // ESTADISTICAS
+            // ---------------------------------------------
+
+            const activas =
+                promociones.filter(
+                    (promo) =>
+                        promo.activa === true ||
+                        promo.estado === "activa"
+                ).length;
+
+
+            const redenciones =
+                promociones.reduce(
+                    (total, promo) =>
+                        total +
+                        Number(
+                            promo.redenciones || 0
+                        ),
+                    0
+                );
+
+
+            totalPromociones.textContent =
+                formatNumber(
+                    promociones.length
+                );
+
+
+            promocionesActivas.textContent =
+                formatNumber(
+                    activas
+                );
+
+
+            totalRedenciones.textContent =
+                formatNumber(
+                    redenciones
+                );
+
+
+            // ---------------------------------------------
+            // CLIENTES
+            // ---------------------------------------------
+            //
+            // Por ahora permanece en 0 porque las reglas
+            // actuales de Firestore no permiten que un
+            // negocio lea todos los documentos clientes.
+            //
+            // Más adelante podemos crear una estructura
+            // de clientes vinculados al negocio.
+            //
+
+            totalClientes.textContent =
+                "0";
+
+
+            // ---------------------------------------------
+            // ORDENAR
+            // ---------------------------------------------
+            //
+            // Las promociones más recientes primero.
+            //
+
+            promociones.sort(
+                (a, b) => {
+
+                    const fechaA =
+                        a.fechaCreacion?.toMillis
+                            ? a.fechaCreacion.toMillis()
+                            : 0;
+
+
+                    const fechaB =
+                        b.fechaCreacion?.toMillis
+                            ? b.fechaCreacion.toMillis()
+                            : 0;
+
+
+                    return fechaB - fechaA;
+
+                }
+            );
+
+
+            // ---------------------------------------------
+            // MOSTRAR
+            // ---------------------------------------------
+
+            renderPromotions(
+                promociones
+            );
+
+        }
+        catch (error) {
+
+            console.error(
+                "Error cargando promociones:",
+                error
+            );
+
+
+            promotionsList.innerHTML = `
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        ⚠️
+                    </div>
+
+                    <h3>
+                        No fue posible cargar las promociones
+                    </h3>
+
+                    <p>
+                        Ocurrió un problema al consultar
+                        las promociones de tu negocio.
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+    }
 
 
 
@@ -1335,6 +2050,16 @@
 
 
                 // -----------------------------------------
+                // CARGAR PROMOCIONES
+                // -----------------------------------------
+
+                await loadPromotions(
+                    user
+                );
+
+
+
+                // -----------------------------------------
                 // OCULTAR LOADING
                 // -----------------------------------------
 
@@ -1347,7 +2072,7 @@
 
 
                 console.error(
-                    "Error cargando negocio:",
+                    "Error cargando dashboard:",
                     error
                 );
 
@@ -1355,7 +2080,7 @@
                 loading.querySelector(
                     ".loading-text"
                 ).textContent =
-                    "No fue posible cargar el negocio.";
+                    "No fue posible cargar el dashboard.";
 
 
                 setTimeout(
