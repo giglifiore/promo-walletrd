@@ -1632,107 +1632,58 @@
     // AUTENTICACION
     // =====================================================
 
-    onAuthStateChanged(
-        auth,
-        async (user) => {
+    onAuthStateChanged(auth, async (user) => {
 
+    console.log("CREAR PROMOCION - Usuario:", user);
 
-            // -------------------------------------------------
-            // NO AUTENTICADO
-            // -------------------------------------------------
+    if (!user) {
+        console.log("No hay sesión activa");
+        window.location.href = "login.html";
+        return;
+    }
 
-            if (!user) {
+    try {
 
-                window.location.href =
-                    "login.html";
+        console.log("Consultando negocio:", user.uid);
 
-                return;
+        const negocioRef = doc(db, "negocios", user.uid);
+        const negocioSnap = await getDoc(negocioRef);
 
-            }
+        if (!negocioSnap.exists()) {
 
+            console.error("No existe el negocio:", user.uid);
 
-            currentUser =
-                user;
-
-
-            try {
-
-
-                // -------------------------------------------------
-                // BUSCAR NEGOCIO
-                // -------------------------------------------------
-
-                const negocioRef =
-                    doc(
-                        db,
-                        "negocios",
-                        user.uid
-                    );
-
-
-                const negocioSnap =
-                    await getDoc(
-                        negocioRef
-                    );
-
-
-                if (
-                    !negocioSnap.exists()
-                ) {
-
-                    console.warn(
-                        "El usuario no tiene perfil de negocio."
-                    );
-
-
-                    window.location.href =
-                        "login.html";
-
-                    return;
-
-                }
-
-
-                negocioData =
-                    negocioSnap.data();
-
-
-                // -------------------------------------------------
-                // MOSTRAR NEGOCIO
-                // -------------------------------------------------
-
-                businessNameTop.textContent =
-                    negocioData.nombreNegocio ||
-                    "Mi negocio";
-
-
-                // -------------------------------------------------
-                // MOSTRAR PAGINA
-                // -------------------------------------------------
-
-                hideLoading();
-
-            }
-            catch (error) {
-
-                console.error(
-                    "Error validando negocio:",
-                    error
-                );
-
-
-                showMessage(
-                    "No fue posible validar la cuenta del negocio.",
-                    "error"
-                );
-
-
-                hideLoading();
-
-            }
-
+            alert("No se encontró el perfil del negocio.");
+            window.location.href = "login.html";
+            return;
         }
-    );
+
+        const negocioData = negocioSnap.data();
+
+        console.log("Negocio encontrado:", negocioData);
+
+        document.getElementById("nombreNegocio").textContent =
+            negocioData.nombreNegocio || "Mi negocio";
+
+    } catch (error) {
+
+        console.error("ERROR CONSULTANDO NEGOCIO:", error);
+        console.error("CODE:", error.code);
+
+        // NO enviar al login si el problema es Firestore
+        if (error.code === "unavailable") {
+
+            alert(
+                "No se pudo conectar con Firebase Firestore.\n\n" +
+                "Tu sesión sigue activa. Verifica la conexión a Internet."
+            );
+
+            return;
+        }
+
+        alert("Error al cargar el perfil del negocio: " + error.message);
+    }
+});
 
 
 
