@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard negocio - PromoWallet</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f8f7;
+            color: #263238;
+        }
+
+        /* =========================================
+           TOPBAR
+        ========================================= */
+
+        .topbar {
+            height: 70px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5ece9;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 32px;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: -0.7px;
+        }
+
+        .logo span {
+            color: #16a36a;
+        }
+
+        .top-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .business-name-top {
+            font-size: 14px;
+            color: #607d8b;
+            font-weight: 600;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 50%;
+
+            background: #e7f8f0;
+            color: #168f60;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .logout {
+            border: none;
+            background: transparent;
+
+            color: #718096;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .logout:hover {
+            color: #d64545;
+        }
+
+        /* =========================================
+           CONTAINER
+        ========================================= */
+
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 34px 24px 50px;
+        }
+
+        /* =========================================
+           WELCOME
+        ========================================= */
+
+        .welcome {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 28px;
+        }
+
+        .welcome h1 {
+            margin: 0;
+
+            font-size: 29px;
+            letter-spacing: -0.6px;
+        }
+
+        .welcome p {
+            margin: 8px 0 0;
+
+            color: #718096;
+
+            font-size: 14px;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            background: #eaf8f1;
+            color: #168f60;
+
+            padding: 8px 13px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #16a36a;
+        }
+
+        /* =========================================
+           HERO CARD
+        ========================================= */
+
+        .hero-card {
+            background: linear-gradient(
+                135deg,
+                #168f60,
+                #16a36a
+            );
+
+            border-radius: 20px;
+
+            padding: 28px;
+
+            color: white;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 25px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 12px 28px rgba(22, 163, 106, 0.16);
+        }
+
+        .hero-info h2 {
+            margin: 0;
+
+            font-size: 23px;
+        }
+
+        .hero-info p {
+            margin: 8px 0 0;
+
+            color: rgba(255,255,255,.82);
+
+            font-size: 14px;
+        }
+
+        .hero-action {
+            border: none;
+
+            background: white;
+            color: #168f60;
+
+            padding: 13px 20px;
+
+            border-radius: 11px;
+
+            font-weight: 700;
+            font-size: 14px;
+
+            cursor: pointer;
+
+            white-space: nowrap;
+        }
+
+        .hero-action:hover {
+            background: #f1faf6;
+        }
+
+        /* =========================================
+           STATS
+        ========================================= */
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: #ffffff;
+
+            border: 1px solid #e6eeeb;
+
+            border-radius: 16px;
+
+            padding: 21px;
+
+            box-shadow:
+                0 5px 18px rgba(39,70,83,.05);
+        }
+
+        .stat-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 15px;
+        }
+
+        .stat-icon {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 12px;
+
+            background: #edf8f4;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 20px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #78909c;
+        }
+
+        .stat-value {
+            font-size: 27px;
+            font-weight: 800;
+
+            color: #263238;
+        }
+
+        /* =========================================
+           CONTENT GRID
+        ========================================= */
+
+        .content-grid {
+            display: grid;
+
+            grid-template-columns:
+                1.6fr
+                1fr;
+
+            gap: 22px;
+        }
+
+        .section-card {
+            background: #ffffff;
+
+            border: 1px solid #e6eeeb;
+
+            border-radius: 17px;
+
+            padding: 23px;
+
+            box-shadow:
+                0 5px 18px rgba(39,70,83,.05);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 {
+            margin: 0;
+
+            font-size: 18px;
+        }
+
+        .section-header a {
+            color: #168f60;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+        /* =========================================
+           EMPTY PROMOTIONS
+        ========================================= */
+
+        .empty {
+            text-align: center;
+
+            padding: 30px 15px;
+        }
+
+        .empty-icon {
+            width: 58px;
+            height: 58px;
+
+            margin: 0 auto 13px;
+
+            border-radius: 16px;
+
+            background: #edf8f4;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 27px;
+        }
+
+        .empty h3 {
+            margin: 0;
+
+            font-size: 16px;
+        }
+
+        .empty p {
+            margin: 8px auto 18px;
+
+            max-width: 330px;
+
+            color: #78909c;
+
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .create-btn {
+            display: inline-block;
+
+            padding: 11px 17px;
+
+            border-radius: 10px;
+
+            background: #16a36a;
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .create-btn:hover {
+            background: #128956;
+        }
+
+        /* =========================================
+           BUSINESS INFO
+        ========================================= */
+
+        .info-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding: 13px 0;
+
+            border-bottom: 1px solid #edf1f0;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #78909c;
+            font-size: 13px;
+        }
+
+        .info-value {
+            text-align: right;
+
+            color: #37474f;
+
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* =========================================
+           QUICK ACTIONS
+        ========================================= */
+
+        .quick-actions {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+
+            margin-top: 20px;
+        }
+
+        .quick-action {
+            border: 1px solid #e3ece8;
+
+            background: #fbfdfc;
+
+            border-radius: 12px;
+
+            padding: 15px;
+
+            text-decoration: none;
+
+            color: #37474f;
+
+            transition: .2s;
+        }
+
+        .quick-action:hover {
+            border-color: #a9d9c4;
+
+            background: #f2faf6;
+
+            transform: translateY(-1px);
+        }
+
+        .quick-action-icon {
+            font-size: 21px;
+
+            margin-bottom: 8px;
+        }
+
+        .quick-action-title {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .quick-action-description {
+            margin-top: 4px;
+
+            color: #90a4ae;
+
+            font-size: 11px;
+        }
+
+        /* =========================================
+           LOADING
+        ========================================= */
+
+        .loading {
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(255,255,255,.94);
+
+            z-index: 9999;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            flex-direction: column;
+        }
+
+        .spinner {
+            width: 43px;
+            height: 43px;
+
+            border: 4px solid #dcefe7;
+
+            border-top-color: #16a36a;
+
+            border-radius: 50%;
+
+            animation: spin .8s linear infinite;
+        }
+
+        .loading-text {
+            margin-top: 13px;
+
+            font-size: 14px;
+
+            color: #607d8b;
+
+            font-weight: 600;
+        }
+
+        @keyframes spin {
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 900px) {
+
+            .stats {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .topbar {
+                padding: 0 17px;
+            }
+
+            .business-name-top {
+                display: none;
+            }
+
+            .container {
+                padding: 25px 15px 40px;
+            }
+
+            .welcome {
+                flex-direction: column;
+            }
+
+            .welcome h1 {
+                font-size: 25px;
+            }
+
+            .hero-card {
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+            .hero-action {
+                width: 100%;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+
+                gap: 12px;
+            }
+
+            .stat-card {
+                padding: 17px;
+            }
+
+            .stat-value {
+                font-size: 23px;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     TOPBAR
+===================================================== -->
+
+<header class="topbar">
+
+    <div class="logo">
+        Promo<span>Wallet</span>
+    </div>
+
+
+    <div class="top-right">
+
+        <span
+            class="business-name-top"
+            id="topBusinessName"
+        >
+            Mi negocio
+        </span>
+
+
+        <div
+            class="avatar"
+            id="avatar"
+        >
+            🏪
+        </div>
+
+
+        <button
+            class="logout"
+            id="logoutButton"
+        >
+            Cerrar sesión
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     CONTENIDO
+===================================================== -->
+
+<main class="container">
+
+
+    <!-- WELCOME -->
+
+    <section class="welcome">
+
+        <div>
+
+            <h1>
+                Hola, <span id="businessName">Negocio</span> 👋
+            </h1>
+
+            <p>
+                Administra tus promociones y conecta con tus clientes.
+            </p>
+
+        </div>
+
+
+        <div class="status">
+
+            <span class="status-dot"></span>
+
+            Cuenta activa
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         HERO
+    ================================================= -->
+
+    <section class="hero-card">
+
+        <div class="hero-info">
+
+            <h2>
+                Crea una nueva promoción
+            </h2>
+
+            <p>
+                Publica ofertas y beneficios para atraer clientes
+                a tu negocio.
+            </p>
+
+        </div>
+
+
+        <a
+            href="crear-promocion.html"
+            class="hero-action"
+        >
+            + Crear promoción
+        </a>
+
+    </section>
+
+
+
+    <!-- =================================================
+         ESTADISTICAS
+    ================================================= -->
+
+    <section class="stats">
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div class="stat-label">
+                    Promociones
+                </div>
+
+                <div class="stat-icon">
+                    🎟️
+                </div>
+
+            </div>
+
+            <div
+                class="stat-value"
+                id="totalPromociones"
+            >
+                0
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div class="stat-label">
+                    Activas
+                </div>
+
+                <div class="stat-icon">
+                    🟢
+                </div>
+
+            </div>
+
+            <div
+                class="stat-value"
+                id="promocionesActivas"
+            >
+                0
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div class="stat-label">
+                    Clientes
+                </div>
+
+                <div class="stat-icon">
+                    👥
+                </div>
+
+            </div>
+
+            <div
+                class="stat-value"
+                id="totalClientes"
+            >
+                0
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div class="stat-label">
+                    Redenciones
+                </div>
+
+                <div class="stat-icon">
+                    🎁
+                </div>
+
+            </div>
+
+            <div
+                class="stat-value"
+                id="totalRedenciones"
+            >
+                0
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         CONTENT
+    ================================================= -->
+
+    <section class="content-grid">
+
+
+        <!-- =============================================
+             PROMOCIONES
+        ============================================== -->
+
+        <div class="section-card">
+
+            <div class="section-header">
+
+                <h2>
+                    Mis promociones
+                </h2>
+
+                <a href="crear-promocion.html">
+                    + Nueva
+                </a>
+
+            </div>
+
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    🎟️
+                </div>
+
+                <h3>
+                    Todavía no tienes promociones
+                </h3>
+
+                <p>
+                    Crea tu primera promoción y comienza a
+                    ofrecer beneficios a los usuarios de PromoWallet.
+                </p>
+
+                <a
+                    href="crear-promocion.html"
+                    class="create-btn"
+                >
+                    Crear mi primera promoción
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =============================================
+             INFORMACION DEL NEGOCIO
+        ============================================== -->
+
+        <div class="section-card">
+
+            <div class="section-header">
+
+                <h2>
+                    Mi negocio
+                </h2>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Negocio
+                </span>
+
+                <span
+                    class="info-value"
+                    id="infoNombreNegocio"
+                >
+                    —
+                </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Contacto
+                </span>
+
+                <span
+                    class="info-value"
+                    id="infoContacto"
+                >
+                    —
+                </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Teléfono
+                </span>
+
+                <span
+                    class="info-value"
+                    id="infoTelefono"
+                >
+                    —
+                </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Correo
+                </span>
+
+                <span
+                    class="info-value"
+                    id="infoEmail"
+                >
+                    —
+                </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Estado
+                </span>
+
+                <span
+                    class="info-value"
+                    id="infoEstado"
+                >
+                    Activo
+                </span>
+
+            </div>
+
+
+
+            <!-- ACCIONES -->
+
+            <div class="quick-actions">
+
+
+                <a
+                    href="crear-promocion.html"
+                    class="quick-action"
+                >
+
+                    <div class="quick-action-icon">
+                        ➕
+                    </div>
+
+                    <div class="quick-action-title">
+                        Crear promoción
+                    </div>
+
+                    <div class="quick-action-description">
+                        Publica una nueva oferta
+                    </div>
+
+                </a>
+
+
+                <a
+                    href="#"
+                    class="quick-action"
+                    onclick="return false;"
+                >
+
+                    <div class="quick-action-icon">
+                        📊
+                    </div>
+
+                    <div class="quick-action-title">
+                        Estadísticas
+                    </div>
+
+                    <div class="quick-action-description">
+                        Próximamente
+                    </div>
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     LOADING
+===================================================== -->
+
+<div
+    class="loading"
+    id="loading"
+>
+
+    <div class="spinner"></div>
+
+    <div class="loading-text">
+        Cargando información del negocio...
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
+<script type="module">
+
+
+    // =====================================================
+    // IMPORTS
+    // =====================================================
+
+    import {
+        initializeApp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+    import {
+        getAuth,
+        onAuthStateChanged,
+        signOut
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+    import {
+        getFirestore,
+        doc,
+        getDoc
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+    // =====================================================
+    // FIREBASE CONFIG
+    // =====================================================
+
+    const firebaseConfig = {
+		  apiKey: "AIzaSyA_5TT1VTLkDSjYfrzTGWZ1Uv_o1yZqQYQ",
+		  authDomain: "promo-walletrd.firebaseapp.com",
+		  projectId: "promo-walletrd",
+		  storageBucket: "promo-walletrd.firebasestorage.app",
+		  messagingSenderId: "933468918139",
+		  appId: "1:933468918139:web:5bf2ec7e4dc37d7c3e2dde",
+		  measurementId: "G-DYXCNPBH62"
+		};
+
+
+
+    // =====================================================
+    // INIT
+    // =====================================================
+
+    const app =
+        initializeApp(firebaseConfig);
+
+
+    const auth =
+        getAuth(app);
+
+
+    const db =
+        getFirestore(app);
+
+
+
+    // =====================================================
+    // ELEMENTOS
+    // =====================================================
+
+    const loading =
+        document.getElementById("loading");
+
+
+    const businessName =
+        document.getElementById("businessName");
+
+
+    const topBusinessName =
+        document.getElementById("topBusinessName");
+
+
+    const avatar =
+        document.getElementById("avatar");
+
+
+    const infoNombreNegocio =
+        document.getElementById("infoNombreNegocio");
+
+
+    const infoContacto =
+        document.getElementById("infoContacto");
+
+
+    const infoTelefono =
+        document.getElementById("infoTelefono");
+
+
+    const infoEmail =
+        document.getElementById("infoEmail");
+
+
+    const infoEstado =
+        document.getElementById("infoEstado");
+
+
+    const logoutButton =
+        document.getElementById("logoutButton");
+
+
+
+    // =====================================================
+    // AUTH
+    // =====================================================
+
+    onAuthStateChanged(
+        auth,
+        async (user) => {
+
+
+            // ---------------------------------------------
+            // NO AUTENTICADO
+            // ---------------------------------------------
+
+            if (!user) {
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+
+            try {
+
+
+                // -----------------------------------------
+                // BUSCAR NEGOCIO
+                // -----------------------------------------
+
+                const negocioRef =
+                    doc(
+                        db,
+                        "negocios",
+                        user.uid
+                    );
+
+
+                const negocioSnap =
+                    await getDoc(
+                        negocioRef
+                    );
+
+
+                // -----------------------------------------
+                // NO ES NEGOCIO
+                // -----------------------------------------
+
+                if (!negocioSnap.exists()) {
+
+                    console.warn(
+                        "Usuario sin perfil de negocio."
+                    );
+
+
+                    await signOut(auth);
+
+
+                    window.location.href =
+                        "login.html";
+
+
+                    return;
+
+                }
+
+
+                // -----------------------------------------
+                // DATOS
+                // -----------------------------------------
+
+                const negocio =
+                    negocioSnap.data();
+
+
+                console.log(
+                    "Negocio cargado:",
+                    negocio
+                );
+
+
+                const nombre =
+                    negocio.nombreNegocio ||
+                    "Mi negocio";
+
+
+                const contacto =
+                    negocio.nombreContacto ||
+                    "—";
+
+
+                const telefono =
+                    negocio.telefono ||
+                    "—";
+
+
+                const email =
+                    negocio.email ||
+                    user.email ||
+                    "—";
+
+
+                const estado =
+                    negocio.estado ||
+                    "activo";
+
+
+
+                // -----------------------------------------
+                // HEADER
+                // -----------------------------------------
+
+                businessName.textContent =
+                    nombre;
+
+
+                topBusinessName.textContent =
+                    nombre;
+
+
+                // -----------------------------------------
+                // AVATAR
+                // -----------------------------------------
+
+                avatar.textContent =
+                    nombre
+                        .charAt(0)
+                        .toUpperCase();
+
+
+
+                // -----------------------------------------
+                // INFORMACION
+                // -----------------------------------------
+
+                infoNombreNegocio.textContent =
+                    nombre;
+
+
+                infoContacto.textContent =
+                    contacto;
+
+
+                infoTelefono.textContent =
+                    telefono;
+
+
+                infoEmail.textContent =
+                    email;
+
+
+                infoEstado.textContent =
+                    estado
+                        .charAt(0)
+                        .toUpperCase() +
+                    estado.slice(1);
+
+
+
+                // -----------------------------------------
+                // OCULTAR LOADING
+                // -----------------------------------------
+
+                loading.style.display =
+                    "none";
+
+
+            }
+            catch (error) {
+
+
+                console.error(
+                    "Error cargando negocio:",
+                    error
+                );
+
+
+                loading.querySelector(
+                    ".loading-text"
+                ).textContent =
+                    "No fue posible cargar el negocio.";
+
+
+                setTimeout(
+                    () => {
+
+                        window.location.href =
+                            "login.html";
+
+                    },
+                    1800
+                );
+
+            }
+
+        }
+    );
+
+
+
+    // =====================================================
+    // LOGOUT
+    // =====================================================
+
+    logoutButton.addEventListener(
+        "click",
+        async () => {
+
+            try {
+
+                await signOut(auth);
+
+                window.location.href =
+                    "login.html";
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Error cerrando sesión:",
+                    error
+                );
+
+            }
+
+        }
+    );
+
+
+</script>
+
+
+</body>
+</html>
