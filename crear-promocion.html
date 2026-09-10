@@ -1701,18 +1701,21 @@
             // VALIDAR USUARIO
             // -------------------------------------------------
 
-            if (
-                !currentUser
-            ) {
+            const user = auth.currentUser;
 
-                showMessage(
-                    "Tu sesión no está disponible. Inicia sesión nuevamente.",
-                    "error"
-                );
+			console.log("Usuario Firebase al publicar:", user);
 
-                return;
+			if (!user) {
 
-            }
+				showMessage(
+					"Tu sesión no está disponible. Inicia sesión nuevamente.",
+					"error"
+				);
+
+				return;
+			}
+
+			currentUser = user;
 
 
             guardarButton.disabled =
@@ -1803,7 +1806,7 @@
                     // ---------------------------------------------
 
                     negocioId:
-                        currentUser.uid,
+						user.uid,
 
                     nombreNegocio:
                         negocioData.nombreNegocio ||
