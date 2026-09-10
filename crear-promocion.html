@@ -646,7 +646,9 @@
 <header class="topbar">
 
     <div class="logo">
+
         Promo<span>Wallet</span>
+
     </div>
 
 
@@ -655,7 +657,9 @@
         <span
             class="business-name"
             id="businessNameTop">
-            Mi negocio
+
+            Cargando negocio...
+
         </span>
 
 
@@ -732,9 +736,13 @@
             <div class="form-group full">
 
                 <label for="nombre">
+
                     Nombre de la promoción
+
                     <span class="required">*</span>
+
                 </label>
+
 
                 <input
                     type="text"
@@ -753,9 +761,13 @@
             <div class="form-group full">
 
                 <label for="descripcion">
+
                     Descripción
+
                     <span class="required">*</span>
+
                 </label>
+
 
                 <textarea
                     id="descripcion"
@@ -764,8 +776,11 @@
                     required
                 ></textarea>
 
+
                 <div class="help">
+
                     Máximo 500 caracteres.
+
                 </div>
 
             </div>
@@ -777,9 +792,13 @@
             <div class="form-group">
 
                 <label for="categoria">
+
                     Categoría
+
                     <span class="required">*</span>
+
                 </label>
+
 
                 <select id="categoria">
 
@@ -838,8 +857,11 @@
             <div class="form-group">
 
                 <label for="cantidad">
+
                     Cantidad disponible
+
                 </label>
+
 
                 <input
                     type="number"
@@ -849,8 +871,11 @@
                     placeholder="Ej. 100"
                 >
 
+
                 <div class="help">
+
                     Deja 0 para indicar disponibilidad ilimitada.
+
                 </div>
 
             </div>
@@ -890,8 +915,11 @@
             <div class="form-group">
 
                 <label for="precioNormal">
+
                     Precio normal
+
                 </label>
+
 
                 <input
                     type="number"
@@ -910,8 +938,11 @@
             <div class="form-group">
 
                 <label for="precioPromo">
+
                     Precio promocional
+
                 </label>
+
 
                 <input
                     type="number"
@@ -924,13 +955,17 @@
             </div>
 
 
+
             <!-- DESCUENTO -->
 
             <div class="form-group">
 
                 <label for="descuento">
+
                     Descuento (%)
+
                 </label>
+
 
                 <input
                     type="number"
@@ -950,8 +985,11 @@
             <div class="form-group">
 
                 <label for="puntos">
+
                     Puntos PromoWallet
+
                 </label>
+
 
                 <input
                     type="number"
@@ -961,8 +999,11 @@
                     placeholder="Ej. 100"
                 >
 
+
                 <div class="help">
+
                     Puntos que puede generar o requerir esta promoción.
+
                 </div>
 
             </div>
@@ -1009,9 +1050,13 @@
             <div class="form-group">
 
                 <label for="fechaInicio">
+
                     Fecha de inicio
+
                     <span class="required">*</span>
+
                 </label>
+
 
                 <input
                     type="date"
@@ -1028,9 +1073,13 @@
             <div class="form-group">
 
                 <label for="fechaFin">
+
                     Fecha de vencimiento
+
                     <span class="required">*</span>
+
                 </label>
+
 
                 <input
                     type="date"
@@ -1053,6 +1102,7 @@
 
     <div class="actions">
 
+
         <a
             href="dashboard-negocio.html"
             class="btn btn-cancel">
@@ -1070,6 +1120,7 @@
             Publicar promoción
 
         </button>
+
 
     </div>
 
@@ -1092,7 +1143,7 @@
         id="loadingText"
         class="loading-text">
 
-        Guardando promoción...
+        Cargando...
 
     </div>
 
@@ -1108,28 +1159,34 @@
 
 
     // =====================================================
-    // IMPORTS
+    // IMPORTS FIREBASE
     // =====================================================
 
     import {
         initializeApp
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    }
+    from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 
     import {
         getAuth,
         onAuthStateChanged
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    }
+    from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
     import {
-        getFirestore,
+        initializeFirestore,
         doc,
         getDoc,
         collection,
         addDoc,
         serverTimestamp
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    }
+    from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
 
@@ -1150,19 +1207,40 @@
 
 
     // =====================================================
-    // FIREBASE INIT
+    // FIREBASE
     // =====================================================
 
     const app =
-        initializeApp(firebaseConfig);
+        initializeApp(
+            firebaseConfig
+        );
 
 
     const auth =
-        getAuth(app);
+        getAuth(
+            app
+        );
 
+
+    /*
+       Usamos Long Polling para evitar
+       problemas de WebChannel / QUIC.
+    */
 
     const db =
-        getFirestore(app);
+        initializeFirestore(
+            app,
+            {
+                experimentalForceLongPolling: true
+            }
+        );
+
+
+
+    console.log(
+        "Firebase conectado:",
+        firebaseConfig.projectId
+    );
 
 
 
@@ -1171,77 +1249,99 @@
     // =====================================================
 
     const nombreInput =
-        document.getElementById("nombre");
+        document.getElementById(
+            "nombre"
+        );
 
 
     const descripcionInput =
-        document.getElementById("descripcion");
+        document.getElementById(
+            "descripcion"
+        );
 
 
     const categoriaInput =
-        document.getElementById("categoria");
+        document.getElementById(
+            "categoria"
+        );
 
 
     const cantidadInput =
-        document.getElementById("cantidad");
+        document.getElementById(
+            "cantidad"
+        );
 
 
     const precioNormalInput =
-        document.getElementById("precioNormal");
+        document.getElementById(
+            "precioNormal"
+        );
 
 
     const precioPromoInput =
-        document.getElementById("precioPromo");
+        document.getElementById(
+            "precioPromo"
+        );
 
 
     const descuentoInput =
-        document.getElementById("descuento");
+        document.getElementById(
+            "descuento"
+        );
 
 
     const puntosInput =
-        document.getElementById("puntos");
+        document.getElementById(
+            "puntos"
+        );
 
 
     const fechaInicioInput =
-        document.getElementById("fechaInicio");
+        document.getElementById(
+            "fechaInicio"
+        );
 
 
     const fechaFinInput =
-        document.getElementById("fechaFin");
+        document.getElementById(
+            "fechaFin"
+        );
 
 
     const guardarButton =
-        document.getElementById("guardarButton");
+        document.getElementById(
+            "guardarButton"
+        );
 
 
     const message =
-        document.getElementById("message");
+        document.getElementById(
+            "message"
+        );
 
 
     const loading =
-        document.getElementById("loading");
+        document.getElementById(
+            "loading"
+        );
 
 
     const loadingText =
-        document.getElementById("loadingText");
+        document.getElementById(
+            "loadingText"
+        );
 
 
     const businessNameTop =
-        document.getElementById("businessNameTop");
+        document.getElementById(
+            "businessNameTop"
+        );
 
 
     const pricePreview =
-        document.getElementById("pricePreview");
-
-
-
-    // =====================================================
-    // VARIABLES
-    // =====================================================
-
-    let currentUser = null;
-
-    let negocioData = null;
+        document.getElementById(
+            "pricePreview"
+        );
 
 
 
@@ -1279,7 +1379,9 @@
     // LOADING
     // =====================================================
 
-    function showLoading(text) {
+    function showLoading(
+        text
+    ) {
 
         loadingText.textContent =
             text;
@@ -1302,7 +1404,7 @@
 
 
     // =====================================================
-    // FECHA MINIMA
+    // FECHAS
     // =====================================================
 
     const today =
@@ -1319,10 +1421,6 @@
         today;
 
 
-
-    // =====================================================
-    // FECHA INICIO CAMBIA
-    // =====================================================
 
     fechaInicioInput.addEventListener(
         "change",
@@ -1421,7 +1519,7 @@
 
 
     // =====================================================
-    // VALIDAR NUMERO
+    // NUMERO
     // =====================================================
 
     function numberValue(
@@ -1454,7 +1552,6 @@
     // =====================================================
 
     function validateForm() {
-
 
         const nombre =
             nombreInput.value.trim();
@@ -1548,7 +1645,6 @@
 
 
         if (
-            precioNormal > 0 &&
             precioPromo < 0
         ) {
 
@@ -1556,6 +1652,8 @@
                 "El precio promocional no puede ser negativo.",
                 "error"
             );
+
+            precioPromoInput.focus();
 
             return false;
 
@@ -1614,79 +1712,193 @@
 
 
     // =====================================================
-    // AUTENTICACION
+    // CARGAR USUARIO / NEGOCIO
     // =====================================================
 
-    onAuthStateChanged(auth, async (user) => {
+    onAuthStateChanged(
+        auth,
+        async (user) => {
 
-    console.log("CREAR PROMOCION - Usuario:", user);
-
-    if (!user) {
-        console.log("No hay sesión activa");
-        window.location.href = "login.html";
-        return;
-    }
-
-    try {
-
-        console.log("Consultando negocio:", user.uid);
-
-        const negocioRef = doc(db, "negocios", user.uid);
-        const negocioSnap = await getDoc(negocioRef);
-
-        if (!negocioSnap.exists()) {
-
-            console.error("No existe el negocio:", user.uid);
-
-            alert("No se encontró el perfil del negocio.");
-            window.location.href = "login.html";
-            return;
-        }
-
-        const negocioData = negocioSnap.data();
-
-        console.log("Negocio encontrado:", negocioData);
-
-        document.getElementById("nombreNegocio").textContent =
-            negocioData.nombreNegocio || "Mi negocio";
-
-    } catch (error) {
-
-        console.error("ERROR CONSULTANDO NEGOCIO:", error);
-        console.error("CODE:", error.code);
-
-        // NO enviar al login si el problema es Firestore
-        if (error.code === "unavailable") {
-
-            alert(
-                "No se pudo conectar con Firebase Firestore.\n\n" +
-                "Tu sesión sigue activa. Verifica la conexión a Internet."
+            console.log(
+                "Usuario autenticado:",
+                user
             );
 
-            return;
-        }
 
-        alert("Error al cargar el perfil del negocio: " + error.message);
-    }
-});
+            // =================================================
+            // NO HAY SESION
+            // =================================================
+
+            if (!user) {
+
+                console.log(
+                    "No existe sesión Firebase."
+                );
+
+
+                window.location.href =
+                    "login.html";
+
+
+                return;
+
+            }
+
+
+            try {
+
+                showLoading(
+                    "Cargando información del negocio..."
+                );
+
+
+                // =============================================
+                // UID DESDE FIREBASE AUTH
+                // =============================================
+
+                const uid =
+                    user.uid;
+
+
+                console.log(
+                    "UID:",
+                    uid
+                );
+
+
+                // =============================================
+                // OBTENER NEGOCIO DESDE FIRESTORE
+                // =============================================
+
+                const negocioRef =
+                    doc(
+                        db,
+                        "negocios",
+                        uid
+                    );
+
+
+                const negocioSnap =
+                    await getDoc(
+                        negocioRef
+                    );
+
+
+                console.log(
+                    "Documento negocio existe:",
+                    negocioSnap.exists()
+                );
+
+
+                // =============================================
+                // NEGOCIO NO EXISTE
+                // =============================================
+
+                if (
+                    !negocioSnap.exists()
+                ) {
+
+                    hideLoading();
+
+
+                    showMessage(
+                        "No se encontró el perfil del negocio asociado a tu cuenta.",
+                        "error"
+                    );
+
+
+                    return;
+
+                }
+
+
+                // =============================================
+                // DATOS DEL NEGOCIO
+                // =============================================
+
+                const negocio =
+                    negocioSnap.data();
+
+
+                console.log(
+                    "Negocio:",
+                    negocio
+                );
+
+
+                // =============================================
+                // MOSTRAR NEGOCIO
+                // =============================================
+
+                businessNameTop.textContent =
+                    negocio.nombreNegocio ||
+                    "Mi negocio";
+
+
+                hideLoading();
+
+
+            }
+            catch (error) {
+
+                console.error(
+                    "ERROR CARGANDO NEGOCIO:",
+                    error
+                );
+
+
+                console.error(
+                    "CODE:",
+                    error.code
+                );
+
+
+                hideLoading();
+
+
+                if (
+                    error.code ===
+                    "unavailable"
+                ) {
+
+                    showMessage(
+                        "No se pudo conectar con Firebase Firestore. Verifica tu conexión a Internet.",
+                        "error"
+                    );
+
+
+                    return;
+
+                }
+
+
+                showMessage(
+                    "Error cargando el negocio: " +
+                    error.message,
+                    "error"
+                );
+
+            }
+
+        }
+    );
 
 
 
     // =====================================================
-    // GUARDAR PROMOCION
+    // PUBLICAR PROMOCION
     // =====================================================
 
     guardarButton.addEventListener(
         "click",
         async () => {
 
-
             clearMessage();
 
 
-            // -------------------------------------------------
-            // VALIDACION
-            // -------------------------------------------------
+            // =================================================
+            // VALIDAR FORMULARIO
+            // =================================================
 
             if (
                 !validateForm()
@@ -1697,25 +1909,31 @@
             }
 
 
-            // -------------------------------------------------
-            // VALIDAR USUARIO
-            // -------------------------------------------------
+            // =================================================
+            // OBTENER USUARIO DIRECTAMENTE DE FIREBASE AUTH
+            // =================================================
 
-            const user = auth.currentUser;
+            const user =
+                auth.currentUser;
 
-			console.log("Usuario Firebase al publicar:", user);
 
-			if (!user) {
+            console.log(
+                "Usuario Firebase al publicar:",
+                user
+            );
 
-				showMessage(
-					"Tu sesión no está disponible. Inicia sesión nuevamente.",
-					"error"
-				);
 
-				return;
-			}
+            if (!user) {
 
-			currentUser = user;
+                showMessage(
+                    "Tu sesión no está disponible. Inicia sesión nuevamente.",
+                    "error"
+                );
+
+
+                return;
+
+            }
 
 
             guardarButton.disabled =
@@ -1729,9 +1947,71 @@
 
             try {
 
+                // =================================================
+                // OBTENER NEGOCIO DIRECTAMENTE DE FIRESTORE
+                // =================================================
+
+                const negocioRef =
+                    doc(
+                        db,
+                        "negocios",
+                        user.uid
+                    );
+
+
+                const negocioSnap =
+                    await getDoc(
+                        negocioRef
+                    );
+
+
+                console.log(
+                    "Negocio consultado al publicar:",
+                    negocioSnap.exists()
+                );
+
 
                 // =================================================
-                // DATOS
+                // VALIDAR NEGOCIO
+                // =================================================
+
+                if (
+                    !negocioSnap.exists()
+                ) {
+
+                    hideLoading();
+
+                    guardarButton.disabled =
+                        false;
+
+
+                    showMessage(
+                        "No se encontró el perfil del negocio.",
+                        "error"
+                    );
+
+
+                    return;
+
+                }
+
+
+                // =================================================
+                // DATOS FIRESTORE
+                // =================================================
+
+                const negocio =
+                    negocioSnap.data();
+
+
+                console.log(
+                    "Negocio obtenido:",
+                    negocio
+                );
+
+
+                // =================================================
+                // DATOS DEL FORMULARIO
                 // =================================================
 
                 const nombre =
@@ -1796,25 +2076,25 @@
 
 
                 // =================================================
-                // CREAR DOCUMENTO
+                // CREAR PROMOCION
                 // =================================================
 
                 const promocion = {
 
                     // ---------------------------------------------
-                    // IDENTIDAD DEL NEGOCIO
+                    // NEGOCIO
                     // ---------------------------------------------
 
                     negocioId:
-						user.uid,
+                        user.uid,
 
                     nombreNegocio:
-                        negocioData.nombreNegocio ||
+                        negocio.nombreNegocio ||
                         "",
 
 
                     // ---------------------------------------------
-                    // PROMOCION
+                    // INFORMACION
                     // ---------------------------------------------
 
                     nombre:
@@ -1853,7 +2133,7 @@
 
 
                     // ---------------------------------------------
-                    // FECHAS
+                    // VIGENCIA
                     // ---------------------------------------------
 
                     fechaInicio:
@@ -1895,16 +2175,37 @@
                 };
 
 
+                console.log(
+                    "================================"
+                );
 
                 console.log(
-                    "Guardando promoción:",
+                    "CREANDO PROMOCION"
+                );
+
+                console.log(
+                    "UID:",
+                    user.uid
+                );
+
+                console.log(
+                    "NEGOCIO:",
+                    negocio.nombreNegocio
+                );
+
+                console.log(
+                    "PROMOCION:",
                     promocion
+                );
+
+                console.log(
+                    "================================"
                 );
 
 
 
                 // =================================================
-                // FIRESTORE
+                // GUARDAR EN FIRESTORE
                 // =================================================
 
                 const promocionRef =
@@ -1931,15 +2232,19 @@
                 hideLoading();
 
 
+                guardarButton.disabled =
+                    false;
+
+
                 showMessage(
                     "Promoción creada correctamente.",
                     "success"
                 );
 
 
-                // -------------------------------------------------
-                // LIMPIAR
-                // -------------------------------------------------
+                // =================================================
+                // LIMPIAR FORMULARIO
+                // =================================================
 
                 nombreInput.value =
                     "";
@@ -1971,14 +2276,16 @@
                 fechaFinInput.value =
                     "";
 
+
                 pricePreview.classList.remove(
                     "show"
                 );
 
 
-                // -------------------------------------------------
-                // IR AL DASHBOARD
-                // -------------------------------------------------
+
+                // =================================================
+                // VOLVER AL DASHBOARD
+                // =================================================
 
                 setTimeout(
                     () => {
@@ -1994,9 +2301,8 @@
             }
             catch (error) {
 
-
                 console.error(
-                    "Error creando promoción:",
+                    "ERROR CREANDO PROMOCION:",
                     error
                 );
 
@@ -2018,7 +2324,25 @@
                 ) {
 
                     errorMessage =
-                        "Firebase rechazó la operación. Revisa las reglas de Firestore para la colección promociones.";
+                        "Firebase rechazó la operación. Revisa las reglas de Firestore para promociones.";
+
+                }
+                else if (
+                    error.code ===
+                    "unavailable"
+                ) {
+
+                    errorMessage =
+                        "Firestore no está disponible. Verifica tu conexión a Internet.";
+
+                }
+                else if (
+                    error.code ===
+                    "failed-precondition"
+                ) {
+
+                    errorMessage =
+                        "Firebase requiere una configuración adicional.";
 
                 }
                 else if (
