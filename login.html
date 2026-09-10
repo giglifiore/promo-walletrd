@@ -1,1 +1,365 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Acceso</title><link rel="stylesheet" href="css/style.css"></head><body class="center-page"><div class="card auth"><a href="index.html">← Volver</a><div class="logo center">Promo<span>Wallet</span></div><h1>Panel del negocio</h1><p>Demo lista para Vercel.</p><label>Correo</label><input placeholder="negocio@email.com"><label>Contraseña</label><input type="password" placeholder="••••••••"><button class="btn full" onclick="location.href='dashboard.html'">Entrar al panel →</button><small>Modo demo. Firebase se conecta en la siguiente fase.</small></div></body></html>
+```html
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>Iniciar sesión - PromoWallet</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="center-page">
+
+    <div class="card auth">
+
+        <a href="index.html">← Volver</a>
+
+        <div class="logo center">
+            Promo<span>Wallet</span>
+        </div>
+
+        <h1>Bienvenido</h1>
+
+        <p>Inicia sesión en tu PromoWallet.</p>
+
+
+        <label for="email">
+            Correo electrónico
+        </label>
+
+        <input
+            id="email"
+            type="email"
+            placeholder="correo@email.com"
+            autocomplete="email"
+        >
+
+
+        <label for="password">
+            Contraseña
+        </label>
+
+        <input
+            id="password"
+            type="password"
+            placeholder="••••••••"
+            autocomplete="current-password"
+        >
+
+
+        <div id="mensaje" style="display:none;"></div>
+
+
+        <button
+            id="btnLogin"
+            class="btn full"
+            type="button"
+        >
+            Entrar a mi Wallet →
+        </button>
+
+
+        <small>
+            ¿No tienes una cuenta?
+            <a href="registro.html">
+                Crear cuenta
+            </a>
+        </small>
+
+    </div>
+
+
+    <script type="module">
+
+        import { initializeApp } from
+            "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+        import {
+            getAuth,
+            signInWithEmailAndPassword
+        } from
+            "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+        // ==========================================
+        // FIREBASE PROMOWALLET
+        // ==========================================
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDprjeDk5qi9uMC4uGdr0BPrqCLvw6zRDE",
+            authDomain: "promos-388dd.firebaseapp.com",
+            projectId: "promos-388dd",
+            storageBucket: "promos-388dd.firebasestorage.app",
+            messagingSenderId: "342231577542",
+            appId: "1:342231577542:web:5fd9a37b95be6e5dcab8c7",
+            measurementId: "G-WN18BNTTPL"
+        };
+
+
+        const app =
+            initializeApp(firebaseConfig);
+
+        const auth =
+            getAuth(app);
+
+
+        // ==========================================
+        // ELEMENTOS
+        // ==========================================
+
+        const emailInput =
+            document.getElementById("email");
+
+        const passwordInput =
+            document.getElementById("password");
+
+        const btnLogin =
+            document.getElementById("btnLogin");
+
+        const mensaje =
+            document.getElementById("mensaje");
+
+
+        // ==========================================
+        // MENSAJE
+        // ==========================================
+
+        function mostrarMensaje(texto, tipo) {
+
+            mensaje.textContent = texto;
+
+            mensaje.style.display = "block";
+
+            mensaje.style.padding = "10px";
+
+            mensaje.style.borderRadius = "8px";
+
+            mensaje.style.marginBottom = "15px";
+
+
+            if (tipo === "error") {
+
+                mensaje.style.color = "#b91c1c";
+
+                mensaje.style.background = "#fee2e2";
+
+            } else {
+
+                mensaje.style.color = "#166534";
+
+                mensaje.style.background = "#dcfce7";
+
+            }
+        }
+
+
+        // ==========================================
+        // LOGIN
+        // ==========================================
+
+        btnLogin.addEventListener("click", async function () {
+
+            const email =
+                emailInput.value.trim();
+
+            const password =
+                passwordInput.value;
+
+
+            // --------------------------------------
+            // VALIDAR CAMPOS
+            // --------------------------------------
+
+            if (!email || !password) {
+
+                mostrarMensaje(
+                    "Ingresa tu correo y contraseña.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            // --------------------------------------
+            // DESHABILITAR BOTÓN
+            // --------------------------------------
+
+            btnLogin.disabled = true;
+
+            btnLogin.textContent =
+                "Iniciando sesión...";
+
+
+            try {
+
+                // ==================================
+                // AUTENTICAR CON FIREBASE
+                // ==================================
+
+                const userCredential =
+                    await signInWithEmailAndPassword(
+                        auth,
+                        email,
+                        password
+                    );
+
+
+                const user =
+                    userCredential.user;
+
+
+                console.log(
+                    "Usuario autenticado:",
+                    user.uid
+                );
+
+
+                // ==================================
+                // LOGIN CORRECTO
+                // ==================================
+
+                mostrarMensaje(
+                    "¡Bienvenido a PromoWallet!",
+                    "success"
+                );
+
+
+                btnLogin.textContent =
+                    "Acceso correcto ✓";
+
+
+                // ==================================
+                // IR AL PANEL DEL CLIENTE
+                // ==================================
+
+                setTimeout(function () {
+
+                    window.location.href =
+                        "cliente.html";
+
+                }, 800);
+
+
+            } catch (error) {
+
+                console.error(
+                    "Error iniciando sesión:",
+                    error
+                );
+
+
+                let mensajeError =
+                    "No fue posible iniciar sesión.";
+
+
+                switch (error.code) {
+
+                    case "auth/invalid-credential":
+
+                        mensajeError =
+                            "Correo o contraseña incorrectos.";
+
+                        break;
+
+
+                    case "auth/user-not-found":
+
+                        mensajeError =
+                            "No existe una cuenta con este correo.";
+
+                        break;
+
+
+                    case "auth/wrong-password":
+
+                        mensajeError =
+                            "La contraseña es incorrecta.";
+
+                        break;
+
+
+                    case "auth/invalid-email":
+
+                        mensajeError =
+                            "El correo electrónico no es válido.";
+
+                        break;
+
+
+                    case "auth/user-disabled":
+
+                        mensajeError =
+                            "Esta cuenta está deshabilitada.";
+
+                        break;
+
+
+                    case "auth/too-many-requests":
+
+                        mensajeError =
+                            "Demasiados intentos. Intenta nuevamente más tarde.";
+
+                        break;
+
+
+                    case "auth/network-request-failed":
+
+                        mensajeError =
+                            "No hay conexión con Firebase.";
+
+                        break;
+
+
+                    default:
+
+                        mensajeError =
+                            error.message ||
+                            mensajeError;
+
+                        break;
+                }
+
+
+                mostrarMensaje(
+                    mensajeError,
+                    "error"
+                );
+
+
+                btnLogin.disabled = false;
+
+                btnLogin.textContent =
+                    "Entrar a mi Wallet →";
+
+            }
+
+        });
+
+
+        // ==========================================
+        // ENTER PARA INICIAR SESIÓN
+        // ==========================================
+
+        passwordInput.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (event.key === "Enter") {
+
+                    btnLogin.click();
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
+```
