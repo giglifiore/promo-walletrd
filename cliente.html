@@ -1,0 +1,440 @@
+```html
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>Mi PromoWallet</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header class="top">
+
+    <div class="logo">
+        Promo<span>Wallet</span>
+    </div>
+
+    <button id="btnSalir" class="btn outline">
+        Cerrar sesión
+    </button>
+
+</header>
+
+
+<main class="client-dashboard">
+
+    <section class="welcome">
+
+        <span class="badge">
+            👋 Mi PromoWallet
+        </span>
+
+        <h1>
+            Hola, <span id="nombreCliente">Cliente</span>
+        </h1>
+
+        <p>
+            Aquí puedes consultar tu wallet, puntos y promociones.
+        </p>
+
+    </section>
+
+
+    <!-- RESUMEN -->
+
+    <section class="wallet-summary">
+
+        <div class="wallet-card">
+
+            <div class="wallet-icon">
+                💰
+            </div>
+
+            <div>
+                <small>
+                    Saldo disponible
+                </small>
+
+                <h2 id="saldoWallet">
+                    RD$ 0.00
+                </h2>
+            </div>
+
+        </div>
+
+
+        <div class="wallet-card">
+
+            <div class="wallet-icon">
+                ⭐
+            </div>
+
+            <div>
+                <small>
+                    Mis puntos
+                </small>
+
+                <h2 id="puntos">
+                    0
+                </h2>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- OPCIONES -->
+
+    <section class="client-options">
+
+        <div class="option-card">
+
+            <div class="option-icon">
+                🎁
+            </div>
+
+            <h3>
+                Promociones
+            </h3>
+
+            <p>
+                Descubre promociones y premios disponibles.
+            </p>
+
+            <button class="btn light" type="button">
+                Ver promociones →
+            </button>
+
+        </div>
+
+
+        <div class="option-card">
+
+            <div class="option-icon">
+                🎟️
+            </div>
+
+            <h3>
+                Mis premios
+            </h3>
+
+            <p>
+                Consulta los premios que has ganado.
+            </p>
+
+            <button class="btn light" type="button">
+                Ver mis premios →
+            </button>
+
+        </div>
+
+
+        <div class="option-card">
+
+            <div class="option-icon">
+                📋
+            </div>
+
+            <h3>
+                Historial
+            </h3>
+
+            <p>
+                Revisa tus movimientos y canjes.
+            </p>
+
+            <button class="btn light" type="button">
+                Ver historial →
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- PERFIL -->
+
+    <section class="profile-card">
+
+        <h2>
+            Mi perfil
+        </h2>
+
+        <div class="profile-grid">
+
+            <div>
+                <small>
+                    Nombre completo
+                </small>
+
+                <strong id="nombreCompleto">
+                    —
+                </strong>
+            </div>
+
+
+            <div>
+                <small>
+                    Correo
+                </small>
+
+                <strong id="emailCliente">
+                    —
+                </strong>
+            </div>
+
+
+            <div>
+                <small>
+                    Teléfono
+                </small>
+
+                <strong id="telefonoCliente">
+                    —
+                </strong>
+            </div>
+
+
+            <div>
+                <small>
+                    Estado
+                </small>
+
+                <strong id="estadoCliente">
+                    —
+                </strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<script type="module">
+
+    // ==========================================
+    // FIREBASE
+    // ==========================================
+
+    import { initializeApp } from
+        "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+    import {
+        getAuth,
+        onAuthStateChanged,
+        signOut
+    } from
+        "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    import {
+        getFirestore,
+        doc,
+        getDoc
+    } from
+        "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDprjeDk5qi9uMC4uGdr0BPrqCLvw6zRDE",
+        authDomain: "promos-388dd.firebaseapp.com",
+        projectId: "promos-388dd",
+        storageBucket: "promos-388dd.firebasestorage.app",
+        messagingSenderId: "342231577542",
+        appId: "1:342231577542:web:5fd9a37b95be6e5dcab8c7",
+        measurementId: "G-WN18BNTTPL"
+    };
+
+
+    const app = initializeApp(firebaseConfig);
+
+    const auth = getAuth(app);
+
+    const db = getFirestore(app);
+
+
+    // ==========================================
+    // ELEMENTOS
+    // ==========================================
+
+    const nombreCliente =
+        document.getElementById("nombreCliente");
+
+    const nombreCompleto =
+        document.getElementById("nombreCompleto");
+
+    const emailCliente =
+        document.getElementById("emailCliente");
+
+    const telefonoCliente =
+        document.getElementById("telefonoCliente");
+
+    const estadoCliente =
+        document.getElementById("estadoCliente");
+
+    const puntos =
+        document.getElementById("puntos");
+
+    const saldoWallet =
+        document.getElementById("saldoWallet");
+
+    const btnSalir =
+        document.getElementById("btnSalir");
+
+
+    // ==========================================
+    // VERIFICAR SESIÓN
+    // ==========================================
+
+    onAuthStateChanged(auth, async (user) => {
+
+        // --------------------------------------
+        // NO HAY USUARIO
+        // --------------------------------------
+
+        if (!user) {
+
+            window.location.href =
+                "login-cliente.html";
+
+            return;
+        }
+
+
+        console.log(
+            "Usuario autenticado:",
+            user.uid
+        );
+
+
+        try {
+
+            // ==================================
+            // BUSCAR CLIENTE EN FIRESTORE
+            // ==================================
+
+            const clienteRef =
+                doc(
+                    db,
+                    "clientes",
+                    user.uid
+                );
+
+            const clienteSnap =
+                await getDoc(clienteRef);
+
+
+            if (!clienteSnap.exists()) {
+
+                console.error(
+                    "No existe el perfil del cliente."
+                );
+
+                alert(
+                    "No encontramos el perfil del cliente."
+                );
+
+                return;
+            }
+
+
+            const cliente =
+                clienteSnap.data();
+
+
+            // ==================================
+            // MOSTRAR INFORMACIÓN
+            // ==================================
+
+            nombreCliente.textContent =
+                cliente.nombre || "Cliente";
+
+
+            nombreCompleto.textContent =
+                cliente.nombreCompleto || "—";
+
+
+            emailCliente.textContent =
+                cliente.email || user.email || "—";
+
+
+            telefonoCliente.textContent =
+                cliente.telefono || "—";
+
+
+            estadoCliente.textContent =
+                cliente.estado || "—";
+
+
+            puntos.textContent =
+                cliente.puntos ?? 0;
+
+
+            const saldo =
+                Number(cliente.saldoWallet ?? 0);
+
+
+            saldoWallet.textContent =
+                "RD$ " +
+                saldo.toLocaleString(
+                    "es-DO",
+                    {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }
+                );
+
+
+        } catch (error) {
+
+            console.error(
+                "Error cargando cliente:",
+                error
+            );
+
+        }
+
+    });
+
+
+    // ==========================================
+    // CERRAR SESIÓN
+    // ==========================================
+
+    btnSalir.addEventListener(
+        "click",
+        async () => {
+
+            try {
+
+                await signOut(auth);
+
+                window.location.href =
+                    "login-cliente.html";
+
+            } catch (error) {
+
+                console.error(
+                    "Error cerrando sesión:",
+                    error
+                );
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+
+</html>
+```
