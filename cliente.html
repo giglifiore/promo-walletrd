@@ -1,4 +1,3 @@
-```html
 <!doctype html>
 <html lang="es">
 
@@ -225,32 +224,44 @@
     // FIREBASE
     // ==========================================
 
-    import { initializeApp } from
-        "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { initializeApp }
+        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
     import {
         getAuth,
         onAuthStateChanged,
         signOut
-    } from
-        "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    }
+    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
     import {
         getFirestore,
         doc,
         getDoc
-    } from
-        "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    }
+    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+
+    // ==========================================
+    // CONFIGURACIÓN FIREBASE
+    // ==========================================
 
     const firebaseConfig = {
+
         apiKey: "AIzaSyDprjeDk5qi9uMC4uGdr0BPrqCLvw6zRDE",
+
         authDomain: "promos-388dd.firebaseapp.com",
+
         projectId: "promos-388dd",
+
         storageBucket: "promos-388dd.firebasestorage.app",
+
         messagingSenderId: "342231577542",
+
         appId: "1:342231577542:web:5fd9a37b95be6e5dcab8c7",
+
         measurementId: "G-WN18BNTTPL"
+
     };
 
 
@@ -291,26 +302,55 @@
 
 
     // ==========================================
-    // VERIFICAR SESIÓN
+    // CONTROL DE AUTENTICACIÓN
     // ==========================================
+
+    let authInicializado = false;
+
 
     onAuthStateChanged(auth, async (user) => {
 
-        // --------------------------------------
-        // NO HAY USUARIO
-        // --------------------------------------
+        console.log(
+            "Estado Firebase:",
+            user ? user.uid : "SIN USUARIO"
+        );
+
+
+        // ======================================
+        // FIREBASE TODAVÍA ESTÁ COMPROBANDO
+        // ======================================
+
+        if (!authInicializado) {
+
+            authInicializado = true;
+
+        }
+
+
+        // ======================================
+        // NO HAY SESIÓN
+        // ======================================
 
         if (!user) {
 
-            window.location.href =
-                "login.html";
+            console.log(
+                "No existe una sesión Firebase."
+            );
+
+            window.location.replace(
+                "login.html"
+            );
 
             return;
         }
 
 
+        // ======================================
+        // USUARIO AUTENTICADO
+        // ======================================
+
         console.log(
-            "Usuario autenticado:",
+            "Usuario autenticado correctamente:",
             user.uid
         );
 
@@ -318,7 +358,7 @@
         try {
 
             // ==================================
-            // BUSCAR CLIENTE EN FIRESTORE
+            // BUSCAR CLIENTE
             // ==================================
 
             const clienteRef =
@@ -328,14 +368,20 @@
                     user.uid
                 );
 
+
             const clienteSnap =
                 await getDoc(clienteRef);
 
 
+            // ==================================
+            // NO EXISTE PERFIL
+            // ==================================
+
             if (!clienteSnap.exists()) {
 
                 console.error(
-                    "No existe el perfil del cliente."
+                    "No existe el documento clientes/" +
+                    user.uid
                 );
 
                 alert(
@@ -346,12 +392,22 @@
             }
 
 
+            // ==================================
+            // DATOS DEL CLIENTE
+            // ==================================
+
             const cliente =
                 clienteSnap.data();
 
 
+            console.log(
+                "Datos Firestore:",
+                cliente
+            );
+
+
             // ==================================
-            // MOSTRAR INFORMACIÓN
+            // MOSTRAR DATOS
             // ==================================
 
             nombreCliente.textContent =
@@ -363,7 +419,9 @@
 
 
             emailCliente.textContent =
-                cliente.email || user.email || "—";
+                cliente.email ||
+                user.email ||
+                "—";
 
 
             telefonoCliente.textContent =
@@ -379,7 +437,9 @@
 
 
             const saldo =
-                Number(cliente.saldoWallet ?? 0);
+                Number(
+                    cliente.saldoWallet ?? 0
+                );
 
 
             saldoWallet.textContent =
@@ -393,7 +453,8 @@
                 );
 
 
-        } catch (error) {
+        }
+        catch (error) {
 
             console.error(
                 "Error cargando cliente:",
@@ -415,12 +476,21 @@
 
             try {
 
+                console.log(
+                    "Cerrando sesión..."
+                );
+
+
                 await signOut(auth);
 
-                window.location.href =
-                    "login.html";
 
-            } catch (error) {
+                window.location.replace(
+                    "login.html"
+                );
+
+
+            }
+            catch (error) {
 
                 console.error(
                     "Error cerrando sesión:",
@@ -437,4 +507,3 @@
 </body>
 
 </html>
-```
