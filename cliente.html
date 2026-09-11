@@ -2428,23 +2428,27 @@
 
     import {
 
-        initializeFirestore,
+    initializeFirestore,
 
-        doc,
+    doc,
 
-        getDoc,
+    getDoc,
 
-        collection,
+    collection,
 
-        query,
+    query,
 
-        where,
+    where,
 
-        getDocs
+    getDocs,
 
-    }
-    from
-        "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    setDoc,
+
+    serverTimestamp
+
+}
+from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
     /* =========================
@@ -3533,319 +3537,468 @@
 
 
     /* =========================
-       VALIDATE PURCHASE CODE
+   VALIDATE PURCHASE CODE
+========================= */
+
+async function validatePurchaseCode(code) {
+
+    const error =
+        document.getElementById(
+            "scannerError"
+        );
+
+    const status =
+        document.getElementById(
+            "scannerStatus"
+        );
+
+    const result =
+        document.getElementById(
+            "scanResult"
+        );
+
+    const resultCode =
+        document.getElementById(
+            "scanResultCode"
+        );
+
+    const promotionFound =
+        document.getElementById(
+            "promotionFound"
+        );
+
+    const promotionBusiness =
+        document.getElementById(
+            "promotionBusiness"
+        );
+
+    const promotionName =
+        document.getElementById(
+            "promotionName"
+        );
+
+    const promotionDescription =
+        document.getElementById(
+            "promotionDescription"
+        );
+
+    const promotionPoints =
+        document.getElementById(
+            "promotionPoints"
+        );
+
+
+    /* =========================
+       LIMPIAR
     ========================= */
 
-    async function validatePurchaseCode(
-        code
-    ) {
+    error.style.display = "none";
+
+    promotionFound.classList.remove("show");
 
 
-        const error =
-            document.getElementById(
-                "scannerError"
+    /* =========================
+       NORMALIZAR CÓDIGO
+    ========================= */
+
+    const codigo =
+        String(code || "")
+            .trim()
+            .toUpperCase();
+
+
+    if (!codigo) {
+
+        error.textContent =
+            "Introduce el código de tu promoción.";
+
+        error.style.display =
+            "block";
+
+        return;
+    }
+
+
+    console.log(
+        "================================="
+    );
+
+    console.log(
+        "VALIDANDO PROMOCIÓN"
+    );
+
+    console.log(
+        "Código:",
+        codigo
+    );
+
+    console.log(
+        "================================="
+    );
+
+
+    status.innerHTML = `
+        🔎 Buscando código...
+    `;
+
+
+    try {
+
+        /* =========================
+           BUSCAR PROMOCIÓN
+        ========================= */
+
+        const promocionesRef =
+            collection(
+                db,
+                "promociones"
             );
 
 
-        const status =
-            document.getElementById(
-                "scannerStatus"
+        const promocionesQuery =
+            query(
+
+                promocionesRef,
+
+                where(
+                    "codigoPromocion",
+                    "==",
+                    codigo
+                )
+
             );
 
 
-        const result =
-            document.getElementById(
-                "scanResult"
+        const snapshot =
+            await getDocs(
+                promocionesQuery
             );
 
 
-        const resultCode =
-            document.getElementById(
-                "scanResultCode"
-            );
+        console.log(
+            "Documentos encontrados:",
+            snapshot.size
+        );
 
 
-        const promotionFound =
-            document.getElementById(
-                "promotionFound"
-            );
+        /* =========================
+           NO EXISTE
+        ========================= */
+
+        if (
+            snapshot.empty
+        ) {
+
+            status.innerHTML =
+                "❌ Código no encontrado";
+
+            error.textContent =
+                "El código " +
+                codigo +
+                " no existe. Verifica que lo hayas escrito correctamente.";
+
+            error.style.display =
+                "block";
+
+            return;
+        }
 
 
-        const promotionBusiness =
-            document.getElementById(
-                "promotionBusiness"
-            );
+        /* =========================
+           OBTENER PROMOCIÓN
+        ========================= */
+
+        const promoDoc =
+            snapshot.docs[0];
 
 
-        const promotionName =
-            document.getElementById(
-                "promotionName"
-            );
+        const promo =
+            promoDoc.data();
 
 
-        const promotionDescription =
-            document.getElementById(
-                "promotionDescription"
-            );
+        console.log(
+            "Promoción encontrada:",
+            promo
+        );
 
 
-        const promotionPoints =
-            document.getElementById(
-                "promotionPoints"
+        console.log(
+            "ID documento:",
+            promoDoc.id
+        );
+
+
+        /* =========================
+           VALIDAR ESTADO
+        ========================= */
+
+        if (
+            promo.activa === false
+        ) {
+
+            status.innerHTML =
+                "⚠️ Promoción no disponible";
+
+            error.textContent =
+                "Esta promoción ya no está activa.";
+
+            error.style.display =
+                "block";
+
+            return;
+        }
+
+
+        /* =========================
+           MOSTRAR RESULTADO
+        ========================= */
+
+        resultCode.textContent =
+            promo.codigoPromocion ||
+            codigo;
+
+
+        result.style.display =
+            "flex";
+
+
+        status.innerHTML =
+            "🎉 Promoción encontrada";
+
+
+        /* =========================
+           MOSTRAR NEGOCIO
+        ========================= */
+
+        promotionBusiness.textContent =
+
+            "🏪 " +
+            (
+                promo.nombreNegocio ||
+                "Negocio"
             );
 
 
         /* =========================
-           LIMPIAR
+           NOMBRE PROMOCIÓN
         ========================= */
 
-        error.style.display =
-            "none";
+        promotionName.textContent =
+
+            promo.nombre ||
+            "Promoción";
 
 
-        promotionFound.classList.remove(
+        /* =========================
+           DESCRIPCIÓN
+        ========================= */
+
+        promotionDescription.textContent =
+
+            promo.descripcion ||
+            "Promoción disponible";
+
+
+        /* =========================
+           PUNTOS
+        ========================= */
+
+        const puntos =
+            Number(
+                promo.puntos || 0
+            );
+
+
+        promotionPoints.textContent =
+
+            "⭐ +" +
+            puntos +
+            " puntos";
+
+
+        promotionFound.classList.add(
             "show"
         );
 
 
         /* =========================
-           NORMALIZAR
+           USUARIO ACTUAL
         ========================= */
 
-        let codigo =
-            String(
-                code || ""
-            )
-            .trim()
-            .toUpperCase();
+        const user =
+            auth.currentUser;
 
 
-        /*
-         * Si el QR contiene espacios
-         * al principio o al final,
-         * también los eliminamos.
-         */
+        if (!user) {
 
-
-        if (!codigo) {
-
-
-            error.textContent =
-                "Introduce el código de tu promoción.";
-
-
-            error.style.display =
-                "block";
-
-
-            return;
+            throw new Error(
+                "No hay un usuario autenticado."
+            );
 
         }
 
 
         console.log(
-            "Buscando código:",
-            codigo
+            "Cliente:",
+            user.uid
         );
 
 
         /* =========================
-           BUSCANDO
+           GUARDAR PROMOCIÓN
+           EN EL CLIENTE
+        ========================= */
+
+        const clientePromocionRef =
+            doc(
+
+                db,
+
+                "clientes",
+                user.uid,
+                "promociones",
+                promoDoc.id
+
+            );
+
+
+        await setDoc(
+
+            clientePromocionRef,
+
+            {
+
+                promocionId:
+                    promoDoc.id,
+
+                codigoPromocion:
+                    promo.codigoPromocion ||
+                    codigo,
+
+                negocioId:
+                    promo.negocioId ||
+                    "",
+
+                nombreNegocio:
+                    promo.nombreNegocio ||
+                    "Negocio",
+
+                nombre:
+                    promo.nombre ||
+                    "Promoción",
+
+                descripcion:
+                    promo.descripcion ||
+                    "",
+
+                categoria:
+                    promo.categoria ||
+                    "",
+
+                descuento:
+                    Number(
+                        promo.descuento || 0
+                    ),
+
+                puntos:
+                    puntos,
+
+                precioNormal:
+                    Number(
+                        promo.precioNormal || 0
+                    ),
+
+                precioPromo:
+                    Number(
+                        promo.precioPromo || 0
+                    ),
+
+                estado:
+                    "disponible",
+
+                fechaAsignacion:
+                    serverTimestamp()
+
+            },
+
+            {
+                merge:
+                    true
+            }
+
+        );
+
+
+        /* =========================
+           CONFIRMAR
         ========================= */
 
         status.innerHTML = `
-
-            🔎 Buscando promoción...
-
+            <span class="status-dot"></span>
+            ✅ Promoción agregada a tu PromoWallet
         `;
 
 
-        try {
+        console.log(
+            "================================="
+        );
+
+        console.log(
+            "PROMOCIÓN AGREGADA AL CLIENTE"
+        );
+
+        console.log(
+            "Cliente:",
+            user.uid
+        );
+
+        console.log(
+            "Promoción:",
+            promoDoc.id
+        );
+
+        console.log(
+            "Código:",
+            codigo
+        );
+
+        console.log(
+            "================================="
+        );
 
-
-            const promocionesQuery =
-                query(
-
-                    collection(
-                        db,
-                        "promociones"
-                    ),
-
-                    where(
-                        "codigoPromocion",
-                        "==",
-                        codigo
-                    )
-
-                );
-
-
-            const snapshot =
-                await getDocs(
-                    promocionesQuery
-                );
-
-
-            /* =========================
-               NO ENCONTRADO
-            ========================= */
-
-            if (
-                snapshot.empty
-            ) {
-
-
-                error.textContent =
-                    "El código no existe o no es válido.";
-
-
-                error.style.display =
-                    "block";
-
-
-                status.innerHTML =
-                    "❌ Código no encontrado";
-
-
-                return;
-
-            }
-
-
-            /* =========================
-               PROMOCION
-            ========================= */
-
-            const promoDoc =
-                snapshot.docs[0];
-
-
-            const promo =
-                promoDoc.data();
-
-
-            console.log(
-                "Promoción encontrada:",
-                promo
-            );
-
-
-            /* =========================
-               RESULTADO
-            ========================= */
-
-            resultCode.textContent =
-                promo.codigoPromocion ||
-                codigo;
-
-
-            result.style.display =
-                "flex";
-
-
-            status.innerHTML =
-                "✅ Promoción encontrada";
-
-
-            /* =========================
-               MOSTRAR DATOS
-            ========================= */
-
-            promotionBusiness.textContent =
-
-                "🏪 " +
-                (
-                    promo.nombreNegocio ||
-                    "Negocio"
-                );
-
-
-            promotionName.textContent =
-
-                promo.nombre ||
-                "Promoción";
-
-
-            promotionDescription.textContent =
-
-                promo.descripcion ||
-                "Promoción disponible";
-
-
-            const puntos =
-                Number(
-                    promo.puntos || 0
-                );
-
-
-            promotionPoints.textContent =
-
-                "⭐ +" +
-                puntos +
-                " puntos";
-
-
-            promotionFound.classList.add(
-                "show"
-            );
-
-
-            console.log(
-                "ID promoción:",
-                promoDoc.id
-            );
-
-
-            console.log(
-                "Negocio:",
-                promo.nombreNegocio
-            );
-
-
-            console.log(
-                "Promoción:",
-                promo.nombre
-            );
-
-
-            console.log(
-                "Descripción:",
-                promo.descripcion
-            );
-
-
-            console.log(
-                "Puntos:",
-                promo.puntos
-            );
-
-
-        }
-        catch (errorFirebase) {
-
-
-            console.error(
-                "Error validando código:",
-                errorFirebase
-            );
-
-
-            error.textContent =
-
-                "No fue posible validar el código. " +
-                "Verifica tu conexión e intenta nuevamente.";
-
-
-            error.style.display =
-                "block";
-
-
-            status.innerHTML =
-                "⚠️ Error de conexión";
-
-        }
 
     }
+    catch (errorFirebase) {
+
+        console.error(
+            "ERROR COMPLETO:",
+            errorFirebase
+        );
+
+
+        status.innerHTML =
+            "⚠️ No se pudo cargar la promoción";
+
+
+        /*
+         * Mostrar el error real durante las pruebas.
+         */
+
+        error.textContent =
+
+            "Error: " +
+            (
+                errorFirebase.message ||
+                "No fue posible guardar la promoción."
+            );
+
+
+        error.style.display =
+            "block";
+
+    }
+
+}
 
 
     /* =========================
