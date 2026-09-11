@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -528,6 +528,77 @@
             }
 
         }
+		
+		/* =========================
+   MIS PREMIOS
+========================= */
+
+.prize-card {
+    background: white;
+    border: 1px solid #fcd34d;
+    border-radius: 16px;
+    padding: 18px;
+    position: relative;
+}
+
+.prize-card-icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.prize-card-title {
+    font-size: 18px;
+    font-weight: 900;
+    color: #92400e;
+    margin-bottom: 6px;
+}
+
+.prize-card-business {
+    color: #64748b;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.prize-card-description {
+    color: #475569;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.prize-card-points {
+    color: #087f5b;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.prize-card-code {
+    display: inline-block;
+    background: #fef3c7;
+    color: #92400e;
+    border-radius: 20px;
+    padding: 6px 10px;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.prize-card-campaign {
+    color: #64748b;
+    font-size: 12px;
+    margin-top: 9px;
+}
+
+.prize-card-status {
+    margin-top: 12px;
+    display: inline-block;
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800;
+}
 
     </style>
 
@@ -703,6 +774,26 @@
 
 
     <!-- MIS PROMOCIONES -->
+	
+	<section class="section">
+
+    <div class="section-header">
+
+        <h2>
+            🏆 Mis premios
+        </h2>
+
+        <span id="prizeCountLabel"></span>
+
+    </div>
+
+    <div
+        id="customerPrizes"
+        class="cards">
+
+    </div>
+
+</section>
 
     <section class="section">
 
@@ -1020,12 +1111,10 @@ onAuthStateChanged(
         currentUser =
             user;
 
-
         await loadCustomer();
-
         await loadPromotions();
-
         await loadCustomerPromotions();
+		await loadCustomerPrizes();
 
     }
 );
@@ -2665,4 +2754,4 @@ document
 </body>
 
 </html>
-```
+
