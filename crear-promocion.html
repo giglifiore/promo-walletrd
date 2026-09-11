@@ -1,17 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Crear - PromoWallet</title>
+    <title>Crear promoción - PromoWallet</title>
 
     <style>
-
         * {
             box-sizing: border-box;
         }
@@ -20,501 +15,502 @@
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
             background: #f4f8f7;
-            color: #263238;
+            color: #243238;
         }
 
-        /* ==========================================
-           TOPBAR
-        ========================================== */
-
         .topbar {
-            height: 70px;
             background: #ffffff;
             border-bottom: 1px solid #e5ece9;
+            height: 64px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 32px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            padding: 0 30px;
         }
 
         .logo {
-            font-size: 25px;
-            font-weight: 800;
-            letter-spacing: -0.7px;
-        }
-
-        .logo span {
-            color: #16a36a;
-        }
-
-        .top-right {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .business-name {
-            color: #607d8b;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .back-link {
-            color: #168f60;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
-        /* ==========================================
-           CONTAINER
-        ========================================== */
-
-        .container {
-            max-width: 850px;
-            margin: 0 auto;
-            padding: 35px 20px 60px;
-        }
-
-        /* ==========================================
-           HEADER
-        ========================================== */
-
-        .page-header {
-            margin-bottom: 25px;
-        }
-
-        .page-header h1 {
-            margin: 0;
-            font-size: 29px;
-            letter-spacing: -0.5px;
-        }
-
-        .page-header p {
-            margin: 8px 0 0;
-            color: #78909c;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        /* ==========================================
-           TYPE SELECTOR
-        ========================================== */
-
-        .type-selector {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin-bottom: 20px;
-        }
-
-        .type-option {
-            background: #ffffff;
-            border: 2px solid #e1e9e6;
-            border-radius: 15px;
-            padding: 18px;
-            cursor: pointer;
-            transition: .2s;
-            display: flex;
-            align-items: center;
-            gap: 13px;
-        }
-
-        .type-option:hover {
-            border-color: #a8d9c3;
-        }
-
-        .type-option.active {
-            border-color: #16a36a;
-            background: #f1faf6;
-        }
-
-        .type-icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 12px;
-            background: #e7f8f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 23px;
-            flex-shrink: 0;
-        }
-
-        .type-option.active .type-icon {
-            background: #d7f3e6;
-        }
-
-        .type-title {
-            font-size: 15px;
-            font-weight: 800;
-            margin-bottom: 4px;
-        }
-
-        .type-description {
-            color: #78909c;
-            font-size: 11px;
-            line-height: 1.4;
-        }
-
-        /* ==========================================
-           CARD
-        ========================================== */
-
-        .card {
-            background: #ffffff;
-            border: 1px solid #e5ece9;
-            border-radius: 18px;
-            padding: 28px;
-            box-shadow: 0 6px 22px rgba(39, 70, 83, .06);
-            margin-bottom: 20px;
-        }
-
-        .card-title {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 22px;
+            font-size: 20px;
+            font-weight: 800;
+            color: #16a36a;
         }
 
-        .card-title-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 11px;
-            background: #e7f8f0;
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: #16a36a;
+            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 19px;
         }
 
-        .card-title h2 {
-            margin: 0;
-            font-size: 18px;
+        .top-right {
+            display: flex;
+            align-items: center;
+            gap: 18px;
         }
 
-        /* ==========================================
-           FORM
-        ========================================== */
-
-        .form-group {
-            margin-bottom: 19px;
+        .business-name {
+            font-size: 13px;
+            color: #60747c;
+            font-weight: 700;
         }
 
-        label {
-            display: block;
-            margin-bottom: 7px;
-            color: #37474f;
+        .dashboard-link {
+            text-decoration: none;
+            color: #16a36a;
             font-size: 13px;
             font-weight: 700;
         }
 
-        .required {
-            color: #e05252;
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .page-header {
+            margin-bottom: 25px;
+        }
+
+        .page-header h1 {
+            margin: 0 0 8px;
+            font-size: 28px;
+            color: #263238;
+        }
+
+        .page-header p {
+            margin: 0;
+            color: #71858c;
+            font-size: 14px;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #e5ece9;
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 17px;
+            font-weight: 800;
+            margin-bottom: 5px;
+            color: #263238;
+        }
+
+        .card-description {
+            color: #8a9ba1;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+
+        /* ================================
+           SELECTOR DE TIPO
+           ================================ */
+
+        .type-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .type-option {
+            border: 1px solid #d9e2e7;
+            background: #fbfcfd;
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.15s ease;
+        }
+
+        .type-option:hover {
+            border-color: #9bcdb8;
+        }
+
+        .type-option.active {
+            border-color: #16a36a;
+            background: #f1faf6;
+            box-shadow: 0 0 0 3px rgba(22, 163, 106, .08);
+        }
+
+        .type-option-icon {
+            font-size: 23px;
+        }
+
+        .type-option-title {
+            font-weight: 800;
+            margin-top: 7px;
+            color: #263238;
+        }
+
+        .type-option-text {
+            font-size: 11px;
+            color: #90a4ae;
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+
+        /* ================================
+           FORMULARIOS
+           ================================ */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 7px;
+            color: #455a64;
         }
 
         input,
         textarea,
         select {
             width: 100%;
-            border: 1px solid #d9e2e7;
-            border-radius: 10px;
-            background: #fbfcfd;
-            color: #263238;
+            border: 1px solid #dce5e8;
+            border-radius: 9px;
+            padding: 11px 12px;
+            font-size: 13px;
             font-family: inherit;
-            font-size: 14px;
+            color: #263238;
+            background: #ffffff;
             outline: none;
-            transition: .2s;
-        }
-
-        input,
-        select {
-            height: 47px;
-            padding: 0 13px;
-        }
-
-        textarea {
-            min-height: 110px;
-            padding: 13px;
-            resize: vertical;
         }
 
         input:focus,
         textarea:focus,
         select:focus {
             border-color: #16a36a;
-            background: #ffffff;
-            box-shadow: 0 0 0 3px rgba(22, 163, 106, .09);
+            box-shadow: 0 0 0 3px rgba(22, 163, 106, .08);
         }
 
-        .help {
-            margin-top: 6px;
-            color: #90a4ae;
+        textarea {
+            min-height: 95px;
+            resize: vertical;
+        }
+
+        .help-text {
             font-size: 11px;
-            line-height: 1.4;
+            color: #91a0a6;
+            margin-top: 5px;
         }
 
-        /* ==========================================
-           GRID
-        ========================================== */
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 17px;
-        }
-
-        .full {
-            grid-column: 1 / -1;
-        }
-
-        /* ==========================================
-           PRICE PREVIEW
-        ========================================== */
+        /* ================================
+           PRECIOS
+           ================================ */
 
         .price-preview {
-            margin-top: 10px;
-            padding: 12px 14px;
-            background: #f1faf6;
-            border-radius: 10px;
-            color: #168f60;
-            font-size: 13px;
-            display: none;
-        }
-
-        .price-preview.show {
-            display: block;
-        }
-
-        /* ==========================================
-           PRIZE INFO
-        ========================================== */
-
-        .prize-info {
-            background: #fffaf0;
-            border: 1px solid #f4e3b7;
-            border-radius: 12px;
-            padding: 13px 15px;
-            color: #856404;
-            font-size: 12px;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-        .prize-preview {
-            display: none;
-            background: #f1faf6;
-            border: 1px solid #ccebdd;
-            border-radius: 15px;
-            padding: 18px;
-            margin-top: 5px;
-            margin-bottom: 20px;
-        }
-
-        .prize-preview.show {
-            display: block;
-        }
-
-        .prize-preview-title {
-            font-size: 12px;
-            color: #78909c;
-            margin-bottom: 7px;
-        }
-
-        .prize-preview-name {
-            font-size: 20px;
-            font-weight: 800;
-            color: #168f60;
-        }
-
-        .prize-preview-description {
-            font-size: 12px;
-            color: #607d8b;
-            margin-top: 5px;
-        }
-
-        /* ==========================================
-           CODE RESULT
-        ========================================== */
-
-        .codes-result {
-            display: none;
-            background: #ffffff;
-            border: 1px solid #dce9e4;
-            border-radius: 15px;
             margin-top: 20px;
-            overflow: hidden;
-        }
-
-        .codes-result.show {
-            display: block;
-        }
-
-        .codes-header {
-            padding: 17px;
-            background: #f1faf6;
-            border-bottom: 1px solid #dce9e4;
-        }
-
-        .codes-header-title {
-            font-size: 15px;
-            font-weight: 800;
-            color: #168f60;
-        }
-
-        .codes-header-description {
-            margin-top: 5px;
-            font-size: 11px;
-            color: #78909c;
-        }
-
-        .codes-list {
-            max-height: 300px;
-            overflow-y: auto;
-            padding: 10px;
-        }
-
-        .code-item {
+            border-radius: 12px;
+            background: #f4faf7;
+            border: 1px solid #d8eee3;
+            padding: 18px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 12px;
-            border-bottom: 1px solid #eef2f1;
         }
 
-        .code-item:last-child {
-            border-bottom: none;
+        .price-preview-label {
+            font-size: 12px;
+            color: #78909c;
         }
 
-        .code-value {
-            font-family: monospace;
-            font-size: 14px;
+        .price-preview-value {
+            font-size: 22px;
             font-weight: 800;
-            letter-spacing: 1px;
-            color: #263238;
+            color: #16a36a;
         }
 
-        .code-status {
-            font-size: 10px;
-            color: #168f60;
+        /* ================================
+           PREMIOS
+           ================================ */
+
+        .prize-summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            background: #f8fafb;
+            border: 1px solid #e3eaed;
+            border-radius: 11px;
+            padding: 14px 16px;
+            margin-bottom: 18px;
+        }
+
+        .prize-summary-label {
+            font-size: 12px;
+            color: #60747c;
             font-weight: 700;
         }
 
-        /* ==========================================
-           BUTTONS
-        ========================================== */
+        .prize-total {
+            font-size: 19px;
+            font-weight: 800;
+        }
+
+        .prize-total.ok {
+            color: #16a36a;
+        }
+
+        .prize-total.warning {
+            color: #e67e22;
+        }
+
+        .prize-total.error {
+            color: #d9534f;
+        }
+
+        .prize-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .prize-item {
+            border: 1px solid #dfe7ea;
+            border-radius: 12px;
+            padding: 15px;
+            background: #ffffff;
+        }
+
+        .prize-item-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .prize-number {
+            font-size: 12px;
+            font-weight: 800;
+            color: #16a36a;
+        }
+
+        .remove-prize {
+            border: 0;
+            background: transparent;
+            color: #d9534f;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 2px 5px;
+        }
+
+        .prize-grid {
+            display: grid;
+            grid-template-columns: 1fr 170px;
+            gap: 14px;
+        }
+
+        .probability-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .probability-input {
+            position: relative;
+        }
+
+        .probability-input input {
+            padding-right: 35px;
+        }
+
+        .percent-symbol {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #78909c;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .add-prize-button {
+            width: 100%;
+            margin-top: 15px;
+            padding: 12px;
+            border: 1px dashed #a9cdbc;
+            border-radius: 10px;
+            background: #f5fbf8;
+            color: #16a36a;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .add-prize-button:hover {
+            background: #eef9f4;
+        }
+
+        .probability-message {
+            margin-top: 10px;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .probability-message.ok {
+            color: #16a36a;
+        }
+
+        .probability-message.warning {
+            color: #d67c18;
+        }
+
+        .probability-message.error {
+            color: #d9534f;
+        }
+
+        .prize-example {
+            background: #f7fafb;
+            border: 1px solid #e3eaed;
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-top: 15px;
+            color: #71858c;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        /* ================================
+           MENSAJES
+           ================================ */
+
+        #message {
+            display: none;
+            padding: 13px 15px;
+            border-radius: 9px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        #message.success {
+            display: block;
+            background: #edf9f3;
+            border: 1px solid #ccebdc;
+            color: #137b4e;
+        }
+
+        #message.error {
+            display: block;
+            background: #fff1f0;
+            border: 1px solid #f1d1ce;
+            color: #c0392b;
+        }
+
+        #message.info {
+            display: block;
+            background: #eef6fb;
+            border: 1px solid #d5e6f1;
+            color: #39708f;
+        }
+
+        /* ================================
+           BOTONES
+           ================================ */
 
         .actions {
             display: flex;
             justify-content: flex-end;
-            gap: 12px;
+            gap: 10px;
             margin-top: 10px;
         }
 
-        .btn {
-            height: 48px;
-            padding: 0 22px;
-            border-radius: 11px;
-            font-size: 14px;
-            font-weight: 700;
+        .button {
+            border: 0;
+            border-radius: 9px;
+            padding: 12px 20px;
+            font-size: 13px;
+            font-weight: 800;
             cursor: pointer;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            border: none;
         }
 
-        .btn-cancel {
-            background: #f0f3f4;
-            color: #607d8b;
+        .button-secondary {
+            background: #eef2f3;
+            color: #60747c;
         }
 
-        .btn-cancel:hover {
-            background: #e5eaec;
+        .button-secondary:hover {
+            background: #e4eaec;
         }
 
-        .btn-primary {
+        .button-primary {
             background: #16a36a;
             color: #ffffff;
         }
 
-        .btn-primary:hover {
-            background: #128956;
+        .button-primary:hover {
+            background: #128d5b;
         }
 
-        .btn-primary:disabled {
-            background: #91cbb1;
+        .button-primary:disabled {
+            opacity: .55;
             cursor: not-allowed;
         }
 
-        /* ==========================================
-           MESSAGE
-        ========================================== */
-
-        .message {
-            display: none;
-            margin-bottom: 20px;
-            padding: 13px 15px;
-            border-radius: 10px;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-
-        .message.success {
-            display: block;
-            background: #edf9f3;
-            color: #16784d;
-            border: 1px solid #c9edda;
-        }
-
-        .message.error {
-            display: block;
-            background: #fff1f1;
-            color: #c62828;
-            border: 1px solid #ffd3d3;
-        }
-
-        /* ==========================================
+        /* ================================
            LOADING
-        ========================================== */
+           ================================ */
 
-        .loading {
+        #loading {
+            display: none;
             position: fixed;
             inset: 0;
-            background: rgba(255,255,255,.92);
+            background: rgba(255,255,255,.85);
             z-index: 9999;
-            display: none;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
         }
 
-        .loading.show {
-            display: flex;
+        .loading-box {
+            background: #ffffff;
+            border: 1px solid #e1e9e6;
+            border-radius: 14px;
+            padding: 25px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,.08);
         }
 
         .spinner {
-            width: 43px;
-            height: 43px;
-            border: 4px solid #dcefe7;
+            width: 34px;
+            height: 34px;
+            border: 4px solid #dceee5;
             border-top-color: #16a36a;
             border-radius: 50%;
-            animation: spin .8s linear infinite;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 13px;
         }
 
         .loading-text {
-            margin-top: 13px;
-            color: #607d8b;
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 13px;
+            color: #60747c;
+            font-weight: 700;
         }
 
         @keyframes spin {
@@ -523,22 +519,14 @@
             }
         }
 
-        /* ==========================================
-           HIDDEN
-        ========================================== */
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* ==========================================
+        /* ================================
            RESPONSIVE
-        ========================================== */
+           ================================ */
 
         @media (max-width: 650px) {
 
             .topbar {
-                padding: 0 16px;
+                padding: 0 15px;
             }
 
             .business-name {
@@ -546,22 +534,31 @@
             }
 
             .container {
-                padding: 25px 15px 40px;
+                margin: 25px auto;
+                padding: 0 14px;
+            }
+
+            .page-header h1 {
+                font-size: 24px;
             }
 
             .card {
-                padding: 22px 18px;
+                padding: 18px;
+            }
+
+            .type-selector {
+                grid-template-columns: 1fr;
             }
 
             .form-grid {
                 grid-template-columns: 1fr;
             }
 
-            .full {
+            .form-group.full {
                 grid-column: auto;
             }
 
-            .type-selector {
+            .prize-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -569,181 +566,154 @@
                 flex-direction: column-reverse;
             }
 
-            .btn {
+            .button {
                 width: 100%;
             }
-
         }
-
     </style>
-
 </head>
 
 <body>
 
-<!-- ==========================================
-     TOPBAR
-========================================== -->
+    <!-- ================================
+         TOPBAR
+         ================================ -->
 
-<header class="topbar">
+    <header class="topbar">
 
-    <div class="logo">
-        Promo<span>Wallet</span>
-    </div>
+        <div class="logo">
+            <div class="logo-icon">P</div>
+            <span>PromoWallet</span>
+        </div>
 
-    <div class="top-right">
+        <div class="top-right">
+            <span id="businessNameTop" class="business-name">
+                Cargando negocio...
+            </span>
 
-        <span
-            class="business-name"
-            id="businessNameTop">
+            <a href="dashboard-negocio.html" class="dashboard-link">
+                Dashboard
+            </a>
+        </div>
 
-            Cargando negocio...
-
-        </span>
-
-        <a
-            href="dashboard-negocio.html"
-            class="back-link">
-
-            ← Volver al dashboard
-
-        </a>
-
-    </div>
-
-</header>
+    </header>
 
 
-<!-- ==========================================
-     CONTENIDO
-========================================== -->
+    <!-- ================================
+         CONTENIDO
+         ================================ -->
 
-<main class="container">
+    <main class="container">
 
-    <div class="page-header">
+        <div class="page-header">
 
-        <h1 id="pageTitle">
-            Crear promoción
-        </h1>
+            <h1 id="pageTitle">
+                Crear promoción
+            </h1>
 
-        <p id="pageDescription">
-            Publica una nueva oferta para que los clientes
-            puedan descubrirla y aprovecharla.
-        </p>
-
-    </div>
-
-
-    <!-- ==========================================
-         SELECTOR
-    ========================================== -->
-
-    <div class="type-selector">
-
-        <div
-            class="type-option active"
-            id="typePromotion">
-
-            <div class="type-icon">
-                🎟️
-            </div>
-
-            <div>
-
-                <div class="type-title">
-                    Promoción
-                </div>
-
-                <div class="type-description">
-                    Publica una oferta para que
-                    los clientes puedan verla.
-                </div>
-
-            </div>
+            <p id="pageDescription">
+                Publica una nueva oferta para que los clientes puedan descubrirla y aprovecharla.
+            </p>
 
         </div>
 
 
-        <div
-            class="type-option"
-            id="typePrize">
-
-            <div class="type-icon">
-                🎁
-            </div>
-
-            <div>
-
-                <div class="type-title">
-                    Premio
-                </div>
-
-                <div class="type-description">
-                    Crea premios y genera códigos
-                    para entregarlos a tus clientes.
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
+        <div id="message"></div>
 
 
-    <!-- ==========================================
-         MENSAJE
-    ========================================== -->
-
-    <div
-        id="message"
-        class="message">
-    </div>
-
-
-    <!-- =====================================================
-         FORMULARIO PROMOCION
-    ===================================================== -->
-
-    <div id="promotionForm">
-
-
-        <!-- ==========================================
-             INFORMACION
-        ========================================== -->
+        <!-- ================================
+             TIPO DE PUBLICACIÓN
+             ================================ -->
 
         <div class="card">
 
             <div class="card-title">
+                ¿Qué quieres crear?
+            </div>
 
-                <div class="card-title-icon">
-                    🎟️
+            <div class="card-description">
+                Selecciona el tipo de contenido que quieres publicar.
+            </div>
+
+
+            <div class="type-selector">
+
+                <div
+                    id="typePromotion"
+                    class="type-option active"
+                    onclick="selectType('promocion')"
+                >
+
+                    <div class="type-option-icon">
+                        🎟️
+                    </div>
+
+                    <div class="type-option-title">
+                        Promoción
+                    </div>
+
+                    <div class="type-option-text">
+                        Oferta tradicional con precio normal,
+                        precio promocional y descuento.
+                    </div>
+
                 </div>
 
-                <h2>
-                    Información de la promoción
-                </h2>
 
+                <div
+                    id="typePrize"
+                    class="type-option"
+                    onclick="selectType('premio')"
+                >
+
+                    <div class="type-option-icon">
+                        🎁
+                    </div>
+
+                    <div class="type-option-title">
+                        Campaña de premios
+                    </div>
+
+                    <div class="type-option-text">
+                        Crea varios premios y asigna una
+                        probabilidad a cada uno.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================
+             INFORMACIÓN
+             ================================ -->
+
+        <div class="card">
+
+            <div class="card-title" id="informationTitle">
+                Información de la promoción
+            </div>
+
+            <div class="card-description" id="informationDescription">
+                Completa la información básica de tu promoción.
             </div>
 
 
             <div class="form-grid">
 
-
                 <div class="form-group full">
 
-                    <label for="nombre">
-
+                    <label for="nombre" id="nombreLabel">
                         Nombre de la promoción
-
-                        <span class="required">*</span>
-
                     </label>
 
                     <input
                         type="text"
                         id="nombre"
                         maxlength="100"
-                        placeholder="Ej. 20% de descuento en toda la tienda"
+                        placeholder="Ej. 20% de descuento"
                     >
 
                 </div>
@@ -752,22 +722,14 @@
                 <div class="form-group full">
 
                     <label for="descripcion">
-
                         Descripción
-
-                        <span class="required">*</span>
-
                     </label>
 
                     <textarea
                         id="descripcion"
                         maxlength="500"
-                        placeholder="Describe qué incluye la promoción, condiciones, productos participantes, etc."
+                        placeholder="Describe brevemente tu promoción..."
                     ></textarea>
-
-                    <div class="help">
-                        Máximo 500 caracteres.
-                    </div>
 
                 </div>
 
@@ -775,57 +737,57 @@
                 <div class="form-group">
 
                     <label for="categoria">
-
                         Categoría
-
-                        <span class="required">*</span>
-
                     </label>
 
                     <select id="categoria">
 
                         <option value="">
-                            Selecciona una categoría
+                            Seleccionar categoría
                         </option>
 
                         <option value="Alimentos">
-                            🍔 Alimentos
+                            Alimentos
                         </option>
 
                         <option value="Bebidas">
-                            🥤 Bebidas
+                            Bebidas
                         </option>
 
-                        <option value="Moda">
-                            👕 Moda
+                        <option value="Restaurante">
+                            Restaurante
+                        </option>
+
+                        <option value="Supermercado">
+                            Supermercado
                         </option>
 
                         <option value="Tecnología">
-                            📱 Tecnología
+                            Tecnología
                         </option>
 
                         <option value="Belleza">
-                            💄 Belleza
+                            Belleza
                         </option>
 
                         <option value="Salud">
-                            ❤️ Salud
+                            Salud
+                        </option>
+
+                        <option value="Moda">
+                            Moda
                         </option>
 
                         <option value="Entretenimiento">
-                            🎮 Entretenimiento
+                            Entretenimiento
                         </option>
 
                         <option value="Servicios">
-                            🛠️ Servicios
-                        </option>
-
-                        <option value="Hogar">
-                            🏠 Hogar
+                            Servicios
                         </option>
 
                         <option value="Otros">
-                            📦 Otros
+                            Otros
                         </option>
 
                     </select>
@@ -836,21 +798,19 @@
                 <div class="form-group">
 
                     <label for="cantidad">
-
                         Cantidad disponible
-
                     </label>
 
                     <input
                         type="number"
                         id="cantidad"
-                        min="0"
+                        min="1"
                         step="1"
-                        placeholder="Ej. 100"
+                        placeholder="Ej. 50"
                     >
 
-                    <div class="help">
-                        Deja 0 para indicar disponibilidad ilimitada.
+                    <div class="help-text">
+                        Cantidad total disponible.
                     </div>
 
                 </div>
@@ -860,27 +820,22 @@
         </div>
 
 
-        <!-- ==========================================
-             PRECIO
-        ========================================== -->
+        <!-- ================================
+             PRECIOS - PROMOCIÓN
+             ================================ -->
 
-        <div class="card">
+        <div class="card" id="promotionPriceCard">
 
             <div class="card-title">
+                Precio y beneficio
+            </div>
 
-                <div class="card-title-icon">
-                    💰
-                </div>
-
-                <h2>
-                    Precio y beneficio
-                </h2>
-
+            <div class="card-description">
+                Define el precio normal y el precio especial para el cliente.
             </div>
 
 
             <div class="form-grid">
-
 
                 <div class="form-group">
 
@@ -927,8 +882,9 @@
                         id="descuento"
                         min="0"
                         max="100"
-                        step="1"
-                        placeholder="Ej. 20"
+                        step="0.01"
+                        readonly
+                        placeholder="0"
                     >
 
                 </div>
@@ -937,7 +893,7 @@
                 <div class="form-group">
 
                     <label for="puntos">
-                        Puntos PromoWallet
+                        Puntos
                     </label>
 
                     <input
@@ -945,57 +901,178 @@
                         id="puntos"
                         min="0"
                         step="1"
+                        value="0"
                         placeholder="Ej. 100"
                     >
 
-                    <div class="help">
-                        Puntos asociados a esta promoción.
-                    </div>
-
                 </div>
-
 
             </div>
 
 
-            <div
-                id="pricePreview"
-                class="price-preview">
+            <div class="price-preview">
+
+                <div class="price-preview-label">
+                    El cliente pagará
+                </div>
+
+                <div class="price-preview-value" id="pricePreview">
+                    RD$ 0.00
+                </div>
+
             </div>
 
         </div>
 
 
-        <!-- ==========================================
-             VIGENCIA
-        ========================================== -->
+        <!-- ================================
+             CAMPAÑA DE PREMIOS
+             ================================ -->
 
-        <div class="card">
+        <div
+            class="card"
+            id="prizeCard"
+            style="display:none;"
+        >
 
             <div class="card-title">
+                Opciones de premios
+            </div>
 
-                <div class="card-title-icon">
-                    📅
+            <div class="card-description">
+                Agrega todos los premios que puede ganar el cliente y
+                define la probabilidad de cada uno.
+            </div>
+
+
+            <div class="prize-summary">
+
+                <div>
+                    <div class="prize-summary-label">
+                        Probabilidad total
+                    </div>
                 </div>
 
-                <h2>
-                    Vigencia
-                </h2>
+                <div
+                    id="prizeTotal"
+                    class="prize-total warning"
+                >
+                    0%
+                </div>
 
+            </div>
+
+
+            <div
+                id="prizeList"
+                class="prize-list"
+            ></div>
+
+
+            <button
+                type="button"
+                class="add-prize-button"
+                onclick="addPrize()"
+            >
+                ＋ Agregar premio
+            </button>
+
+
+            <div
+                id="probabilityMessage"
+                class="probability-message warning"
+            >
+                Agrega al menos un premio. La suma de las probabilidades debe ser exactamente 100%.
+            </div>
+
+
+            <div class="prize-example">
+
+                <strong>Ejemplo:</strong>
+
+                Café gratis 50%,
+                Hamburguesa gratis 25%,
+                RD$200 de descuento 15%,
+                500 puntos 8% y
+                Premio especial 2%.
+
+                <br><br>
+
+                <strong>Total: 100%</strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================
+             PUNTOS PARA PREMIOS
+             ================================ -->
+
+        <div
+            class="card"
+            id="prizePointsCard"
+            style="display:none;"
+        >
+
+            <div class="card-title">
+                Recompensa adicional
+            </div>
+
+            <div class="card-description">
+                Opcionalmente puedes entregar puntos adicionales junto con el premio ganado.
             </div>
 
 
             <div class="form-grid">
 
+                <div class="form-group">
+
+                    <label for="puntosPremio">
+                        Puntos adicionales
+                    </label>
+
+                    <input
+                        type="number"
+                        id="puntosPremio"
+                        min="0"
+                        step="1"
+                        value="0"
+                        placeholder="Ej. 100"
+                    >
+
+                    <div class="help-text">
+                        Estos puntos se entregarán además del premio.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================
+             VIGENCIA
+             ================================ -->
+
+        <div class="card">
+
+            <div class="card-title">
+                Vigencia
+            </div>
+
+            <div class="card-description">
+                Define durante qué período estará disponible.
+            </div>
+
+
+            <div class="form-grid">
 
                 <div class="form-group">
 
                     <label for="fechaInicio">
-
                         Fecha de inicio
-
-                        <span class="required">*</span>
-
                     </label>
 
                     <input
@@ -1009,11 +1086,7 @@
                 <div class="form-group">
 
                     <label for="fechaFin">
-
-                        Fecha de vencimiento
-
-                        <span class="required">*</span>
-
+                        Fecha de finalización
                     </label>
 
                     <input
@@ -1023,2466 +1096,1702 @@
 
                 </div>
 
-
             </div>
 
         </div>
 
 
+        <!-- ================================
+             ACCIONES
+             ================================ -->
+
         <div class="actions">
 
             <a
                 href="dashboard-negocio.html"
-                class="btn btn-cancel">
-
+                class="button button-secondary"
+            >
                 Cancelar
-
             </a>
 
             <button
                 type="button"
                 id="guardarButton"
-                class="btn btn-primary">
-
+                class="button button-primary"
+            >
                 Publicar promoción
-
             </button>
 
         </div>
 
-    </div>
+    </main>
 
 
-    <!-- =====================================================
-         FORMULARIO PREMIO
-    ===================================================== -->
+    <!-- ================================
+         LOADING
+         ================================ -->
 
-    <div
-        id="prizeForm"
-        class="hidden">
+    <div id="loading">
 
+        <div class="loading-box">
 
-        <!-- ==========================================
-             INFORMACION DEL PREMIO
-        ========================================== -->
-
-        <div class="card">
-
-            <div class="card-title">
-
-                <div class="card-title-icon">
-                    🎁
-                </div>
-
-                <h2>
-                    Información del premio
-                </h2>
-
-            </div>
-
-
-            <div class="prize-info">
-
-                🎁 Este premio será asociado a códigos únicos.
-                El negocio podrá entregar un código al cliente
-                después de una compra.
-
-            </div>
-
-
-            <div class="form-grid">
-
-
-                <div class="form-group full">
-
-                    <label for="premioNombre">
-
-                        Nombre del premio
-
-                        <span class="required">*</span>
-
-                    </label>
-
-                    <input
-                        type="text"
-                        id="premioNombre"
-                        maxlength="100"
-                        placeholder="Ej. Café gratis"
-                    >
-
-                </div>
-
-
-                <div class="form-group full">
-
-                    <label for="premioDescripcion">
-
-                        Descripción
-
-                        <span class="required">*</span>
-
-                    </label>
-
-                    <textarea
-                        id="premioDescripcion"
-                        maxlength="500"
-                        placeholder="Ej. Café americano gratis para el cliente."
-                    ></textarea>
-
-                    <div class="help">
-                        Máximo 500 caracteres.
-                    </div>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="premioTipo">
-
-                        Tipo de premio
-
-                        <span class="required">*</span>
-
-                    </label>
-
-                    <select id="premioTipo">
-
-                        <option value="">
-                            Selecciona un tipo
-                        </option>
-
-                        <option value="puntos">
-                            ⭐ Puntos
-                        </option>
-
-                        <option value="producto">
-                            🎁 Producto
-                        </option>
-
-                        <option value="descuento">
-                            🎟️ Descuento
-                        </option>
-
-                        <option value="saldo">
-                            💰 Saldo
-                        </option>
-
-                        <option value="otro">
-                            🏆 Otro
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="premioValor">
-
-                        Valor del premio
-
-                    </label>
-
-                    <input
-                        type="number"
-                        id="premioValor"
-                        min="0"
-                        step="0.01"
-                        placeholder="Ej. 50"
-                    >
-
-                    <div class="help">
-                        Para puntos: cantidad de puntos.
-                        Para descuento: porcentaje.
-                        Para saldo: monto.
-                    </div>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="premioCantidad">
-
-                        Cantidad de códigos
-
-                        <span class="required">*</span>
-
-                    </label>
-
-                    <input
-                        type="number"
-                        id="premioCantidad"
-                        min="1"
-                        max="1000"
-                        step="1"
-                        value="10"
-                    >
-
-                    <div class="help">
-                        Cantidad de códigos que deseas generar.
-                    </div>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="premioIcono">
-
-                        Icono
-
-                    </label>
-
-                    <input
-                        type="text"
-                        id="premioIcono"
-                        maxlength="4"
-                        value="🎁"
-                        placeholder="🎁"
-                    >
-
-                </div>
-
-
-            </div>
-
+            <div class="spinner"></div>
 
             <div
-                id="prizePreview"
-                class="prize-preview">
-
-                <div class="prize-preview-title">
-                    Vista previa
-                </div>
-
-                <div
-                    id="prizePreviewName"
-                    class="prize-preview-name">
-                </div>
-
-                <div
-                    id="prizePreviewDescription"
-                    class="prize-preview-description">
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- ==========================================
-             VIGENCIA PREMIO
-        ========================================== -->
-
-        <div class="card">
-
-            <div class="card-title">
-
-                <div class="card-title-icon">
-                    📅
-                </div>
-
-                <h2>
-                    Vigencia del premio
-                </h2>
-
-            </div>
-
-
-            <div class="form-grid">
-
-
-                <div class="form-group">
-
-                    <label for="premioFechaInicio">
-
-                        Fecha de inicio
-
-                        <span class="required">*</span>
-
-                    </label>
-
-                    <input
-                        type="date"
-                        id="premioFechaInicio"
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="premioFechaFin">
-
-                        Fecha de vencimiento
-
-                        <span class="required">*</span>
-
-                    </label>
-
-                    <input
-                        type="date"
-                        id="premioFechaFin"
-                    >
-
-                </div>
-
-
-            </div>
-
-        </div>
-
-
-        <div class="actions">
-
-            <a
-                href="dashboard-negocio.html"
-                class="btn btn-cancel">
-
-                Cancelar
-
-            </a>
-
-            <button
-                type="button"
-                id="crearPremioButton"
-                class="btn btn-primary">
-
-                🎁 Crear premio
-
-            </button>
-
-        </div>
-
-
-        <!-- ==========================================
-             CODIGOS GENERADOS
-        ========================================== -->
-
-        <div
-            id="codesResult"
-            class="codes-result">
-
-            <div class="codes-header">
-
-                <div class="codes-header-title">
-                    🎉 Códigos generados
-                </div>
-
-                <div class="codes-header-description">
-                    Entrega estos códigos a tus clientes después de sus compras.
-                </div>
-
-            </div>
-
-            <div
-                id="codesList"
-                class="codes-list">
+                id="loadingText"
+                class="loading-text"
+            >
+                Publicando...
             </div>
 
         </div>
 
     </div>
 
-</main>
 
+    <!-- ================================
+         FIREBASE
+         ================================ -->
 
-<!-- ==========================================
-     LOADING
-========================================== -->
+    <script type="module">
 
-<div
-    id="loading"
-    class="loading">
-
-    <div class="spinner"></div>
-
-    <div
-        id="loadingText"
-        class="loading-text">
-
-        Cargando...
-
-    </div>
-
-</div>
-
-
-<!-- ==========================================
-     FIREBASE
-========================================== -->
-
-<script type="module">
-
-    // =====================================================
-    // IMPORTS FIREBASE
-    // =====================================================
-
-    import {
-        initializeApp
-    }
-    from
-    "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-
-    import {
-        getAuth,
-        onAuthStateChanged
-    }
-    from
-    "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-
-    import {
-        initializeFirestore,
-        doc,
-        getDoc,
-        getDocs,
-        collection,
-        addDoc,
-        setDoc,
-        query,
-        where,
-        serverTimestamp
-    }
-    from
-    "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-
-    // =====================================================
-    // FIREBASE CONFIG
-    // =====================================================
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyA_5TT1VTLkDSjYfrzTGWZ1Uv_o1yZqQYQ",
-        authDomain: "promo-walletrd.firebaseapp.com",
-        projectId: "promo-walletrd",
-        storageBucket: "promo-walletrd.firebasestorage.app",
-        messagingSenderId: "933468918139",
-        appId: "1:933468918139:web:5bf2ec7e4dc37d7c3e2dde",
-        measurementId: "G-DYXCNPBH62"
-    };
-
-
-    // =====================================================
-    // FIREBASE
-    // =====================================================
-
-    const app =
-        initializeApp(
-            firebaseConfig
-        );
-
-
-    const auth =
-        getAuth(
-            app
-        );
-
-
-    const db =
-        initializeFirestore(
-            app,
-            {
-                experimentalForceLongPolling: true
-            }
-        );
-
-
-    console.log(
-        "Firebase conectado:",
-        firebaseConfig.projectId
-    );
-
-
-    // =====================================================
-    // ELEMENTOS GENERALES
-    // =====================================================
-
-    const pageTitle =
-        document.getElementById(
-            "pageTitle"
-        );
-
-
-    const pageDescription =
-        document.getElementById(
-            "pageDescription"
-        );
-
-
-    const typePromotion =
-        document.getElementById(
-            "typePromotion"
-        );
-
-
-    const typePrize =
-        document.getElementById(
-            "typePrize"
-        );
-
-
-    const promotionForm =
-        document.getElementById(
-            "promotionForm"
-        );
-
-
-    const prizeForm =
-        document.getElementById(
-            "prizeForm"
-        );
-
-
-    const message =
-        document.getElementById(
-            "message"
-        );
-
-
-    const loading =
-        document.getElementById(
-            "loading"
-        );
-
-
-    const loadingText =
-        document.getElementById(
-            "loadingText"
-        );
-
-
-    const businessNameTop =
-        document.getElementById(
-            "businessNameTop"
-        );
-
-
-    // =====================================================
-    // ELEMENTOS PROMOCION
-    // =====================================================
-
-    const nombreInput =
-        document.getElementById(
-            "nombre"
-        );
-
-
-    const descripcionInput =
-        document.getElementById(
-            "descripcion"
-        );
-
-
-    const categoriaInput =
-        document.getElementById(
-            "categoria"
-        );
-
-
-    const cantidadInput =
-        document.getElementById(
-            "cantidad"
-        );
-
-
-    const precioNormalInput =
-        document.getElementById(
-            "precioNormal"
-        );
-
-
-    const precioPromoInput =
-        document.getElementById(
-            "precioPromo"
-        );
-
-
-    const descuentoInput =
-        document.getElementById(
-            "descuento"
-        );
-
-
-    const puntosInput =
-        document.getElementById(
-            "puntos"
-        );
-
-
-    const fechaInicioInput =
-        document.getElementById(
-            "fechaInicio"
-        );
-
-
-    const fechaFinInput =
-        document.getElementById(
-            "fechaFin"
-        );
-
-
-    const guardarButton =
-        document.getElementById(
-            "guardarButton"
-        );
-
-
-    const pricePreview =
-        document.getElementById(
-            "pricePreview"
-        );
-
-
-    // =====================================================
-    // ELEMENTOS PREMIO
-    // =====================================================
-
-    const premioNombreInput =
-        document.getElementById(
-            "premioNombre"
-        );
-
-
-    const premioDescripcionInput =
-        document.getElementById(
-            "premioDescripcion"
-        );
-
-
-    const premioTipoInput =
-        document.getElementById(
-            "premioTipo"
-        );
-
-
-    const premioValorInput =
-        document.getElementById(
-            "premioValor"
-        );
-
-
-    const premioCantidadInput =
-        document.getElementById(
-            "premioCantidad"
-        );
-
-
-    const premioIconoInput =
-        document.getElementById(
-            "premioIcono"
-        );
-
-
-    const premioFechaInicioInput =
-        document.getElementById(
-            "premioFechaInicio"
-        );
-
-
-    const premioFechaFinInput =
-        document.getElementById(
-            "premioFechaFin"
-        );
-
-
-    const crearPremioButton =
-        document.getElementById(
-            "crearPremioButton"
-        );
-
-
-    const prizePreview =
-        document.getElementById(
-            "prizePreview"
-        );
-
-
-    const prizePreviewName =
-        document.getElementById(
-            "prizePreviewName"
-        );
-
-
-    const prizePreviewDescription =
-        document.getElementById(
-            "prizePreviewDescription"
-        );
-
-
-    const codesResult =
-        document.getElementById(
-            "codesResult"
-        );
-
-
-    const codesList =
-        document.getElementById(
-            "codesList"
-        );
-
-
-    // =====================================================
-    // MENSAJES
-    // =====================================================
-
-    function showMessage(
-        text,
-        type
-    ) {
-
-        message.className =
-            "message " + type;
-
-        message.textContent =
-            text;
-
-    }
-
-
-    function clearMessage() {
-
-        message.className =
-            "message";
-
-        message.textContent =
-            "";
-
-    }
-
-
-    // =====================================================
-    // LOADING
-    // =====================================================
-
-    function showLoading(
-        text
-    ) {
-
-        loadingText.textContent =
-            text;
-
-        loading.classList.add(
-            "show"
-        );
-
-    }
-
-
-    function hideLoading() {
-
-        loading.classList.remove(
-            "show"
-        );
-
-    }
-
-
-    // =====================================================
-    // CAMBIAR TIPO
-    // =====================================================
-
-    function selectPromotion() {
-
-        typePromotion.classList.add(
-            "active"
-        );
-
-        typePrize.classList.remove(
-            "active"
-        );
-
-        promotionForm.classList.remove(
-            "hidden"
-        );
-
-        prizeForm.classList.add(
-            "hidden"
-        );
-
-        pageTitle.textContent =
-            "Crear promoción";
-
-        pageDescription.textContent =
-            "Publica una nueva oferta para que los clientes puedan descubrirla y aprovecharla.";
-
-        clearMessage();
-
-    }
-
-
-    function selectPrize() {
-
-        typePrize.classList.add(
-            "active"
-        );
-
-        typePromotion.classList.remove(
-            "active"
-        );
-
-        promotionForm.classList.add(
-            "hidden"
-        );
-
-        prizeForm.classList.remove(
-            "hidden"
-        );
-
-        pageTitle.textContent =
-            "Crear premio";
-
-        pageDescription.textContent =
-            "Crea un premio y genera códigos únicos para entregarlos a tus clientes.";
-
-        clearMessage();
-
-    }
-
-
-    typePromotion.addEventListener(
-        "click",
-        selectPromotion
-    );
-
-
-    typePrize.addEventListener(
-        "click",
-        selectPrize
-    );
-
-
-    // =====================================================
-    // FECHAS
-    // =====================================================
-
-    const today =
-        new Date()
-            .toISOString()
-            .split("T")[0];
-
-
-    fechaInicioInput.min =
-        today;
-
-    fechaFinInput.min =
-        today;
-
-    premioFechaInicioInput.min =
-        today;
-
-    premioFechaFinInput.min =
-        today;
-
-
-    fechaInicioInput.addEventListener(
-        "change",
-        () => {
-
-            fechaFinInput.min =
-                fechaInicioInput.value;
-
-            if (
-                fechaFinInput.value &&
-                fechaFinInput.value <
-                fechaInicioInput.value
-            ) {
-
-                fechaFinInput.value =
-                    "";
-
-            }
-
+        import {
+            initializeApp
         }
-    );
+        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 
-    premioFechaInicioInput.addEventListener(
-        "change",
-        () => {
-
-            premioFechaFinInput.min =
-                premioFechaInicioInput.value;
-
-            if (
-                premioFechaFinInput.value &&
-                premioFechaFinInput.value <
-                premioFechaInicioInput.value
-            ) {
-
-                premioFechaFinInput.value =
-                    "";
-
-            }
-
+        import {
+            getAuth,
+            onAuthStateChanged
         }
-    );
+        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
-    // =====================================================
-    // NUMERO
-    // =====================================================
-
-    function numberValue(
-        element
-    ) {
-
-        const value =
-            parseFloat(
-                element.value
-            );
-
-
-        if (
-            isNaN(value)
-        ) {
-
-            return 0;
-
+        import {
+            initializeFirestore,
+            doc,
+            getDoc,
+            getDocs,
+            collection,
+            addDoc,
+            query,
+            where,
+            serverTimestamp
         }
+        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-        return value;
+        /* ==========================================
+           FIREBASE CONFIG
+           ========================================== */
 
-    }
+        const firebaseConfig = {
+		  apiKey: "AIzaSyA_5TT1VTLkDSjYfrzTGWZ1Uv_o1yZqQYQ",
+		  authDomain: "promo-walletrd.firebaseapp.com",
+		  projectId: "promo-walletrd",
+		  storageBucket: "promo-walletrd.firebasestorage.app",
+		  messagingSenderId: "933468918139",
+		  appId: "1:933468918139:web:5bf2ec7e4dc37d7c3e2dde",
+		  measurementId: "G-DYXCNPBH62"
+		};
 
-
-    // =====================================================
-    // DESCUENTO
-    // =====================================================
-
-    function updateDiscount() {
-
-        const normal =
-            parseFloat(
-                precioNormalInput.value
-            );
-
-
-        const promo =
-            parseFloat(
-                precioPromoInput.value
-            );
+        const app = initializeApp(firebaseConfig);
 
 
-        if (
-            normal > 0 &&
-            promo >= 0 &&
-            promo < normal
-        ) {
+        const db = initializeFirestore(app, {
 
-            const discount =
-                (
-                    (normal - promo) /
-                    normal
-                ) * 100;
+            experimentalForceLongPolling: true
+
+        });
 
 
-            descuentoInput.value =
-                Math.round(
-                    discount
-                );
+        const auth = getAuth(app);
 
 
-            pricePreview.textContent =
-                "El cliente ahorra " +
-                Math.round(discount) +
-                "% en esta promoción.";
+        /* ==========================================
+           VARIABLES
+           ========================================== */
+
+        let currentUser = null;
+
+        let negocioActual = null;
+
+        let currentType = "promocion";
+
+        let prizeCounter = 0;
 
 
-            pricePreview.classList.add(
-                "show"
-            );
+        /* ==========================================
+           ELEMENTOS
+           ========================================== */
 
-        }
-        else {
+        const businessNameTop =
+            document.getElementById("businessNameTop");
 
-            pricePreview.classList.remove(
-                "show"
-            );
+        const message =
+            document.getElementById("message");
 
-        }
+        const guardarButton =
+            document.getElementById("guardarButton");
 
-    }
+        const loading =
+            document.getElementById("loading");
 
+        const loadingText =
+            document.getElementById("loadingText");
 
-    precioNormalInput.addEventListener(
-        "input",
-        updateDiscount
-    );
-
-
-    precioPromoInput.addEventListener(
-        "input",
-        updateDiscount
-    );
-
-
-    // =====================================================
-    // VALIDAR PROMOCION
-    // =====================================================
-
-    function validatePromotionForm() {
 
         const nombre =
-            nombreInput.value.trim();
-
+            document.getElementById("nombre");
 
         const descripcion =
-            descripcionInput.value.trim();
-
+            document.getElementById("descripcion");
 
         const categoria =
-            categoriaInput.value;
-
-
-        const fechaInicio =
-            fechaInicioInput.value;
-
-
-        const fechaFin =
-            fechaFinInput.value;
-
-
-        if (!nombre) {
-
-            showMessage(
-                "Escribe el nombre de la promoción.",
-                "error"
-            );
-
-            nombreInput.focus();
-
-            return false;
-
-        }
-
-
-        if (!descripcion) {
-
-            showMessage(
-                "Escribe una descripción de la promoción.",
-                "error"
-            );
-
-            descripcionInput.focus();
-
-            return false;
-
-        }
-
-
-        if (!categoria) {
-
-            showMessage(
-                "Selecciona una categoría.",
-                "error"
-            );
-
-            categoriaInput.focus();
-
-            return false;
-
-        }
-
-
-        const precioNormal =
-            numberValue(
-                precioNormalInput
-            );
-
-
-        const precioPromo =
-            numberValue(
-                precioPromoInput
-            );
-
-
-        if (
-            precioNormal > 0 &&
-            precioPromo > precioNormal
-        ) {
-
-            showMessage(
-                "El precio promocional no puede ser mayor que el precio normal.",
-                "error"
-            );
-
-            precioPromoInput.focus();
-
-            return false;
-
-        }
-
-
-        if (
-            precioPromo < 0
-        ) {
-
-            showMessage(
-                "El precio promocional no puede ser negativo.",
-                "error"
-            );
-
-            precioPromoInput.focus();
-
-            return false;
-
-        }
-
-
-        if (!fechaInicio) {
-
-            showMessage(
-                "Selecciona la fecha de inicio.",
-                "error"
-            );
-
-            fechaInicioInput.focus();
-
-            return false;
-
-        }
-
-
-        if (!fechaFin) {
-
-            showMessage(
-                "Selecciona la fecha de vencimiento.",
-                "error"
-            );
-
-            fechaFinInput.focus();
-
-            return false;
-
-        }
-
-
-        if (
-            fechaFin <
-            fechaInicio
-        ) {
-
-            showMessage(
-                "La fecha de vencimiento debe ser igual o posterior a la fecha de inicio.",
-                "error"
-            );
-
-            fechaFinInput.focus();
-
-            return false;
-
-        }
-
-
-        return true;
-
-    }
-
-
-    // =====================================================
-    // GENERAR CODIGO PROMOCION
-    // =====================================================
-
-    function generarCodigoPromocion() {
-
-        const caracteres =
-            "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-
-        let codigo =
-            "PW-";
-
-
-        for (
-            let i = 0;
-            i < 6;
-            i++
-        ) {
-
-            const posicion =
-                Math.floor(
-                    Math.random() *
-                    caracteres.length
-                );
-
-
-            codigo +=
-                caracteres[posicion];
-
-        }
-
-
-        return codigo;
-
-    }
-
-
-    // =====================================================
-    // VERIFICAR CODIGO PROMOCION
-    // =====================================================
-
-    async function generarCodigoPromocionUnico() {
-
-        let codigo;
-
-        let existe = true;
-
-
-        while (existe) {
-
-            codigo =
-                generarCodigoPromocion();
-
-
-            const codigoQuery =
-                query(
-                    collection(
-                        db,
-                        "promociones"
-                    ),
-                    where(
-                        "codigoPromocion",
-                        "==",
-                        codigo
-                    )
-                );
-
-
-            const resultado =
-                await getDocs(
-                    codigoQuery
-                );
-
-
-            existe =
-                !resultado.empty;
-
-        }
-
-
-        return codigo;
-
-    }
-
-
-    // =====================================================
-    // PUBLICAR PROMOCION
-    // =====================================================
-
-    guardarButton.addEventListener(
-        "click",
-        async () => {
-
-            clearMessage();
-
-
-            if (
-                !validatePromotionForm()
-            ) {
-
-                return;
-
-            }
-
-
-            const user =
-                auth.currentUser;
-
-
-            if (!user) {
-
-                showMessage(
-                    "Tu sesión no está disponible. Inicia sesión nuevamente.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            guardarButton.disabled =
-                true;
-
-
-            showLoading(
-                "Publicando promoción..."
-            );
-
-
-            try {
-
-                const negocioRef =
-                    doc(
-                        db,
-                        "negocios",
-                        user.uid
-                    );
-
-
-                const negocioSnap =
-                    await getDoc(
-                        negocioRef
-                    );
-
-
-                if (
-                    !negocioSnap.exists()
-                ) {
-
-                    hideLoading();
-
-                    guardarButton.disabled =
-                        false;
-
-                    showMessage(
-                        "No se encontró el perfil del negocio.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                const negocio =
-                    negocioSnap.data();
-
-
-                const nombre =
-                    nombreInput.value.trim();
-
-
-                const descripcion =
-                    descripcionInput.value.trim();
-
-
-                const categoria =
-                    categoriaInput.value;
-
-
-                const cantidad =
-                    Math.max(
-                        0,
-                        Math.floor(
-                            numberValue(
-                                cantidadInput
-                            )
-                        )
-                    );
-
-
-                const precioNormal =
-                    numberValue(
-                        precioNormalInput
-                    );
-
-
-                const precioPromo =
-                    numberValue(
-                        precioPromoInput
-                    );
-
-
-                const descuento =
-                    numberValue(
-                        descuentoInput
-                    );
-
-
-                const puntos =
-                    Math.max(
-                        0,
-                        Math.floor(
-                            numberValue(
-                                puntosInput
-                            )
-                        )
-                    );
-
-
-                const fechaInicio =
-                    fechaInicioInput.value;
-
-
-                const fechaFin =
-                    fechaFinInput.value;
-
-
-                const codigoPromocion =
-                    await generarCodigoPromocionUnico();
-
-
-                const promocion = {
-
-                    codigoPromocion:
-
-                        codigoPromocion,
-
-                    negocioId:
-
-                        user.uid,
-
-                    nombreNegocio:
-
-                        negocio.nombreNegocio || "",
-
-                    nombre:
-
-                        nombre,
-
-                    descripcion:
-
-                        descripcion,
-
-                    categoria:
-
-                        categoria,
-
-                    precioNormal:
-
-                        precioNormal,
-
-                    precioPromo:
-
-                        precioPromo,
-
-                    descuento:
-
-                        descuento,
-
-                    puntos:
-
-                        puntos,
-
-                    cantidadDisponible:
-
-                        cantidad,
-
-                    fechaInicio:
-
-                        fechaInicio,
-
-                    fechaFin:
-
-                        fechaFin,
-
-                    estado:
-
-                        "activa",
-
-                    activa:
-
-                        true,
-
-                    vistas:
-
-                        0,
-
-                    redenciones:
-
-                        0,
-
-                    fechaCreacion:
-
-                        serverTimestamp()
-
-                };
-
-
-                const promocionRef =
-                    await addDoc(
-                        collection(
-                            db,
-                            "promociones"
-                        ),
-                        promocion
-                    );
-
-
-                console.log(
-                    "Promoción creada:",
-                    promocionRef.id
-                );
-
-
-                console.log(
-                    "Código:",
-                    codigoPromocion
-                );
-
-
-                hideLoading();
-
-                guardarButton.disabled =
-                    false;
-
-
-                showMessage(
-                    "Promoción creada correctamente. Código: " +
-                    codigoPromocion,
-                    "success"
-                );
-
-
-                nombreInput.value =
-                    "";
-
-                descripcionInput.value =
-                    "";
-
-                categoriaInput.value =
-                    "";
-
-                cantidadInput.value =
-                    "";
-
-                precioNormalInput.value =
-                    "";
-
-                precioPromoInput.value =
-                    "";
-
-                descuentoInput.value =
-                    "";
-
-                puntosInput.value =
-                    "";
-
-                fechaInicioInput.value =
-                    "";
-
-                fechaFinInput.value =
-                    "";
-
-                pricePreview.classList.remove(
-                    "show"
-                );
-
-
-                setTimeout(
-                    () => {
-
-                        window.location.href =
-                            "dashboard-negocio.html";
-
-                    },
-                    1800
-                );
-
-
-            }
-            catch (error) {
-
-                console.error(
-                    "ERROR CREANDO PROMOCION:",
-                    error
-                );
-
-
-                hideLoading();
-
-                guardarButton.disabled =
-                    false;
-
-
-                let errorMessage =
-                    "No fue posible crear la promoción.";
-
-
-                if (
-                    error.code ===
-                    "permission-denied"
-                ) {
-
-                    errorMessage =
-                        "Firebase rechazó la operación. Revisa las reglas de Firestore para promociones.";
-
-                }
-                else if (
-                    error.code ===
-                    "unavailable"
-                ) {
-
-                    errorMessage =
-                        "Firestore no está disponible. Verifica tu conexión a Internet.";
-
-                }
-                else if (
-                    error.message
-                ) {
-
-                    errorMessage =
-                        error.message;
-
-                }
-
-
-                showMessage(
-                    errorMessage,
-                    "error"
-                );
-
-            }
-
-        }
-    );
-
-
-    // =====================================================
-    // VISTA PREVIA PREMIO
-    // =====================================================
-
-    function updatePrizePreview() {
-
-        const nombre =
-            premioNombreInput.value.trim();
-
-
-        const descripcion =
-            premioDescripcionInput.value.trim();
-
-
-        if (
-            nombre ||
-            descripcion
-        ) {
-
-            prizePreview.classList.add(
-                "show"
-            );
-
-
-            prizePreviewName.textContent =
-                (
-                    premioIconoInput.value.trim() ||
-                    "🎁"
-                ) +
-                " " +
-                (
-                    nombre ||
-                    "Nombre del premio"
-                );
-
-
-            prizePreviewDescription.textContent =
-                descripcion ||
-                "Descripción del premio";
-
-        }
-        else {
-
-            prizePreview.classList.remove(
-                "show"
-            );
-
-        }
-
-    }
-
-
-    premioNombreInput.addEventListener(
-        "input",
-        updatePrizePreview
-    );
-
-
-    premioDescripcionInput.addEventListener(
-        "input",
-        updatePrizePreview
-    );
-
-
-    premioIconoInput.addEventListener(
-        "input",
-        updatePrizePreview
-    );
-
-
-    // =====================================================
-    // VALIDAR PREMIO
-    // =====================================================
-
-    function validatePrizeForm() {
-
-        const nombre =
-            premioNombreInput.value.trim();
-
-
-        const descripcion =
-            premioDescripcionInput.value.trim();
-
-
-        const tipo =
-            premioTipoInput.value;
-
+            document.getElementById("categoria");
 
         const cantidad =
-            Math.floor(
-                numberValue(
-                    premioCantidadInput
-                )
-            );
+            document.getElementById("cantidad");
 
+        const precioNormal =
+            document.getElementById("precioNormal");
+
+        const precioPromo =
+            document.getElementById("precioPromo");
+
+        const descuento =
+            document.getElementById("descuento");
+
+        const puntos =
+            document.getElementById("puntos");
+
+        const puntosPremio =
+            document.getElementById("puntosPremio");
 
         const fechaInicio =
-            premioFechaInicioInput.value;
-
+            document.getElementById("fechaInicio");
 
         const fechaFin =
-            premioFechaFinInput.value;
+            document.getElementById("fechaFin");
+
+        const pricePreview =
+            document.getElementById("pricePreview");
+
+        const prizeList =
+            document.getElementById("prizeList");
+
+        const prizeTotal =
+            document.getElementById("prizeTotal");
+
+        const probabilityMessage =
+            document.getElementById("probabilityMessage");
 
 
-        if (!nombre) {
+        /* ==========================================
+           FECHAS
+           ========================================== */
 
-            showMessage(
-                "Escribe el nombre del premio.",
-                "error"
-            );
+        const today =
+            new Date().toISOString().split("T")[0];
 
-            premioNombreInput.focus();
+        fechaInicio.min = today;
 
-            return false;
-
-        }
+        fechaFin.min = today;
 
 
-        if (!descripcion) {
+        fechaInicio.addEventListener("change", function () {
 
-            showMessage(
-                "Escribe una descripción del premio.",
-                "error"
-            );
+            fechaFin.min = fechaInicio.value;
 
-            premioDescripcionInput.focus();
+            if (
+                fechaFin.value &&
+                fechaFin.value < fechaInicio.value
+            ) {
 
-            return false;
+                fechaFin.value = fechaInicio.value;
 
-        }
+            }
 
-
-        if (!tipo) {
-
-            showMessage(
-                "Selecciona el tipo de premio.",
-                "error"
-            );
-
-            premioTipoInput.focus();
-
-            return false;
-
-        }
+        });
 
 
-        if (
-            cantidad < 1
-        ) {
+        /* ==========================================
+           MENSAJES
+           ========================================== */
 
-            showMessage(
-                "La cantidad de códigos debe ser al menos 1.",
-                "error"
-            );
+        function showMessage(text, type = "info") {
 
-            premioCantidadInput.focus();
+            message.textContent = text;
 
-            return false;
+            message.className = type;
 
-        }
+            message.style.display = "block";
 
-
-        if (
-            cantidad > 1000
-        ) {
-
-            showMessage(
-                "Puedes generar un máximo de 1,000 códigos por premio.",
-                "error"
-            );
-
-            premioCantidadInput.focus();
-
-            return false;
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
 
         }
 
 
-        if (!fechaInicio) {
+        function clearMessage() {
 
-            showMessage(
-                "Selecciona la fecha de inicio del premio.",
-                "error"
-            );
+            message.textContent = "";
 
-            premioFechaInicioInput.focus();
+            message.className = "";
 
-            return false;
+            message.style.display = "none";
 
         }
 
 
-        if (!fechaFin) {
+        /* ==========================================
+           LOADING
+           ========================================== */
 
-            showMessage(
-                "Selecciona la fecha de vencimiento del premio.",
-                "error"
-            );
+        function showLoading(text) {
 
-            premioFechaFinInput.focus();
+            loadingText.textContent = text;
 
-            return false;
-
-        }
-
-
-        if (
-            fechaFin <
-            fechaInicio
-        ) {
-
-            showMessage(
-                "La fecha de vencimiento debe ser igual o posterior a la fecha de inicio.",
-                "error"
-            );
-
-            premioFechaFinInput.focus();
-
-            return false;
+            loading.style.display = "flex";
 
         }
 
 
-        return true;
+        function hideLoading() {
 
-    }
-
-
-    // =====================================================
-    // GENERAR CODIGO DE PREMIO
-    // =====================================================
-
-    function generarCodigoPremio() {
-
-        const caracteres =
-            "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-
-        let codigo =
-            "PW-";
-
-
-        for (
-            let i = 0;
-            i < 6;
-            i++
-        ) {
-
-            const posicion =
-                Math.floor(
-                    Math.random() *
-                    caracteres.length
-                );
-
-
-            codigo +=
-                caracteres[posicion];
+            loading.style.display = "none";
 
         }
 
 
-        return codigo;
+        /* ==========================================
+           CAMBIO DE TIPO
+           ========================================== */
 
-    }
+        window.selectType = function(type) {
 
+            currentType = type;
 
-    // =====================================================
-    // VERIFICAR CODIGO DE PREMIO
-    // =====================================================
-
-    async function generarCodigoPremioUnico() {
-
-        let codigo;
-
-        let existe = true;
+            clearMessage();
 
 
-        while (existe) {
+            const typePromotion =
+                document.getElementById("typePromotion");
 
-            codigo =
-                generarCodigoPremio();
+            const typePrize =
+                document.getElementById("typePrize");
+
+            const promotionPriceCard =
+                document.getElementById("promotionPriceCard");
+
+            const prizeCard =
+                document.getElementById("prizeCard");
+
+            const prizePointsCard =
+                document.getElementById("prizePointsCard");
+
+            const pageTitle =
+                document.getElementById("pageTitle");
+
+            const pageDescription =
+                document.getElementById("pageDescription");
+
+            const informationTitle =
+                document.getElementById("informationTitle");
+
+            const informationDescription =
+                document.getElementById("informationDescription");
+
+            const nombreLabel =
+                document.getElementById("nombreLabel");
 
 
-            // ---------------------------------------------
-            // Revisar promociones
-            // ---------------------------------------------
+            if (type === "promocion") {
 
-            const promocionQuery =
-                query(
-                    collection(
-                        db,
-                        "promociones"
-                    ),
+                typePromotion.classList.add("active");
+
+                typePrize.classList.remove("active");
+
+                promotionPriceCard.style.display = "block";
+
+                prizeCard.style.display = "none";
+
+                prizePointsCard.style.display = "none";
+
+
+                pageTitle.textContent =
+                    "Crear promoción";
+
+                pageDescription.textContent =
+                    "Publica una nueva oferta para que los clientes puedan descubrirla y aprovecharla.";
+
+
+                informationTitle.textContent =
+                    "Información de la promoción";
+
+                informationDescription.textContent =
+                    "Completa la información básica de tu promoción.";
+
+                nombreLabel.textContent =
+                    "Nombre de la promoción";
+
+                nombre.placeholder =
+                    "Ej. 20% de descuento";
+
+
+                guardarButton.textContent =
+                    "Publicar promoción";
+
+            }
+            else {
+
+                typePromotion.classList.remove("active");
+
+                typePrize.classList.add("active");
+
+                promotionPriceCard.style.display = "none";
+
+                prizeCard.style.display = "block";
+
+                prizePointsCard.style.display = "block";
+
+
+                pageTitle.textContent =
+                    "Crear campaña de premios";
+
+                pageDescription.textContent =
+                    "Crea una campaña con varios premios y define la probabilidad de ganar cada uno.";
+
+
+                informationTitle.textContent =
+                    "Información de la campaña";
+
+                informationDescription.textContent =
+                    "Completa la información básica de tu campaña de premios.";
+
+                nombreLabel.textContent =
+                    "Nombre de la campaña";
+
+                nombre.placeholder =
+                    "Ej. Premios de septiembre";
+
+
+                guardarButton.textContent =
+                    "Publicar campaña";
+
+
+                if (prizeList.children.length === 0) {
+
+                    addPrize();
+
+                    addPrize();
+
+                }
+
+            }
+
+        };
+
+
+        /* ==========================================
+           GENERAR CÓDIGO PROMOCIÓN
+           ========================================== */
+
+        function generarCodigoPromocion() {
+
+            const caracteres =
+                "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+            let codigo = "PW-";
+
+
+            for (let i = 0; i < 6; i++) {
+
+                const posicion =
+                    Math.floor(
+                        Math.random() * caracteres.length
+                    );
+
+                codigo += caracteres[posicion];
+
+            }
+
+
+            return codigo;
+
+        }
+
+
+        /* ==========================================
+           GENERAR CÓDIGO PREMIO
+           ========================================== */
+
+        function generarCodigoPremio() {
+
+            const caracteres =
+                "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+            let codigo = "PR-";
+
+
+            for (let i = 0; i < 6; i++) {
+
+                const posicion =
+                    Math.floor(
+                        Math.random() * caracteres.length
+                    );
+
+                codigo += caracteres[posicion];
+
+            }
+
+
+            return codigo;
+
+        }
+
+
+        /* ==========================================
+           CÓDIGO ÚNICO PROMOCIÓN
+           ========================================== */
+
+        async function generarCodigoUnico() {
+
+            let intentos = 0;
+
+
+            while (intentos < 20) {
+
+                const codigo =
+                    generarCodigoPromocion();
+
+
+                const q = query(
+
+                    collection(db, "promociones"),
+
                     where(
                         "codigoPromocion",
                         "==",
                         codigo
                     )
+
                 );
 
 
-            const promocionResultado =
-                await getDocs(
-                    promocionQuery
-                );
+                const snapshot =
+                    await getDocs(q);
 
 
-            // ---------------------------------------------
-            // Revisar códigos de premios
-            // ---------------------------------------------
+                if (snapshot.empty) {
 
-            const premioQuery =
-                query(
-                    collection(
-                        db,
-                        "codigosPremio"
-                    ),
-                    where(
-                        "codigo",
-                        "==",
-                        codigo
-                    )
-                );
-
-
-            const premioResultado =
-                await getDocs(
-                    premioQuery
-                );
-
-
-            existe =
-                !promocionResultado.empty ||
-                !premioResultado.empty;
-
-        }
-
-
-        return codigo;
-
-    }
-
-
-    // =====================================================
-    // CREAR PREMIO
-    // =====================================================
-
-    crearPremioButton.addEventListener(
-        "click",
-        async () => {
-
-            clearMessage();
-
-
-            if (
-                !validatePrizeForm()
-            ) {
-
-                return;
-
-            }
-
-
-            const user =
-                auth.currentUser;
-
-
-            if (!user) {
-
-                showMessage(
-                    "Tu sesión no está disponible. Inicia sesión nuevamente.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            crearPremioButton.disabled =
-                true;
-
-
-            showLoading(
-                "Creando premio y generando códigos..."
-            );
-
-
-            try {
-
-                // =============================================
-                // NEGOCIO
-                // =============================================
-
-                const negocioRef =
-                    doc(
-                        db,
-                        "negocios",
-                        user.uid
-                    );
-
-
-                const negocioSnap =
-                    await getDoc(
-                        negocioRef
-                    );
-
-
-                if (
-                    !negocioSnap.exists()
-                ) {
-
-                    hideLoading();
-
-                    crearPremioButton.disabled =
-                        false;
-
-                    showMessage(
-                        "No se encontró el perfil del negocio.",
-                        "error"
-                    );
-
-                    return;
+                    return codigo;
 
                 }
 
 
-                const negocio =
-                    negocioSnap.data();
+                intentos++;
+
+            }
 
 
-                // =============================================
-                // DATOS
-                // =============================================
+            throw new Error(
+                "No fue posible generar un código único."
+            );
 
-                const nombre =
-                    premioNombreInput.value.trim();
-
-
-                const descripcion =
-                    premioDescripcionInput.value.trim();
+        }
 
 
-                const tipo =
-                    premioTipoInput.value;
+        /* ==========================================
+           CÓDIGO ÚNICO PREMIO
+           ========================================== */
+
+        async function generarCodigoUnicoPremio() {
+
+            let intentos = 0;
 
 
-                const valor =
-                    numberValue(
-                        premioValorInput
-                    );
+            while (intentos < 20) {
+
+                const codigo =
+                    generarCodigoPremio();
 
 
-                const cantidad =
-                    Math.max(
-                        1,
-                        Math.floor(
-                            numberValue(
-                                premioCantidadInput
-                            )
-                        )
-                    );
+                const q = query(
 
+                    collection(db, "premios"),
 
-                const icono =
-                    premioIconoInput.value.trim() ||
-                    "🎁";
+                    where(
+                        "codigoPremio",
+                        "==",
+                        codigo
+                    )
 
-
-                const fechaInicio =
-                    premioFechaInicioInput.value;
-
-
-                const fechaFin =
-                    premioFechaFinInput.value;
-
-
-                // =============================================
-                // CREAR PREMIO
-                // =============================================
-
-                const premio = {
-
-                    negocioId:
-                        user.uid,
-
-                    nombreNegocio:
-                        negocio.nombreNegocio || "",
-
-                    nombre:
-                        nombre,
-
-                    descripcion:
-                        descripcion,
-
-                    tipo:
-                        tipo,
-
-                    valor:
-                        valor,
-
-                    icono:
-                        icono,
-
-                    cantidadDisponible:
-                        cantidad,
-
-                    cantidadTotal:
-                        cantidad,
-
-                    fechaInicio:
-                        fechaInicio,
-
-                    fechaFin:
-                        fechaFin,
-
-                    estado:
-                        "activo",
-
-                    activo:
-                        true,
-
-                    codigosGenerados:
-                        0,
-
-                    codigosUsados:
-                        0,
-
-                    fechaCreacion:
-                        serverTimestamp()
-
-                };
-
-
-                const premioRef =
-                    await addDoc(
-                        collection(
-                            db,
-                            "premios"
-                        ),
-                        premio
-                    );
-
-
-                console.log(
-                    "Premio creado:",
-                    premioRef.id
                 );
 
 
-                // =============================================
-                // GENERAR CODIGOS
-                // =============================================
-
-                const codigosGenerados = [];
+                const snapshot =
+                    await getDocs(q);
 
 
-                for (
-                    let i = 0;
-                    i < cantidad;
-                    i++
-                ) {
+                if (snapshot.empty) {
 
-                    const codigo =
-                        await generarCodigoPremioUnico();
+                    return codigo;
+
+                }
 
 
-                    const codigoData = {
+                intentos++;
 
-                        codigo:
-                            codigo,
-
-                        premioId:
-                            premioRef.id,
-
-                        negocioId:
-                            user.uid,
-
-                        nombrePremio:
-                            nombre,
-
-                        estado:
-                            "disponible",
-
-                        usado:
-                            false,
-
-                        clienteId:
-                            "",
-
-                        fechaCreacion:
-                            serverTimestamp(),
-
-                        fechaUso:
-                            null
-
-                    };
+            }
 
 
-                    const codigoRef =
-                        await addDoc(
-                            collection(
-                                db,
-                                "codigosPremio"
-                            ),
-                            codigoData
+            throw new Error(
+                "No fue posible generar un código único para la campaña."
+            );
+
+        }
+
+
+        /* ==========================================
+           VALOR NUMÉRICO
+           ========================================== */
+
+        function numberValue(element) {
+
+            const value =
+                parseFloat(element.value);
+
+            return isNaN(value) ? 0 : value;
+
+        }
+
+
+        /* ==========================================
+           DESCUENTO
+           ========================================== */
+
+        function updateDiscount() {
+
+            const normal =
+                numberValue(precioNormal);
+
+            const promo =
+                numberValue(precioPromo);
+
+
+            if (
+                normal > 0 &&
+                promo >= 0 &&
+                promo <= normal
+            ) {
+
+                const calculated =
+                    ((normal - promo) / normal) * 100;
+
+
+                descuento.value =
+                    calculated.toFixed(2);
+
+
+                pricePreview.textContent =
+                    "RD$ " + promo.toFixed(2);
+
+            }
+            else {
+
+                descuento.value = "0";
+
+                pricePreview.textContent =
+                    "RD$ 0.00";
+
+            }
+
+        }
+
+
+        precioNormal.addEventListener(
+            "input",
+            updateDiscount
+        );
+
+
+        precioPromo.addEventListener(
+            "input",
+            updateDiscount
+        );
+
+
+        /* ==========================================
+           AGREGAR PREMIO
+           ========================================== */
+
+        window.addPrize = function() {
+
+            prizeCounter++;
+
+
+            const prizeItem =
+                document.createElement("div");
+
+            prizeItem.className =
+                "prize-item";
+
+
+            prizeItem.dataset.id =
+                prizeCounter;
+
+
+            prizeItem.innerHTML = `
+
+                <div class="prize-item-header">
+
+                    <div class="prize-number">
+                        🎁 Premio ${prizeCounter}
+                    </div>
+
+                    <button
+                        type="button"
+                        class="remove-prize"
+                        title="Eliminar premio"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+
+                <div class="prize-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            Nombre del premio
+                        </label>
+
+                        <input
+                            type="text"
+                            class="prize-name"
+                            maxlength="100"
+                            placeholder="Ej. Café gratis"
+                        >
+
+                    </div>
+
+
+                    <div class="probability-box">
+
+                        <label>
+                            Probabilidad
+                        </label>
+
+                        <div class="probability-input">
+
+                            <input
+                                type="number"
+                                class="prize-probability"
+                                min="0"
+                                max="100"
+                                step="0.01"
+                                value="0"
+                                placeholder="0"
+                            >
+
+                            <span class="percent-symbol">
+                                %
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group" style="grid-column:1/-1;">
+
+                        <label>
+                            Descripción del premio
+                        </label>
+
+                        <input
+                            type="text"
+                            class="prize-description"
+                            maxlength="250"
+                            placeholder="Ej. Un café de cortesía"
+                        >
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            prizeList.appendChild(prizeItem);
+
+
+            const removeButton =
+                prizeItem.querySelector(
+                    ".remove-prize"
+                );
+
+
+            removeButton.addEventListener(
+                "click",
+                function() {
+
+                    prizeItem.remove();
+
+                    renumberPrizes();
+
+                    updatePrizeTotal();
+
+                }
+            );
+
+
+            const probabilityInput =
+                prizeItem.querySelector(
+                    ".prize-probability"
+                );
+
+
+            probabilityInput.addEventListener(
+                "input",
+                updatePrizeTotal
+            );
+
+
+            updatePrizeTotal();
+
+        };
+
+
+        /* ==========================================
+           RENOMBRAR PREMIOS
+           ========================================== */
+
+        function renumberPrizes() {
+
+            const items =
+                document.querySelectorAll(
+                    ".prize-item"
+                );
+
+
+            items.forEach(
+                (item, index) => {
+
+                    const number =
+                        item.querySelector(
+                            ".prize-number"
                         );
 
 
-                    codigosGenerados.push({
-                        id: codigoRef.id,
-                        codigo: codigo
+                    number.textContent =
+                        "🎁 Premio " + (index + 1);
+
+                }
+            );
+
+        }
+
+
+        /* ==========================================
+           CALCULAR PROBABILIDAD TOTAL
+           ========================================== */
+
+        function getPrizeTotal() {
+
+            const inputs =
+                document.querySelectorAll(
+                    ".prize-probability"
+                );
+
+
+            let total = 0;
+
+
+            inputs.forEach(
+                input => {
+
+                    let value =
+                        parseFloat(input.value);
+
+
+                    if (isNaN(value)) {
+                        value = 0;
+                    }
+
+
+                    total += value;
+
+                }
+            );
+
+
+            return total;
+
+        }
+
+
+        /* ==========================================
+           ACTUALIZAR TOTAL
+           ========================================== */
+
+        function updatePrizeTotal() {
+
+            const total =
+                getPrizeTotal();
+
+
+            prizeTotal.textContent =
+                total.toFixed(2) + "%";
+
+
+            prizeTotal.classList.remove(
+                "ok",
+                "warning",
+                "error"
+            );
+
+
+            probabilityMessage.classList.remove(
+                "ok",
+                "warning",
+                "error"
+            );
+
+
+            if (total === 100) {
+
+                prizeTotal.classList.add("ok");
+
+                probabilityMessage.classList.add("ok");
+
+                probabilityMessage.textContent =
+                    "✓ La distribución de probabilidades es correcta. Total: 100%.";
+
+            }
+            else if (total < 100) {
+
+                prizeTotal.classList.add("warning");
+
+                probabilityMessage.classList.add("warning");
+
+                probabilityMessage.textContent =
+                    "⚠ Faltan " +
+                    (100 - total).toFixed(2) +
+                    "% para completar el 100%.";
+
+            }
+            else {
+
+                prizeTotal.classList.add("error");
+
+                probabilityMessage.classList.add("error");
+
+                probabilityMessage.textContent =
+                    "✕ Te has pasado por " +
+                    (total - 100).toFixed(2) +
+                    "%. La suma no puede superar el 100%.";
+
+            }
+
+        }
+
+
+        /* ==========================================
+           OBTENER OPCIONES DE PREMIOS
+           ========================================== */
+
+        function getPrizeOptions() {
+
+            const items =
+                document.querySelectorAll(
+                    ".prize-item"
+                );
+
+
+            const opciones = [];
+
+
+            items.forEach(
+                (item, index) => {
+
+                    const nameInput =
+                        item.querySelector(
+                            ".prize-name"
+                        );
+
+
+                    const descriptionInput =
+                        item.querySelector(
+                            ".prize-description"
+                        );
+
+
+                    const probabilityInput =
+                        item.querySelector(
+                            ".prize-probability"
+                        );
+
+
+                    const nombrePremio =
+                        nameInput.value.trim();
+
+
+                    const descripcionPremio =
+                        descriptionInput.value.trim();
+
+
+                    const probabilidad =
+                        parseFloat(
+                            probabilityInput.value
+                        ) || 0;
+
+
+                    opciones.push({
+
+                        id: String(index + 1),
+
+                        nombre:
+                            nombrePremio,
+
+                        descripcion:
+                            descripcionPremio,
+
+                        probabilidad:
+                            probabilidad
+
                     });
 
                 }
+            );
 
 
-                // =============================================
-                // ACTUALIZAR PREMIO
-                // =============================================
+            return opciones;
 
-                await setDoc(
-                    premioRef,
-                    {
-                        codigosGenerados:
-                            codigosGenerados.length
-                    },
-                    {
-                        merge: true
-                    }
-                );
+        }
 
 
-                console.log(
-                    "Códigos generados:",
-                    codigosGenerados.length
-                );
+        /* ==========================================
+           VALIDACIÓN PROMOCIÓN
+           ========================================== */
+
+        function validatePromotionForm() {
+
+            const nombreValue =
+                nombre.value.trim();
+
+            const descripcionValue =
+                descripcion.value.trim();
+
+            const categoriaValue =
+                categoria.value;
+
+            const cantidadValue =
+                numberValue(cantidad);
+
+            const normalValue =
+                numberValue(precioNormal);
+
+            const promoValue =
+                numberValue(precioPromo);
+
+            const inicioValue =
+                fechaInicio.value;
+
+            const finValue =
+                fechaFin.value;
 
 
-                // =============================================
-                // MOSTRAR CODIGOS
-                // =============================================
-
-                codesList.innerHTML =
-                    "";
-
-
-                codigosGenerados.forEach(
-                    item => {
-
-                        const div =
-                            document.createElement(
-                                "div"
-                            );
-
-
-                        div.className =
-                            "code-item";
-
-
-                        div.innerHTML = `
-
-                            <div class="code-value">
-                                ${item.codigo}
-                            </div>
-
-                            <div class="code-status">
-                                ✓ Disponible
-                            </div>
-
-                        `;
-
-
-                        codesList.appendChild(
-                            div
-                        );
-
-                    }
-                );
-
-
-                codesResult.classList.add(
-                    "show"
-                );
-
-
-                hideLoading();
-
-
-                crearPremioButton.disabled =
-                    false;
-
+            if (!nombreValue) {
 
                 showMessage(
-                    "🎉 Premio creado correctamente. Se generaron " +
-                    codigosGenerados.length +
-                    " códigos.",
-                    "success"
+                    "Debes indicar el nombre de la promoción.",
+                    "error"
                 );
 
+                nombre.focus();
 
-                // =============================================
-                // LIMPIAR FORMULARIO
-                // =============================================
-
-                premioNombreInput.value =
-                    "";
-
-                premioDescripcionInput.value =
-                    "";
-
-                premioTipoInput.value =
-                    "";
-
-                premioValorInput.value =
-                    "";
-
-                premioCantidadInput.value =
-                    "10";
-
-                premioIconoInput.value =
-                    "🎁";
-
-                premioFechaInicioInput.value =
-                    "";
-
-                premioFechaFinInput.value =
-                    "";
-
-
-                prizePreview.classList.remove(
-                    "show"
-                );
-
+                return false;
 
             }
-            catch (error) {
 
-                console.error(
-                    "ERROR CREANDO PREMIO:",
-                    error
+
+            if (!descripcionValue) {
+
+                showMessage(
+                    "Debes indicar la descripción.",
+                    "error"
                 );
 
+                descripcion.focus();
 
-                hideLoading();
+                return false;
+
+            }
 
 
-                crearPremioButton.disabled =
-                    false;
+            if (!categoriaValue) {
+
+                showMessage(
+                    "Selecciona una categoría.",
+                    "error"
+                );
+
+                categoria.focus();
+
+                return false;
+
+            }
 
 
-                let errorMessage =
-                    "No fue posible crear el premio.";
+            if (cantidadValue <= 0) {
+
+                showMessage(
+                    "La cantidad disponible debe ser mayor que 0.",
+                    "error"
+                );
+
+                cantidad.focus();
+
+                return false;
+
+            }
+
+
+            if (normalValue <= 0) {
+
+                showMessage(
+                    "El precio normal debe ser mayor que 0.",
+                    "error"
+                );
+
+                precioNormal.focus();
+
+                return false;
+
+            }
+
+
+            if (promoValue < 0) {
+
+                showMessage(
+                    "El precio promocional no puede ser negativo.",
+                    "error"
+                );
+
+                precioPromo.focus();
+
+                return false;
+
+            }
+
+
+            if (promoValue > normalValue) {
+
+                showMessage(
+                    "El precio promocional no puede ser mayor que el precio normal.",
+                    "error"
+                );
+
+                precioPromo.focus();
+
+                return false;
+
+            }
+
+
+            if (!inicioValue || !finValue) {
+
+                showMessage(
+                    "Debes indicar las fechas de inicio y finalización.",
+                    "error"
+                );
+
+                return false;
+
+            }
+
+
+            if (finValue < inicioValue) {
+
+                showMessage(
+                    "La fecha de finalización no puede ser anterior a la fecha de inicio.",
+                    "error"
+                );
+
+                return false;
+
+            }
+
+
+            return true;
+
+        }
+
+
+        /* ==========================================
+           VALIDACIÓN CAMPAÑA DE PREMIOS
+           ========================================== */
+
+        function validatePrizeForm() {
+
+            const nombreValue =
+                nombre.value.trim();
+
+            const descripcionValue =
+                descripcion.value.trim();
+
+            const categoriaValue =
+                categoria.value;
+
+            const cantidadValue =
+                numberValue(cantidad);
+
+            const inicioValue =
+                fechaInicio.value;
+
+            const finValue =
+                fechaFin.value;
+
+
+            if (!nombreValue) {
+
+                showMessage(
+                    "Debes indicar el nombre de la campaña.",
+                    "error"
+                );
+
+                nombre.focus();
+
+                return false;
+
+            }
+
+
+            if (!descripcionValue) {
+
+                showMessage(
+                    "Debes indicar la descripción de la campaña.",
+                    "error"
+                );
+
+                descripcion.focus();
+
+                return false;
+
+            }
+
+
+            if (!categoriaValue) {
+
+                showMessage(
+                    "Selecciona una categoría.",
+                    "error"
+                );
+
+                categoria.focus();
+
+                return false;
+
+            }
+
+
+            if (cantidadValue <= 0) {
+
+                showMessage(
+                    "La cantidad disponible debe ser mayor que 0.",
+                    "error"
+                );
+
+                cantidad.focus();
+
+                return false;
+
+            }
+
+
+            if (!inicioValue || !finValue) {
+
+                showMessage(
+                    "Debes indicar las fechas de inicio y finalización.",
+                    "error"
+                );
+
+                return false;
+
+            }
+
+
+            if (finValue < inicioValue) {
+
+                showMessage(
+                    "La fecha de finalización no puede ser anterior a la fecha de inicio.",
+                    "error"
+                );
+
+                return false;
+
+            }
+
+
+            const opciones =
+                getPrizeOptions();
+
+
+            if (opciones.length === 0) {
+
+                showMessage(
+                    "Debes agregar al menos un premio.",
+                    "error"
+                );
+
+                return false;
+
+            }
+
+
+            for (
+                let i = 0;
+                i < opciones.length;
+                i++
+            ) {
+
+                const premio =
+                    opciones[i];
+
+
+                if (!premio.nombre) {
+
+                    showMessage(
+                        "El premio " +
+                        (i + 1) +
+                        " necesita un nombre.",
+                        "error"
+                    );
+
+                    return false;
+
+                }
 
 
                 if (
-                    error.code ===
-                    "permission-denied"
+                    premio.probabilidad <= 0
                 ) {
 
-                    errorMessage =
-                        "Firebase rechazó la operación. Revisa las reglas de Firestore para premios y códigos.";
+                    showMessage(
+                        "El premio " +
+                        (i + 1) +
+                        " debe tener una probabilidad mayor que 0%.",
+                        "error"
+                    );
 
-                }
-                else if (
-                    error.code ===
-                    "unavailable"
-                ) {
-
-                    errorMessage =
-                        "Firestore no está disponible. Verifica tu conexión a Internet.";
-
-                }
-                else if (
-                    error.message
-                ) {
-
-                    errorMessage =
-                        error.message;
+                    return false;
 
                 }
 
+
+                if (
+                    premio.probabilidad > 100
+                ) {
+
+                    showMessage(
+                        "La probabilidad del premio " +
+                        (i + 1) +
+                        " no puede superar el 100%.",
+                        "error"
+                    );
+
+                    return false;
+
+                }
+
+            }
+
+
+            const total =
+                opciones.reduce(
+                    (sum, premio) =>
+                        sum + premio.probabilidad,
+                    0
+                );
+
+
+            if (
+                Math.abs(total - 100) > 0.001
+            ) {
 
                 showMessage(
-                    errorMessage,
+                    "La suma de las probabilidades debe ser exactamente 100%. Actualmente tienes " +
+                    total.toFixed(2) +
+                    "%.",
                     "error"
                 );
+
+                return false;
+
+            }
+
+
+            return true;
+
+        }
+
+
+        /* ==========================================
+           LIMPIAR FORMULARIO
+           ========================================== */
+
+        function clearForm() {
+
+            nombre.value = "";
+
+            descripcion.value = "";
+
+            categoria.value = "";
+
+            cantidad.value = "";
+
+            precioNormal.value = "";
+
+            precioPromo.value = "";
+
+            descuento.value = "";
+
+            puntos.value = "0";
+
+            puntosPremio.value = "0";
+
+            fechaInicio.value = "";
+
+            fechaFin.value = "";
+
+
+            prizeList.innerHTML = "";
+
+            prizeCounter = 0;
+
+
+            pricePreview.textContent =
+                "RD$ 0.00";
+
+
+            if (currentType === "premio") {
+
+                addPrize();
+
+                addPrize();
 
             }
 
         }
-    );
 
 
-    // =====================================================
-    // CARGAR NEGOCIO
-    // =====================================================
+        /* ==========================================
+           AUTENTICACIÓN
+           ========================================== */
 
-    onAuthStateChanged(
-        auth,
-        async (user) => {
+        onAuthStateChanged(
+            auth,
+            async (user) => {
 
-            console.log(
-                "Usuario autenticado:",
-                user
-            );
+                if (!user) {
 
+                    window.location.href =
+                        "login-negocio.html";
 
-            if (!user) {
+                    return;
 
-                window.location.href =
-                    "login.html";
-
-                return;
-
-            }
+                }
 
 
-            try {
-
-                showLoading(
-                    "Cargando información del negocio..."
-                );
+                currentUser = user;
 
 
-                const negocioRef =
-                    doc(
-                        db,
-                        "negocios",
-                        user.uid
+                try {
+
+                    const negocioRef =
+                        doc(
+                            db,
+                            "negocios",
+                            user.uid
+                        );
+
+
+                    const negocioSnap =
+                        await getDoc(
+                            negocioRef
+                        );
+
+
+                    if (
+                        !negocioSnap.exists()
+                    ) {
+
+                        showMessage(
+                            "No se encontró la información del negocio.",
+                            "error"
+                        );
+
+                        guardarButton.disabled =
+                            true;
+
+                        return;
+
+                    }
+
+
+                    negocioActual =
+                        negocioSnap.data();
+
+
+                    businessNameTop.textContent =
+                        negocioActual.nombreNegocio ||
+                        "Mi negocio";
+
+                }
+                catch (error) {
+
+                    console.error(
+                        error
                     );
-
-
-                const negocioSnap =
-                    await getDoc(
-                        negocioRef
-                    );
-
-
-                if (
-                    !negocioSnap.exists()
-                ) {
-
-                    hideLoading();
 
 
                     showMessage(
-                        "No se encontró el perfil del negocio asociado a tu cuenta.",
+                        "No fue posible cargar la información del negocio.",
                         "error"
                     );
+
+                }
+
+            }
+        );
+
+
+        /* ==========================================
+           GUARDAR
+           ========================================== */
+
+        guardarButton.addEventListener(
+            "click",
+            async function() {
+
+                clearMessage();
+
+
+                if (!currentUser) {
+
+                    showMessage(
+                        "Tu sesión no está disponible. Inicia sesión nuevamente.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                if (!negocioActual) {
+
+                    showMessage(
+                        "No se pudo cargar la información del negocio.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                /* ==================================
+                   PROMOCIÓN
+                   ================================== */
+
+                if (
+                    currentType === "promocion"
+                ) {
+
+                    if (
+                        !validatePromotionForm()
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    guardarButton.disabled =
+                        true;
+
+
+                    showLoading(
+                        "Publicando promoción..."
+                    );
+
+
+                    try {
+
+                        const codigoPromocion =
+                            await generarCodigoUnico();
+
+
+                        const nombreValue =
+                            nombre.value.trim();
+
+                        const descripcionValue =
+                            descripcion.value.trim();
+
+                        const categoriaValue =
+                            categoria.value;
+
+                        const cantidadValue =
+                            numberValue(cantidad);
+
+                        const precioNormalValue =
+                            numberValue(precioNormal);
+
+                        const precioPromoValue =
+                            numberValue(precioPromo);
+
+                        const descuentoValue =
+                            numberValue(descuento);
+
+                        const puntosValue =
+                            numberValue(puntos);
+
+                        const fechaInicioValue =
+                            fechaInicio.value;
+
+                        const fechaFinValue =
+                            fechaFin.value;
+
+
+                        /*
+                         * ESTRUCTURA ORIGINAL
+                         * DE PROMOCIONES
+                         */
+
+                        const promocion = {
+
+                            codigoPromocion:
+                                codigoPromocion,
+
+                            negocioId:
+                                currentUser.uid,
+
+                            nombreNegocio:
+                                negocioActual.nombreNegocio || "",
+
+                            nombre:
+                                nombreValue,
+
+                            descripcion:
+                                descripcionValue,
+
+                            categoria:
+                                categoriaValue,
+
+                            precioNormal:
+                                precioNormalValue,
+
+                            precioPromo:
+                                precioPromoValue,
+
+                            descuento:
+                                descuentoValue,
+
+                            puntos:
+                                puntosValue,
+
+                            cantidadDisponible:
+                                cantidadValue,
+
+                            fechaInicio:
+                                fechaInicioValue,
+
+                            fechaFin:
+                                fechaFinValue,
+
+                            estado:
+                                "activa",
+
+                            activa:
+                                true,
+
+                            vistas:
+                                0,
+
+                            redenciones:
+                                0,
+
+                            fechaCreacion:
+                                serverTimestamp()
+
+                        };
+
+
+                        await addDoc(
+
+                            collection(
+                                db,
+                                "promociones"
+                            ),
+
+                            promocion
+
+                        );
+
+
+                        hideLoading();
+
+
+                        showMessage(
+                            "✓ Promoción publicada correctamente.",
+                            "success"
+                        );
+
+
+                        clearForm();
+
+
+                        setTimeout(
+                            function() {
+
+                                window.location.href =
+                                    "dashboard-negocio.html";
+
+                            },
+                            1300
+                        );
+
+                    }
+                    catch (error) {
+
+                        console.error(
+                            "Error creando promoción:",
+                            error
+                        );
+
+
+                        hideLoading();
+
+
+                        guardarButton.disabled =
+                            false;
+
+
+                        showMessage(
+                            "No fue posible publicar la promoción: " +
+                            (error.message || "Error desconocido."),
+                            "error"
+                        );
+
+                    }
 
 
                     return;
@@ -3490,43 +2799,184 @@
                 }
 
 
-                const negocio =
-                    negocioSnap.data();
+                /* ==================================
+                   CAMPAÑA DE PREMIOS
+                   ================================== */
+
+                if (
+                    currentType === "premio"
+                ) {
+
+                    if (
+                        !validatePrizeForm()
+                    ) {
+
+                        return;
+
+                    }
 
 
-                businessNameTop.textContent =
-                    negocio.nombreNegocio ||
-                    "Mi negocio";
+                    guardarButton.disabled =
+                        true;
 
 
-                hideLoading();
+                    showLoading(
+                        "Publicando campaña de premios..."
+                    );
 
+
+                    try {
+
+                        const codigoPremio =
+                            await generarCodigoUnicoPremio();
+
+
+                        const nombreValue =
+                            nombre.value.trim();
+
+                        const descripcionValue =
+                            descripcion.value.trim();
+
+                        const categoriaValue =
+                            categoria.value;
+
+                        const cantidadValue =
+                            numberValue(cantidad);
+
+                        const fechaInicioValue =
+                            fechaInicio.value;
+
+                        const fechaFinValue =
+                            fechaFin.value;
+
+                        const puntosPremioValue =
+                            numberValue(puntosPremio);
+
+
+                        const opciones =
+                            getPrizeOptions();
+
+
+                        /*
+                         * NUEVA ESTRUCTURA
+                         * PARA CAMPAÑAS DE PREMIOS
+                         */
+
+                        const premio = {
+
+                            codigoPremio:
+                                codigoPremio,
+
+                            negocioId:
+                                currentUser.uid,
+
+                            nombreNegocio:
+                                negocioActual.nombreNegocio || "",
+
+                            nombre:
+                                nombreValue,
+
+                            descripcion:
+                                descripcionValue,
+
+                            categoria:
+                                categoriaValue,
+
+                            cantidadDisponible:
+                                cantidadValue,
+
+                            fechaInicio:
+                                fechaInicioValue,
+
+                            fechaFin:
+                                fechaFinValue,
+
+                            estado:
+                                "activo",
+
+                            activo:
+                                true,
+
+                            redenciones:
+                                0,
+
+                            puntos:
+                                puntosPremioValue,
+
+                            opciones:
+                                opciones,
+
+                            fechaCreacion:
+                                serverTimestamp()
+
+                        };
+
+
+                        await addDoc(
+
+                            collection(
+                                db,
+                                "premios"
+                            ),
+
+                            premio
+
+                        );
+
+
+                        hideLoading();
+
+
+                        showMessage(
+                            "✓ Campaña de premios publicada correctamente. Código: " +
+                            codigoPremio,
+                            "success"
+                        );
+
+
+                        clearForm();
+
+
+                        setTimeout(
+                            function() {
+
+                                window.location.href =
+                                    "dashboard-negocio.html";
+
+                            },
+                            1800
+                        );
+
+                    }
+                    catch (error) {
+
+                        console.error(
+                            "Error creando campaña:",
+                            error
+                        );
+
+
+                        hideLoading();
+
+
+                        guardarButton.disabled =
+                            false;
+
+
+                        showMessage(
+                            "No fue posible publicar la campaña: " +
+                            (error.message || "Error desconocido."),
+                            "error"
+                        );
+
+                    }
+
+                }
 
             }
-            catch (error) {
+        );
 
-                console.error(
-                    "ERROR CARGANDO NEGOCIO:",
-                    error
-                );
-
-
-                hideLoading();
-
-
-                showMessage(
-                    "Error cargando el negocio: " +
-                    error.message,
-                    "error"
-                );
-
-            }
-
-        }
-    );
-
-</script>
+    </script>
 
 </body>
-
 </html>
