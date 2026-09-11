@@ -1,2678 +1,733 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width,
-                   initial-scale=1.0,
-                   maximum-scale=1.0,
-                   user-scalable=no">
+    <title>PromoWallet RD</title>
 
-    <meta name="theme-color" content="#0f9d72">
-
-    <meta name="apple-mobile-web-app-capable"
-          content="yes">
-
-    <meta name="apple-mobile-web-app-status-bar-style"
-          content="default">
-
-    <title>PromoWallet</title>
-
+    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 
     <style>
-
         * {
             box-sizing: border-box;
+        }
+
+        body {
             margin: 0;
-            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
         }
-
-
-        html,
-        body {
-            width: 100%;
-            min-height: 100%;
-        }
-
-
-        body {
-
-            font-family:
-                Inter,
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                Roboto,
-                Arial,
-                sans-serif;
-
-            background: #f5f7fb;
-
-            color: #172033;
-
-            -webkit-font-smoothing: antialiased;
-
-            padding-bottom: 90px;
-        }
-
-
-        button {
-            font-family: inherit;
-        }
-
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-
-        /* =========================
-           LOADING
-        ========================= */
-
-        #loading {
-
-            position: fixed;
-
-            inset: 0;
-
-            background: #ffffff;
-
-            z-index: 9999;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            flex-direction: column;
-
-            gap: 15px;
-        }
-
-
-        .loading-logo {
-
-            width: 62px;
-            height: 62px;
-
-            border-radius: 18px;
-
-            background: #0f9d72;
-
-            color: white;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 28px;
-
-            font-weight: 800;
-        }
-
-
-        .loading-text {
-
-            font-size: 14px;
-
-            color: #6b7280;
-        }
-
-
-        .spinner {
-
-            width: 24px;
-            height: 24px;
-
-            border: 3px solid #e5e7eb;
-
-            border-top-color: #0f9d72;
-
-            border-radius: 50%;
-
-            animation: spin .8s linear infinite;
-        }
-
-
-        @keyframes spin {
-
-            to {
-                transform: rotate(360deg);
-            }
-
-        }
-
-
-        /* =========================
-           APP
-        ========================= */
-
-        .app {
-            display: none;
-        }
-
-
-        /* =========================
-           HEADER
-        ========================= */
 
         .topbar {
-
-            background: #ffffff;
-
-            height: 68px;
-
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 14px 18px;
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
-            padding: 0 18px;
-
-            border-bottom: 1px solid #e8ebf0;
-
             position: sticky;
-
             top: 0;
-
             z-index: 100;
         }
 
-
         .brand {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 9px;
-        }
-
-
-        .brand-icon {
-
-            width: 38px;
-            height: 38px;
-
-            border-radius: 11px;
-
-            background: #0f9d72;
-
-            color: white;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 19px;
-
+            font-size: 21px;
             font-weight: 800;
+            color: #087f5b;
         }
 
-
-        .brand-name {
-
-            font-size: 18px;
-
-            font-weight: 800;
-
-            letter-spacing: -.4px;
+        .brand span {
+            color: #2563eb;
         }
 
-
-        .brand-name span {
-            color: #0f9d72;
+        .logout {
+            border: none;
+            background: #f1f5f9;
+            color: #334155;
+            padding: 9px 13px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: 600;
         }
-
-
-        .user-area {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 10px;
-        }
-
-
-        .avatar {
-
-            width: 38px;
-            height: 38px;
-
-            border-radius: 50%;
-
-            background: #e7f7f1;
-
-            color: #087957;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-weight: 800;
-
-            font-size: 14px;
-        }
-
-
-        /* =========================
-           MAIN
-        ========================= */
 
         .container {
-
-            width: 100%;
-
-            max-width: 760px;
-
+            max-width: 1100px;
             margin: auto;
-
-            padding: 22px 16px 30px;
+            padding: 20px 15px 50px;
         }
-
-
-        /* =========================
-           WELCOME
-        ========================= */
 
         .welcome {
             margin-bottom: 18px;
         }
 
-
-        .welcome-small {
-
-            color: #7a8494;
-
-            font-size: 13px;
-
-            font-weight: 700;
-
-            text-transform: uppercase;
-
-            letter-spacing: .7px;
-
-            margin-bottom: 5px;
-        }
-
-
         .welcome h1 {
-
+            margin: 0 0 5px;
             font-size: 25px;
-
-            line-height: 1.2;
-
-            letter-spacing: -.7px;
-
-            margin-bottom: 6px;
         }
-
 
         .welcome p {
-
-            color: #687386;
-
-            font-size: 14px;
+            margin: 0;
+            color: #64748b;
         }
 
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
 
-        /* =========================
-           SCAN CARD
-        ========================= */
+        .stat {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 16px;
+        }
+
+        .stat-icon {
+            font-size: 23px;
+            margin-bottom: 7px;
+        }
+
+        .stat-title {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .stat-value {
+            font-size: 22px;
+            font-weight: 800;
+            margin-top: 3px;
+        }
 
         .scan-card {
-
-            position: relative;
-
-            background: #0f9d72;
-
+            background: linear-gradient(135deg, #0f9d71, #087f5b);
             color: white;
-
-            border-radius: 22px;
-
-            padding: 24px 20px;
-
-            overflow: hidden;
-
-            box-shadow:
-                0 12px 30px
-                rgba(15, 157, 114, .20);
-
-            margin-bottom: 18px;
-        }
-
-
-        .scan-card::after {
-
-            content: "";
-
-            position: absolute;
-
-            width: 180px;
-            height: 180px;
-
-            right: -80px;
-            top: -80px;
-
-            border-radius: 50%;
-
-            background:
-                rgba(255,255,255,.08);
-        }
-
-
-        .scan-card-content {
-
-            position: relative;
-
-            z-index: 2;
-        }
-
-
-        .scan-label {
-
-            font-size: 12px;
-
-            font-weight: 700;
-
-            text-transform: uppercase;
-
-            letter-spacing: .7px;
-
-            opacity: .85;
-
-            margin-bottom: 5px;
-        }
-
-
-        .scan-title {
-
-            font-size: 23px;
-
-            font-weight: 800;
-
-            letter-spacing: -.5px;
-
-            margin-bottom: 6px;
-        }
-
-
-        .scan-description {
-
-            font-size: 14px;
-
-            line-height: 1.5;
-
-            opacity: .9;
-
-            margin-bottom: 18px;
-        }
-
-
-        .scan-button {
-
-            width: 100%;
-
-            border: none;
-
-            background: white;
-
-            color: #087957;
-
-            border-radius: 15px;
-
-            min-height: 58px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            gap: 10px;
-
-            font-size: 16px;
-
-            font-weight: 800;
-
-            cursor: pointer;
-
-            box-shadow:
-                0 5px 15px
-                rgba(0,0,0,.10);
-
-            transition:
-                transform .15s ease;
-        }
-
-
-        .scan-button:active {
-            transform: scale(.98);
-        }
-
-
-        .scan-icon {
-            font-size: 23px;
-        }
-
-
-        /* =========================
-           POINTS
-        ========================= */
-
-        .points-card {
-
-            background: white;
-
-            border: 1px solid #e7ebf0;
-
-            border-radius: 19px;
-
-            padding: 20px;
-
-            margin-bottom: 18px;
-        }
-
-
-        .points-top {
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-            margin-bottom: 14px;
-        }
-
-
-        .points-label {
-
-            color: #707b8c;
-
-            font-size: 13px;
-
-            font-weight: 600;
-        }
-
-
-        .points-number {
-
-            font-size: 26px;
-
-            font-weight: 800;
-
-            color: #172033;
-        }
-
-
-        .progress-container {
-
-            height: 9px;
-
-            background: #edf0f3;
-
-            border-radius: 20px;
-
-            overflow: hidden;
-
-            margin-bottom: 9px;
-        }
-
-
-        .progress {
-
-            height: 100%;
-
-            width: 0%;
-
-            background: #0f9d72;
-
-            border-radius: 20px;
-
-            transition: width .5s ease;
-        }
-
-
-        .progress-text {
-
-            color: #788294;
-
-            font-size: 12px;
-        }
-
-
-        /* =========================
-           SECTION
-        ========================= */
-
-        .section {
-            margin-bottom: 22px;
-        }
-
-
-        .section-header {
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            margin-bottom: 11px;
-        }
-
-
-        .section-title {
-
-            font-size: 17px;
-
-            font-weight: 800;
-        }
-
-
-        .section-link {
-
-            color: #0f9d72;
-
-            font-size: 13px;
-
-            font-weight: 700;
-        }
-
-
-        /* =========================
-           PROMOTIONS
-        ========================= */
-
-        .promo-list {
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 10px;
-        }
-
-
-        .promo-card {
-
-            background: white;
-
-            border: 1px solid #e8ebf0;
-
-            border-radius: 16px;
-
-            padding: 15px;
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 13px;
-
-            transition:
-                transform .15s ease,
-                box-shadow .15s ease;
-        }
-
-
-        .promo-card:active {
-
-            transform: scale(.99);
-
-        }
-
-
-        .promo-icon {
-
-            width: 46px;
-            height: 46px;
-
-            flex-shrink: 0;
-
-            border-radius: 13px;
-
-            background: #eef8f5;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 22px;
-        }
-
-
-        .promo-info {
-
-            flex: 1;
-
-            min-width: 0;
-        }
-
-
-        .promo-name {
-
-            font-size: 14px;
-
-            font-weight: 800;
-
-            margin-bottom: 3px;
-        }
-
-
-        .promo-description {
-
-            font-size: 12px;
-
-            color: #737d8c;
-
-            white-space: nowrap;
-
-            overflow: hidden;
-
-            text-overflow: ellipsis;
-        }
-
-
-        .promo-arrow {
-
-            color: #9ba4b1;
-
-            font-size: 18px;
-        }
-
-
-        .empty-promos {
-
-            background: white;
-
-            border: 1px dashed #d8dee7;
-
-            border-radius: 16px;
-
-            padding: 22px 16px;
-
-            text-align: center;
-
-            color: #778190;
-
-            font-size: 13px;
-        }
-
-
-        /* =========================
-           MY PROMOTIONS
-        ========================= */
-
-        .my-promo-card {
-
-            background: white;
-
-            border: 1px solid #d7eee6;
-
-            border-radius: 17px;
-
-            padding: 16px;
-
-            position: relative;
-        }
-
-
-        .my-promo-top {
-
-            display: flex;
-
-            align-items: flex-start;
-
-            gap: 12px;
-
-            margin-bottom: 12px;
-        }
-
-
-        .my-promo-icon {
-
-            width: 48px;
-            height: 48px;
-
-            flex-shrink: 0;
-
-            border-radius: 14px;
-
-            background: #eaf8f3;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 23px;
-        }
-
-
-        .my-promo-info {
-
-            flex: 1;
-
-            min-width: 0;
-        }
-
-
-        .my-promo-business {
-
-            color: #087957;
-
-            font-size: 12px;
-
-            font-weight: 800;
-
-            margin-bottom: 3px;
-
-        }
-
-
-        .my-promo-name {
-
-            color: #172033;
-
-            font-size: 15px;
-
-            font-weight: 800;
-
-            line-height: 1.3;
-
-        }
-
-
-        .my-promo-description {
-
-            color: #737d8c;
-
-            font-size: 12px;
-
-            line-height: 1.45;
-
-            margin-bottom: 12px;
-        }
-
-
-        .my-promo-bottom {
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 10px;
-
-            border-top: 1px solid #edf0f2;
-
-            padding-top: 11px;
-        }
-
-
-        .my-promo-code {
-
-            font-size: 11px;
-
-            color: #7a8494;
-
-            font-weight: 700;
-
-            letter-spacing: .5px;
-        }
-
-
-        .my-promo-points {
-
-            display: inline-flex;
-
-            align-items: center;
-
-            background: #fff7e6;
-
-            color: #b87500;
-
-            border-radius: 20px;
-
-            padding: 5px 9px;
-
-            font-size: 11px;
-
-            font-weight: 800;
-
-            white-space: nowrap;
-        }
-
-
-        .promo-status {
-
-            display: inline-flex;
-
-            align-items: center;
-
-            gap: 5px;
-
-            margin-top: 9px;
-
-            background: #eaf8f3;
-
-            color: #087957;
-
-            border-radius: 20px;
-
-            padding: 5px 9px;
-
-            font-size: 10px;
-
-            font-weight: 800;
-        }
-
-
-        /* =========================
-           MISSION
-        ========================= */
-
-        .mission-card {
-
-            background: white;
-
-            border: 1px solid #e8ebf0;
-
             border-radius: 18px;
-
-            padding: 18px;
-
-            display: flex;
-
-            gap: 14px;
+            padding: 22px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(15, 157, 113, .18);
         }
 
-
-        .mission-icon {
-
-            width: 48px;
-            height: 48px;
-
-            flex-shrink: 0;
-
-            border-radius: 14px;
-
-            background: #fff7e6;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 23px;
-        }
-
-
-        .mission-content {
-            flex: 1;
-        }
-
-
-        .mission-title {
-
-            font-weight: 800;
-
-            font-size: 14px;
-
-            margin-bottom: 4px;
-        }
-
-
-        .mission-description {
-
-            color: #737d8c;
-
-            font-size: 12px;
-
-            line-height: 1.4;
-
-            margin-bottom: 10px;
-        }
-
-
-        .mission-reward {
-
-            display: inline-flex;
-
-            align-items: center;
-
-            background: #fff7e6;
-
-            color: #b87500;
-
-            border-radius: 20px;
-
-            padding: 5px 9px;
-
-            font-size: 11px;
-
-            font-weight: 800;
-        }
-
-
-        /* =========================
-           LEVEL
-        ========================= */
-
-        .level-card {
-
-            background: white;
-
-            border: 1px solid #e8ebf0;
-
-            border-radius: 18px;
-
-            padding: 18px;
-        }
-
-
-        .level-top {
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-            margin-bottom: 14px;
-        }
-
-
-        .level-info {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 10px;
-        }
-
-
-        .level-badge {
-
-            width: 43px;
-            height: 43px;
-
-            border-radius: 50%;
-
-            background: #eef4ff;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
+        .scan-card h2 {
+            margin: 0 0 7px;
             font-size: 21px;
         }
 
-
-        .level-name {
-
-            font-size: 14px;
-
-            font-weight: 800;
+        .scan-card p {
+            margin: 0 0 16px;
+            opacity: .92;
         }
 
-
-        .level-sub {
-
-            font-size: 11px;
-
-            color: #7b8492;
-
-            margin-top: 2px;
-        }
-
-
-        .level-points {
-
-            font-size: 13px;
-
-            font-weight: 800;
-        }
-
-
-        .level-progress {
-
-            height: 8px;
-
-            background: #edf0f3;
-
-            border-radius: 20px;
-
-            overflow: hidden;
-        }
-
-
-        .level-progress-fill {
-
-            height: 100%;
-
-            width: 0%;
-
-            background: #4b7bec;
-
-            border-radius: 20px;
-        }
-
-
-        /* =========================
-           WALLET
-        ========================= */
-
-        .wallet-grid {
-
-            display: grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
-            gap: 10px;
-        }
-
-
-        .wallet-mini {
-
-            background: white;
-
-            border: 1px solid #e8ebf0;
-
-            border-radius: 16px;
-
-            padding: 16px;
-        }
-
-
-        .wallet-mini-label {
-
-            color: #7b8492;
-
-            font-size: 12px;
-
-            margin-bottom: 6px;
-        }
-
-
-        .wallet-mini-value {
-
-            font-size: 19px;
-
-            font-weight: 800;
-        }
-
-
-        /* =========================
-           BOTTOM NAV
-        ========================= */
-
-        .bottom-nav {
-
-            position: fixed;
-
-            bottom: 0;
-
-            left: 0;
-
-            right: 0;
-
-            height: 72px;
-
-            background:
-                rgba(255,255,255,.97);
-
-            border-top:
-                1px solid #e6e9ee;
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(5, 1fr);
-
-            z-index: 500;
-
-            padding-bottom:
-                env(safe-area-inset-bottom);
-        }
-
-
-        .nav-item {
-
-            border: none;
-
-            background: transparent;
-
+        .scan-buttons {
             display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
 
-            flex-direction: column;
-
-            align-items: center;
-
-            justify-content: center;
-
-            gap: 3px;
-
-            color: #8a93a1;
-
-            font-size: 10px;
-
-            font-weight: 600;
-
+        .btn {
+            border: none;
+            border-radius: 10px;
+            padding: 12px 17px;
+            font-weight: 700;
             cursor: pointer;
         }
 
+        .btn-white {
+            background: white;
+            color: #087f5b;
+        }
 
-        .nav-item span:first-child {
+        .btn-light {
+            background: rgba(255,255,255,.18);
+            color: white;
+            border: 1px solid rgba(255,255,255,.3);
+        }
+
+        .section {
+            margin-top: 25px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .section-header h2 {
+            margin: 0;
             font-size: 20px;
         }
 
-
-        .nav-item.active {
-            color: #0f9d72;
+        .section-header span {
+            color: #64748b;
+            font-size: 13px;
         }
 
-
-        .nav-scan {
-
-            position: relative;
-
-            top: -14px;
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
         }
 
-
-        .nav-scan-circle {
-
-            width: 52px;
-            height: 52px;
-
-            border-radius: 50%;
-
-            background: #0f9d72;
-
-            color: white;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 23px;
-
-            box-shadow:
-                0 7px 18px
-                rgba(15,157,114,.30);
-
-            border:
-                4px solid #f5f7fb;
+        .card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 17px;
         }
 
+        .card-category {
+            display: inline-block;
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 5px 8px;
+            border-radius: 20px;
+            margin-bottom: 9px;
+        }
 
-        /* =========================
-           MODAL
-        ========================= */
+        .card h3 {
+            margin: 0 0 7px;
+            font-size: 17px;
+        }
+
+        .business {
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .description {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .points {
+            margin-top: 12px;
+            font-weight: 800;
+            color: #087f5b;
+        }
+
+        .empty {
+            background: white;
+            border: 1px dashed #cbd5e1;
+            padding: 25px;
+            text-align: center;
+            border-radius: 14px;
+            color: #64748b;
+        }
+
+        /* MODAL */
 
         .modal {
-
-            position: fixed;
-
-            inset: 0;
-
-            background:
-                rgba(20,28,40,.50);
-
-            z-index: 1000;
-
             display: none;
-
-            align-items: flex-end;
-
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, .65);
+            z-index: 1000;
+            align-items: center;
             justify-content: center;
+            padding: 15px;
         }
-
 
         .modal.show {
             display: flex;
         }
 
-
         .modal-content {
-
             width: 100%;
-
-            max-width: 760px;
-
+            max-width: 480px;
             background: white;
-
-            border-radius:
-                25px 25px 0 0;
-
-            padding:
-                25px 20px 30px;
-
-            animation:
-                slideUp .22s ease;
+            border-radius: 18px;
+            padding: 20px;
+            max-height: 92vh;
+            overflow-y: auto;
         }
 
-
-        @keyframes slideUp {
-
-            from {
-                transform:
-                    translateY(100%);
-            }
-
-            to {
-                transform:
-                    translateY(0);
-            }
-
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
         }
 
-
-        .modal-handle {
-
-            width: 40px;
-            height: 4px;
-
-            background: #d9dee5;
-
-            border-radius: 10px;
-
-            margin:
-                -5px auto 20px;
-        }
-
-
-        .modal-title {
-
+        .modal-header h2 {
+            margin: 0;
             font-size: 20px;
+        }
 
-            font-weight: 800;
+        .close {
+            border: none;
+            background: #f1f5f9;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+        }
 
+        #reader {
+            width: 100%;
+            margin-bottom: 15px;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .manual {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 15px;
+        }
+
+        .manual label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
             margin-bottom: 7px;
         }
 
-
-        .modal-description {
-
-            font-size: 13px;
-
-            color: #737d8c;
-
-            line-height: 1.5;
-
-            margin-bottom: 20px;
+        .manual-row {
+            display: flex;
+            gap: 8px;
         }
 
-
-        /* =========================
-           INPUT CODE
-        ========================= */
-
-        .code-input {
-
-            width: 100%;
-
-            height: 58px;
-
-            border:
-                1px solid #dce1e7;
-
-            border-radius: 14px;
-
-            padding:
-                0 15px;
-
-            font-size: 18px;
-
-            text-align: center;
-
-            letter-spacing: 3px;
-
-            outline: none;
-
+        .manual input {
+            flex: 1;
+            min-width: 0;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            font-size: 15px;
             text-transform: uppercase;
         }
 
-
-        .code-input:focus {
-
-            border-color: #0f9d72;
-
-            box-shadow:
-                0 0 0 3px
-                rgba(15,157,114,.10);
-        }
-
-
-        .validate-button {
-
-            width: 100%;
-
-            height: 55px;
-
-            border: none;
-
-            border-radius: 14px;
-
-            background: #0f9d72;
-
+        .manual button {
+            background: #087f5b;
             color: white;
-
-            font-size: 15px;
-
-            font-weight: 800;
-
-            margin-top: 12px;
-
-            cursor: pointer;
-        }
-
-
-        .validate-button:active {
-
-            transform: scale(.98);
-        }
-
-
-        .close-button {
-
-            width: 100%;
-
-            height: 50px;
-
             border: none;
-
-            background: #f3f5f7;
-
-            color: #5e6878;
-
-            border-radius: 14px;
-
-            font-size: 14px;
-
+            border-radius: 9px;
+            padding: 0 16px;
             font-weight: 700;
-
-            margin-top: 9px;
-
             cursor: pointer;
         }
 
-
-        .modal-message {
-
+        .message {
             display: none;
-
-            padding: 11px;
-
-            margin-top: 12px;
-
+            padding: 12px;
             border-radius: 10px;
-
-            background: #fff3f3;
-
-            color: #b42318;
-
-            font-size: 12px;
-
-            text-align: center;
-        }
-
-
-        /* =========================
-           QR SCANNER
-        ========================= */
-
-        .scan-modal-content {
-
-            max-width: 500px;
-
-            padding-bottom: 24px;
-        }
-
-
-        .scan-modal-header {
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: flex-start;
-
-            gap: 15px;
-        }
-
-
-        .scan-close {
-
-            width: 38px;
-            height: 38px;
-
-            border: none;
-
-            border-radius: 50%;
-
-            background: #f2f4f7;
-
-            color: #667085;
-
-            font-size: 18px;
-
-            cursor: pointer;
-
-            flex-shrink: 0;
-        }
-
-
-        .qr-reader {
-
-            width: 100%;
-
-            margin-top: 10px;
-
-            border-radius: 18px;
-
-            overflow: hidden;
-
-            background: #111;
-
-            min-height: 280px;
-        }
-
-
-        .qr-reader video {
-
-            width: 100% !important;
-
-            height: auto !important;
-
-            border-radius: 18px;
-        }
-
-
-        .qr-reader img {
-
-            display: none !important;
-        }
-
-
-        .qr-reader__dashboard {
-
-            padding: 8px !important;
-        }
-
-
-        .qr-reader__dashboard_section {
-
-            padding: 0 !important;
-        }
-
-
-        .qr-reader__dashboard_section_csr {
-
-            display: none !important;
-        }
-
-
-        .qr-reader button {
-
-            border: none;
-
-            background: #0f9d72;
-
-            color: white;
-
-            border-radius: 10px;
-
-            padding: 9px 13px;
-
-            font-size: 12px;
-        }
-
-
-        /* =========================
-           SCANNER STATUS
-        ========================= */
-
-        .scanner-status {
-
             margin-top: 12px;
-
-            padding: 11px 13px;
-
-            border-radius: 11px;
-
-            background: #eef8f5;
-
-            color: #087957;
-
-            font-size: 12px;
-
-            text-align: center;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            gap: 7px;
-        }
-
-
-        .status-dot {
-
-            width: 7px;
-            height: 7px;
-
-            border-radius: 50%;
-
-            background: #0f9d72;
-
-            animation:
-                scannerPulse 1.3s infinite;
-        }
-
-
-        @keyframes scannerPulse {
-
-            0% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: .3;
-            }
-
-            100% {
-                opacity: 1;
-            }
-
-        }
-
-
-        /* =========================
-           RESULT
-        ========================= */
-
-        .scan-result {
-
-            display: none;
-
-            margin-top: 12px;
-
-            padding: 14px;
-
-            border-radius: 14px;
-
-            background: #eef8f5;
-
-            align-items: center;
-
-            gap: 12px;
-        }
-
-
-        .scan-result-icon {
-
-            width: 42px;
-            height: 42px;
-
-            border-radius: 50%;
-
-            background: #0f9d72;
-
-            color: white;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 22px;
-
-            font-weight: 800;
-        }
-
-
-        .scan-result-title {
-
             font-size: 13px;
-
-            font-weight: 800;
-
-            color: #087957;
         }
 
-
-        .scan-result-code {
-
-            margin-top: 3px;
-
-            font-size: 12px;
-
-            color: #657180;
-
-            word-break: break-all;
+        .message.show {
+            display: block;
         }
 
+        .message.error {
+            background: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+        }
 
-        /* =========================
-           PROMOTION FOUND
-        ========================= */
+        .message.success {
+            background: #ecfdf5;
+            color: #047857;
+            border: 1px solid #a7f3d0;
+        }
+
+        /* RESULTADO PROMOCION */
 
         .promotion-found {
-
             display: none;
-
-            margin-top: 14px;
-
+            margin-top: 15px;
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            border-radius: 14px;
             padding: 17px;
-
-            border-radius: 16px;
-
-            background: #f8fffc;
-
-            border: 1px solid #d7f1e7;
         }
-
 
         .promotion-found.show {
             display: block;
         }
 
-
         .promotion-found-title {
-
-            font-size: 15px;
-
+            font-size: 18px;
             font-weight: 800;
-
-            color: #087957;
-
-            margin-bottom: 10px;
+            color: #047857;
+            margin-bottom: 9px;
         }
-
 
         .promotion-business {
-
+            color: #64748b;
             font-size: 13px;
-
-            font-weight: 800;
-
-            color: #172033;
-
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
-
 
         .promotion-name {
-
-            font-size: 14px;
-
-            font-weight: 700;
-
-            color: #172033;
-
-            margin-bottom: 5px;
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 7px;
         }
-
 
         .promotion-description {
-
-            font-size: 12px;
-
+            color: #475569;
+            font-size: 13px;
             line-height: 1.5;
-
-            color: #737d8c;
-
-            margin-bottom: 10px;
         }
 
-
         .promotion-points {
-
-            display: inline-flex;
-
-            padding: 6px 10px;
-
-            border-radius: 20px;
-
-            background: #fff7e6;
-
-            color: #b87500;
-
-            font-size: 11px;
-
+            margin-top: 10px;
+            color: #087f5b;
             font-weight: 800;
         }
 
+        /* RESULTADO PREMIO */
 
-        /* =========================
-           ERROR
-        ========================= */
-
-        .scanner-error {
-
+        .prize-found {
             display: none;
-
-            margin-top: 10px;
-
-            padding: 10px;
-
-            border-radius: 10px;
-
-            background: #fff2f2;
-
-            color: #b42318;
-
-            font-size: 12px;
-
+            margin-top: 15px;
+            background: #fffbeb;
+            border: 2px solid #f59e0b;
+            border-radius: 16px;
+            padding: 20px;
             text-align: center;
         }
 
-
-        /* =========================
-           MANUAL CODE
-        ========================= */
-
-        .manual-code-button {
-
-            width: 100%;
-
-            margin-top: 14px;
-
-            border: none;
-
-            background: transparent;
-
-            color: #0f9d72;
-
-            font-size: 12px;
-
-            font-weight: 700;
-
-            padding: 8px;
-
-            cursor: pointer;
-        }
-
-
-        .manual-code-container {
-
-            display: none;
-
-            margin-top: 5px;
-        }
-
-
-        .manual-code-container.show {
-
+        .prize-found.show {
             display: block;
         }
 
-
-        /* =========================
-           DESKTOP
-        ========================= */
-
-        @media (min-width: 700px) {
-
-            body {
-                padding-bottom: 0;
-            }
-
-
-            .container {
-                padding-top: 35px;
-            }
-
-
-            .bottom-nav {
-                display: none;
-            }
-
-
-            .modal {
-                align-items: center;
-            }
-
-
-            .modal-content {
-
-                border-radius: 24px;
-
-                max-width: 480px;
-            }
-
-
-            .scan-card {
-                padding: 30px;
-            }
-
+        .prize-icon {
+            font-size: 48px;
+            margin-bottom: 7px;
         }
 
+        .prize-title {
+            color: #b45309;
+            font-size: 22px;
+            font-weight: 900;
+            margin-bottom: 7px;
+        }
+
+        .prize-campaign {
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .prize-name {
+            font-size: 23px;
+            font-weight: 900;
+            color: #92400e;
+            margin-bottom: 8px;
+        }
+
+        .prize-description {
+            color: #57534e;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .prize-points {
+            margin-top: 12px;
+            font-weight: 900;
+            color: #087f5b;
+        }
+
+        .code-badge {
+            margin-top: 14px;
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 20px;
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        @media(max-width: 800px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 600px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 15px 12px 40px;
+            }
+
+            .scan-card {
+                padding: 18px;
+            }
+
+            .manual-row {
+                flex-direction: column;
+            }
+
+            .manual button {
+                height: 45px;
+            }
+        }
     </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =========================
-     LOADING
-========================= -->
-
-<div id="loading">
-
-    <div class="loading-logo">
-        P
+<header class="topbar">
+    <div class="brand">
+        Promo<span>Wallet</span> RD
     </div>
 
-    <div class="spinner"></div>
+    <button class="logout" onclick="logout()">
+        Salir
+    </button>
+</header>
 
-    <div class="loading-text">
-        Cargando PromoWallet...
+<main class="container">
+
+    <div class="welcome">
+        <h1>¡Hola! 👋</h1>
+        <p>Descubre promociones y gana premios.</p>
     </div>
 
-</div>
+    <div class="stats">
 
-
-<!-- =========================
-     APP
-========================= -->
-
-<div class="app" id="app">
-
-
-    <!-- HEADER -->
-
-    <header class="topbar">
-
-        <div class="brand">
-
-            <div class="brand-icon">
-                P
-            </div>
-
-            <div class="brand-name">
-                Promo<span>Wallet</span>
-            </div>
-
+        <div class="stat">
+            <div class="stat-icon">⭐</div>
+            <div class="stat-title">Mis puntos</div>
+            <div class="stat-value" id="pointsValue">0</div>
         </div>
 
-
-        <div class="user-area">
-
-            <div class="avatar" id="avatar">
-                U
-            </div>
-
+        <div class="stat">
+            <div class="stat-icon">🏆</div>
+            <div class="stat-title">Nivel</div>
+            <div class="stat-value" id="levelValue">1</div>
         </div>
 
-    </header>
+        <div class="stat">
+            <div class="stat-icon">🎁</div>
+            <div class="stat-title">Premios ganados</div>
+            <div class="stat-value" id="prizesValue">0</div>
+        </div>
 
+    </div>
 
-    <!-- MAIN -->
+    <!-- SCANNER -->
 
-    <main class="container">
+    <section class="scan-card">
 
+        <h2>🎟️ ¿Tienes un código?</h2>
 
-        <!-- WELCOME -->
+        <p>
+            Escanea el QR o escribe el código que recibiste.
+        </p>
 
-        <section class="welcome">
-
-            <div class="welcome-small">
-                MI PROMOWALLET
-            </div>
-
-            <h1>
-
-                Hola,
-                <span id="nombreUsuario">
-                    Cliente
-                </span>
-                👋
-
-            </h1>
-
-            <p>
-                ¿Listo para ganar algo hoy?
-            </p>
-
-        </section>
-
-
-        <!-- SCAN -->
-
-        <section class="scan-card">
-
-            <div class="scan-card-content">
-
-                <div class="scan-label">
-                    DESPUÉS DE TU COMPRA
-                </div>
-
-                <div class="scan-title">
-                    ¿Qué ganaste? 🎁
-                </div>
-
-                <div class="scan-description">
-
-                    Escanea el código de tu compra
-                    o introduce el código manualmente
-                    para descubrir tu premio.
-
-                </div>
-
-
-                <button
-                    class="scan-button"
-                    id="scanButton">
-
-                    <span class="scan-icon">
-                        📷
-                    </span>
-
-                    <span>
-                        ESCANEAR COMPRA
-                    </span>
-
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- POINTS -->
-
-        <section class="points-card">
-
-            <div class="points-top">
-
-                <div>
-
-                    <div class="points-label">
-                        ⭐ PUNTOS ACUMULADOS
-                    </div>
-
-                    <div class="points-number">
-
-                        <span id="points">
-                            0
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div style="font-size:34px;">
-                    ⭐
-                </div>
-
-            </div>
-
-
-            <div class="progress-container">
-
-                <div
-                    class="progress"
-                    id="pointsProgress">
-                </div>
-
-            </div>
-
-
-            <div
-                class="progress-text"
-                id="pointsProgressText">
-
-                Comienza a acumular puntos
-                para desbloquear premios.
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             OPPORTUNITIES
-        ========================= -->
-
-        <section class="section">
-
-            <div class="section-header">
-
-                <div class="section-title">
-                    🔥 Oportunidades para ti
-                </div>
-
-                <div class="section-link">
-                    Ver todas
-                </div>
-
-            </div>
-
-
-            <div
-                class="promo-list"
-                id="promoList">
-
-                <div class="empty-promos">
-
-                    🎁
-
-                    <br><br>
-
-                    Próximamente encontrarás aquí
-                    promociones y oportunidades.
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             MY PROMOTIONS
-        ========================= -->
-
-        <section class="section">
-
-            <div class="section-header">
-
-                <div class="section-title">
-                    🎁 Mis promociones
-                </div>
-
-                <div
-                    class="section-link"
-                    id="myPromosCount">
-                    0
-                </div>
-
-            </div>
-
-
-            <div
-                class="promo-list"
-                id="customerPromoList">
-
-                <div class="empty-promos">
-
-                    🎁
-
-                    <br><br>
-
-                    Aún no tienes promociones.
-
-                    <br>
-
-                    Escanea una compra o introduce
-                    un código para agregar una.
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- MISSION -->
-
-        <section class="section">
-
-            <div class="section-header">
-
-                <div class="section-title">
-                    🎯 Misión de hoy
-                </div>
-
-            </div>
-
-
-            <div class="mission-card">
-
-                <div class="mission-icon">
-                    🛍️
-                </div>
-
-
-                <div class="mission-content">
-
-                    <div class="mission-title">
-                        Haz tu primera compra
-                    </div>
-
-                    <div class="mission-description">
-
-                        Realiza una compra y escanea
-                        tu código para comenzar a ganar.
-
-                    </div>
-
-
-                    <div class="mission-reward">
-                        ⭐ +20 puntos
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- LEVEL -->
-
-        <section class="section">
-
-            <div class="section-header">
-
-                <div class="section-title">
-                    🏆 Tu nivel
-                </div>
-
-            </div>
-
-
-            <div class="level-card">
-
-                <div class="level-top">
-
-                    <div class="level-info">
-
-                        <div
-                            class="level-badge"
-                            id="levelBadge">
-
-                            🥉
-
-                        </div>
-
-
-                        <div>
-
-                            <div
-                                class="level-name"
-                                id="levelName">
-
-                                Novato
-
-                            </div>
-
-
-                            <div
-                                class="level-sub"
-                                id="levelDescription">
-
-                                Sigue acumulando puntos
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="level-points">
-
-                        <span id="levelCurrent">
-                            0
-                        </span>
-
-                        /
-
-                        <span id="levelNext">
-                            100
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="level-progress">
-
-                    <div
-                        class="level-progress-fill"
-                        id="levelProgress">
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- WALLET -->
-
-        <section class="section">
-
-            <div class="section-header">
-
-                <div class="section-title">
-                    💰 Mi Wallet
-                </div>
-
-            </div>
-
-
-            <div class="wallet-grid">
-
-
-                <div class="wallet-mini">
-
-                    <div class="wallet-mini-label">
-                        Saldo disponible
-                    </div>
-
-                    <div
-                        class="wallet-mini-value"
-                        id="saldo">
-
-                        RD$ 0.00
-
-                    </div>
-
-                </div>
-
-
-                <div class="wallet-mini">
-
-                    <div class="wallet-mini-label">
-                        Premios ganados
-                    </div>
-
-                    <div
-                        class="wallet-mini-value"
-                        id="premios">
-
-                        0
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- =========================
-         BOTTOM NAV
-    ========================= -->
-
-    <nav class="bottom-nav">
-
-
-        <button
-            class="nav-item active"
-            onclick="goHome()">
-
-            <span>🏠</span>
-
-            <span>
-                Inicio
-            </span>
-
-        </button>
-
-
-        <button
-            class="nav-item"
-            onclick="showPromos()">
-
-            <span>🎁</span>
-
-            <span>
-                Promos
-            </span>
-
-        </button>
-
-
-        <button
-            class="nav-item nav-scan"
-            onclick="openScan()">
-
-            <div class="nav-scan-circle">
-                📷
-            </div>
-
-            <span style="margin-top:-8px;">
-                Escanear
-            </span>
-
-        </button>
-
-
-        <button
-            class="nav-item"
-            onclick="showHistory()">
-
-            <span>⭐</span>
-
-            <span>
-                Premios
-            </span>
-
-        </button>
-
-
-        <button
-            class="nav-item"
-            onclick="showProfile()">
-
-            <span>👤</span>
-
-            <span>
-                Perfil
-            </span>
-
-        </button>
-
-    </nav>
-
-</div>
-
-
-<!-- =========================
-     SCAN MODAL
-========================= -->
-
-<div
-    class="modal"
-    id="scanModal">
-
-
-    <div
-        class="modal-content scan-modal-content">
-
-
-        <div class="modal-handle"></div>
-
-
-        <div class="scan-modal-header">
-
-
-            <div>
-
-                <div class="modal-title">
-                    📷 Escanear compra
-                </div>
-
-
-                <div class="modal-description">
-
-                    Apunta la cámara al código QR
-                    de tu compra.
-
-                </div>
-
-            </div>
-
+        <div class="scan-buttons">
 
             <button
-                class="scan-close"
-                id="closeModal">
+                class="btn btn-white"
+                onclick="openScan()">
+                📷 Escanear QR
+            </button>
 
-                ✕
-
+            <button
+                class="btn btn-light"
+                onclick="focusManualCode()">
+                ⌨️ Escribir código
             </button>
 
         </div>
 
+    </section>
 
-        <!-- QR READER -->
+    <!-- OPORTUNIDADES -->
 
-        <div
-            id="reader"
-            class="qr-reader">
+    <section class="section">
+
+        <div class="section-header">
+            <h2>🔥 Oportunidades para ti</h2>
+            <span id="promotionCount"></span>
         </div>
 
+        <div id="publicPromotions" class="cards">
+        </div>
 
-        <!-- STATUS -->
+    </section>
 
-        <div
-            id="scannerStatus"
-            class="scanner-status">
+    <!-- MIS PROMOCIONES -->
 
-            <span class="status-dot"></span>
+    <section class="section">
 
-            Apunta la cámara al código QR
+        <div class="section-header">
+            <h2>🎁 Mis promociones</h2>
+        </div>
+
+        <div id="customerPromotions" class="cards">
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- MODAL SCANNER -->
+
+<div id="scanModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>Escanear código</h2>
+
+            <button
+                class="close"
+                onclick="closeScan()">
+                ×
+            </button>
 
         </div>
 
+        <div id="reader"></div>
 
-        <!-- RESULT -->
+        <div class="manual">
 
-        <div
-            id="scanResult"
-            class="scan-result">
+            <label for="manualCode">
+                También puedes escribir el código
+            </label>
 
+            <div class="manual-row">
 
-            <div class="scan-result-icon">
-                ✓
+                <input
+                    id="manualCode"
+                    type="text"
+                    placeholder="Ej: PR-C2Y6JN"
+                    autocomplete="off">
+
+                <button onclick="validateManualCode()">
+                    Validar
+                </button>
+
             </div>
 
-
-            <div>
-
-                <div class="scan-result-title">
-                    Código detectado
-                </div>
-
-
-                <div
-                    id="scanResultCode"
-                    class="scan-result-code">
-                </div>
-
-            </div>
-
         </div>
 
+        <div id="message" class="message"></div>
 
-        <!-- PROMOTION FOUND -->
+        <!-- PROMOCION ENCONTRADA -->
 
-        <div
-            id="promotionFound"
-            class="promotion-found">
-
+        <div id="promotionFound" class="promotion-found">
 
             <div class="promotion-found-title">
                 🎉 Promoción encontrada
             </div>
 
-
-            <div
-                id="promotionBusiness"
-                class="promotion-business">
+            <div id="promotionBusiness"
+                 class="promotion-business">
             </div>
 
-
-            <div
-                id="promotionName"
-                class="promotion-name">
+            <div id="promotionName"
+                 class="promotion-name">
             </div>
 
-
-            <div
-                id="promotionDescription"
-                class="promotion-description">
+            <div id="promotionDescription"
+                 class="promotion-description">
             </div>
 
-
-            <div
-                id="promotionPoints"
-                class="promotion-points">
+            <div id="promotionPoints"
+                 class="promotion-points">
             </div>
 
         </div>
 
+        <!-- PREMIO ENCONTRADO -->
 
-        <!-- ERROR -->
+        <div id="prizeFound" class="prize-found">
 
-        <div
-            id="scannerError"
-            class="scanner-error">
-        </div>
+            <div class="prize-icon">
+                🎁
+            </div>
 
+            <div class="prize-title">
+                ¡Ganaste un premio!
+            </div>
 
-        <!-- MANUAL -->
+            <div id="prizeBusiness"
+                 class="promotion-business">
+            </div>
 
-        <button
-            class="manual-code-button"
-            id="manualCodeButton">
+            <div id="prizeCampaign"
+                 class="prize-campaign">
+            </div>
 
-            ✍️ Introducir código manualmente
+            <div id="prizeName"
+                 class="prize-name">
+            </div>
 
-        </button>
+            <div id="prizeDescription"
+                 class="prize-description">
+            </div>
 
+            <div id="prizePoints"
+                 class="prize-points">
+            </div>
 
-        <div
-            id="manualCodeContainer"
-            class="manual-code-container">
-
-
-            <input
-                type="text"
-                id="purchaseCode"
-                class="code-input"
-                placeholder="PW-XXXXXX"
-                maxlength="50"
-                autocomplete="off">
-
-
-            <button
-                class="validate-button"
-                id="validateButton">
-
-                VALIDAR CÓDIGO
-
-            </button>
+            <div id="prizeCode"
+                 class="code-badge">
+            </div>
 
         </div>
-
 
     </div>
 
 </div>
 
 
-<!-- =========================
-     HTML5 QR CODE
-========================= -->
-
-<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js">
-</script>
-
-
-<!-- =========================
-     FIREBASE
-========================= -->
-
 <script type="module">
 
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-    /* =========================
-       FIREBASE APP
-    ========================= */
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-    import {
-        initializeApp
-    }
-    from
-        "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-
-    /* =========================
-       FIREBASE AUTH
-    ========================= */
-
-    import {
-
-        getAuth,
-
-        onAuthStateChanged,
-
-        signOut
-
-    }
-    from
-        "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {
+    initializeFirestore,
+    doc,
+    getDoc,
+    collection,
+    query,
+    where,
+    getDocs,
+    setDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-    /* =========================
-       FIRESTORE
-    ========================= */
+/* =========================================================
+   FIREBASE
+========================================================= */
 
-    import {
-
-        initializeFirestore,
-
-        doc,
-
-        getDoc,
-
-        collection,
-
-        query,
-
-        where,
-
-        getDocs,
-
-        setDoc,
-
-        serverTimestamp
-
-    }
-    from
-        "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-
-    /* =========================
-       FIREBASE CONFIG
-    ========================= */
-
-    const firebaseConfig = {
+const firebaseConfig = {
 		  apiKey: "AIzaSyA_5TT1VTLkDSjYfrzTGWZ1Uv_o1yZqQYQ",
 		  authDomain: "promo-walletrd.firebaseapp.com",
 		  projectId: "promo-walletrd",
@@ -2683,2588 +738,1499 @@
 		};
 
 
-    /* =========================
-       INIT FIREBASE
-    ========================= */
+const app =
+    initializeApp(firebaseConfig);
 
-    const app =
-        initializeApp(
-            firebaseConfig
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    initializeFirestore(app, {
+        experimentalForceLongPolling: true
+    });
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+let currentUser = null;
+
+let html5QrCode = null;
+
+let scannerRunning = false;
+
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+onAuthStateChanged(auth, async (user) => {
+
+    if (!user) {
+
+        window.location.href = "login.html";
+
+        return;
+    }
+
+    currentUser = user;
+
+    await loadCustomer();
+
+    await loadPromotions();
+
+    await loadCustomerPromotions();
+
+});
+
+
+/* =========================================================
+   CARGAR CLIENTE
+========================================================= */
+
+async function loadCustomer() {
+
+    try {
+
+        const customerRef =
+            doc(
+                db,
+                "clientes",
+                currentUser.uid
+            );
+
+        const snapshot =
+            await getDoc(customerRef);
+
+
+        if (!snapshot.exists()) {
+
+            return;
+        }
+
+
+        const cliente =
+            snapshot.data();
+
+
+        document.getElementById(
+            "pointsValue"
+        ).textContent =
+            Number(cliente.puntos || 0);
+
+
+        document.getElementById(
+            "levelValue"
+        ).textContent =
+            Number(cliente.nivel || 1);
+
+
+        document.getElementById(
+            "prizesValue"
+        ).textContent =
+            Number(cliente.premiosGanados || 0);
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error cargando cliente:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   PROMOCIONES PUBLICAS
+========================================================= */
+
+async function loadPromotions() {
+
+    const container =
+        document.getElementById(
+            "publicPromotions"
         );
 
 
-    const auth =
-        getAuth(app);
+    container.innerHTML = "";
 
 
-    const db =
-        initializeFirestore(
-            app,
-            {
-                experimentalForceLongPolling:
+    try {
+
+        const promocionesRef =
+            collection(
+                db,
+                "promociones"
+            );
+
+
+        const promocionesQuery =
+            query(
+                promocionesRef,
+                where(
+                    "activa",
+                    "==",
                     true
+                )
+            );
+
+
+        const snapshot =
+            await getDocs(
+                promocionesQuery
+            );
+
+
+        document.getElementById(
+            "promotionCount"
+        ).textContent =
+            snapshot.size + " disponibles";
+
+
+        if (snapshot.empty) {
+
+            container.innerHTML =
+                `
+                <div class="empty">
+                    No hay promociones disponibles
+                    en este momento.
+                </div>
+                `;
+
+            return;
+        }
+
+
+        snapshot.forEach((docSnap) => {
+
+            const promo =
+                docSnap.data();
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+            card.className =
+                "card";
+
+
+            card.innerHTML =
+                `
+                <div class="card-category">
+                    ${escapeHtml(
+                        promo.categoria || "Promoción"
+                    )}
+                </div>
+
+                <h3>
+                    ${escapeHtml(
+                        promo.nombre || "Promoción"
+                    )}
+                </h3>
+
+                <div class="business">
+                    🏪 ${escapeHtml(
+                        promo.nombreNegocio ||
+                        "Negocio"
+                    )}
+                </div>
+
+                <div class="description">
+                    ${escapeHtml(
+                        promo.descripcion || ""
+                    )}
+                </div>
+
+                <div class="points">
+                    ⭐ ${Number(
+                        promo.puntos || 0
+                    )} puntos
+                </div>
+                `;
+
+
+            container.appendChild(card);
+
+        });
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error cargando promociones:",
+            error
+        );
+
+        container.innerHTML =
+            `
+            <div class="empty">
+                No fue posible cargar las promociones.
+            </div>
+            `;
+
+    }
+
+}
+
+
+/* =========================================================
+   MIS PROMOCIONES
+========================================================= */
+
+async function loadCustomerPromotions() {
+
+    const container =
+        document.getElementById(
+            "customerPromotions"
+        );
+
+
+    container.innerHTML = "";
+
+
+    try {
+
+        const ref =
+            collection(
+                db,
+                "clientes",
+                currentUser.uid,
+                "promociones"
+            );
+
+
+        const snapshot =
+            await getDocs(ref);
+
+
+        if (snapshot.empty) {
+
+            container.innerHTML =
+                `
+                <div class="empty">
+                    Todavía no tienes promociones guardadas.
+                </div>
+                `;
+
+            return;
+        }
+
+
+        snapshot.forEach((docSnap) => {
+
+            const promo =
+                docSnap.data();
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+            card.className =
+                "card";
+
+
+            card.innerHTML =
+                `
+                <div class="card-category">
+                    ${escapeHtml(
+                        promo.categoria || "Promoción"
+                    )}
+                </div>
+
+                <h3>
+                    ${escapeHtml(
+                        promo.nombre || "Promoción"
+                    )}
+                </h3>
+
+                <div class="business">
+                    🏪 ${escapeHtml(
+                        promo.nombreNegocio ||
+                        "Negocio"
+                    )}
+                </div>
+
+                <div class="description">
+                    ${escapeHtml(
+                        promo.descripcion || ""
+                    )}
+                </div>
+
+                <div class="points">
+                    ⭐ ${Number(
+                        promo.puntos || 0
+                    )} puntos
+                </div>
+                `;
+
+
+            container.appendChild(card);
+
+        });
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error cargando promociones del cliente:",
+            error
+        );
+
+        container.innerHTML =
+            `
+            <div class="empty">
+                No fue posible cargar tus promociones.
+            </div>
+            `;
+
+    }
+
+}
+
+
+/* =========================================================
+   ABRIR SCANNER
+========================================================= */
+
+window.openScan = async function() {
+
+    document
+        .getElementById("scanModal")
+        .classList.add("show");
+
+
+    resetScannerUI();
+
+
+    try {
+
+        html5QrCode =
+            new Html5Qrcode("reader");
+
+
+        await html5QrCode.start(
+
+            {
+                facingMode: "environment"
+            },
+
+            {
+                fps: 10,
+                qrbox: {
+                    width: 250,
+                    height: 250
+                }
+            },
+
+            async (decodedText) => {
+
+                await stopScanner();
+
+                await validatePurchaseCode(
+                    decodedText
+                );
+
+            },
+
+            () => {}
+
+        );
+
+
+        scannerRunning = true;
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error iniciando cámara:",
+            error
+        );
+
+        showMessage(
+            "No fue posible iniciar la cámara. Puedes escribir el código manualmente.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   CERRAR SCANNER
+========================================================= */
+
+window.closeScan = async function() {
+
+    await stopScanner();
+
+    document
+        .getElementById("scanModal")
+        .classList.remove("show");
+
+};
+
+
+/* =========================================================
+   DETENER SCANNER
+========================================================= */
+
+async function stopScanner() {
+
+    if (
+        html5QrCode &&
+        scannerRunning
+    ) {
+
+        try {
+
+            await html5QrCode.stop();
+
+            html5QrCode.clear();
+
+        }
+        catch (error) {
+
+            console.warn(
+                "Scanner:",
+                error
+            );
+
+        }
+
+    }
+
+    scannerRunning = false;
+
+    html5QrCode = null;
+
+}
+
+
+/* =========================================================
+   ENFOCAR CODIGO MANUAL
+========================================================= */
+
+window.focusManualCode = function() {
+
+    document
+        .getElementById("scanModal")
+        .classList.add("show");
+
+
+    setTimeout(() => {
+
+        document
+            .getElementById("manualCode")
+            .focus();
+
+    }, 200);
+
+};
+
+
+/* =========================================================
+   VALIDAR CODIGO MANUAL
+========================================================= */
+
+window.validateManualCode = async function() {
+
+    const input =
+        document.getElementById(
+            "manualCode"
+        );
+
+
+    const codigo =
+        input.value
+            .trim()
+            .toUpperCase();
+
+
+    if (!codigo) {
+
+        showMessage(
+            "Escribe un código.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    await validatePurchaseCode(
+        codigo
+    );
+
+};
+
+
+/* =========================================================
+   VALIDAR CODIGO
+========================================================= */
+
+async function validatePurchaseCode(code) {
+
+    resetResults();
+
+
+    const codigo =
+        String(code || "")
+            .trim()
+            .toUpperCase();
+
+
+    if (!codigo) {
+
+        showMessage(
+            "Código vacío.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    console.log(
+        "Código recibido:",
+        codigo
+    );
+
+
+    /*
+       PW = PROMOCION
+       PR = PREMIO
+    */
+
+    if (
+        codigo.startsWith("PW-")
+    ) {
+
+        await validatePromotionCode(
+            codigo
+        );
+
+        return;
+    }
+
+
+    if (
+        codigo.startsWith("PR-")
+    ) {
+
+        await validatePrizeCode(
+            codigo
+        );
+
+        return;
+    }
+
+
+    showMessage(
+        "Código no reconocido. Los códigos válidos comienzan con PW- o PR-.",
+        "error"
+    );
+
+}
+
+
+/* =========================================================
+   VALIDAR PROMOCION
+========================================================= */
+
+async function validatePromotionCode(
+    codigo
+) {
+
+    try {
+
+        showMessage(
+            "Buscando promoción...",
+            "success"
+        );
+
+
+        const promocionesRef =
+            collection(
+                db,
+                "promociones"
+            );
+
+
+        const promocionesQuery =
+            query(
+                promocionesRef,
+                where(
+                    "codigoPromocion",
+                    "==",
+                    codigo
+                )
+            );
+
+
+        const snapshot =
+            await getDocs(
+                promocionesQuery
+            );
+
+
+        if (snapshot.empty) {
+
+            showMessage(
+                `El código ${codigo} no existe. Verifica que lo hayas escrito correctamente.`,
+                "error"
+            );
+
+            return;
+        }
+
+
+        const promoDoc =
+            snapshot.docs[0];
+
+
+        const promo =
+            promoDoc.data();
+
+
+        /*
+           Guardar promoción
+        */
+
+        const customerPromotionRef =
+            doc(
+                db,
+                "clientes",
+                currentUser.uid,
+                "promociones",
+                promoDoc.id
+            );
+
+
+        await setDoc(
+            customerPromotionRef,
+            {
+
+                promocionId:
+                    promoDoc.id,
+
+                codigoPromocion:
+                    promo.codigoPromocion ||
+                    codigo,
+
+                negocioId:
+                    promo.negocioId ||
+                    "",
+
+                nombreNegocio:
+                    promo.nombreNegocio ||
+                    "Negocio",
+
+                nombre:
+                    promo.nombre ||
+                    "Promoción",
+
+                descripcion:
+                    promo.descripcion ||
+                    "",
+
+                categoria:
+                    promo.categoria ||
+                    "",
+
+                descuento:
+                    Number(
+                        promo.descuento || 0
+                    ),
+
+                puntos:
+                    Number(
+                        promo.puntos || 0
+                    ),
+
+                precioNormal:
+                    Number(
+                        promo.precioNormal || 0
+                    ),
+
+                precioPromo:
+                    Number(
+                        promo.precioPromo || 0
+                    ),
+
+                estado:
+                    "disponible",
+
+                fechaAsignacion:
+                    serverTimestamp()
+
+            },
+
+            {
+                merge: true
             }
+
         );
 
 
-    /* =========================
-       ELEMENTS
-    ========================= */
+        /*
+           Mostrar resultado
+        */
 
-    const loading =
         document.getElementById(
-            "loading"
-        );
+            "promotionBusiness"
+        ).textContent =
+            "🏪 " +
+            (
+                promo.nombreNegocio ||
+                "Negocio"
+            );
 
 
-    const appContainer =
         document.getElementById(
-            "app"
-        );
+            "promotionName"
+        ).textContent =
+            promo.nombre ||
+            "Promoción";
 
 
-    const nombreUsuario =
         document.getElementById(
-            "nombreUsuario"
-        );
+            "promotionDescription"
+        ).textContent =
+            promo.descripcion ||
+            "";
 
 
-    const avatar =
         document.getElementById(
-            "avatar"
+            "promotionPoints"
+        ).textContent =
+            "⭐ " +
+            Number(
+                promo.puntos || 0
+            ) +
+            " puntos";
+
+
+        document
+            .getElementById(
+                "promotionFound"
+            )
+            .classList.add("show");
+
+
+        showMessage(
+            "¡Promoción agregada a tu wallet!",
+            "success"
         );
 
 
-    const points =
-        document.getElementById(
-            "points"
+        await loadCustomerPromotions();
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error validando promoción:",
+            error
         );
 
 
-    const saldo =
-        document.getElementById(
-            "saldo"
+        showMessage(
+            "No fue posible validar la promoción: " +
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   VALIDAR PREMIO
+========================================================= */
+
+async function validatePrizeCode(
+    codigo
+) {
+
+    try {
+
+        showMessage(
+            "Buscando campaña de premios...",
+            "success"
         );
 
 
-    const premios =
-        document.getElementById(
-            "premios"
-        );
+        const premiosRef =
+            collection(
+                db,
+                "premios"
+            );
 
 
-    /* =========================
-       AUTH
-    ========================= */
+        const premiosQuery =
+            query(
+                premiosRef,
+                where(
+                    "codigoPremio",
+                    "==",
+                    codigo
+                )
+            );
 
-    onAuthStateChanged(
-        auth,
-        async (user) => {
 
-            if (!user) {
+        const snapshot =
+            await getDocs(
+                premiosQuery
+            );
 
-                window.location.href =
-                    "login.html";
+
+        if (snapshot.empty) {
+
+            showMessage(
+                `El código ${codigo} no existe. Verifica que lo hayas escrito correctamente.`,
+                "error"
+            );
+
+            return;
+        }
+
+
+        const premioDoc =
+            snapshot.docs[0];
+
+
+        const campana =
+            premioDoc.data();
+
+
+        /*
+           Validar estado
+        */
+
+        if (
+            campana.activo === false ||
+            campana.estado === "inactivo"
+        ) {
+
+            showMessage(
+                "Esta campaña de premios no está activa.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        /*
+           Validar fecha
+        */
+
+        const hoy =
+            new Date();
+
+
+        if (
+            campana.fechaInicio
+        ) {
+
+            const inicio =
+                new Date(
+                    campana.fechaInicio +
+                    "T00:00:00"
+                );
+
+
+            if (
+                hoy < inicio
+            ) {
+
+                showMessage(
+                    "Esta campaña todavía no ha comenzado.",
+                    "error"
+                );
 
                 return;
+            }
+
+        }
+
+
+        if (
+            campana.fechaFin
+        ) {
+
+            const fin =
+                new Date(
+                    campana.fechaFin +
+                    "T23:59:59"
+                );
+
+
+            if (
+                hoy > fin
+            ) {
+
+                showMessage(
+                    "Esta campaña ya finalizó.",
+                    "error"
+                );
+
+                return;
+            }
+
+        }
+
+
+        /*
+           Validar disponibilidad
+        */
+
+        if (
+            campana.cantidadDisponible !==
+            undefined &&
+            Number(
+                campana.cantidadDisponible
+            ) <= 0
+        ) {
+
+            showMessage(
+                "Esta campaña ya no tiene premios disponibles.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        /*
+           Obtener opciones
+        */
+
+        const opciones =
+            Array.isArray(
+                campana.opciones
+            )
+                ? campana.opciones
+                : [];
+
+
+        if (
+            opciones.length === 0
+        ) {
+
+            showMessage(
+                "La campaña no tiene premios configurados.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        /*
+           Limpiar opciones
+        */
+
+        const opcionesValidas =
+            opciones
+                .map(opcion => ({
+
+                    id:
+                        opcion.id ||
+                        crypto.randomUUID(),
+
+                    nombre:
+                        opcion.nombre ||
+                        "Premio",
+
+                    descripcion:
+                        opcion.descripcion ||
+                        "",
+
+                    probabilidad:
+                        Number(
+                            opcion.probabilidad || 0
+                        ),
+
+                    puntos:
+                        Number(
+                            opcion.puntos || 0
+                        )
+
+                }))
+                .filter(
+                    opcion =>
+                        opcion.probabilidad > 0
+                );
+
+
+        /*
+           Validar total
+        */
+
+        const total =
+            opcionesValidas.reduce(
+                (
+                    acumulado,
+                    opcion
+                ) =>
+                    acumulado +
+                    opcion.probabilidad,
+                0
+            );
+
+
+        if (
+            Math.abs(
+                total - 100
+            ) > 0.001
+        ) {
+
+            showMessage(
+                "La configuración de probabilidades de esta campaña no es válida. El total debe ser 100%.",
+                "error"
+            );
+
+            console.error(
+                "Total probabilidades:",
+                total
+            );
+
+            return;
+        }
+
+
+        /*
+           SORTEO PONDERADO
+        */
+
+        const premioGanado =
+            seleccionarPremio(
+                opcionesValidas
+            );
+
+
+        if (!premioGanado) {
+
+            showMessage(
+                "No fue posible determinar el premio.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        /*
+           ID DE REDENCION
+        */
+
+        const redemptionRef =
+            doc(
+                collection(
+                    db,
+                    "clientes",
+                    currentUser.uid,
+                    "premios"
+                )
+            );
+
+
+        /*
+           GUARDAR PREMIO
+        */
+
+        await setDoc(
+            redemptionRef,
+            {
+
+                premioCampanaId:
+                    premioDoc.id,
+
+                codigoPremio:
+                    campana.codigoPremio ||
+                    codigo,
+
+                negocioId:
+                    campana.negocioId ||
+                    "",
+
+                nombreNegocio:
+                    campana.nombreNegocio ||
+                    "Negocio",
+
+                campanaNombre:
+                    campana.nombre ||
+                    "Campaña de premios",
+
+                premioId:
+                    premioGanado.id,
+
+                premioGanado:
+                    premioGanado.nombre,
+
+                descripcionPremio:
+                    premioGanado.descripcion,
+
+                puntos:
+                    Number(
+                        premioGanado.puntos || 0
+                    ),
+
+                probabilidad:
+                    Number(
+                        premioGanado.probabilidad || 0
+                    ),
+
+                estado:
+                    "ganado",
+
+                fechaRedencion:
+                    serverTimestamp()
 
             }
 
-
-            try {
-
-                console.log(
-                    "Usuario autenticado:",
-                    user.uid
-                );
+        );
 
 
-                const clienteRef =
-                    doc(
-                        db,
-                        "clientes",
-                        user.uid
-                    );
+        /*
+           MOSTRAR PREMIO
+        */
+
+        document.getElementById(
+            "prizeBusiness"
+        ).textContent =
+            "🏪 " +
+            (
+                campana.nombreNegocio ||
+                "Negocio"
+            );
 
 
-                const clienteSnap =
-                    await getDoc(
-                        clienteRef
-                    );
+        document.getElementById(
+            "prizeCampaign"
+        ).textContent =
+            campana.nombre ||
+            "Campaña de premios";
 
 
-                if (
-                    !clienteSnap.exists()
-                ) {
-
-                    alert(
-                        "No encontramos la información de tu cuenta."
-                    );
+        document.getElementById(
+            "prizeName"
+        ).textContent =
+            premioGanado.nombre;
 
 
-                    await signOut(
-                        auth
-                    );
+        document.getElementById(
+            "prizeDescription"
+        ).textContent =
+            premioGanado.descripcion ||
+            "¡Disfruta tu premio!";
 
 
-                    window.location.href =
-                        "login.html";
+        const puntos =
+            Number(
+                premioGanado.puntos || 0
+            );
 
 
-                    return;
+        if (
+            puntos > 0
+        ) {
 
-                }
+            document.getElementById(
+                "prizePoints"
+            ).textContent =
+                "⭐ Ganaste " +
+                puntos +
+                " puntos";
 
+        }
+        else {
 
-                const cliente =
-                    clienteSnap.data();
+            document.getElementById(
+                "prizePoints"
+            ).textContent =
+                "🎉 Premio obtenido";
 
-
-                /* =========================
-                   NOMBRE
-                ========================= */
-
-                const nombre =
-                    cliente.nombre ||
-                    cliente.nombreCompleto ||
-                    "Cliente";
-
-
-                nombreUsuario.textContent =
-                    nombre
-                        .split(" ")[0];
+        }
 
 
-                /* =========================
-                   AVATAR
-                ========================= */
-
-                const inicial =
-                    nombre
-                        .trim()
-                        .charAt(0)
-                        .toUpperCase();
+        document.getElementById(
+            "prizeCode"
+        ).textContent =
+            "Código: " +
+            codigo;
 
 
-                avatar.textContent =
-                    inicial;
+        document
+            .getElementById(
+                "prizeFound"
+            )
+            .classList.add("show");
 
 
-                /* =========================
-                   PUNTOS
-                ========================= */
-
-                const puntosActuales =
-                    Number(
-                        cliente.puntos || 0
-                    );
+        showMessage(
+            "¡Felicidades! El premio fue registrado correctamente.",
+            "success"
+        );
 
 
-                points.textContent =
-                    puntosActuales
-                        .toLocaleString(
-                            "es-DO"
-                        );
+        /*
+           Actualizar contador visual
+        */
+
+        const prizeCounter =
+            document.getElementById(
+                "prizesValue"
+            );
 
 
-                updateLevel(
-                    puntosActuales
-                );
+        const actual =
+            Number(
+                prizeCounter.textContent || 0
+            );
 
 
-                /* =========================
-                   SALDO
-                ========================= */
+        prizeCounter.textContent =
+            actual + 1;
 
-                const saldoActual =
-                    Number(
-                        cliente.saldoWallet ||
-                        0
-                    );
+    }
+    catch (error) {
 
-
-                saldo.textContent =
-                    formatMoney(
-                        saldoActual
-                    );
+        console.error(
+            "Error validando premio:",
+            error
+        );
 
 
-                /* =========================
-                   PREMIOS
-                ========================= */
+        showMessage(
+            "No fue posible procesar el premio: " +
+            error.message,
+            "error"
+        );
 
-                premios.textContent =
-                    Number(
-                        cliente.premiosGanados ||
-                        0
-                    );
+    }
 
-
-                /* =========================
-                   PROMOCIONES PÚBLICAS
-                ========================= */
-
-                await loadPromotions();
+}
 
 
-                /* =========================
-                   PROMOCIONES DEL CLIENTE
-                ========================= */
+/* =========================================================
+   SORTEO PONDERADO
+========================================================= */
 
-                await loadCustomerPromotions();
+function seleccionarPremio(
+    opciones
+) {
 
-
-                /* =========================
-                   SHOW APP
-                ========================= */
-
-                loading.style.display =
-                    "none";
+    const random =
+        Math.random() * 100;
 
 
-                appContainer.style.display =
-                    "block";
-
-            }
-            catch (error) {
-
-                console.error(
-                    "Error cargando cliente:",
-                    error
-                );
+    let acumulado = 0;
 
 
-                loading.style.display =
-                    "none";
+    for (
+        const opcion of opciones
+    ) {
+
+        acumulado +=
+            Number(
+                opcion.probabilidad || 0
+            );
 
 
-                appContainer.style.display =
-                    "block";
+        if (
+            random < acumulado
+        ) {
+
+            return opcion;
+
+        }
+
+    }
+
+
+    /*
+       Protección contra
+       errores de precisión
+    */
+
+    return opciones[
+        opciones.length - 1
+    ];
+
+}
+
+
+/* =========================================================
+   RESET UI
+========================================================= */
+
+function resetScannerUI() {
+
+    resetResults();
+
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    message.className =
+        "message";
+
+
+    message.textContent =
+        "";
+
+
+    document.getElementById(
+        "manualCode"
+    ).value = "";
+
+}
+
+
+function resetResults() {
+
+    document
+        .getElementById(
+            "promotionFound"
+        )
+        .classList.remove("show");
+
+
+    document
+        .getElementById(
+            "prizeFound"
+        )
+        .classList.remove("show");
+
+}
+
+
+/* =========================================================
+   MENSAJES
+========================================================= */
+
+function showMessage(
+    text,
+    type
+) {
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    message.textContent =
+        text;
+
+
+    message.className =
+        "message show " +
+        type;
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(value) {
+
+    return String(value || "")
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+window.logout = async function() {
+
+    try {
+
+        await signOut(auth);
+
+        window.location.href =
+            "login.html";
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error cerrando sesión:",
+            error
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   ENTER EN CODIGO MANUAL
+========================================================= */
+
+document
+    .getElementById(
+        "manualCode"
+    )
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                validateManualCode();
 
             }
 
         }
     );
 
-
-    /* =========================
-       LEVEL
-    ========================= */
-
-    function updateLevel(
-        puntos
-    ) {
-
-        let nombre =
-            "Novato";
-
-        let badge =
-            "🥉";
-
-        let max =
-            100;
-
-        let previous =
-            0;
-
-
-        if (puntos >= 700) {
-
-            nombre =
-                "VIP";
-
-            badge =
-                "💎";
-
-            previous =
-                700;
-
-            max =
-                1000;
-
-        }
-
-        else if (puntos >= 300) {
-
-            nombre =
-                "Fan";
-
-            badge =
-                "🥇";
-
-            previous =
-                300;
-
-            max =
-                700;
-
-        }
-
-        else if (puntos >= 100) {
-
-            nombre =
-                "Explorador";
-
-            badge =
-                "🥈";
-
-            previous =
-                100;
-
-            max =
-                300;
-
-        }
-
-
-        document.getElementById(
-            "levelName"
-        ).textContent =
-            nombre;
-
-
-        document.getElementById(
-            "levelBadge"
-        ).textContent =
-            badge;
-
-
-        document.getElementById(
-            "levelCurrent"
-        ).textContent =
-            puntos;
-
-
-        document.getElementById(
-            "levelNext"
-        ).textContent =
-            max;
-
-
-        const porcentaje =
-
-            puntos >= max
-
-                ? 100
-
-                :
-
-                (
-                    (
-                        puntos -
-                        previous
-                    ) /
-                    (
-                        max -
-                        previous
-                    )
-                ) * 100;
-
-
-        document.getElementById(
-            "levelProgress"
-        ).style.width =
-
-            Math.max(
-                0,
-                porcentaje
-            ) + "%";
-
-
-        const faltan =
-            Math.max(
-                0,
-                max - puntos
-            );
-
-
-        document.getElementById(
-            "pointsProgress"
-        ).style.width =
-
-            Math.min(
-                100,
-                (
-                    puntos /
-                    max
-                ) * 100
-            ) + "%";
-
-
-        if (faltan > 0) {
-
-            document.getElementById(
-                "pointsProgressText"
-            ).textContent =
-
-                `Te faltan ${faltan} puntos para alcanzar el próximo nivel.`;
-
-        }
-
-        else {
-
-            document.getElementById(
-                "pointsProgressText"
-            ).textContent =
-
-                "¡Has alcanzado este nivel! 🎉";
-
-        }
-
-    }
-
-
-    /* =========================
-       MONEY
-    ========================= */
-
-    function formatMoney(
-        value
-    ) {
-
-        return new Intl.NumberFormat(
-
-            "es-DO",
-
-            {
-
-                style:
-                    "currency",
-
-                currency:
-                    "DOP",
-
-                minimumFractionDigits:
-                    2
-
-            }
-
-        ).format(
-            value
-        );
-
-    }
-
-
-    /* =========================
-       LOAD PUBLIC PROMOTIONS
-       promociones/
-    ========================= */
-
-    async function loadPromotions() {
-
-        const promoList =
-            document.getElementById(
-                "promoList"
-            );
-
-
-        try {
-
-            console.log(
-                "Cargando promociones públicas..."
-            );
-
-
-            const promocionesQuery =
-                query(
-
-                    collection(
-                        db,
-                        "promociones"
-                    ),
-
-                    where(
-                        "activa",
-                        "==",
-                        true
-                    )
-
-                );
-
-
-            const snapshot =
-                await getDocs(
-                    promocionesQuery
-                );
-
-
-            console.log(
-                "Promociones públicas:",
-                snapshot.size
-            );
-
-
-            if (
-                snapshot.empty
-            ) {
-
-                promoList.innerHTML = `
-
-                    <div class="empty-promos">
-
-                        🎁
-
-                        <br><br>
-
-                        Próximamente encontrarás aquí
-                        promociones y oportunidades.
-
-                    </div>
-
-                `;
-
-                return;
-
-            }
-
-
-            promoList.innerHTML =
-                "";
-
-
-            let count =
-                0;
-
-
-            snapshot.forEach(
-                (docSnap) => {
-
-
-                    if (
-                        count >= 5
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    const promo =
-                        docSnap.data();
-
-
-                    const card =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    card.className =
-                        "promo-card";
-
-
-                    const categoria =
-                        String(
-                            promo.categoria ||
-                            ""
-                        ).toLowerCase();
-
-
-                    let icon =
-                        "🎁";
-
-
-                    if (
-
-                        categoria.includes(
-                            "café"
-                        )
-
-                        ||
-
-                        categoria.includes(
-                            "cafe"
-                        )
-
-                    ) {
-
-                        icon =
-                            "☕";
-
-                    }
-
-                    else if (
-
-                        categoria.includes(
-                            "comida"
-                        )
-
-                        ||
-
-                        categoria.includes(
-                            "restaurante"
-                        )
-
-                        ||
-
-                        categoria.includes(
-                            "alimentos"
-                        )
-
-                    ) {
-
-                        icon =
-                            "🍔";
-
-                    }
-
-                    else if (
-
-                        categoria.includes(
-                            "tecnología"
-                        )
-
-                        ||
-
-                        categoria.includes(
-                            "tecnologia"
-                        )
-
-                    ) {
-
-                        icon =
-                            "📱";
-
-                    }
-
-                    else if (
-
-                        categoria.includes(
-                            "ropa"
-                        )
-
-                    ) {
-
-                        icon =
-                            "👕";
-
-                    }
-
-
-                    card.innerHTML = `
-
-                        <div class="promo-icon">
-
-                            ${icon}
-
-                        </div>
-
-
-                        <div class="promo-info">
-
-                            <div class="promo-name">
-
-                                ${escapeHtml(
-                                    promo.nombreNegocio ||
-                                    "Negocio"
-                                )}
-
-                            </div>
-
-
-                            <div class="promo-description">
-
-                                ${escapeHtml(
-                                    promo.nombre ||
-                                    promo.descripcion ||
-                                    "Nueva oportunidad"
-                                )}
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="promo-arrow">
-
-                            ›
-
-                        </div>
-
-                    `;
-
-
-                    promoList.appendChild(
-                        card
-                    );
-
-
-                    count++;
-
-                }
-            );
-
-
-        }
-        catch (error) {
-
-            console.error(
-                "Error cargando promociones públicas:",
-                error
-            );
-
-
-            promoList.innerHTML = `
-
-                <div class="empty-promos">
-
-                    ⚠️
-
-                    <br><br>
-
-                    No fue posible cargar
-                    las promociones.
-
-                </div>
-
-            `;
-
-        }
-
-    }
-
-
-    /* =========================
-       LOAD CUSTOMER PROMOTIONS
-       
-       clientes/{UID}/promociones/
-    ========================= */
-
-    async function loadCustomerPromotions() {
-
-        const customerPromoList =
-            document.getElementById(
-                "customerPromoList"
-            );
-
-
-        const countElement =
-            document.getElementById(
-                "myPromosCount"
-            );
-
-
-        const user =
-            auth.currentUser;
-
-
-        if (!user) {
-
-            console.warn(
-                "No hay usuario para cargar promociones."
-            );
-
-            return;
-
-        }
-
-
-        try {
-
-            console.log(
-                "================================="
-            );
-
-            console.log(
-                "CARGANDO PROMOCIONES DEL CLIENTE"
-            );
-
-            console.log(
-                "Cliente:",
-                user.uid
-            );
-
-            console.log(
-                "================================="
-            );
-
-
-            const promocionesClienteRef =
-                collection(
-
-                    db,
-
-                    "clientes",
-
-                    user.uid,
-
-                    "promociones"
-
-                );
-
-
-            const snapshot =
-                await getDocs(
-                    promocionesClienteRef
-                );
-
-
-            console.log(
-                "Promociones adquiridas:",
-                snapshot.size
-            );
-
-
-            if (
-                countElement
-            ) {
-
-                countElement.textContent =
-                    snapshot.size;
-
-            }
-
-
-            /* =========================
-               SIN PROMOCIONES
-            ========================= */
-
-            if (
-                snapshot.empty
-            ) {
-
-                customerPromoList.innerHTML = `
-
-                    <div class="empty-promos">
-
-                        🎁
-
-                        <br><br>
-
-                        Aún no tienes promociones.
-
-                        <br>
-
-                        Escanea una compra o introduce
-                        un código para agregar una.
-
-                    </div>
-
-                `;
-
-                return;
-
-            }
-
-
-            customerPromoList.innerHTML =
-                "";
-
-
-            snapshot.forEach(
-                (docSnap) => {
-
-                    const promo =
-                        docSnap.data();
-
-
-                    /* =========================
-                       SOLO DISPONIBLES
-                    ========================= */
-
-                    if (
-                        promo.estado &&
-                        promo.estado !== "disponible"
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    const categoria =
-                        String(
-                            promo.categoria ||
-                            ""
-                        ).toLowerCase();
-
-
-                    let icon =
-                        "🎁";
-
-
-                    if (
-
-                        categoria.includes(
-                            "café"
-                        )
-
-                        ||
-
-                        categoria.includes(
-                            "cafe"
-                        )
-
-                    ) {
-
-                        icon =
-                            "☕";
-
-                    }
-
-                    else if (
-
-                        categoria.includes(
-                            "comida"
-                        )
-
-                        ||
-
-                        categoria.includes(
-                            "restaurante"
-                        )
-
-                        ||
-
-                        categoria.includes(
-                            "alimentos"
-                        )
-
-                    ) {
-
-                        icon =
-                            "🍔";
-
-                    }
-
-                    else if (
-
-                        categoria.includes(
-                            "tecnología"
-                        )
-
-                        ||
-
-                        categoria.includes(
-                            "tecnologia"
-                        )
-
-                    ) {
-
-                        icon =
-                            "📱";
-
-                    }
-
-                    else if (
-
-                        categoria.includes(
-                            "ropa"
-                        )
-
-                    ) {
-
-                        icon =
-                            "👕";
-
-                    }
-
-
-                    const card =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    card.className =
-                        "my-promo-card";
-
-
-                    card.innerHTML = `
-
-                        <div class="my-promo-top">
-
-
-                            <div class="my-promo-icon">
-
-                                ${icon}
-
-                            </div>
-
-
-                            <div class="my-promo-info">
-
-
-                                <div class="my-promo-business">
-
-                                    🏪
-
-                                    ${escapeHtml(
-                                        promo.nombreNegocio ||
-                                        "Negocio"
-                                    )}
-
-                                </div>
-
-
-                                <div class="my-promo-name">
-
-                                    ${escapeHtml(
-                                        promo.nombre ||
-                                        "Promoción"
-                                    )}
-
-                                </div>
-
-
-                            </div>
-
-
-                        </div>
-
-
-                        <div class="my-promo-description">
-
-                            ${escapeHtml(
-                                promo.descripcion ||
-                                "Promoción disponible"
-                            )}
-
-                        </div>
-
-
-                        <div class="promo-status">
-
-                            ✓ Promoción disponible
-
-                        </div>
-
-
-                        <div class="my-promo-bottom">
-
-
-                            <div class="my-promo-code">
-
-                                ${escapeHtml(
-                                    promo.codigoPromocion ||
-                                    ""
-                                )}
-
-                            </div>
-
-
-                            <div class="my-promo-points">
-
-                                ⭐ +
-
-                                ${Number(
-                                    promo.puntos || 0
-                                )}
-
-                                puntos
-
-                            </div>
-
-
-                        </div>
-
-                    `;
-
-
-                    customerPromoList.appendChild(
-                        card
-                    );
-
-                }
-            );
-
-
-            /* =========================
-               SI TODOS FUERON USADOS
-            ========================= */
-
-            if (
-                customerPromoList.children.length === 0
-            ) {
-
-                customerPromoList.innerHTML = `
-
-                    <div class="empty-promos">
-
-                        🎉
-
-                        <br><br>
-
-                        No tienes promociones disponibles
-                        en este momento.
-
-                    </div>
-
-                `;
-
-            }
-
-
-        }
-        catch (error) {
-
-            console.error(
-                "Error cargando promociones del cliente:",
-                error
-            );
-
-
-            customerPromoList.innerHTML = `
-
-                <div class="empty-promos">
-
-                    ⚠️
-
-                    <br><br>
-
-                    No fue posible cargar
-                    tus promociones.
-
-                </div>
-
-            `;
-
-        }
-
-    }
-
-
-    /* =========================
-       ESCAPE HTML
-    ========================= */
-
-    function escapeHtml(
-        value
-    ) {
-
-        return String(value)
-
-            .replaceAll(
-                "&",
-                "&amp;"
-            )
-
-            .replaceAll(
-                "<",
-                "&lt;"
-            )
-
-            .replaceAll(
-                ">",
-                "&gt;"
-            )
-
-            .replaceAll(
-                '"',
-                "&quot;"
-            )
-
-            .replaceAll(
-                "'",
-                "&#039;"
-            );
-
-    }
-
-
-    /* =========================
-       QR SCANNER
-    ========================= */
-
-    let qrScanner =
-        null;
-
-
-    let scannerRunning =
-        false;
-
-
-    let lastScannedCode =
-        null;
-
-
-    /* =========================
-       OPEN SCANNER
-    ========================= */
-
-    window.openScan =
-        async function () {
-
-            const modal =
-                document.getElementById(
-                    "scanModal"
-                );
-
-
-            modal.classList.add(
-                "show"
-            );
-
-
-            resetScannerUI();
-
-
-            await startQRScanner();
-
-        };
-
-
-    /* =========================
-       SCAN BUTTON
-    ========================= */
-
-    document
-        .getElementById(
-            "scanButton"
-        )
-        .addEventListener(
-            "click",
-            async () => {
-
-                await window.openScan();
-
-            }
-        );
-
-
-    /* =========================
-       START QR SCANNER
-    ========================= */
-
-    async function startQRScanner() {
-
-        const reader =
-            document.getElementById(
-                "reader"
-            );
-
-
-        const status =
-            document.getElementById(
-                "scannerStatus"
-            );
-
-
-        const error =
-            document.getElementById(
-                "scannerError"
-            );
-
-
-        error.style.display =
-            "none";
-
-
-        status.innerHTML = `
-
-            <span class="status-dot"></span>
-
-            Activando cámara...
-
-        `;
-
-
-        try {
-
-            if (
-                qrScanner
-            ) {
-
-                try {
-
-                    await stopQRScanner();
-
-                }
-                catch (e) {}
-
-            }
-
-
-            qrScanner =
-                new Html5Qrcode(
-                    "reader"
-                );
-
-
-            const config = {
-
-                fps:
-                    10,
-
-                qrbox: {
-
-                    width:
-                        250,
-
-                    height:
-                        250
-
-                },
-
-                aspectRatio:
-                    1.0,
-
-                formatsToSupport: [
-
-                    Html5QrcodeSupportedFormats
-                        .QR_CODE
-
-                ]
-
-            };
-
-
-            await qrScanner.start(
-
-                {
-                    facingMode:
-                        "environment"
-                },
-
-                config,
-
-                onQRDetected,
-
-                onQRScanError
-
-            );
-
-
-            scannerRunning =
-                true;
-
-
-            status.innerHTML = `
-
-                <span class="status-dot"></span>
-
-                Apunta la cámara al código QR
-
-            `;
-
-
-        }
-        catch (err) {
-
-            console.error(
-                "No se pudo iniciar la cámara:",
-                err
-            );
-
-
-            scannerRunning =
-                false;
-
-
-            status.innerHTML =
-                "📷 No se pudo activar la cámara";
-
-
-            error.textContent =
-                getCameraErrorMessage(
-                    err
-                );
-
-
-            error.style.display =
-                "block";
-
-        }
-
-    }
-
-
-    /* =========================
-       QR DETECTED
-    ========================= */
-
-    async function onQRDetected(
-
-        decodedText,
-        decodedResult
-
-    ) {
-
-        if (
-            lastScannedCode ===
-            decodedText
-        ) {
-
-            return;
-
-        }
-
-
-        lastScannedCode =
-            decodedText;
-
-
-        console.log(
-            "QR detectado:",
-            decodedText
-        );
-
-
-        await stopQRScanner();
-
-
-        showScanResult(
-            decodedText
-        );
-
-
-        await validatePurchaseCode(
-            decodedText
-        );
-
-    }
-
-
-    /* =========================
-       QR ERROR
-    ========================= */
-
-    function onQRScanError(
-        errorMessage
-    ) {
-
-        /*
-         * No mostramos errores
-         * mientras la cámara busca.
-         */
-
-    }
-
-
-    /* =========================
-       STOP SCANNER
-    ========================= */
-
-    async function stopQRScanner() {
-
-        if (
-
-            qrScanner &&
-
-            scannerRunning
-
-        ) {
-
-            try {
-
-                await qrScanner.stop();
-
-            }
-            catch (error) {
-
-                console.warn(
-                    "Error deteniendo scanner:",
-                    error
-                );
-
-            }
-
-
-            scannerRunning =
-                false;
-
-        }
-
-    }
-
-
-    /* =========================
-       SHOW RESULT
-    ========================= */
-
-    function showScanResult(
-        code
-    ) {
-
-        const result =
-            document.getElementById(
-                "scanResult"
-            );
-
-
-        const resultCode =
-            document.getElementById(
-                "scanResultCode"
-            );
-
-
-        const status =
-            document.getElementById(
-                "scannerStatus"
-            );
-
-
-        resultCode.textContent =
-            code;
-
-
-        result.style.display =
-            "flex";
-
-
-        status.innerHTML = `
-
-            ✓ Código leído correctamente
-
-        `;
-
-    }
-
-
-    /* =========================
-       VALIDATE PURCHASE CODE
-    ========================= */
-
-    async function validatePurchaseCode(
-        code
-    ) {
-
-        const error =
-            document.getElementById(
-                "scannerError"
-            );
-
-
-        const status =
-            document.getElementById(
-                "scannerStatus"
-            );
-
-
-        const result =
-            document.getElementById(
-                "scanResult"
-            );
-
-
-        const resultCode =
-            document.getElementById(
-                "scanResultCode"
-            );
-
-
-        const promotionFound =
-            document.getElementById(
-                "promotionFound"
-            );
-
-
-        const promotionBusiness =
-            document.getElementById(
-                "promotionBusiness"
-            );
-
-
-        const promotionName =
-            document.getElementById(
-                "promotionName"
-            );
-
-
-        const promotionDescription =
-            document.getElementById(
-                "promotionDescription"
-            );
-
-
-        const promotionPoints =
-            document.getElementById(
-                "promotionPoints"
-            );
-
-
-        /* =========================
-           LIMPIAR
-        ========================= */
-
-        error.style.display =
-            "none";
-
-
-        promotionFound.classList.remove(
-            "show"
-        );
-
-
-        /* =========================
-           NORMALIZAR CÓDIGO
-        ========================= */
-
-        const codigo =
-            String(code || "")
-                .trim()
-                .toUpperCase();
-
-
-        if (!codigo) {
-
-            error.textContent =
-                "Introduce el código de tu promoción.";
-
-
-            error.style.display =
-                "block";
-
-
-            return;
-
-        }
-
-
-        console.log(
-            "================================="
-        );
-
-
-        console.log(
-            "VALIDANDO PROMOCIÓN"
-        );
-
-
-        console.log(
-            "Código:",
-            codigo
-        );
-
-
-        console.log(
-            "================================="
-        );
-
-
-        status.innerHTML = `
-
-            🔎 Buscando código...
-
-        `;
-
-
-        try {
-
-            /* =========================
-               BUSCAR PROMOCIÓN
-            ========================= */
-
-            const promocionesRef =
-                collection(
-                    db,
-                    "promociones"
-                );
-
-
-            const promocionesQuery =
-                query(
-
-                    promocionesRef,
-
-                    where(
-                        "codigoPromocion",
-                        "==",
-                        codigo
-                    )
-
-                );
-
-
-            const snapshot =
-                await getDocs(
-                    promocionesQuery
-                );
-
-
-            console.log(
-                "Documentos encontrados:",
-                snapshot.size
-            );
-
-
-            /* =========================
-               NO EXISTE
-            ========================= */
-
-            if (
-                snapshot.empty
-            ) {
-
-                status.innerHTML =
-                    "❌ Código no encontrado";
-
-
-                error.textContent =
-
-                    "El código " +
-                    codigo +
-                    " no existe. Verifica que lo hayas escrito correctamente.";
-
-
-                error.style.display =
-                    "block";
-
-
-                return;
-
-            }
-
-
-            /* =========================
-               OBTENER PROMOCIÓN
-            ========================= */
-
-            const promoDoc =
-                snapshot.docs[0];
-
-
-            const promo =
-                promoDoc.data();
-
-
-            console.log(
-                "Promoción encontrada:",
-                promo
-            );
-
-
-            console.log(
-                "ID documento:",
-                promoDoc.id
-            );
-
-
-            /* =========================
-               VALIDAR ESTADO
-            ========================= */
-
-            if (
-                promo.activa === false
-            ) {
-
-                status.innerHTML =
-                    "⚠️ Promoción no disponible";
-
-
-                error.textContent =
-                    "Esta promoción ya no está activa.";
-
-
-                error.style.display =
-                    "block";
-
-
-                return;
-
-            }
-
-
-            /* =========================
-               USUARIO ACTUAL
-            ========================= */
-
-            const user =
-                auth.currentUser;
-
-
-            if (!user) {
-
-                throw new Error(
-                    "No hay un usuario autenticado."
-                );
-
-            }
-
-
-            console.log(
-                "Cliente:",
-                user.uid
-            );
-
-
-            /* =========================
-               REFERENCIA PROMOCIÓN CLIENTE
-            ========================= */
-
-            const clientePromocionRef =
-                doc(
-
-                    db,
-
-                    "clientes",
-
-                    user.uid,
-
-                    "promociones",
-
-                    promoDoc.id
-
-                );
-
-
-            /* =========================
-               VERIFICAR SI YA EXISTE
-            ========================= */
-
-            const clientePromoSnap =
-                await getDoc(
-                    clientePromocionRef
-                );
-
-
-            if (
-                clientePromoSnap.exists()
-            ) {
-
-                const promoCliente =
-                    clientePromoSnap.data();
-
-
-                if (
-                    promoCliente.estado ===
-                    "disponible"
-                ) {
-
-                    resultCode.textContent =
-                        promo.codigoPromocion ||
-                        codigo;
-
-
-                    result.style.display =
-                        "flex";
-
-
-                    promotionBusiness.textContent =
-
-                        "🏪 " +
-                        (
-                            promo.nombreNegocio ||
-                            "Negocio"
-                        );
-
-
-                    promotionName.textContent =
-
-                        promo.nombre ||
-                        "Promoción";
-
-
-                    promotionDescription.textContent =
-
-                        promo.descripcion ||
-                        "Promoción disponible";
-
-
-                    const puntosExistentes =
-                        Number(
-                            promoCliente.puntos ||
-                            promo.puntos ||
-                            0
-                        );
-
-
-                    promotionPoints.textContent =
-
-                        "⭐ +" +
-                        puntosExistentes +
-                        " puntos";
-
-
-                    promotionFound.classList.add(
-                        "show"
-                    );
-
-
-                    status.innerHTML = `
-
-                        <span class="status-dot"></span>
-
-                        ℹ️ Esta promoción ya está en tu PromoWallet
-
-                    `;
-
-
-                    return;
-
-                }
-
-            }
-
-
-            /* =========================
-               MOSTRAR RESULTADO
-            ========================= */
-
-            resultCode.textContent =
-                promo.codigoPromocion ||
-                codigo;
-
-
-            result.style.display =
-                "flex";
-
-
-            status.innerHTML =
-                "🎉 Promoción encontrada";
-
-
-            /* =========================
-               MOSTRAR NEGOCIO
-            ========================= */
-
-            promotionBusiness.textContent =
-
-                "🏪 " +
-                (
-                    promo.nombreNegocio ||
-                    "Negocio"
-                );
-
-
-            /* =========================
-               NOMBRE PROMOCIÓN
-            ========================= */
-
-            promotionName.textContent =
-
-                promo.nombre ||
-                "Promoción";
-
-
-            /* =========================
-               DESCRIPCIÓN
-            ========================= */
-
-            promotionDescription.textContent =
-
-                promo.descripcion ||
-                "Promoción disponible";
-
-
-            /* =========================
-               PUNTOS
-            ========================= */
-
-            const puntos =
-                Number(
-                    promo.puntos || 0
-                );
-
-
-            promotionPoints.textContent =
-
-                "⭐ +" +
-                puntos +
-                " puntos";
-
-
-            promotionFound.classList.add(
-                "show"
-            );
-
-
-            /* =========================
-               GUARDAR PROMOCIÓN
-               EN EL CLIENTE
-            ========================= */
-
-            await setDoc(
-
-                clientePromocionRef,
-
-                {
-
-                    promocionId:
-                        promoDoc.id,
-
-                    codigoPromocion:
-                        promo.codigoPromocion ||
-                        codigo,
-
-                    negocioId:
-                        promo.negocioId ||
-                        "",
-
-                    nombreNegocio:
-                        promo.nombreNegocio ||
-                        "Negocio",
-
-                    nombre:
-                        promo.nombre ||
-                        "Promoción",
-
-                    descripcion:
-                        promo.descripcion ||
-                        "",
-
-                    categoria:
-                        promo.categoria ||
-                        "",
-
-                    descuento:
-                        Number(
-                            promo.descuento || 0
-                        ),
-
-                    puntos:
-                        puntos,
-
-                    precioNormal:
-                        Number(
-                            promo.precioNormal || 0
-                        ),
-
-                    precioPromo:
-                        Number(
-                            promo.precioPromo || 0
-                        ),
-
-                    estado:
-                        "disponible",
-
-                    fechaAsignacion:
-                        serverTimestamp()
-
-                },
-
-                {
-
-                    merge:
-                        true
-
-                }
-
-            );
-
-
-            /* =========================
-               CONFIRMAR
-            ========================= */
-
-            status.innerHTML = `
-
-                <span class="status-dot"></span>
-
-                ✅ Promoción agregada a tu PromoWallet
-
-            `;
-
-
-            console.log(
-                "================================="
-            );
-
-
-            console.log(
-                "PROMOCIÓN AGREGADA AL CLIENTE"
-            );
-
-
-            console.log(
-                "Cliente:",
-                user.uid
-            );
-
-
-            console.log(
-                "Promoción:",
-                promoDoc.id
-            );
-
-
-            console.log(
-                "Código:",
-                codigo
-            );
-
-
-            console.log(
-                "================================="
-            );
-
-
-            /* =========================
-               ACTUALIZAR MI PROMOWALLET
-            ========================= */
-
-            await loadCustomerPromotions();
-
-
-        }
-        catch (errorFirebase) {
-
-            console.error(
-                "ERROR COMPLETO:",
-                errorFirebase
-            );
-
-
-            status.innerHTML =
-                "⚠️ No se pudo cargar la promoción";
-
-
-            error.textContent =
-
-                "Error: " +
-
-                (
-                    errorFirebase.message ||
-
-                    "No fue posible guardar la promoción."
-                );
-
-
-            error.style.display =
-                "block";
-
-        }
-
-    }
-
-
-    /* =========================
-       CAMERA ERROR
-    ========================= */
-
-    function getCameraErrorMessage(
-        error
-    ) {
-
-        const text =
-            String(
-                error || ""
-            )
-            .toLowerCase();
-
-
-        if (
-
-            text.includes(
-                "permission"
-            )
-
-            ||
-
-            text.includes(
-                "notallowed"
-            )
-
-        ) {
-
-            return `
-
-                Debes permitir el acceso
-                a la cámara para escanear
-                tu compra.
-
-            `;
-
-        }
-
-
-        if (
-
-            text.includes(
-                "notfound"
-            )
-
-            ||
-
-            text.includes(
-                "device"
-            )
-
-        ) {
-
-            return `
-
-                No encontramos una cámara
-                disponible en este dispositivo.
-
-            `;
-
-        }
-
-
-        if (
-
-            text.includes(
-                "secure"
-            )
-
-            ||
-
-            text.includes(
-                "https"
-            )
-
-        ) {
-
-            return `
-
-                La cámara necesita una
-                conexión segura HTTPS.
-
-            `;
-
-        }
-
-
-        return `
-
-            No fue posible iniciar la cámara.
-            Verifica los permisos del navegador.
-
-        `;
-
-    }
-
-
-    /* =========================
-       RESET SCANNER UI
-    ========================= */
-
-    function resetScannerUI() {
-
-        lastScannedCode =
-            null;
-
-
-        document
-            .getElementById(
-                "scanResult"
-            )
-            .style.display =
-            "none";
-
-
-        document
-            .getElementById(
-                "scannerError"
-            )
-            .style.display =
-            "none";
-
-
-        document
-            .getElementById(
-                "promotionFound"
-            )
-            .classList
-            .remove(
-                "show"
-            );
-
-
-        document
-            .getElementById(
-                "manualCodeContainer"
-            )
-            .classList
-            .remove(
-                "show"
-            );
-
-
-        document
-            .getElementById(
-                "purchaseCode"
-            )
-            .value =
-            "";
-
-
-        document
-            .getElementById(
-                "scannerStatus"
-            )
-            .innerHTML = `
-
-                <span class="status-dot"></span>
-
-                Preparando cámara...
-
-            `;
-
-    }
-
-
-    /* =========================
-       CLOSE MODAL
-    ========================= */
-
-    document
-        .getElementById(
-            "closeModal"
-        )
-        .addEventListener(
-
-            "click",
-
-            async () => {
-
-                await stopQRScanner();
-
-
-                document
-                    .getElementById(
-                        "scanModal"
-                    )
-                    .classList
-                    .remove(
-                        "show"
-                    );
-
-            }
-
-        );
-
-
-    /* =========================
-       MANUAL CODE BUTTON
-    ========================= */
-
-    document
-        .getElementById(
-            "manualCodeButton"
-        )
-        .addEventListener(
-
-            "click",
-
-            () => {
-
-                const container =
-                    document.getElementById(
-                        "manualCodeContainer"
-                    );
-
-
-                container.classList.toggle(
-                    "show"
-                );
-
-
-                if (
-                    container.classList.contains(
-                        "show"
-                    )
-                ) {
-
-                    document
-                        .getElementById(
-                            "purchaseCode"
-                        )
-                        .focus();
-
-                }
-
-            }
-
-        );
-
-
-    /* =========================
-       MANUAL VALIDATION
-    ========================= */
-
-    document
-        .getElementById(
-            "validateButton"
-        )
-        .addEventListener(
-
-            "click",
-
-            async () => {
-
-                const input =
-                    document.getElementById(
-                        "purchaseCode"
-                    );
-
-
-                const code =
-                    input.value
-                        .trim()
-                        .toUpperCase();
-
-
-                const error =
-                    document.getElementById(
-                        "scannerError"
-                    );
-
-
-                if (!code) {
-
-                    error.textContent =
-                        "Introduce el código de tu compra.";
-
-
-                    error.style.display =
-                        "block";
-
-
-                    input.focus();
-
-
-                    return;
-
-                }
-
-
-                error.style.display =
-                    "none";
-
-
-                await validatePurchaseCode(
-                    code
-                );
-
-            }
-
-        );
-
-
-    /* =========================
-       ENTER EN INPUT
-    ========================= */
-
-    document
-        .getElementById(
-            "purchaseCode"
-        )
-        .addEventListener(
-
-            "keydown",
-
-            async (event) => {
-
-                if (
-                    event.key ===
-                    "Enter"
-                ) {
-
-                    event.preventDefault();
-
-
-                    document
-                        .getElementById(
-                            "validateButton"
-                        )
-                        .click();
-
-                }
-
-            }
-
-        );
-
-
-    /* =========================
-       CLOSE OUTSIDE
-    ========================= */
-
-    document
-        .getElementById(
-            "scanModal"
-        )
-        .addEventListener(
-
-            "click",
-
-            async (event) => {
-
-                if (
-
-                    event.target.id ===
-                    "scanModal"
-
-                ) {
-
-                    await stopQRScanner();
-
-
-                    event.target
-                        .classList
-                        .remove(
-                            "show"
-                        );
-
-                }
-
-            }
-
-        );
-
-
-    /* =========================
-       NAVIGATION
-    ========================= */
-
-    window.goHome =
-        function () {
-
-            window.scrollTo({
-
-                top:
-                    0,
-
-                behavior:
-                    "smooth"
-
-            });
-
-        };
-
-
-    window.showPromos =
-        function () {
-
-            const element =
-                document.querySelector(
-                    "#customerPromoList"
-                );
-
-
-            if (element) {
-
-                element.scrollIntoView({
-
-                    behavior:
-                        "smooth",
-
-                    block:
-                        "center"
-
-                });
-
-            }
-
-        };
-
-
-    window.showHistory =
-        function () {
-
-            alert(
-                "La sección de premios estará disponible próximamente."
-            );
-
-        };
-
-
-    window.showProfile =
-        function () {
-
-            alert(
-                "La sección de perfil estará disponible próximamente."
-            );
-
-        };
-
-
 </script>
 
-
 </body>
-
 </html>
+```
