@@ -986,6 +986,280 @@
             .scan-card {
                 padding: 30px;
             }
+			
+			```css
+/* =========================
+   QR SCANNER
+========================= */
+
+.scan-modal-content {
+    max-width: 500px;
+    padding-bottom: 24px;
+}
+
+.scan-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.scan-close {
+    width: 38px;
+    height: 38px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #f2f4f7;
+    color: #667085;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+}
+
+.qr-reader {
+    width: 100%;
+
+    margin-top: 10px;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    background: #111;
+
+    min-height: 280px;
+}
+
+.qr-reader video {
+    width: 100% !important;
+    height: auto !important;
+
+    border-radius: 18px;
+}
+
+.qr-reader img {
+    display: none !important;
+}
+
+/* Evita que la UI de la librería se vea demasiado grande */
+
+.qr-reader__dashboard {
+    padding: 8px !important;
+}
+
+.qr-reader__dashboard_section {
+    padding: 0 !important;
+}
+
+.qr-reader__dashboard_section_csr {
+    display: none !important;
+}
+
+.qr-reader button {
+    border: none;
+
+    background: #0f9d72;
+
+    color: white;
+
+    border-radius: 10px;
+
+    padding: 9px 13px;
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   SCANNER STATUS
+========================= */
+
+.scanner-status {
+
+    margin-top: 12px;
+
+    padding: 11px 13px;
+
+    border-radius: 11px;
+
+    background: #eef8f5;
+
+    color: #087957;
+
+    font-size: 12px;
+
+    text-align: center;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+}
+
+.status-dot {
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #0f9d72;
+
+    animation: scannerPulse 1.3s infinite;
+}
+
+@keyframes scannerPulse {
+
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .3;
+    }
+
+    100% {
+        opacity: 1;
+    }
+
+}
+
+
+/* =========================
+   RESULT
+========================= */
+
+.scan-result {
+
+    display: none;
+
+    margin-top: 12px;
+
+    padding: 14px;
+
+    border-radius: 14px;
+
+    background: #eef8f5;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.scan-result-icon {
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: #0f9d72;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 22px;
+
+    font-weight: 800;
+}
+
+.scan-result-title {
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    color: #087957;
+
+}
+
+.scan-result-code {
+
+    margin-top: 3px;
+
+    font-size: 12px;
+
+    color: #657180;
+
+    word-break: break-all;
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+.scanner-error {
+
+    display: none;
+
+    margin-top: 10px;
+
+    padding: 10px;
+
+    border-radius: 10px;
+
+    background: #fff2f2;
+
+    color: #b42318;
+
+    font-size: 12px;
+
+    text-align: center;
+}
+
+
+/* =========================
+   MANUAL CODE
+========================= */
+
+.manual-code-button {
+
+    width: 100%;
+
+    margin-top: 14px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #0f9d72;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    padding: 8px;
+
+    cursor: pointer;
+}
+
+.manual-code-container {
+
+    display: none;
+
+    margin-top: 5px;
+}
+
+.manual-code-container.show {
+
+    display: block;
+}
+```
+
         }
     </style>
 </head>
@@ -1422,6 +1696,7 @@
 </div>
 
 
+
 <!-- =========================
      SCAN MODAL
 ========================= -->
@@ -1430,60 +1705,122 @@
     class="modal"
     id="scanModal">
 
-    <div class="modal-content">
+    <div class="modal-content scan-modal-content">
 
         <div class="modal-handle"></div>
 
-        <div class="modal-title">
-            📷 Escanear compra
+        <div class="scan-modal-header">
+
+            <div>
+
+                <div class="modal-title">
+                    📷 Escanear compra
+                </div>
+
+                <div class="modal-description">
+                    Apunta la cámara al código QR de tu compra.
+                </div>
+
+            </div>
+
+            <button
+                class="scan-close"
+                id="closeModal">
+
+                ✕
+
+            </button>
+
         </div>
 
-        <div class="modal-description">
 
-            Introduce el código que aparece en el
-            comprobante de tu compra.
+        <!-- SCANNER -->
 
-            <br><br>
+        <div
+            id="reader"
+            class="qr-reader">
+        </div>
 
-            <strong>
-                Próximamente podrás escanear directamente
-                el código QR con la cámara.
-            </strong>
+
+        <!-- ESTADO -->
+
+        <div
+            id="scannerStatus"
+            class="scanner-status">
+
+            <span class="status-dot"></span>
+
+            Apunta la cámara al código QR
 
         </div>
 
 
-        <input
-            type="text"
-            id="purchaseCode"
-            class="code-input"
-            placeholder="CÓDIGO"
-            maxlength="30"
-            autocomplete="off">
+        <!-- RESULTADO -->
 
+        <div
+            id="scanResult"
+            class="scan-result">
+
+            <div class="scan-result-icon">
+                ✓
+            </div>
+
+            <div>
+
+                <div class="scan-result-title">
+                    Código detectado
+                </div>
+
+                <div
+                    id="scanResultCode"
+                    class="scan-result-code">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ERROR -->
+
+        <div
+            id="scannerError"
+            class="scanner-error">
+        </div>
+
+
+        <!-- MANUAL -->
 
         <button
-            class="validate-button"
-            id="validateButton">
+            class="manual-code-button"
+            id="manualCodeButton">
 
-            VALIDAR COMPRA
+            Introducir código manualmente
 
         </button>
 
 
         <div
-            class="modal-message"
-            id="modalMessage">
+            id="manualCodeContainer"
+            class="manual-code-container">
+
+            <input
+                type="text"
+                id="purchaseCode"
+                class="code-input"
+                placeholder="CÓDIGO"
+                maxlength="50"
+                autocomplete="off">
+
+            <button
+                class="validate-button"
+                id="validateButton">
+
+                VALIDAR COMPRA
+
+            </button>
+
         </div>
-
-
-        <button
-            class="close-button"
-            id="closeModal">
-
-            Cancelar
-
-        </button>
 
     </div>
 
@@ -1493,7 +1830,7 @@
 <!-- =========================
      FIREBASE
 ========================= -->
-
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 <script type="module">
 
     import {
@@ -2007,130 +2344,589 @@
     }
 
 
-    /* =========================
-       SCAN
-    ========================= */
 
-    window.openScan = function () {
+/* =========================
+   QR SCANNER
+========================= */
 
-        document
-            .getElementById("scanModal")
-            .classList.add("show");
+let qrScanner = null;
 
+let scannerRunning = false;
 
-        setTimeout(() => {
-
-            document
-                .getElementById("purchaseCode")
-                .focus();
-
-        }, 200);
-
-    };
+let lastScannedCode = null;
 
 
-    document
-        .getElementById("scanButton")
-        .addEventListener(
-            "click",
-            window.openScan
+/* =========================
+   OPEN SCANNER
+========================= */
+
+window.openScan = async function () {
+
+    const modal =
+        document.getElementById("scanModal");
+
+    modal.classList.add("show");
+
+    resetScannerUI();
+
+    await startQRScanner();
+
+};
+
+
+/* =========================
+   START QR SCANNER
+========================= */
+
+async function startQRScanner() {
+
+    const reader =
+        document.getElementById("reader");
+
+    const status =
+        document.getElementById(
+            "scannerStatus"
+        );
+
+    const error =
+        document.getElementById(
+            "scannerError"
         );
 
 
-    document
-        .getElementById("closeModal")
-        .addEventListener(
-            "click",
-            closeScan
+    error.style.display = "none";
+
+    status.innerHTML = `
+        <span class="status-dot"></span>
+        Activando cámara...
+    `;
+
+
+    try {
+
+        /*
+         * Creamos el lector solamente
+         * cuando el usuario presiona
+         * ESCANEAR COMPRA.
+         */
+
+        qrScanner =
+            new Html5Qrcode(
+                "reader"
+            );
+
+
+        const config = {
+
+            fps: 10,
+
+            qrbox: {
+                width: 250,
+                height: 250
+            },
+
+            aspectRatio: 1.0,
+
+            formatsToSupport: [
+                Html5QrcodeSupportedFormats.QR_CODE
+            ]
+
+        };
+
+
+        /*
+         * environment =
+         * cámara trasera del teléfono.
+         */
+
+        await qrScanner.start(
+
+            {
+                facingMode: "environment"
+            },
+
+            config,
+
+            onQRDetected,
+
+            onQRScanError
+
         );
 
 
-    function closeScan() {
-
-        document
-            .getElementById("scanModal")
-            .classList.remove("show");
+        scannerRunning = true;
 
 
-        document
-            .getElementById("purchaseCode")
-            .value = "";
+        status.innerHTML = `
+            <span class="status-dot"></span>
+            Apunta la cámara al código QR
+        `;
 
 
-        document
-            .getElementById("modalMessage")
-            .style.display = "none";
+    }
+    catch (err) {
+
+        console.error(
+            "No se pudo iniciar la cámara:",
+            err
+        );
+
+
+        scannerRunning = false;
+
+
+        status.innerHTML =
+            "📷 No se pudo activar la cámara";
+
+
+        error.textContent =
+            getCameraErrorMessage(err);
+
+
+        error.style.display =
+            "block";
+
+    }
+
+}
+
+
+/* =========================
+   QR DETECTED
+========================= */
+
+async function onQRDetected(
+    decodedText,
+    decodedResult
+) {
+
+    /*
+     * Evita procesar el mismo QR
+     * varias veces.
+     */
+
+    if (
+        lastScannedCode === decodedText
+    ) {
+
+        return;
 
     }
 
 
-    /* =========================
-       VALIDATE CODE
-    ========================= */
+    lastScannedCode =
+        decodedText;
+
+
+    console.log(
+        "QR detectado:",
+        decodedText
+    );
+
+
+    /*
+     * Detenemos inmediatamente
+     * la cámara.
+     */
+
+    await stopQRScanner();
+
+
+    /*
+     * Mostramos resultado.
+     */
+
+    showScanResult(
+        decodedText
+    );
+
+
+    /*
+     * AQUÍ conectaremos posteriormente
+     * la validación Firebase.
+     */
+
+    await validatePurchaseCode(
+        decodedText
+    );
+
+}
+
+
+/* =========================
+   QR SCAN ERROR
+========================= */
+
+function onQRScanError(errorMessage) {
+
+    /*
+     * No mostramos errores continuamente.
+     *
+     * html5-qrcode llama esta función
+     * mientras busca un QR.
+     */
+
+}
+
+
+/* =========================
+   STOP SCANNER
+========================= */
+
+async function stopQRScanner() {
+
+    if (
+        qrScanner &&
+        scannerRunning
+    ) {
+
+        try {
+
+            await qrScanner.stop();
+
+        }
+        catch (error) {
+
+            console.warn(
+                "Error deteniendo scanner:",
+                error
+            );
+
+        }
+
+        scannerRunning = false;
+
+    }
+
+}
+
+
+/* =========================
+   SHOW RESULT
+========================= */
+
+function showScanResult(code) {
+
+    const result =
+        document.getElementById(
+            "scanResult"
+        );
+
+    const resultCode =
+        document.getElementById(
+            "scanResultCode"
+        );
+
+    const status =
+        document.getElementById(
+            "scannerStatus"
+        );
+
+
+    resultCode.textContent =
+        code;
+
+
+    result.style.display =
+        "flex";
+
+
+    status.innerHTML = `
+        ✓ Código leído correctamente
+    `;
+
+}
+
+
+/* =========================
+   VALIDATE PURCHASE
+========================= */
+
+async function validatePurchaseCode(code) {
+
+    /*
+     * POR AHORA:
+     *
+     * Solo demostramos que el QR
+     * fue leído correctamente.
+     *
+     * En el siguiente paso este
+     * código se buscará en Firebase:
+     *
+     * compras/{compraId}
+     *
+     * y validaremos:
+     *
+     * - clienteId
+     * - negocioId
+     * - usado
+     * - fecha
+     * - promoción
+     * - premio
+     */
+
+
+    console.log(
+        "Código para validar:",
+        code
+    );
+
+
+    /*
+     * Simulación temporal.
+     */
+
+    setTimeout(() => {
+
+        const status =
+            document.getElementById(
+                "scannerStatus"
+            );
+
+
+        status.innerHTML =
+            "🎁 Código recibido. Preparando tu recompensa...";
+
+
+    }, 500);
+
+}
+
+
+/* =========================
+   CAMERA ERROR
+========================= */
+
+function getCameraErrorMessage(error) {
+
+    const text =
+        String(error || "")
+            .toLowerCase();
+
+
+    if (
+        text.includes("permission") ||
+        text.includes("notallowed")
+    ) {
+
+        return `
+            Debes permitir el acceso a la cámara
+            para escanear tu compra.
+        `;
+
+    }
+
+
+    if (
+        text.includes("notfound") ||
+        text.includes("device")
+    ) {
+
+        return `
+            No encontramos una cámara disponible
+            en este dispositivo.
+        `;
+
+    }
+
+
+    if (
+        text.includes("secure") ||
+        text.includes("https")
+    ) {
+
+        return `
+            La cámara necesita una conexión segura HTTPS.
+        `;
+
+    }
+
+
+    return `
+        No fue posible iniciar la cámara.
+        Verifica los permisos del navegador.
+    `;
+
+}
+
+
+/* =========================
+   RESET UI
+========================= */
+
+function resetScannerUI() {
+
+    lastScannedCode =
+        null;
+
 
     document
-        .getElementById("validateButton")
-        .addEventListener(
-            "click",
-            async () => {
-
-                const code =
-                    document
-                        .getElementById(
-                            "purchaseCode"
-                        )
-                        .value
-                        .trim();
+        .getElementById(
+            "scanResult"
+        )
+        .style.display =
+        "none";
 
 
-                const message =
+    document
+        .getElementById(
+            "scannerError"
+        )
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById(
+            "manualCodeContainer"
+        )
+        .classList.remove(
+            "show"
+        );
+
+
+    document
+        .getElementById(
+            "scannerStatus"
+        )
+        .innerHTML = `
+            <span class="status-dot"></span>
+            Preparando cámara...
+        `;
+
+
+}
+
+
+/* =========================
+   CLOSE MODAL
+========================= */
+
+document
+    .getElementById("closeModal")
+    .addEventListener(
+        "click",
+        async () => {
+
+            await stopQRScanner();
+
+            document
+                .getElementById(
+                    "scanModal"
+                )
+                .classList.remove(
+                    "show"
+                );
+
+        }
+    );
+
+
+/* =========================
+   MANUAL CODE
+========================= */
+
+document
+    .getElementById(
+        "manualCodeButton"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            const container =
+                document.getElementById(
+                    "manualCodeContainer"
+                );
+
+
+            container.classList.toggle(
+                "show"
+            );
+
+        }
+    );
+
+
+/* =========================
+   MANUAL VALIDATION
+========================= */
+
+document
+    .getElementById(
+        "validateButton"
+    )
+    .addEventListener(
+        "click",
+        async () => {
+
+            const input =
+                document.getElementById(
+                    "purchaseCode"
+                );
+
+
+            const code =
+                input.value.trim();
+
+
+            if (!code) {
+
+                const error =
                     document.getElementById(
-                        "modalMessage"
+                        "scannerError"
                     );
 
 
-                if (!code) {
-
-                    message.textContent =
-                        "Introduce el código de tu compra.";
-
-                    message.style.display =
-                        "block";
-
-                    return;
-
-                }
+                error.textContent =
+                    "Introduce el código de tu compra.";
 
 
-                /*
-                 * POR AHORA SOLO MOSTRAMOS
-                 * EL FLUJO VISUAL.
-                 *
-                 * LA VALIDACIÓN REAL DEL CÓDIGO
-                 * LA CONECTAREMOS CON:
-                 *
-                 * compras/{compraId}
-                 *
-                 * Y DESPUÉS:
-                 *
-                 * premios/{premioId}
-                 */
-
-
-                message.style.background =
-                    "#eef8f5";
-
-                message.style.color =
-                    "#087957";
-
-                message.textContent =
-                    "Código recibido. Próximamente validaremos tu compra y mostraremos tu premio 🎁";
-
-                message.style.display =
+                error.style.display =
                     "block";
 
+
+                return;
+
             }
-        );
+
+
+            await validatePurchaseCode(
+                code
+            );
+
+        }
+    );
+
+
+/* =========================
+   CLOSE WHEN CLICK OUTSIDE
+========================= */
+
+document
+    .getElementById(
+        "scanModal"
+    )
+    .addEventListener(
+        "click",
+        async (event) => {
+
+            if (
+                event.target.id ===
+                "scanModal"
+            ) {
+
+                await stopQRScanner();
+
+                event.target
+                    .classList
+                    .remove("show");
+
+            }
+
+        }
+    );
+
 
 
     /* =========================
