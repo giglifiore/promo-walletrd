@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -8,14 +7,12 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0">
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
 
     <title>PromoWallet RD</title>
 
-    <script
-        src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js">
-    </script>
-
+    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 
     <style>
 
@@ -25,294 +22,242 @@
 
         body {
             margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Arial,
+                sans-serif;
+
             background: #f4f7fb;
-            color: #1f2937;
+            color: #243447;
         }
 
         .topbar {
-            background: white;
-            border-bottom: 1px solid #e5e7eb;
+            background: #ffffff;
+            border-bottom: 1px solid #e3e8ef;
             padding: 14px 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
+        .topbar-content {
+            max-width: 700px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
         .brand {
             font-size: 21px;
             font-weight: 800;
-            color: #087f5b;
+            color: #1677b8;
         }
 
         .brand span {
-            color: #2563eb;
+            color: #27ae60;
         }
 
-        .logout {
+        .logout-btn {
             border: none;
-            background: #f1f5f9;
-            color: #334155;
-            padding: 9px 13px;
-            border-radius: 9px;
+            background: #eef4f8;
+            color: #3c5668;
+            padding: 8px 13px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 700px;
             margin: auto;
-            padding: 20px 15px 50px;
+            padding: 18px 14px 50px;
         }
 
         .welcome {
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
-        .welcome h1 {
+        .welcome h2 {
             margin: 0 0 5px;
-            font-size: 25px;
+            font-size: 23px;
         }
 
         .welcome p {
             margin: 0;
-            color: #64748b;
+            color: #708090;
+            font-size: 14px;
         }
 
         .stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
+            gap: 10px;
             margin-bottom: 20px;
         }
 
-        .stat {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 15px;
-            padding: 16px;
+        .stat-card {
+            background: #ffffff;
+            border: 1px solid #e4eaf0;
+            border-radius: 13px;
+            padding: 15px 8px;
+            text-align: center;
         }
 
         .stat-icon {
-            font-size: 23px;
-            margin-bottom: 7px;
-        }
-
-        .stat-title {
-            font-size: 12px;
-            color: #64748b;
+            font-size: 22px;
+            margin-bottom: 5px;
         }
 
         .stat-value {
             font-size: 22px;
             font-weight: 800;
+            color: #176b9e;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #71808f;
             margin-top: 3px;
         }
 
-        .scan-card {
-            background: linear-gradient(
-                135deg,
-                #0f9d71,
-                #087f5b
-            );
-
-            color: white;
-            border-radius: 18px;
-            padding: 22px;
-            margin-bottom: 25px;
-
-            box-shadow:
-                0 8px 20px
-                rgba(15, 157, 113, .18);
-        }
-
-        .scan-card h2 {
-            margin: 0 0 7px;
-            font-size: 21px;
-        }
-
-        .scan-card p {
-            margin: 0 0 16px;
-            opacity: .92;
-        }
-
-        .scan-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            border: none;
-            border-radius: 10px;
-            padding: 12px 17px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .btn-white {
-            background: white;
-            color: #087f5b;
-        }
-
-        .btn-light {
-            background: rgba(255,255,255,.18);
-            color: white;
-            border: 1px solid rgba(255,255,255,.3);
-        }
-
         .section {
-            margin-top: 25px;
+            margin-top: 22px;
         }
 
-        .section-header {
+        .section-title {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 10px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
-        .section-header h2 {
+        .section-title h3 {
             margin: 0;
-            font-size: 20px;
+            font-size: 18px;
         }
 
-        .section-header span {
-            color: #64748b;
-            font-size: 13px;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
+        .section-title span {
+            font-size: 12px;
+            color: #7a8996;
         }
 
         .card {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 15px;
-            padding: 17px;
-        }
-
-        .card-category {
-            display: inline-block;
-            background: #eff6ff;
-            color: #2563eb;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 5px 8px;
-            border-radius: 20px;
-            margin-bottom: 9px;
-        }
-
-        .card h3 {
-            margin: 0 0 7px;
-            font-size: 17px;
-        }
-
-        .business {
-            color: #64748b;
-            font-size: 13px;
-            margin-bottom: 8px;
-        }
-
-        .description {
-            color: #64748b;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-
-        .points {
-            margin-top: 12px;
-            font-weight: 800;
-            color: #087f5b;
-        }
-
-        .empty {
-            background: white;
-            border: 1px dashed #cbd5e1;
-            padding: 25px;
-            text-align: center;
+            background: #ffffff;
+            border: 1px solid #e1e7ed;
             border-radius: 14px;
-            color: #64748b;
+            padding: 16px;
+            margin-bottom: 12px;
         }
 
-
-        /* =========================
-           MODAL
-        ========================= */
-
-        .modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(15, 23, 42, .65);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
+        .promotion-card {
+            position: relative;
+            overflow: hidden;
         }
 
-        .modal.show {
-            display: flex;
+        .promotion-business {
+            font-size: 12px;
+            color: #27ae60;
+            font-weight: 700;
+            margin-bottom: 5px;
         }
 
-        .modal-content {
-            width: 100%;
-            max-width: 480px;
-            background: white;
-            border-radius: 18px;
-            padding: 20px;
-            max-height: 92vh;
-            overflow-y: auto;
+        .promotion-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #243447;
         }
 
-        .modal-header {
+        .promotion-description {
+            color: #6d7d8b;
+            font-size: 14px;
+            line-height: 1.4;
+            margin: 7px 0;
+        }
+
+        .promotion-price {
+            margin-top: 10px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            margin-bottom: 15px;
+            gap: 8px;
         }
 
-        .modal-header h2 {
-            margin: 0;
-            font-size: 20px;
+        .price-normal {
+            color: #9aa6b2;
+            text-decoration: line-through;
+            font-size: 13px;
         }
 
-        .close {
-            border: none;
-            background: #f1f5f9;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            font-size: 20px;
-            cursor: pointer;
+        .price-promo {
+            color: #16864b;
+            font-size: 19px;
+            font-weight: 800;
+        }
+
+        .discount {
+            display: inline-block;
+            background: #e9f8ef;
+            color: #16864b;
+            border-radius: 6px;
+            padding: 4px 7px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .points-badge {
+            display: inline-block;
+            background: #eef6ff;
+            color: #2671a7;
+            border-radius: 6px;
+            padding: 4px 7px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-left: 4px;
+        }
+
+        .code-badge {
+            display: inline-block;
+            background: #f1f4f7;
+            border: 1px dashed #aebbc6;
+            color: #445867;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        .scanner-card {
+            text-align: center;
         }
 
         #reader {
             width: 100%;
-            margin-bottom: 15px;
+            max-width: 420px;
+            margin: 10px auto;
             overflow: hidden;
             border-radius: 12px;
         }
 
+        .scanner-status {
+            font-size: 13px;
+            color: #6d7d8b;
+            margin: 10px 0;
+        }
 
-        /* =========================
-           CODIGO MANUAL
-        ========================= */
-
-        .manual {
-            border-top: 1px solid #e5e7eb;
+        .manual-box {
+            margin-top: 15px;
+            border-top: 1px solid #edf0f3;
             padding-top: 15px;
         }
 
-        .manual label {
+        .manual-box label {
             display: block;
+            text-align: left;
             font-size: 13px;
             font-weight: 700;
             margin-bottom: 7px;
@@ -323,694 +268,554 @@
             gap: 8px;
         }
 
-        .manual input {
+        .manual-input {
             flex: 1;
             min-width: 0;
-            padding: 12px;
-            border: 1px solid #cbd5e1;
+            border: 1px solid #cfd8e0;
             border-radius: 9px;
-            font-size: 15px;
+            padding: 12px;
+            font-size: 16px;
             text-transform: uppercase;
+            outline: none;
         }
 
-        .manual button {
-            background: #087f5b;
-            color: white;
+        .manual-input:focus {
+            border-color: #2687bd;
+        }
+
+        .btn {
             border: none;
             border-radius: 9px;
-            padding: 0 16px;
+            padding: 11px 15px;
             font-weight: 700;
             cursor: pointer;
         }
 
+        .btn-primary {
+            background: #1677b8;
+            color: white;
+        }
 
-        /* =========================
-           MENSAJES
-        ========================= */
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #edf2f6;
+            color: #435665;
+        }
+
+        .btn-danger {
+            background: #f8eaea;
+            color: #b53b3b;
+        }
+
+        .result-card {
+            display: none;
+            margin-top: 14px;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .promotion-found {
+            background: #eef8ff;
+            border: 1px solid #cde8f8;
+        }
+
+        .prize-found {
+            background: #fff9e9;
+            border: 1px solid #f4df9a;
+        }
+
+        .result-card.show {
+            display: block;
+        }
+
+        .prize-icon {
+            font-size: 48px;
+            margin-bottom: 5px;
+        }
+
+        .prize-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #b27a00;
+        }
+
+        .prize-name {
+            font-size: 25px;
+            font-weight: 900;
+            margin-top: 10px;
+            color: #283b4b;
+        }
+
+        .prize-description {
+            color: #687987;
+            margin-top: 7px;
+        }
+
+        .prize-points {
+            margin-top: 12px;
+            font-weight: 800;
+            color: #16864b;
+        }
+
+        .prize-campaign {
+            font-size: 13px;
+            color: #6c7a86;
+            margin-top: 4px;
+        }
 
         .message {
             display: none;
-            padding: 12px;
-            border-radius: 10px;
-            margin-top: 12px;
-            font-size: 13px;
+            padding: 12px 14px;
+            border-radius: 9px;
+            margin: 12px 0;
+            font-size: 14px;
+            font-weight: 600;
         }
 
         .message.show {
             display: block;
         }
 
-        .message.error {
-            background: #fef2f2;
-            color: #b91c1c;
-            border: 1px solid #fecaca;
-        }
-
         .message.success {
-            background: #ecfdf5;
-            color: #047857;
-            border: 1px solid #a7f3d0;
+            background: #eaf8ef;
+            color: #16733f;
+            border: 1px solid #c6ead3;
         }
 
-
-        /* =========================
-           PROMOCION
-        ========================= */
-
-        .promotion-found {
-            display: none;
-            margin-top: 15px;
-            background: #ecfdf5;
-            border: 1px solid #a7f3d0;
-            border-radius: 14px;
-            padding: 17px;
+        .message.error {
+            background: #fbeeee;
+            color: #a63232;
+            border: 1px solid #efcccc;
         }
 
-        .promotion-found.show {
-            display: block;
+        .message.info {
+            background: #eef6ff;
+            color: #246a9b;
+            border: 1px solid #cfe5f6;
         }
 
-        .promotion-found-title {
-            font-size: 18px;
-            font-weight: 800;
-            color: #047857;
-            margin-bottom: 9px;
-        }
-
-        .promotion-business {
-            color: #64748b;
-            font-size: 13px;
-            margin-bottom: 6px;
-        }
-
-        .promotion-name {
-            font-size: 18px;
-            font-weight: 800;
-            margin-bottom: 7px;
-        }
-
-        .promotion-description {
-            color: #475569;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-
-        .promotion-points {
-            margin-top: 10px;
-            color: #087f5b;
-            font-weight: 800;
-        }
-
-
-        /* =========================
-           PREMIO
-        ========================= */
-
-        .prize-found {
-            display: none;
-            margin-top: 15px;
-            background: #fffbeb;
-            border: 2px solid #f59e0b;
-            border-radius: 16px;
-            padding: 20px;
+        .empty {
             text-align: center;
-        }
-
-        .prize-found.show {
-            display: block;
-        }
-
-        .prize-icon {
-            font-size: 48px;
-            margin-bottom: 7px;
-        }
-
-        .prize-title {
-            color: #b45309;
-            font-size: 22px;
-            font-weight: 900;
-            margin-bottom: 7px;
-        }
-
-        .prize-campaign {
-            color: #64748b;
-            font-size: 13px;
-            margin-bottom: 10px;
-        }
-
-        .prize-name {
-            font-size: 23px;
-            font-weight: 900;
-            color: #92400e;
-            margin-bottom: 8px;
-        }
-
-        .prize-description {
-            color: #57534e;
+            color: #7c8a96;
+            padding: 25px 10px;
             font-size: 14px;
-            line-height: 1.5;
         }
 
-        .prize-points {
-            margin-top: 12px;
-            font-weight: 900;
-            color: #087f5b;
+        .customer-prize {
+            border-left: 4px solid #f0b429;
         }
 
-        .code-badge {
-            margin-top: 14px;
-            display: inline-block;
-            padding: 7px 12px;
-            border-radius: 20px;
-            background: #fef3c7;
-            color: #92400e;
-            font-size: 12px;
+        .customer-prize-name {
             font-weight: 800;
+            font-size: 17px;
         }
 
-
-        /* =========================
-           RESPONSIVE
-        ========================= */
-
-        @media(max-width: 800px) {
-
-            .cards {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
+        .customer-prize-meta {
+            color: #71808f;
+            font-size: 12px;
+            margin-top: 5px;
         }
 
-        @media(max-width: 600px) {
+        .customer-prize-code {
+            margin-top: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            color: #536775;
+        }
+
+        .loading {
+            text-align: center;
+            color: #7a8996;
+            padding: 20px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 430px) {
 
             .stats {
-                grid-template-columns: 1fr;
+                gap: 7px;
             }
 
-            .cards {
-                grid-template-columns: 1fr;
+            .stat-card {
+                padding: 12px 5px;
             }
 
-            .container {
-                padding: 15px 12px 40px;
-            }
-
-            .scan-card {
-                padding: 18px;
+            .stat-value {
+                font-size: 19px;
             }
 
             .manual-row {
                 flex-direction: column;
             }
 
-            .manual button {
-                height: 45px;
+            .manual-row .btn {
+                width: 100%;
             }
 
         }
-		
-		/* =========================
-   MIS PREMIOS
-========================= */
-
-.prize-card {
-    background: white;
-    border: 1px solid #fcd34d;
-    border-radius: 16px;
-    padding: 18px;
-    position: relative;
-}
-
-.prize-card-icon {
-    font-size: 32px;
-    margin-bottom: 8px;
-}
-
-.prize-card-title {
-    font-size: 18px;
-    font-weight: 900;
-    color: #92400e;
-    margin-bottom: 6px;
-}
-
-.prize-card-business {
-    color: #64748b;
-    font-size: 13px;
-    margin-bottom: 10px;
-}
-
-.prize-card-description {
-    color: #475569;
-    font-size: 13px;
-    line-height: 1.5;
-    margin-bottom: 12px;
-}
-
-.prize-card-points {
-    color: #087f5b;
-    font-weight: 800;
-    margin-bottom: 10px;
-}
-
-.prize-card-code {
-    display: inline-block;
-    background: #fef3c7;
-    color: #92400e;
-    border-radius: 20px;
-    padding: 6px 10px;
-    font-size: 11px;
-    font-weight: 800;
-}
-
-.prize-card-campaign {
-    color: #64748b;
-    font-size: 12px;
-    margin-top: 9px;
-}
-
-.prize-card-status {
-    margin-top: 12px;
-    display: inline-block;
-    background: #ecfdf5;
-    color: #047857;
-    border: 1px solid #a7f3d0;
-    padding: 5px 9px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 800;
-}
 
     </style>
 
 </head>
 
-
 <body>
 
+    <header class="topbar">
 
-<header class="topbar">
+        <div class="topbar-content">
 
-    <div class="brand">
-        Promo<span>Wallet</span> RD
-    </div>
-
-    <button
-        class="logout"
-        onclick="logout()">
-
-        Salir
-
-    </button>
-
-</header>
-
-
-<main class="container">
-
-
-    <div class="welcome">
-
-        <h1>
-            ¡Hola! 👋
-        </h1>
-
-        <p>
-            Descubre promociones y gana premios.
-        </p>
-
-    </div>
-
-
-    <!-- ESTADISTICAS -->
-
-    <div class="stats">
-
-
-        <div class="stat">
-
-            <div class="stat-icon">
-                ⭐
+            <div class="brand">
+                Promo<span>Wallet</span>
             </div>
-
-            <div class="stat-title">
-                Mis puntos
-            </div>
-
-            <div
-                class="stat-value"
-                id="pointsValue">
-
-                0
-
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-icon">
-                🏆
-            </div>
-
-            <div class="stat-title">
-                Nivel
-            </div>
-
-            <div
-                class="stat-value"
-                id="levelValue">
-
-                1
-
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-icon">
-                🎁
-            </div>
-
-            <div class="stat-title">
-                Premios ganados
-            </div>
-
-            <div
-                class="stat-value"
-                id="prizesValue">
-
-                0
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-
-    <!-- ESCANEAR -->
-
-    <section class="scan-card">
-
-        <h2>
-            🎟️ ¿Tienes un código?
-        </h2>
-
-        <p>
-            Escanea el QR o escribe el código que recibiste.
-        </p>
-
-
-        <div class="scan-buttons">
 
             <button
-                class="btn btn-white"
-                onclick="openScan()">
-
-                📷 Escanear QR
-
-            </button>
-
-
-            <button
-                class="btn btn-light"
-                onclick="focusManualCode()">
-
-                ⌨️ Escribir código
-
+                id="logoutBtn"
+                class="logout-btn"
+            >
+                Salir
             </button>
 
         </div>
 
-    </section>
+    </header>
 
 
-    <!-- PROMOCIONES PUBLICAS -->
+    <main class="container">
 
-    <section class="section">
+        <div class="welcome">
 
-        <div class="section-header">
-
-            <h2>
-                🔥 Oportunidades para ti
+            <h2 id="welcomeName">
+                Hola 👋
             </h2>
 
-            <span id="promotionCount"></span>
+            <p>
+                Tus promociones y premios en un solo lugar.
+            </p>
 
         </div>
 
 
-        <div
-            id="publicPromotions"
-            class="cards">
+        <!-- ESTADISTICAS -->
 
-        </div>
+        <div class="stats">
 
-    </section>
+            <div class="stat-card">
 
+                <div class="stat-icon">
+                    ⭐
+                </div>
 
-    <!-- MIS PROMOCIONES -->
-	
-	<section class="section">
+                <div
+                    id="pointsValue"
+                    class="stat-value"
+                >
+                    0
+                </div>
 
-    <div class="section-header">
+                <div class="stat-label">
+                    Puntos
+                </div>
 
-        <h2>
-            🏆 Mis premios
-        </h2>
-
-        <span id="prizeCountLabel"></span>
-
-    </div>
-
-    <div
-        id="customerPrizes"
-        class="cards">
-
-    </div>
-
-</section>
-
-    <section class="section">
-
-        <div class="section-header">
-
-            <h2>
-                🎁 Mis promociones
-            </h2>
-
-        </div>
+            </div>
 
 
-        <div
-            id="customerPromotions"
-            class="cards">
+            <div class="stat-card">
 
-        </div>
+                <div class="stat-icon">
+                    🏆
+                </div>
 
-    </section>
+                <div
+                    id="levelValue"
+                    class="stat-value"
+                >
+                    1
+                </div>
 
+                <div class="stat-label">
+                    Nivel
+                </div>
 
-</main>
-
-
-<!-- MODAL -->
-
-<div
-    id="scanModal"
-    class="modal">
-
-
-    <div class="modal-content">
+            </div>
 
 
-        <div class="modal-header">
+            <div class="stat-card">
 
-            <h2>
-                Escanear código
-            </h2>
+                <div class="stat-icon">
+                    🎁
+                </div>
 
+                <div
+                    id="prizesValue"
+                    class="stat-value"
+                >
+                    0
+                </div>
 
-            <button
-                class="close"
-                onclick="closeScan()">
-
-                ×
-
-            </button>
-
-        </div>
-
-
-        <div id="reader"></div>
-
-
-        <!-- CODIGO MANUAL -->
-
-        <div class="manual">
-
-            <label for="manualCode">
-
-                También puedes escribir el código
-
-            </label>
-
-
-            <div class="manual-row">
-
-                <input
-                    id="manualCode"
-                    type="text"
-                    placeholder="Ej: PR-C2Y6JN"
-                    autocomplete="off">
-
-
-                <button
-                    onclick="validateManualCode()">
-
-                    Validar
-
-                </button>
+                <div class="stat-label">
+                    Premios
+                </div>
 
             </div>
 
         </div>
 
-
-        <!-- MENSAJE -->
 
         <div
             id="message"
-            class="message">
+            class="message"
+        ></div>
 
-        </div>
+
+        <!-- ESCANEAR -->
+
+        <section class="section">
+
+            <div class="section-title">
+
+                <h3>
+                    Escanear promoción o premio
+                </h3>
+
+            </div>
 
 
-        <!-- PROMOCION -->
+            <div class="card scanner-card">
+
+                <div class="scanner-status">
+                    Escanea el código QR del negocio
+                </div>
+
+                <div id="reader"></div>
+
+
+                <button
+                    id="startScannerBtn"
+                    class="btn btn-primary"
+                    type="button"
+                >
+                    📷 Abrir cámara
+                </button>
+
+
+                <button
+                    id="stopScannerBtn"
+                    class="btn btn-secondary hidden"
+                    type="button"
+                >
+                    Detener cámara
+                </button>
+
+
+                <div class="manual-box">
+
+                    <label for="manualCode">
+                        O introduce el código manualmente
+                    </label>
+
+                    <div class="manual-row">
+
+                        <input
+                            id="manualCode"
+                            class="manual-input"
+                            type="text"
+                            placeholder="Ej: PR-C2Y6JN"
+                            autocomplete="off"
+                        >
+
+                        <button
+                            id="validateManualBtn"
+                            class="btn btn-success"
+                            type="button"
+                        >
+                            Validar
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RESULTADO PROMOCION -->
 
         <div
             id="promotionFound"
-            class="promotion-found">
+            class="result-card promotion-found"
+        >
 
-
-            <div class="promotion-found-title">
-
-                🎉 Promoción encontrada
-
+            <div style="font-size:42px;">
+                🎟️
             </div>
-
 
             <div
                 id="promotionBusiness"
-                class="promotion-business">
-
-            </div>
-
+                class="promotion-business"
+            ></div>
 
             <div
                 id="promotionName"
-                class="promotion-name">
-
-            </div>
-
+                class="promotion-title"
+            ></div>
 
             <div
                 id="promotionDescription"
-                class="promotion-description">
+                class="promotion-description"
+            ></div>
 
-            </div>
-
+            <div
+                id="promotionDiscount"
+                class="discount"
+            ></div>
 
             <div
                 id="promotionPoints"
-                class="promotion-points">
+                class="points-badge"
+            ></div>
 
-            </div>
-
+            <div
+                id="promotionCode"
+                class="code-badge"
+            ></div>
 
         </div>
 
 
-        <!-- PREMIO -->
+        <!-- RESULTADO PREMIO -->
 
         <div
             id="prizeFound"
-            class="prize-found">
-
+            class="result-card prize-found"
+        >
 
             <div class="prize-icon">
                 🎁
             </div>
 
-
             <div class="prize-title">
-
                 ¡Ganaste un premio!
-
             </div>
-
 
             <div
                 id="prizeBusiness"
-                class="promotion-business">
-
-            </div>
-
+                class="promotion-business"
+            ></div>
 
             <div
                 id="prizeCampaign"
-                class="prize-campaign">
-
-            </div>
-
+                class="prize-campaign"
+            ></div>
 
             <div
                 id="prizeName"
-                class="prize-name">
-
-            </div>
-
+                class="prize-name"
+            ></div>
 
             <div
                 id="prizeDescription"
-                class="prize-description">
-
-            </div>
-
+                class="prize-description"
+            ></div>
 
             <div
                 id="prizePoints"
-                class="prize-points">
-
-            </div>
-
+                class="prize-points"
+            ></div>
 
             <div
                 id="prizeCode"
-                class="code-badge">
-
-            </div>
-
+                class="code-badge"
+            ></div>
 
         </div>
 
 
-    </div>
+        <!-- PROMOCIONES PUBLICAS -->
 
-</div>
+        <section class="section">
 
+            <div class="section-title">
+
+                <h3>
+                    Promociones disponibles
+                </h3>
+
+                <span>
+                    Para ti
+                </span>
+
+            </div>
+
+            <div id="publicPromotions">
+
+                <div class="loading">
+                    Cargando promociones...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MIS PROMOCIONES -->
+
+        <section class="section">
+
+            <div class="section-title">
+
+                <h3>
+                    Mis promociones
+                </h3>
+
+            </div>
+
+            <div id="customerPromotions">
+
+                <div class="loading">
+                    Cargando...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MIS PREMIOS -->
+
+        <section class="section">
+
+            <div class="section-title">
+
+                <h3>
+                    Mis premios
+                </h3>
+
+            </div>
+
+            <div id="customerPrizes">
+
+                <div class="loading">
+                    Cargando premios...
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
 
 
 <script type="module">
-
-
-/* =========================================================
-   FIREBASE
-========================================================= */
 
 import {
     initializeApp
@@ -1036,15 +841,16 @@ import {
     getDocs,
     setDoc,
     serverTimestamp,
-    runTransaction
+    runTransaction,
+    increment
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
 
-/* =========================================================
-   CONFIGURACION FIREBASE
-========================================================= */
+/* ============================================================
+   FIREBASE
+============================================================ */
 
 const firebaseConfig = {
 		  apiKey: "AIzaSyA_5TT1VTLkDSjYfrzTGWZ1Uv_o1yZqQYQ",
@@ -1057,30 +863,26 @@ const firebaseConfig = {
 		};
 
 
-
 const app =
-    initializeApp(
-        firebaseConfig
-    );
+    initializeApp(firebaseConfig);
+
+
+const db =
+    initializeFirestore(app, {
+
+        experimentalForceLongPolling: true
+
+    });
 
 
 const auth =
     getAuth(app);
 
 
-const db =
-    initializeFirestore(
-        app,
-        {
-            experimentalForceLongPolling: true
-        }
-    );
 
-
-
-/* =========================================================
+/* ============================================================
    VARIABLES
-========================================================= */
+============================================================ */
 
 let currentUser = null;
 
@@ -1088,44 +890,105 @@ let html5QrCode = null;
 
 let scannerRunning = false;
 
+let processingCode = false;
 
 
-/* =========================================================
-   AUTH
-========================================================= */
 
-onAuthStateChanged(
-    auth,
-    async (user) => {
+/* ============================================================
+   ELEMENTOS
+============================================================ */
 
-        if (!user) {
+const message =
+    document.getElementById("message");
 
-            window.location.href =
-                "login.html";
+const manualCode =
+    document.getElementById("manualCode");
 
-            return;
+const startScannerBtn =
+    document.getElementById("startScannerBtn");
 
-        }
+const stopScannerBtn =
+    document.getElementById("stopScannerBtn");
 
 
-        currentUser =
-            user;
 
-        await loadCustomer();
-        await loadPromotions();
-        await loadCustomerPromotions();
-		await loadCustomerPrizes();
+/* ============================================================
+   MENSAJES
+============================================================ */
 
+function showMessage(text, type = "info") {
+
+    message.textContent = text;
+
+    message.className =
+        "message show " + type;
+
+}
+
+
+function hideMessage() {
+
+    message.className =
+        "message";
+
+    message.textContent = "";
+
+}
+
+
+
+/* ============================================================
+   NORMALIZAR CODIGO
+============================================================ */
+
+function normalizeCode(value) {
+
+    return String(value || "")
+        .trim()
+        .toUpperCase();
+
+}
+
+
+
+/* ============================================================
+   NIVEL
+============================================================ */
+
+function calcularNivel(puntos) {
+
+    puntos = Number(puntos || 0);
+
+    if (puntos >= 5000) {
+        return 5;
     }
-);
+
+    if (puntos >= 2500) {
+        return 4;
+    }
+
+    if (puntos >= 1000) {
+        return 3;
+    }
+
+    if (puntos >= 500) {
+        return 2;
+    }
+
+    return 1;
+}
 
 
 
-/* =========================================================
+/* ============================================================
    CARGAR CLIENTE
-========================================================= */
+============================================================ */
 
 async function loadCustomer() {
+
+    if (!currentUser) {
+        return;
+    }
 
     try {
 
@@ -1138,44 +1001,73 @@ async function loadCustomer() {
 
 
         const snapshot =
-            await getDoc(
-                customerRef
-            );
+            await getDoc(customerRef);
 
 
         if (!snapshot.exists()) {
 
-            return;
+            document.getElementById(
+                "welcomeName"
+            ).textContent =
+                "Hola 👋";
 
+            document.getElementById(
+                "pointsValue"
+            ).textContent = "0";
+
+            document.getElementById(
+                "prizesValue"
+            ).textContent = "0";
+
+            document.getElementById(
+                "levelValue"
+            ).textContent = "1";
+
+            return;
         }
 
 
-        const cliente =
+        const data =
             snapshot.data();
+
+
+        const nombre =
+            data.nombre ||
+            data.name ||
+            data.email ||
+            "Cliente";
+
+
+        const puntos =
+            Number(data.puntos || 0);
+
+
+        const premiosGanados =
+            Number(data.premiosGanados || 0);
+
+
+        document.getElementById(
+            "welcomeName"
+        ).textContent =
+            "Hola " + nombre + " 👋";
 
 
         document.getElementById(
             "pointsValue"
         ).textContent =
-            Number(
-                cliente.puntos || 0
-            );
-
-
-        document.getElementById(
-            "levelValue"
-        ).textContent =
-            Number(
-                cliente.nivel || 1
-            );
+            puntos.toLocaleString("es-DO");
 
 
         document.getElementById(
             "prizesValue"
         ).textContent =
-            Number(
-                cliente.premiosGanados || 0
-            );
+            premiosGanados;
+
+
+        document.getElementById(
+            "levelValue"
+        ).textContent =
+            calcularNivel(puntos);
 
     }
     catch (error) {
@@ -1191,11 +1083,11 @@ async function loadCustomer() {
 
 
 
-/* =========================================================
+/* ============================================================
    PROMOCIONES PUBLICAS
-========================================================= */
+============================================================ */
 
-async function loadPromotions() {
+async function loadPublicPromotions() {
 
     const container =
         document.getElementById(
@@ -1203,21 +1095,14 @@ async function loadPromotions() {
         );
 
 
-    container.innerHTML = "";
-
-
     try {
 
-        const promocionesRef =
-            collection(
-                db,
-                "promociones"
-            );
-
-
-        const promocionesQuery =
+        const q =
             query(
-                promocionesRef,
+                collection(
+                    db,
+                    "promociones"
+                ),
                 where(
                     "activa",
                     "==",
@@ -1227,94 +1112,149 @@ async function loadPromotions() {
 
 
         const snapshot =
-            await getDocs(
-                promocionesQuery
-            );
+            await getDocs(q);
 
 
-        document.getElementById(
-            "promotionCount"
-        ).textContent =
-            snapshot.size +
-            " disponibles";
+        container.innerHTML = "";
 
 
         if (snapshot.empty) {
 
-            container.innerHTML =
-                `
-                <div class="empty">
-                    No hay promociones disponibles
-                    en este momento.
+            container.innerHTML = `
+                <div class="card empty">
+                    No hay promociones disponibles.
                 </div>
-                `;
+            `;
 
             return;
-
         }
 
 
-        snapshot.forEach(
-            (docSnap) => {
+        snapshot.forEach((promoDoc) => {
 
-                const promo =
-                    docSnap.data();
-
-
-                const card =
-                    document.createElement(
-                        "div"
-                    );
+            const promo =
+                promoDoc.data();
 
 
-                card.className =
-                    "card";
-
-
-                card.innerHTML =
-                    `
-                    <div class="card-category">
-                        ${escapeHtml(
-                            promo.categoria ||
-                            "Promoción"
-                        )}
-                    </div>
-
-                    <h3>
-                        ${escapeHtml(
-                            promo.nombre ||
-                            "Promoción"
-                        )}
-                    </h3>
-
-                    <div class="business">
-                        🏪 ${escapeHtml(
-                            promo.nombreNegocio ||
-                            "Negocio"
-                        )}
-                    </div>
-
-                    <div class="description">
-                        ${escapeHtml(
-                            promo.descripcion ||
-                            ""
-                        )}
-                    </div>
-
-                    <div class="points">
-                        ⭐ ${Number(
-                            promo.puntos || 0
-                        )} puntos
-                    </div>
-                    `;
-
-
-                container.appendChild(
-                    card
+            const descuento =
+                Number(
+                    promo.descuento || 0
                 );
 
-            }
-        );
+
+            const puntos =
+                Number(
+                    promo.puntos || 0
+                );
+
+
+            const precioNormal =
+                Number(
+                    promo.precioNormal || 0
+                );
+
+
+            const precioPromo =
+                Number(
+                    promo.precioPromo || 0
+                );
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "card promotion-card";
+
+
+            card.innerHTML = `
+
+                <div class="promotion-business">
+                    ${escapeHtml(
+                        promo.nombreNegocio ||
+                        "Negocio"
+                    )}
+                </div>
+
+                <div class="promotion-title">
+                    ${escapeHtml(
+                        promo.nombre ||
+                        "Promoción"
+                    )}
+                </div>
+
+                <div class="promotion-description">
+                    ${escapeHtml(
+                        promo.descripcion ||
+                        ""
+                    )}
+                </div>
+
+                ${
+                    precioPromo > 0
+                    ?
+                    `
+                    <div class="promotion-price">
+
+                        ${
+                            precioNormal > 0
+                            ?
+                            `
+                            <span class="price-normal">
+                                RD$ ${precioNormal.toLocaleString("es-DO")}
+                            </span>
+                            `
+                            :
+                            ""
+                        }
+
+                        <span class="price-promo">
+                            RD$ ${precioPromo.toLocaleString("es-DO")}
+                        </span>
+
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
+                <div style="margin-top:10px;">
+
+                    ${
+                        descuento > 0
+                        ?
+                        `
+                        <span class="discount">
+                            ${descuento}% descuento
+                        </span>
+                        `
+                        :
+                        ""
+                    }
+
+                    ${
+                        puntos > 0
+                        ?
+                        `
+                        <span class="points-badge">
+                            ⭐ ${puntos} puntos
+                        </span>
+                        `
+                        :
+                        ""
+                    }
+
+                </div>
+
+            `;
+
+
+            container.appendChild(card);
+
+        });
 
     }
     catch (error) {
@@ -1325,12 +1265,11 @@ async function loadPromotions() {
         );
 
 
-        container.innerHTML =
-            `
-            <div class="empty">
+        container.innerHTML = `
+            <div class="card empty">
                 No fue posible cargar las promociones.
             </div>
-            `;
+        `;
 
     }
 
@@ -1338,9 +1277,9 @@ async function loadPromotions() {
 
 
 
-/* =========================================================
-   MIS PROMOCIONES
-========================================================= */
+/* ============================================================
+   PROMOCIONES DEL CLIENTE
+============================================================ */
 
 async function loadCustomerPromotions() {
 
@@ -1350,7 +1289,9 @@ async function loadCustomerPromotions() {
         );
 
 
-    container.innerHTML = "";
+    if (!currentUser) {
+        return;
+    }
 
 
     try {
@@ -1365,436 +1306,468 @@ async function loadCustomerPromotions() {
 
 
         const snapshot =
-            await getDocs(
-                ref
-            );
+            await getDocs(ref);
+
+
+        container.innerHTML = "";
 
 
         if (snapshot.empty) {
 
-            container.innerHTML =
-                `
-                <div class="empty">
+            container.innerHTML = `
+                <div class="card empty">
                     Todavía no tienes promociones guardadas.
                 </div>
-                `;
-
-            return;
-
-        }
-
-
-        snapshot.forEach(
-            (docSnap) => {
-
-                const promo =
-                    docSnap.data();
-
-
-                const card =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                card.className =
-                    "card";
-
-
-                card.innerHTML =
-                    `
-                    <div class="card-category">
-                        ${escapeHtml(
-                            promo.categoria ||
-                            "Promoción"
-                        )}
-                    </div>
-
-                    <h3>
-                        ${escapeHtml(
-                            promo.nombre ||
-                            "Promoción"
-                        )}
-                    </h3>
-
-                    <div class="business">
-                        🏪 ${escapeHtml(
-                            promo.nombreNegocio ||
-                            "Negocio"
-                        )}
-                    </div>
-
-                    <div class="description">
-                        ${escapeHtml(
-                            promo.descripcion ||
-                            ""
-                        )}
-                    </div>
-
-                    <div class="points">
-                        ⭐ ${Number(
-                            promo.puntos || 0
-                        )} puntos
-                    </div>
-                    `;
-
-
-                container.appendChild(
-                    card
-                );
-
-            }
-        );
-
-    }
-    catch (error) {
-
-        console.error(
-            "Error cargando promociones:",
-            error
-        );
-
-
-        container.innerHTML =
-            `
-            <div class="empty">
-                No fue posible cargar tus promociones.
-            </div>
             `;
 
-    }
-
-}
-
+            return;
+        }
 
 
-/* =========================================================
-   ABRIR SCANNER
-========================================================= */
+        snapshot.forEach((promoDoc) => {
 
-window.openScan =
-async function() {
-
-    document
-        .getElementById(
-            "scanModal"
-        )
-        .classList.add(
-            "show"
-        );
+            const promo =
+                promoDoc.data();
 
 
-    resetScannerUI();
-
-
-    try {
-
-        html5QrCode =
-            new Html5Qrcode(
-                "reader"
-            );
-
-
-        await html5QrCode.start(
-
-            {
-                facingMode:
-                    "environment"
-            },
-
-            {
-                fps: 10,
-
-                qrbox: {
-                    width: 250,
-                    height: 250
-                }
-            },
-
-            async (decodedText) => {
-
-                await stopScanner();
-
-
-                await validatePurchaseCode(
-                    decodedText
+            const card =
+                document.createElement(
+                    "div"
                 );
 
-            },
 
-            () => {}
-
-        );
+            card.className =
+                "card promotion-card";
 
 
-        scannerRunning =
-            true;
+            card.innerHTML = `
+
+                <div class="promotion-business">
+                    ${escapeHtml(
+                        promo.nombreNegocio ||
+                        "Negocio"
+                    )}
+                </div>
+
+                <div class="promotion-title">
+                    ${escapeHtml(
+                        promo.nombre ||
+                        "Promoción"
+                    )}
+                </div>
+
+                <div class="promotion-description">
+                    ${escapeHtml(
+                        promo.descripcion ||
+                        ""
+                    )}
+                </div>
+
+                <div style="margin-top:10px;">
+
+                    ${
+                        Number(
+                            promo.descuento || 0
+                        ) > 0
+                        ?
+                        `
+                        <span class="discount">
+                            ${Number(
+                                promo.descuento || 0
+                            )}% descuento
+                        </span>
+                        `
+                        :
+                        ""
+                    }
+
+                    ${
+                        Number(
+                            promo.puntos || 0
+                        ) > 0
+                        ?
+                        `
+                        <span class="points-badge">
+                            ⭐ ${Number(
+                                promo.puntos || 0
+                            )} puntos
+                        </span>
+                        `
+                        :
+                        ""
+                    }
+
+                </div>
+
+                ${
+                    promo.codigoPromocion
+                    ?
+                    `
+                    <div class="code-badge">
+                        ${escapeHtml(
+                            promo.codigoPromocion
+                        )}
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
+            `;
+
+
+            container.appendChild(card);
+
+        });
 
     }
     catch (error) {
 
         console.error(
-            "Error iniciando cámara:",
+            "Error cargando promociones del cliente:",
             error
         );
 
 
-        showMessage(
-            "No fue posible iniciar la cámara. Puedes escribir el código manualmente.",
-            "error"
+        container.innerHTML = `
+            <div class="card empty">
+                No fue posible cargar tus promociones.
+            </div>
+        `;
+
+    }
+
+}
+
+
+
+/* ============================================================
+   PREMIOS DEL CLIENTE
+============================================================ */
+
+async function loadCustomerPrizes() {
+
+    const container =
+        document.getElementById(
+            "customerPrizes"
+        );
+
+
+    if (!currentUser) {
+        return;
+    }
+
+
+    try {
+
+        const ref =
+            collection(
+                db,
+                "clientes",
+                currentUser.uid,
+                "premios"
+            );
+
+
+        const snapshot =
+            await getDocs(ref);
+
+
+        container.innerHTML = "";
+
+
+        if (snapshot.empty) {
+
+            container.innerHTML = `
+                <div class="card empty">
+                    Todavía no has ganado premios.
+                </div>
+            `;
+
+            return;
+        }
+
+
+        const premios =
+            [];
+
+
+        snapshot.forEach((premioDoc) => {
+
+            premios.push({
+                id: premioDoc.id,
+                ...premioDoc.data()
+            });
+
+        });
+
+
+        premios.reverse();
+
+
+        premios.forEach((premio) => {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "card customer-prize";
+
+
+            const puntos =
+                Number(
+                    premio.puntos || 0
+                );
+
+
+            card.innerHTML = `
+
+                <div class="customer-prize-name">
+                    🎁 ${escapeHtml(
+                        premio.premioGanado ||
+                        "Premio"
+                    )}
+                </div>
+
+                <div class="promotion-business">
+                    ${escapeHtml(
+                        premio.nombreNegocio ||
+                        "Negocio"
+                    )}
+                </div>
+
+                <div class="customer-prize-meta">
+                    ${escapeHtml(
+                        premio.campanaNombre ||
+                        "Campaña"
+                    )}
+                </div>
+
+                ${
+                    premio.descripcionPremio
+                    ?
+                    `
+                    <div class="promotion-description">
+                        ${escapeHtml(
+                            premio.descripcionPremio
+                        )}
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
+                ${
+                    puntos > 0
+                    ?
+                    `
+                    <div class="points-badge">
+                        ⭐ +${puntos} puntos
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
+                <div class="customer-prize-code">
+                    Código: ${escapeHtml(
+                        premio.codigoPremio ||
+                        ""
+                    )}
+                </div>
+
+            `;
+
+
+            container.appendChild(card);
+
+        });
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error cargando premios:",
+            error
+        );
+
+
+        container.innerHTML = `
+            <div class="card empty">
+                No fue posible cargar tus premios.
+            </div>
+        `;
+
+    }
+
+}
+
+
+
+/* ============================================================
+   SELECCIONAR PREMIO
+============================================================ */
+
+function seleccionarPremio(opciones) {
+
+    const random =
+        Math.random() * 100;
+
+
+    let acumulado = 0;
+
+
+    for (
+        const opcion of opciones
+    ) {
+
+        acumulado +=
+            Number(
+                opcion.probabilidad || 0
+            );
+
+
+        if (
+            random < acumulado
+        ) {
+
+            return opcion;
+
+        }
+
+    }
+
+
+    return opciones[
+        opciones.length - 1
+    ];
+
+}
+
+
+
+/* ============================================================
+   VALIDAR OPCIONES
+============================================================ */
+
+function validarOpciones(opciones) {
+
+    if (
+        !Array.isArray(opciones) ||
+        opciones.length === 0
+    ) {
+
+        throw new Error(
+            "La campaña no tiene opciones de premios."
         );
 
     }
 
-};
+
+    let total = 0;
 
 
-
-/* =========================================================
-   CERRAR SCANNER
-========================================================= */
-
-window.closeScan =
-async function() {
-
-    await stopScanner();
-
-
-    document
-        .getElementById(
-            "scanModal"
-        )
-        .classList.remove(
-            "show"
-        );
-
-};
-
-
-
-/* =========================================================
-   DETENER SCANNER
-========================================================= */
-
-async function stopScanner() {
-
-    if (
-        html5QrCode &&
-        scannerRunning
+    for (
+        const opcion of opciones
     ) {
 
-        try {
+        const probabilidad =
+            Number(
+                opcion.probabilidad || 0
+            );
 
-            await html5QrCode.stop();
 
-            html5QrCode.clear();
+        if (
+            !opcion.id ||
+            !opcion.nombre
+        ) {
 
-        }
-        catch (error) {
-
-            console.warn(
-                "Scanner:",
-                error
+            throw new Error(
+                "Una opción de premio está incompleta."
             );
 
         }
 
+
+        if (
+            probabilidad < 0
+        ) {
+
+            throw new Error(
+                "Existe una probabilidad inválida."
+            );
+
+        }
+
+
+        total += probabilidad;
+
     }
 
 
-    scannerRunning =
-        false;
+    if (
+        Math.abs(total - 100) > 0.001
+    ) {
 
+        throw new Error(
+            "Las probabilidades de la campaña deben sumar exactamente 100%."
+        );
 
-    html5QrCode =
-        null;
+    }
 
 }
 
 
 
-/* =========================================================
-   INPUT MANUAL
-========================================================= */
-
-window.focusManualCode =
-function() {
-
-    document
-        .getElementById(
-            "scanModal"
-        )
-        .classList.add(
-            "show"
-        );
-
-
-    setTimeout(
-        () => {
-
-            document
-                .getElementById(
-                    "manualCode"
-                )
-                .focus();
-
-        },
-        200
-    );
-
-};
-
-
-
-/* =========================================================
-   VALIDAR MANUAL
-========================================================= */
-
-window.validateManualCode =
-async function() {
-
-    const input =
-        document.getElementById(
-            "manualCode"
-        );
-
-
-    const codigo =
-        input.value
-            .trim()
-            .toUpperCase();
-
-
-    if (!codigo) {
-
-        showMessage(
-            "Escribe un código.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    await validatePurchaseCode(
-        codigo
-    );
-
-};
-
-
-
-/* =========================================================
-   IDENTIFICAR TIPO DE CODIGO
-========================================================= */
-
-async function validatePurchaseCode(
-    code
-) {
-
-    resetResults();
-
-
-    const codigo =
-        String(
-            code || ""
-        )
-        .trim()
-        .toUpperCase();
-
-
-    if (!codigo) {
-
-        showMessage(
-            "Código vacío.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    console.log(
-        "Código recibido:",
-        codigo
-    );
-
-
-    /*
-     * PROMOCION
-     */
-
-    if (
-        codigo.startsWith(
-            "PW-"
-        )
-    ) {
-
-        await validatePromotionCode(
-            codigo
-        );
-
-        return;
-
-    }
-
-
-    /*
-     * PREMIO
-     */
-
-    if (
-        codigo.startsWith(
-            "PR-"
-        )
-    ) {
-
-        await validatePrizeCode(
-            codigo
-        );
-
-        return;
-
-    }
-
-
-    showMessage(
-        "Código no reconocido. Los códigos válidos comienzan con PW- o PR-.",
-        "error"
-    );
-
-}
-
-
-
-/* =========================================================
+/* ============================================================
    VALIDAR PROMOCION
-========================================================= */
+============================================================ */
 
-async function validatePromotionCode(
-    codigo
-) {
+async function validatePromotionCode(codigo) {
+
+    if (!currentUser) {
+
+        showMessage(
+            "Debes iniciar sesión.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    codigo =
+        normalizeCode(codigo);
+
+
+    if (!codigo.startsWith("PW-")) {
+
+        showMessage(
+            "El código de promoción no es válido.",
+            "error"
+        );
+
+        return;
+    }
+
 
     try {
 
         showMessage(
-            "Buscando promoción...",
-            "success"
+            "Validando promoción...",
+            "info"
         );
 
 
-        const promocionesRef =
-            collection(
-                db,
-                "promociones"
-            );
-
-
-        const promocionesQuery =
+        const q =
             query(
-                promocionesRef,
+                collection(
+                    db,
+                    "promociones"
+                ),
                 where(
                     "codigoPromocion",
                     "==",
@@ -1804,20 +1777,17 @@ async function validatePromotionCode(
 
 
         const snapshot =
-            await getDocs(
-                promocionesQuery
-            );
+            await getDocs(q);
 
 
         if (snapshot.empty) {
 
             showMessage(
-                `El código ${codigo} no existe. Verifica que lo hayas escrito correctamente.`,
+                "No encontramos esta promoción.",
                 "error"
             );
 
             return;
-
         }
 
 
@@ -1829,7 +1799,21 @@ async function validatePromotionCode(
             promoDoc.data();
 
 
-        const customerPromotionRef =
+        if (
+            promo.activa === false ||
+            promo.estado === "inactiva"
+        ) {
+
+            showMessage(
+                "Esta promoción ya no está activa.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        const customerPromoRef =
             doc(
                 db,
                 "clientes",
@@ -1839,8 +1823,38 @@ async function validatePromotionCode(
             );
 
 
+        const customerPromo =
+            await getDoc(
+                customerPromoRef
+            );
+
+
+        if (
+            customerPromo.exists()
+        ) {
+
+            showMessage(
+                "Ya tienes esta promoción en tu wallet.",
+                "info"
+            );
+
+            mostrarPromocion(
+                promo,
+                codigo
+            );
+
+            return;
+        }
+
+
+        const puntos =
+            Number(
+                promo.puntos || 0
+            );
+
+
         await setDoc(
-            customerPromotionRef,
+            customerPromoRef,
             {
 
                 promocionId:
@@ -1876,9 +1890,7 @@ async function validatePromotionCode(
                     ),
 
                 puntos:
-                    Number(
-                        promo.puntos || 0
-                    ),
+                    puntos,
 
                 precioNormal:
                     Number(
@@ -1904,51 +1916,14 @@ async function validatePromotionCode(
         );
 
 
-        document.getElementById(
-            "promotionBusiness"
-        ).textContent =
-            "🏪 " +
-            (
-                promo.nombreNegocio ||
-                "Negocio"
-            );
-
-
-        document.getElementById(
-            "promotionName"
-        ).textContent =
-            promo.nombre ||
-            "Promoción";
-
-
-        document.getElementById(
-            "promotionDescription"
-        ).textContent =
-            promo.descripcion ||
-            "";
-
-
-        document.getElementById(
-            "promotionPoints"
-        ).textContent =
-            "⭐ " +
-            Number(
-                promo.puntos || 0
-            ) +
-            " puntos";
-
-
-        document
-            .getElementById(
-                "promotionFound"
-            )
-            .classList.add(
-                "show"
-            );
+        mostrarPromocion(
+            promo,
+            codigo
+        );
 
 
         showMessage(
-            "¡Promoción agregada a tu wallet!",
+            "Promoción agregada a tu wallet.",
             "success"
         );
 
@@ -1959,13 +1934,13 @@ async function validatePromotionCode(
     catch (error) {
 
         console.error(
-            "Error validando promoción:",
+            "Error procesando promoción:",
             error
         );
 
 
         showMessage(
-            "No fue posible validar la promoción: " +
+            "Error procesando la promoción: " +
             error.message,
             "error"
         );
@@ -1976,37 +1951,157 @@ async function validatePromotionCode(
 
 
 
-/* =========================================================
-   VALIDAR PREMIO
-   UN SOLO USO
-========================================================= */
+/* ============================================================
+   MOSTRAR PROMOCION
+============================================================ */
 
-async function validatePrizeCode(
+function mostrarPromocion(
+    promo,
     codigo
 ) {
 
-    try {
+    const result =
+        document.getElementById(
+            "promotionFound"
+        );
+
+
+    document.getElementById(
+        "promotionBusiness"
+    ).textContent =
+        promo.nombreNegocio ||
+        "Negocio";
+
+
+    document.getElementById(
+        "promotionName"
+    ).textContent =
+        promo.nombre ||
+        "Promoción";
+
+
+    document.getElementById(
+        "promotionDescription"
+    ).textContent =
+        promo.descripcion ||
+        "";
+
+
+    document.getElementById(
+        "promotionDiscount"
+    ).textContent =
+        Number(
+            promo.descuento || 0
+        ) > 0
+        ?
+        Number(
+            promo.descuento || 0
+        ) + "% descuento"
+        :
+        "";
+
+
+    document.getElementById(
+        "promotionPoints"
+    ).textContent =
+        Number(
+            promo.puntos || 0
+        ) > 0
+        ?
+        "⭐ " +
+        Number(
+            promo.puntos || 0
+        ) +
+        " puntos"
+        :
+        "";
+
+
+    document.getElementById(
+        "promotionCode"
+    ).textContent =
+        codigo;
+
+
+    result.classList.add(
+        "show"
+    );
+
+
+
+    document.getElementById(
+        "prizeFound"
+    ).classList.remove(
+        "show"
+    );
+
+}
+
+
+
+/* ============================================================
+   VALIDAR PREMIO
+============================================================ */
+
+async function validatePrizeCode(codigo) {
+
+    if (
+        !currentUser
+    ) {
 
         showMessage(
-            "Buscando campaña de premios...",
-            "success"
+            "Debes iniciar sesión.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (processingCode) {
+
+        return;
+
+    }
+
+
+    processingCode = true;
+
+
+    try {
+
+        codigo =
+            normalizeCode(codigo);
+
+
+        if (
+            !codigo.startsWith("PR-")
+        ) {
+
+            throw new Error(
+                "El código de premio no es válido."
+            );
+
+        }
+
+
+        showMessage(
+            "Validando código de premio...",
+            "info"
         );
 
 
         /*
-         * 1. BUSCAR CAMPAÑA
+         * Buscamos la campaña por codigoPremio.
          */
 
-        const premiosRef =
-            collection(
-                db,
-                "premios"
-            );
-
-
-        const premiosQuery =
+        const campaignQuery =
             query(
-                premiosRef,
+                collection(
+                    db,
+                    "premios"
+                ),
                 where(
                     "codigoPremio",
                     "==",
@@ -2015,26 +2110,25 @@ async function validatePrizeCode(
             );
 
 
-        const snapshot =
+        const campaignSnapshot =
             await getDocs(
-                premiosQuery
+                campaignQuery
             );
 
 
-        if (snapshot.empty) {
+        if (
+            campaignSnapshot.empty
+        ) {
 
-            showMessage(
-                `El código ${codigo} no existe. Verifica que lo hayas escrito correctamente.`,
-                "error"
+            throw new Error(
+                "No encontramos una campaña asociada a este código."
             );
-
-            return;
 
         }
 
 
         const premioDoc =
-            snapshot.docs[0];
+            campaignSnapshot.docs[0];
 
 
         const campana =
@@ -2042,185 +2136,136 @@ async function validatePrizeCode(
 
 
         /*
-         * 2. VALIDAR ESTADO
+         * Validar estado.
          */
 
         if (
             campana.activo === false ||
-            campana.estado === "inactivo"
+            campana.estado !== "activo"
         ) {
 
-            showMessage(
-                "Esta campaña de premios no está activa.",
-                "error"
+            throw new Error(
+                "Esta campaña de premios no está activa."
             );
-
-            return;
 
         }
 
 
         /*
-         * 3. VALIDAR DISPONIBILIDAD
+         * Validar fechas.
          */
 
+        const hoy =
+            new Date();
+
+
         if (
-            campana.cantidadDisponible !==
-            undefined
-            &&
-            Number(
-                campana.cantidadDisponible
-            ) <= 0
+            campana.fechaInicio
         ) {
 
-            showMessage(
-                "Esta campaña ya no tiene premios disponibles.",
-                "error"
-            );
+            const fechaInicio =
+                new Date(
+                    campana.fechaInicio +
+                    "T00:00:00"
+                );
 
-            return;
+
+            if (
+                hoy < fechaInicio
+            ) {
+
+                throw new Error(
+                    "Esta campaña todavía no ha comenzado."
+                );
+
+            }
+
+        }
+
+
+        if (
+            campana.fechaFin
+        ) {
+
+            const fechaFin =
+                new Date(
+                    campana.fechaFin +
+                    "T23:59:59"
+                );
+
+
+            if (
+                hoy > fechaFin
+            ) {
+
+                throw new Error(
+                    "Esta campaña ya finalizó."
+                );
+
+            }
 
         }
 
 
         /*
-         * 4. OPCIONES
+         * Validar disponibilidad.
+         */
+
+        const cantidadDisponible =
+            Number(
+                campana.cantidadDisponible ?? 0
+            );
+
+
+        if (
+            cantidadDisponible <= 0
+        ) {
+
+            throw new Error(
+                "Esta campaña ya no tiene premios disponibles."
+            );
+
+        }
+
+
+        /*
+         * Validar opciones.
          */
 
         const opciones =
             Array.isArray(
                 campana.opciones
             )
-                ? campana.opciones
-                : [];
+            ?
+            campana.opciones
+            :
+            [];
 
 
-        if (
-            opciones.length === 0
-        ) {
-
-            showMessage(
-                "La campaña no tiene premios configurados.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        /*
-         * 5. OPCIONES VALIDAS
-         */
-
-        const opcionesValidas =
+        validarOpciones(
             opciones
-                .map(
-                    (opcion) => ({
-
-                        id:
-                            opcion.id ||
-                            crypto.randomUUID(),
-
-                        nombre:
-                            opcion.nombre ||
-                            "Premio",
-
-                        descripcion:
-                            opcion.descripcion ||
-                            "",
-
-                        probabilidad:
-                            Number(
-                                opcion.probabilidad ||
-                                0
-                            ),
-
-                        puntos:
-                            Number(
-                                opcion.puntos ||
-                                0
-                            )
-
-                    })
-                )
-                .filter(
-                    (opcion) =>
-                        opcion.probabilidad > 0
-                );
+        );
 
 
         /*
-         * 6. TOTAL PROBABILIDADES
-         */
-
-        const total =
-            opcionesValidas.reduce(
-                (
-                    acumulado,
-                    opcion
-                ) =>
-                    acumulado +
-                    opcion.probabilidad,
-                0
-            );
-
-
-        if (
-            Math.abs(
-                total - 100
-            ) > 0.001
-        ) {
-
-            showMessage(
-                "Las probabilidades de esta campaña deben sumar 100%. Actualmente suman " +
-                total +
-                "%.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        /*
-         * 7. SORTEO
+         * IMPORTANTE:
          *
-         * Lo hacemos antes de la transacción.
+         * Seleccionamos el premio antes
+         * de la transacción.
          *
-         * Si el código ya fue usado,
-         * la transacción no permitirá
-         * guardar otro resultado.
+         * El código sigue siendo de un solo uso
+         * porque la transacción vuelve a comprobar
+         * codigoRef antes de guardar.
          */
 
         const premioGanado =
             seleccionarPremio(
-                opcionesValidas
+                opciones
             );
-
-
-        if (!premioGanado) {
-
-            showMessage(
-                "No fue posible determinar el premio.",
-                "error"
-            );
-
-            return;
-
-        }
 
 
         /*
-         * 8. REFERENCIA DEL CODIGO
-         *
-         * Estructura:
-         *
-         * premios
-         *   └── ID_CAMPAÑA
-         *        └── codigos
-         *             └── PR-C2Y6JN
+         * Referencias.
          */
 
         const codigoRef =
@@ -2233,34 +2278,51 @@ async function validatePrizeCode(
             );
 
 
-        /*
-         * 9. REFERENCIA DE REDENCION
-         */
+        const campanaRef =
+            doc(
+                db,
+                "premios",
+                premioDoc.id
+            );
+
+
+        const customerRef =
+            doc(
+                db,
+                "clientes",
+                currentUser.uid
+            );
+
 
         const redemptionRef =
             doc(
-                collection(
-                    db,
-                    "clientes",
-                    currentUser.uid,
-                    "premios"
-                )
+                db,
+                "clientes",
+                currentUser.uid,
+                "premios"
             );
 
 
         /*
-         * 10. TRANSACCION
+         * Puntos ganados.
+         */
+
+        const puntosGanados =
+            Number(
+                premioGanado.puntos || 0
+            );
+
+
+        /*
+         * TRANSACCION
          *
-         * Esto es lo importante.
-         *
-         * Si dos usuarios intentan usar
-         * el mismo código al mismo tiempo,
-         * solamente uno podrá crearlo.
+         * Primero hacemos todos los GET.
          */
 
         await runTransaction(
             db,
             async (transaction) => {
+
 
                 const codigoSnapshot =
                     await transaction.get(
@@ -2268,8 +2330,21 @@ async function validatePrizeCode(
                     );
 
 
+                const campanaSnapshot =
+                    await transaction.get(
+                        campanaRef
+                    );
+
+
+                const customerSnapshot =
+                    await transaction.get(
+                        customerRef
+                    );
+
+
                 /*
-                 * EL CODIGO YA EXISTE
+                 * El código ya existe:
+                 * alguien lo utilizó.
                  */
 
                 if (
@@ -2284,7 +2359,45 @@ async function validatePrizeCode(
 
 
                 /*
-                 * REGISTRAR CODIGO
+                 * Volvemos a comprobar
+                 * disponibilidad dentro
+                 * de la transacción.
+                 */
+
+                if (
+                    !campanaSnapshot.exists()
+                ) {
+
+                    throw new Error(
+                        "La campaña ya no existe."
+                    );
+
+                }
+
+
+                const campaignData =
+                    campanaSnapshot.data();
+
+
+                const disponibleActual =
+                    Number(
+                        campaignData.cantidadDisponible ?? 0
+                    );
+
+
+                if (
+                    disponibleActual <= 0
+                ) {
+
+                    throw new Error(
+                        "La campaña se quedó sin premios disponibles."
+                    );
+
+                }
+
+
+                /*
+                 * Guardar consumo del código.
                  */
 
                 transaction.set(
@@ -2314,7 +2427,8 @@ async function validatePrizeCode(
 
 
                 /*
-                 * GUARDAR PREMIO DEL CLIENTE
+                 * Guardar premio ganado
+                 * en el cliente.
                  */
 
                 transaction.set(
@@ -2325,7 +2439,6 @@ async function validatePrizeCode(
                             premioDoc.id,
 
                         codigoPremio:
-                            campana.codigoPremio ||
                             codigo,
 
                         negocioId:
@@ -2347,13 +2460,11 @@ async function validatePrizeCode(
                             premioGanado.nombre,
 
                         descripcionPremio:
-                            premioGanado.descripcion,
+                            premioGanado.descripcion ||
+                            "",
 
                         puntos:
-                            Number(
-                                premioGanado.puntos ||
-                                0
-                            ),
+                            puntosGanados,
 
                         probabilidad:
                             Number(
@@ -2370,115 +2481,113 @@ async function validatePrizeCode(
                     }
                 );
 
+
+                /*
+                 * Actualizar campaña.
+                 */
+
+                transaction.update(
+                    campanaRef,
+                    {
+
+                        cantidadDisponible:
+                            increment(-1),
+
+                        redenciones:
+                            increment(1)
+
+                    }
+                );
+
+
+                /*
+                 * Actualizar cliente.
+                 *
+                 * Si ya existe:
+                 * incrementamos.
+                 *
+                 * Si no existe:
+                 * creamos el documento.
+                 */
+
+                if (
+                    customerSnapshot.exists()
+                ) {
+
+                    transaction.update(
+                        customerRef,
+                        {
+
+                            puntos:
+                                increment(
+                                    puntosGanados
+                                ),
+
+                            premiosGanados:
+                                increment(1)
+
+                        }
+                    );
+
+                }
+                else {
+
+                    transaction.set(
+                        customerRef,
+                        {
+
+                            puntos:
+                                puntosGanados,
+
+                            premiosGanados:
+                                1
+
+                        },
+                        {
+                            merge: true
+                        }
+                    );
+
+                }
+
             }
         );
 
 
         /*
-         * 11. MOSTRAR PREMIO
+         * Si llegamos aquí,
+         * la transacción fue exitosa.
          */
 
-        document.getElementById(
-            "prizeBusiness"
-        ).textContent =
-            "🏪 " +
-            (
-                campana.nombreNegocio ||
-                "Negocio"
-            );
-
-
-        document.getElementById(
-            "prizeCampaign"
-        ).textContent =
-            campana.nombre ||
-            "Campaña de premios";
-
-
-        document.getElementById(
-            "prizeName"
-        ).textContent =
-            premioGanado.nombre;
-
-
-        document.getElementById(
-            "prizeDescription"
-        ).textContent =
-            premioGanado.descripcion ||
-            "¡Disfruta tu premio!";
-
-
-        const puntos =
-            Number(
-                premioGanado.puntos ||
-                0
-            );
-
-
-        if (
-            puntos > 0
-        ) {
-
-            document.getElementById(
-                "prizePoints"
-            ).textContent =
-                "⭐ Ganaste " +
-                puntos +
-                " puntos";
-
-        }
-        else {
-
-            document.getElementById(
-                "prizePoints"
-            ).textContent =
-                "🎉 Premio obtenido";
-
-        }
-
-
-        document.getElementById(
-            "prizeCode"
-        ).textContent =
-            "Código utilizado: " +
-            codigo;
-
-
-        document
-            .getElementById(
-                "prizeFound"
-            )
-            .classList.add(
-                "show"
-            );
+        mostrarPremioGanado(
+            campana,
+            premioGanado,
+            codigo,
+            puntosGanados
+        );
 
 
         showMessage(
-            "¡Felicidades! El premio fue registrado correctamente.",
+            "¡Premio registrado correctamente!",
             "success"
         );
 
 
         /*
-         * ACTUALIZAR CONTADOR VISUAL
+         * Limpiar input.
          */
 
-        const prizeCounter =
-            document.getElementById(
-                "prizesValue"
-            );
+        manualCode.value = "";
 
 
-        const actual =
-            Number(
-                prizeCounter.textContent ||
-                0
-            );
+        /*
+         * Recargar datos reales
+         * desde Firestore.
+         */
 
+        await loadCustomer();
 
-        prizeCounter.textContent =
-            actual + 1;
-
+        await loadCustomerPrizes();
 
     }
     catch (error) {
@@ -2489,32 +2598,229 @@ async function validatePrizeCode(
         );
 
 
-        /*
-         * CODIGO YA UTILIZADO
-         */
-
         if (
             error.message ===
             "CODIGO_YA_UTILIZADO"
         ) {
 
             showMessage(
-                "❌ Este código ya fue utilizado. Cada código de premio solo puede utilizarse una vez.",
+                "Este código ya fue utilizado y no puede volver a usarse.",
                 "error"
             );
 
-            return;
+        }
+        else {
+
+            showMessage(
+                "Error procesando premio: " +
+                error.message,
+                "error"
+            );
 
         }
 
+    }
+    finally {
 
-        /*
-         * OTRO ERROR
-         */
+        processingCode = false;
+
+    }
+
+}
+
+
+
+/* ============================================================
+   MOSTRAR PREMIO
+============================================================ */
+
+function mostrarPremioGanado(
+    campana,
+    premio,
+    codigo,
+    puntos
+) {
+
+    document.getElementById(
+        "promotionFound"
+    ).classList.remove(
+        "show"
+    );
+
+
+    const result =
+        document.getElementById(
+            "prizeFound"
+        );
+
+
+    document.getElementById(
+        "prizeBusiness"
+    ).textContent =
+        campana.nombreNegocio ||
+        "Negocio";
+
+
+    document.getElementById(
+        "prizeCampaign"
+    ).textContent =
+        campana.nombre ||
+        "Campaña de premios";
+
+
+    document.getElementById(
+        "prizeName"
+    ).textContent =
+        premio.nombre ||
+        "Premio";
+
+
+    document.getElementById(
+        "prizeDescription"
+    ).textContent =
+        premio.descripcion ||
+        "";
+
+
+    document.getElementById(
+        "prizePoints"
+    ).textContent =
+        puntos > 0
+        ?
+        "⭐ +" +
+        puntos +
+        " puntos"
+        :
+        "🎉 Premio ganado";
+
+
+    document.getElementById(
+        "prizeCode"
+    ).textContent =
+        codigo;
+
+
+    result.classList.add(
+        "show"
+    );
+
+}
+
+
+
+/* ============================================================
+   ESCANER QR
+============================================================ */
+
+async function startScanner() {
+
+    if (
+        scannerRunning
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        hideMessage();
+
+
+        html5QrCode =
+            new Html5Qrcode(
+                "reader"
+            );
+
+
+        const config = {
+
+            fps: 10,
+
+            qrbox: {
+                width: 250,
+                height: 250
+            },
+
+            aspectRatio: 1.0
+
+        };
+
+
+        await html5QrCode.start(
+
+            {
+                facingMode: "environment"
+            },
+
+            config,
+
+            async (
+                decodedText
+            ) => {
+
+                if (
+                    processingCode
+                ) {
+
+                    return;
+
+                }
+
+
+                await stopScanner();
+
+
+                await processCode(
+                    decodedText
+                );
+
+            },
+
+            () => {
+                /*
+                 * No mostramos errores
+                 * de cada frame.
+                 */
+            }
+
+        );
+
+
+        scannerRunning = true;
+
+
+        startScannerBtn
+            .classList
+            .add(
+                "hidden"
+            );
+
+
+        stopScannerBtn
+            .classList
+            .remove(
+                "hidden"
+            );
+
 
         showMessage(
-            "No fue posible procesar el premio: " +
-            error.message,
+            "Cámara activa. Apunta al código QR.",
+            "info"
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error iniciando cámara:",
+            error
+        );
+
+
+        showMessage(
+            "No fue posible abrir la cámara. Puedes introducir el código manualmente.",
             "error"
         );
 
@@ -2524,224 +2830,227 @@ async function validatePrizeCode(
 
 
 
-/* =========================================================
-   SORTEO PONDERADO
-========================================================= */
+/* ============================================================
+   DETENER ESCANER
+============================================================ */
 
-function seleccionarPremio(
-    opciones
-) {
+async function stopScanner() {
 
-    const random =
-        Math.random() * 100;
-
-
-    let acumulado =
-        0;
-
-
-    for (
-        const opcion
-        of opciones
+    if (
+        !html5QrCode ||
+        !scannerRunning
     ) {
 
-        acumulado +=
-            Number(
-                opcion.probabilidad ||
-                0
-            );
-
-
-        if (
-            random <
-            acumulado
-        ) {
-
-            return opcion;
-
-        }
+        return;
 
     }
 
 
-    /*
-     * Protección por precisión
-     */
+    try {
 
-    return opciones[
-        opciones.length - 1
-    ];
+        await html5QrCode.stop();
 
-}
+        await html5QrCode.clear();
 
+    }
+    catch (error) {
 
+        console.warn(
+            "Error deteniendo scanner:",
+            error
+        );
 
-/* =========================================================
-   RESET
-========================================================= */
-
-function resetScannerUI() {
-
-    resetResults();
+    }
 
 
-    const message =
-        document.getElementById(
-            "message"
+    scannerRunning = false;
+
+
+    startScannerBtn
+        .classList
+        .remove(
+            "hidden"
         );
 
 
-    message.className =
-        "message";
-
-
-    message.textContent =
-        "";
-
-
-    document.getElementById(
-        "manualCode"
-    ).value =
-        "";
-
-}
-
-
-function resetResults() {
-
-    document
-        .getElementById(
-            "promotionFound"
-        )
-        .classList.remove(
-            "show"
-        );
-
-
-    document
-        .getElementById(
-            "prizeFound"
-        )
-        .classList.remove(
-            "show"
+    stopScannerBtn
+        .classList
+        .add(
+            "hidden"
         );
 
 }
 
 
 
-/* =========================================================
-   MENSAJES
-========================================================= */
+/* ============================================================
+   PROCESAR CODIGO
+============================================================ */
 
-function showMessage(
-    text,
-    type
-) {
-
-    const message =
-        document.getElementById(
-            "message"
-        );
-
-
-    message.textContent =
-        text;
-
-
-    message.className =
-        "message show " +
-        type;
-
-}
-
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHtml(
+async function processCode(
     value
 ) {
 
-    return String(
-        value || ""
-    )
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#039;"
+    const codigo =
+        normalizeCode(value);
+
+
+    if (!codigo) {
+
+        showMessage(
+            "Introduce un código.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (
+        codigo.startsWith("PW-")
+    ) {
+
+        await validatePromotionCode(
+            codigo
+        );
+
+        return;
+
+    }
+
+
+    if (
+        codigo.startsWith("PR-")
+    ) {
+
+        await validatePrizeCode(
+            codigo
+        );
+
+        return;
+
+    }
+
+
+    showMessage(
+        "Código no reconocido. Debe comenzar con PW- o PR-.",
+        "error"
     );
 
 }
 
 
 
-/* =========================================================
-   LOGOUT
-========================================================= */
+/* ============================================================
+   ESCAPE HTML
+============================================================ */
 
-window.logout =
-async function() {
+function escapeHtml(value) {
 
-    try {
-
-        await signOut(
-            auth
+    return String(value ?? "")
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
         );
 
-
-        window.location.href =
-            "login.html";
-
-    }
-    catch (error) {
-
-        console.error(
-            "Error cerrando sesión:",
-            error
-        );
-
-    }
-
-};
+}
 
 
 
-/* =========================================================
-   ENTER
-========================================================= */
+/* ============================================================
+   BOTONES
+============================================================ */
+
+startScannerBtn.addEventListener(
+    "click",
+    startScanner
+);
+
+
+stopScannerBtn.addEventListener(
+    "click",
+    stopScanner
+);
+
 
 document
     .getElementById(
-        "manualCode"
+        "validateManualBtn"
     )
     .addEventListener(
-        "keydown",
-        function(event) {
+        "click",
+        async () => {
 
-            if (
-                event.key ===
-                "Enter"
-            ) {
+            await processCode(
+                manualCode.value
+            );
 
-                validateManualCode();
+        }
+    );
+
+
+manualCode.addEventListener(
+    "keydown",
+    async (event) => {
+
+        if (
+            event.key === "Enter"
+        ) {
+
+            await processCode(
+                manualCode.value
+            );
+
+        }
+
+    }
+);
+
+
+
+/* ============================================================
+   LOGOUT
+============================================================ */
+
+document
+    .getElementById(
+        "logoutBtn"
+    )
+    .addEventListener(
+        "click",
+        async () => {
+
+            try {
+
+                await stopScanner();
+
+                await signOut(
+                    auth
+                );
+
+            }
+            catch (error) {
+
+                console.error(
+                    error
+                );
 
             }
 
@@ -2749,9 +3058,42 @@ document
     );
 
 
+
+/* ============================================================
+   AUTH
+============================================================ */
+
+onAuthStateChanged(
+    auth,
+    async (user) => {
+
+        if (!user) {
+
+            window.location.href =
+                "index.html";
+
+            return;
+
+        }
+
+
+        currentUser =
+            user;
+
+
+        await loadCustomer();
+
+        await loadPublicPromotions();
+
+        await loadCustomerPromotions();
+
+        await loadCustomerPrizes();
+
+    }
+);
+
 </script>
 
 </body>
 
 </html>
-
