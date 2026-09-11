@@ -1,15 +1,24 @@
 ```html
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>PromoWallet RD</title>
 
-    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+    <script
+        src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js">
+    </script>
+
 
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -104,12 +113,20 @@
         }
 
         .scan-card {
-            background: linear-gradient(135deg, #0f9d71, #087f5b);
+            background: linear-gradient(
+                135deg,
+                #0f9d71,
+                #087f5b
+            );
+
             color: white;
             border-radius: 18px;
             padding: 22px;
             margin-bottom: 25px;
-            box-shadow: 0 8px 20px rgba(15, 157, 113, .18);
+
+            box-shadow:
+                0 8px 20px
+                rgba(15, 157, 113, .18);
         }
 
         .scan-card h2 {
@@ -225,7 +242,10 @@
             color: #64748b;
         }
 
-        /* MODAL */
+
+        /* =========================
+           MODAL
+        ========================= */
 
         .modal {
             display: none;
@@ -281,6 +301,11 @@
             border-radius: 12px;
         }
 
+
+        /* =========================
+           CODIGO MANUAL
+        ========================= */
+
         .manual {
             border-top: 1px solid #e5e7eb;
             padding-top: 15px;
@@ -318,6 +343,11 @@
             cursor: pointer;
         }
 
+
+        /* =========================
+           MENSAJES
+        ========================= */
+
         .message {
             display: none;
             padding: 12px;
@@ -342,7 +372,10 @@
             border: 1px solid #a7f3d0;
         }
 
-        /* RESULTADO PROMOCION */
+
+        /* =========================
+           PROMOCION
+        ========================= */
 
         .promotion-found {
             display: none;
@@ -388,7 +421,10 @@
             font-weight: 800;
         }
 
-        /* RESULTADO PREMIO */
+
+        /* =========================
+           PREMIO
+        ========================= */
 
         .prize-found {
             display: none;
@@ -452,13 +488,21 @@
             font-weight: 800;
         }
 
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
         @media(max-width: 800px) {
+
             .cards {
                 grid-template-columns: repeat(2, 1fr);
             }
+
         }
 
         @media(max-width: 600px) {
+
             .stats {
                 grid-template-columns: 1fr;
             }
@@ -482,134 +526,248 @@
             .manual button {
                 height: 45px;
             }
+
         }
+
     </style>
+
 </head>
+
 
 <body>
 
+
 <header class="topbar">
+
     <div class="brand">
         Promo<span>Wallet</span> RD
     </div>
 
-    <button class="logout" onclick="logout()">
+    <button
+        class="logout"
+        onclick="logout()">
+
         Salir
+
     </button>
+
 </header>
+
 
 <main class="container">
 
+
     <div class="welcome">
-        <h1>¡Hola! 👋</h1>
-        <p>Descubre promociones y gana premios.</p>
+
+        <h1>
+            ¡Hola! 👋
+        </h1>
+
+        <p>
+            Descubre promociones y gana premios.
+        </p>
+
     </div>
+
+
+    <!-- ESTADISTICAS -->
 
     <div class="stats">
 
-        <div class="stat">
-            <div class="stat-icon">⭐</div>
-            <div class="stat-title">Mis puntos</div>
-            <div class="stat-value" id="pointsValue">0</div>
-        </div>
 
         <div class="stat">
-            <div class="stat-icon">🏆</div>
-            <div class="stat-title">Nivel</div>
-            <div class="stat-value" id="levelValue">1</div>
+
+            <div class="stat-icon">
+                ⭐
+            </div>
+
+            <div class="stat-title">
+                Mis puntos
+            </div>
+
+            <div
+                class="stat-value"
+                id="pointsValue">
+
+                0
+
+            </div>
+
         </div>
 
+
         <div class="stat">
-            <div class="stat-icon">🎁</div>
-            <div class="stat-title">Premios ganados</div>
-            <div class="stat-value" id="prizesValue">0</div>
+
+            <div class="stat-icon">
+                🏆
+            </div>
+
+            <div class="stat-title">
+                Nivel
+            </div>
+
+            <div
+                class="stat-value"
+                id="levelValue">
+
+                1
+
+            </div>
+
         </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                🎁
+            </div>
+
+            <div class="stat-title">
+                Premios ganados
+            </div>
+
+            <div
+                class="stat-value"
+                id="prizesValue">
+
+                0
+
+            </div>
+
+        </div>
+
 
     </div>
 
-    <!-- SCANNER -->
+
+    <!-- ESCANEAR -->
 
     <section class="scan-card">
 
-        <h2>🎟️ ¿Tienes un código?</h2>
+        <h2>
+            🎟️ ¿Tienes un código?
+        </h2>
 
         <p>
             Escanea el QR o escribe el código que recibiste.
         </p>
+
 
         <div class="scan-buttons">
 
             <button
                 class="btn btn-white"
                 onclick="openScan()">
+
                 📷 Escanear QR
+
             </button>
+
 
             <button
                 class="btn btn-light"
                 onclick="focusManualCode()">
+
                 ⌨️ Escribir código
+
             </button>
 
         </div>
 
     </section>
 
-    <!-- OPORTUNIDADES -->
+
+    <!-- PROMOCIONES PUBLICAS -->
 
     <section class="section">
 
         <div class="section-header">
-            <h2>🔥 Oportunidades para ti</h2>
+
+            <h2>
+                🔥 Oportunidades para ti
+            </h2>
+
             <span id="promotionCount"></span>
+
         </div>
 
-        <div id="publicPromotions" class="cards">
+
+        <div
+            id="publicPromotions"
+            class="cards">
+
         </div>
 
     </section>
+
 
     <!-- MIS PROMOCIONES -->
 
     <section class="section">
 
         <div class="section-header">
-            <h2>🎁 Mis promociones</h2>
+
+            <h2>
+                🎁 Mis promociones
+            </h2>
+
         </div>
 
-        <div id="customerPromotions" class="cards">
+
+        <div
+            id="customerPromotions"
+            class="cards">
+
         </div>
 
     </section>
 
+
 </main>
 
 
-<!-- MODAL SCANNER -->
+<!-- MODAL -->
 
-<div id="scanModal" class="modal">
+<div
+    id="scanModal"
+    class="modal">
+
 
     <div class="modal-content">
 
+
         <div class="modal-header">
 
-            <h2>Escanear código</h2>
+            <h2>
+                Escanear código
+            </h2>
+
 
             <button
                 class="close"
                 onclick="closeScan()">
+
                 ×
+
             </button>
 
         </div>
 
+
         <div id="reader"></div>
+
+
+        <!-- CODIGO MANUAL -->
 
         <div class="manual">
 
             <label for="manualCode">
+
                 También puedes escribir el código
+
             </label>
+
 
             <div class="manual-row">
 
@@ -619,96 +777,163 @@
                     placeholder="Ej: PR-C2Y6JN"
                     autocomplete="off">
 
-                <button onclick="validateManualCode()">
+
+                <button
+                    onclick="validateManualCode()">
+
                     Validar
+
                 </button>
 
             </div>
 
         </div>
 
-        <div id="message" class="message"></div>
 
-        <!-- PROMOCION ENCONTRADA -->
+        <!-- MENSAJE -->
 
-        <div id="promotionFound" class="promotion-found">
-
-            <div class="promotion-found-title">
-                🎉 Promoción encontrada
-            </div>
-
-            <div id="promotionBusiness"
-                 class="promotion-business">
-            </div>
-
-            <div id="promotionName"
-                 class="promotion-name">
-            </div>
-
-            <div id="promotionDescription"
-                 class="promotion-description">
-            </div>
-
-            <div id="promotionPoints"
-                 class="promotion-points">
-            </div>
+        <div
+            id="message"
+            class="message">
 
         </div>
 
-        <!-- PREMIO ENCONTRADO -->
 
-        <div id="prizeFound" class="prize-found">
+        <!-- PROMOCION -->
+
+        <div
+            id="promotionFound"
+            class="promotion-found">
+
+
+            <div class="promotion-found-title">
+
+                🎉 Promoción encontrada
+
+            </div>
+
+
+            <div
+                id="promotionBusiness"
+                class="promotion-business">
+
+            </div>
+
+
+            <div
+                id="promotionName"
+                class="promotion-name">
+
+            </div>
+
+
+            <div
+                id="promotionDescription"
+                class="promotion-description">
+
+            </div>
+
+
+            <div
+                id="promotionPoints"
+                class="promotion-points">
+
+            </div>
+
+
+        </div>
+
+
+        <!-- PREMIO -->
+
+        <div
+            id="prizeFound"
+            class="prize-found">
+
 
             <div class="prize-icon">
                 🎁
             </div>
 
+
             <div class="prize-title">
+
                 ¡Ganaste un premio!
+
             </div>
 
-            <div id="prizeBusiness"
-                 class="promotion-business">
+
+            <div
+                id="prizeBusiness"
+                class="promotion-business">
+
             </div>
 
-            <div id="prizeCampaign"
-                 class="prize-campaign">
+
+            <div
+                id="prizeCampaign"
+                class="prize-campaign">
+
             </div>
 
-            <div id="prizeName"
-                 class="prize-name">
+
+            <div
+                id="prizeName"
+                class="prize-name">
+
             </div>
 
-            <div id="prizeDescription"
-                 class="prize-description">
+
+            <div
+                id="prizeDescription"
+                class="prize-description">
+
             </div>
 
-            <div id="prizePoints"
-                 class="prize-points">
+
+            <div
+                id="prizePoints"
+                class="prize-points">
+
             </div>
 
-            <div id="prizeCode"
-                 class="code-badge">
+
+            <div
+                id="prizeCode"
+                class="code-badge">
+
             </div>
+
 
         </div>
+
 
     </div>
 
 </div>
 
 
+
 <script type="module">
+
+
+/* =========================================================
+   FIREBASE
+========================================================= */
 
 import {
     initializeApp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 
 import {
     getAuth,
     onAuthStateChanged,
     signOut
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
 
 import {
     initializeFirestore,
@@ -719,12 +944,15 @@ import {
     where,
     getDocs,
     setDoc,
-    serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    serverTimestamp,
+    runTransaction
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 
 
 /* =========================================================
-   FIREBASE
+   CONFIGURACION FIREBASE
 ========================================================= */
 
 const firebaseConfig = {
@@ -738,8 +966,11 @@ const firebaseConfig = {
 		};
 
 
+
 const app =
-    initializeApp(firebaseConfig);
+    initializeApp(
+        firebaseConfig
+    );
 
 
 const auth =
@@ -747,9 +978,13 @@ const auth =
 
 
 const db =
-    initializeFirestore(app, {
-        experimentalForceLongPolling: true
-    });
+    initializeFirestore(
+        app,
+        {
+            experimentalForceLongPolling: true
+        }
+    );
+
 
 
 /* =========================================================
@@ -763,28 +998,38 @@ let html5QrCode = null;
 let scannerRunning = false;
 
 
+
 /* =========================================================
    AUTH
 ========================================================= */
 
-onAuthStateChanged(auth, async (user) => {
+onAuthStateChanged(
+    auth,
+    async (user) => {
 
-    if (!user) {
+        if (!user) {
 
-        window.location.href = "login.html";
+            window.location.href =
+                "login.html";
 
-        return;
+            return;
+
+        }
+
+
+        currentUser =
+            user;
+
+
+        await loadCustomer();
+
+        await loadPromotions();
+
+        await loadCustomerPromotions();
+
     }
+);
 
-    currentUser = user;
-
-    await loadCustomer();
-
-    await loadPromotions();
-
-    await loadCustomerPromotions();
-
-});
 
 
 /* =========================================================
@@ -802,13 +1047,17 @@ async function loadCustomer() {
                 currentUser.uid
             );
 
+
         const snapshot =
-            await getDoc(customerRef);
+            await getDoc(
+                customerRef
+            );
 
 
         if (!snapshot.exists()) {
 
             return;
+
         }
 
 
@@ -819,19 +1068,25 @@ async function loadCustomer() {
         document.getElementById(
             "pointsValue"
         ).textContent =
-            Number(cliente.puntos || 0);
+            Number(
+                cliente.puntos || 0
+            );
 
 
         document.getElementById(
             "levelValue"
         ).textContent =
-            Number(cliente.nivel || 1);
+            Number(
+                cliente.nivel || 1
+            );
 
 
         document.getElementById(
             "prizesValue"
         ).textContent =
-            Number(cliente.premiosGanados || 0);
+            Number(
+                cliente.premiosGanados || 0
+            );
 
     }
     catch (error) {
@@ -844,6 +1099,7 @@ async function loadCustomer() {
     }
 
 }
+
 
 
 /* =========================================================
@@ -890,7 +1146,8 @@ async function loadPromotions() {
         document.getElementById(
             "promotionCount"
         ).textContent =
-            snapshot.size + " disponibles";
+            snapshot.size +
+            " disponibles";
 
 
         if (snapshot.empty) {
@@ -904,62 +1161,71 @@ async function loadPromotions() {
                 `;
 
             return;
+
         }
 
 
-        snapshot.forEach((docSnap) => {
+        snapshot.forEach(
+            (docSnap) => {
 
-            const promo =
-                docSnap.data();
+                const promo =
+                    docSnap.data();
 
 
-            const card =
-                document.createElement(
-                    "div"
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                card.className =
+                    "card";
+
+
+                card.innerHTML =
+                    `
+                    <div class="card-category">
+                        ${escapeHtml(
+                            promo.categoria ||
+                            "Promoción"
+                        )}
+                    </div>
+
+                    <h3>
+                        ${escapeHtml(
+                            promo.nombre ||
+                            "Promoción"
+                        )}
+                    </h3>
+
+                    <div class="business">
+                        🏪 ${escapeHtml(
+                            promo.nombreNegocio ||
+                            "Negocio"
+                        )}
+                    </div>
+
+                    <div class="description">
+                        ${escapeHtml(
+                            promo.descripcion ||
+                            ""
+                        )}
+                    </div>
+
+                    <div class="points">
+                        ⭐ ${Number(
+                            promo.puntos || 0
+                        )} puntos
+                    </div>
+                    `;
+
+
+                container.appendChild(
+                    card
                 );
 
-            card.className =
-                "card";
-
-
-            card.innerHTML =
-                `
-                <div class="card-category">
-                    ${escapeHtml(
-                        promo.categoria || "Promoción"
-                    )}
-                </div>
-
-                <h3>
-                    ${escapeHtml(
-                        promo.nombre || "Promoción"
-                    )}
-                </h3>
-
-                <div class="business">
-                    🏪 ${escapeHtml(
-                        promo.nombreNegocio ||
-                        "Negocio"
-                    )}
-                </div>
-
-                <div class="description">
-                    ${escapeHtml(
-                        promo.descripcion || ""
-                    )}
-                </div>
-
-                <div class="points">
-                    ⭐ ${Number(
-                        promo.puntos || 0
-                    )} puntos
-                </div>
-                `;
-
-
-            container.appendChild(card);
-
-        });
+            }
+        );
 
     }
     catch (error) {
@@ -968,6 +1234,7 @@ async function loadPromotions() {
             "Error cargando promociones:",
             error
         );
+
 
         container.innerHTML =
             `
@@ -979,6 +1246,7 @@ async function loadPromotions() {
     }
 
 }
+
 
 
 /* =========================================================
@@ -1008,7 +1276,9 @@ async function loadCustomerPromotions() {
 
 
         const snapshot =
-            await getDocs(ref);
+            await getDocs(
+                ref
+            );
 
 
         if (snapshot.empty) {
@@ -1021,70 +1291,80 @@ async function loadCustomerPromotions() {
                 `;
 
             return;
+
         }
 
 
-        snapshot.forEach((docSnap) => {
+        snapshot.forEach(
+            (docSnap) => {
 
-            const promo =
-                docSnap.data();
+                const promo =
+                    docSnap.data();
 
 
-            const card =
-                document.createElement(
-                    "div"
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                card.className =
+                    "card";
+
+
+                card.innerHTML =
+                    `
+                    <div class="card-category">
+                        ${escapeHtml(
+                            promo.categoria ||
+                            "Promoción"
+                        )}
+                    </div>
+
+                    <h3>
+                        ${escapeHtml(
+                            promo.nombre ||
+                            "Promoción"
+                        )}
+                    </h3>
+
+                    <div class="business">
+                        🏪 ${escapeHtml(
+                            promo.nombreNegocio ||
+                            "Negocio"
+                        )}
+                    </div>
+
+                    <div class="description">
+                        ${escapeHtml(
+                            promo.descripcion ||
+                            ""
+                        )}
+                    </div>
+
+                    <div class="points">
+                        ⭐ ${Number(
+                            promo.puntos || 0
+                        )} puntos
+                    </div>
+                    `;
+
+
+                container.appendChild(
+                    card
                 );
 
-            card.className =
-                "card";
-
-
-            card.innerHTML =
-                `
-                <div class="card-category">
-                    ${escapeHtml(
-                        promo.categoria || "Promoción"
-                    )}
-                </div>
-
-                <h3>
-                    ${escapeHtml(
-                        promo.nombre || "Promoción"
-                    )}
-                </h3>
-
-                <div class="business">
-                    🏪 ${escapeHtml(
-                        promo.nombreNegocio ||
-                        "Negocio"
-                    )}
-                </div>
-
-                <div class="description">
-                    ${escapeHtml(
-                        promo.descripcion || ""
-                    )}
-                </div>
-
-                <div class="points">
-                    ⭐ ${Number(
-                        promo.puntos || 0
-                    )} puntos
-                </div>
-                `;
-
-
-            container.appendChild(card);
-
-        });
+            }
+        );
 
     }
     catch (error) {
 
         console.error(
-            "Error cargando promociones del cliente:",
+            "Error cargando promociones:",
             error
         );
+
 
         container.innerHTML =
             `
@@ -1098,15 +1378,21 @@ async function loadCustomerPromotions() {
 }
 
 
+
 /* =========================================================
    ABRIR SCANNER
 ========================================================= */
 
-window.openScan = async function() {
+window.openScan =
+async function() {
 
     document
-        .getElementById("scanModal")
-        .classList.add("show");
+        .getElementById(
+            "scanModal"
+        )
+        .classList.add(
+            "show"
+        );
 
 
     resetScannerUI();
@@ -1115,17 +1401,21 @@ window.openScan = async function() {
     try {
 
         html5QrCode =
-            new Html5Qrcode("reader");
+            new Html5Qrcode(
+                "reader"
+            );
 
 
         await html5QrCode.start(
 
             {
-                facingMode: "environment"
+                facingMode:
+                    "environment"
             },
 
             {
                 fps: 10,
+
                 qrbox: {
                     width: 250,
                     height: 250
@@ -1135,6 +1425,7 @@ window.openScan = async function() {
             async (decodedText) => {
 
                 await stopScanner();
+
 
                 await validatePurchaseCode(
                     decodedText
@@ -1147,7 +1438,8 @@ window.openScan = async function() {
         );
 
 
-        scannerRunning = true;
+        scannerRunning =
+            true;
 
     }
     catch (error) {
@@ -1156,6 +1448,7 @@ window.openScan = async function() {
             "Error iniciando cámara:",
             error
         );
+
 
         showMessage(
             "No fue posible iniciar la cámara. Puedes escribir el código manualmente.",
@@ -1167,19 +1460,27 @@ window.openScan = async function() {
 };
 
 
+
 /* =========================================================
    CERRAR SCANNER
 ========================================================= */
 
-window.closeScan = async function() {
+window.closeScan =
+async function() {
 
     await stopScanner();
 
+
     document
-        .getElementById("scanModal")
-        .classList.remove("show");
+        .getElementById(
+            "scanModal"
+        )
+        .classList.remove(
+            "show"
+        );
 
 };
+
 
 
 /* =========================================================
@@ -1211,40 +1512,57 @@ async function stopScanner() {
 
     }
 
-    scannerRunning = false;
 
-    html5QrCode = null;
+    scannerRunning =
+        false;
+
+
+    html5QrCode =
+        null;
 
 }
 
 
+
 /* =========================================================
-   ENFOCAR CODIGO MANUAL
+   INPUT MANUAL
 ========================================================= */
 
-window.focusManualCode = function() {
+window.focusManualCode =
+function() {
 
     document
-        .getElementById("scanModal")
-        .classList.add("show");
+        .getElementById(
+            "scanModal"
+        )
+        .classList.add(
+            "show"
+        );
 
 
-    setTimeout(() => {
+    setTimeout(
+        () => {
 
-        document
-            .getElementById("manualCode")
-            .focus();
+            document
+                .getElementById(
+                    "manualCode"
+                )
+                .focus();
 
-    }, 200);
+        },
+        200
+    );
 
 };
 
 
+
 /* =========================================================
-   VALIDAR CODIGO MANUAL
+   VALIDAR MANUAL
 ========================================================= */
 
-window.validateManualCode = async function() {
+window.validateManualCode =
+async function() {
 
     const input =
         document.getElementById(
@@ -1266,6 +1584,7 @@ window.validateManualCode = async function() {
         );
 
         return;
+
     }
 
 
@@ -1276,19 +1595,24 @@ window.validateManualCode = async function() {
 };
 
 
+
 /* =========================================================
-   VALIDAR CODIGO
+   IDENTIFICAR TIPO DE CODIGO
 ========================================================= */
 
-async function validatePurchaseCode(code) {
+async function validatePurchaseCode(
+    code
+) {
 
     resetResults();
 
 
     const codigo =
-        String(code || "")
-            .trim()
-            .toUpperCase();
+        String(
+            code || ""
+        )
+        .trim()
+        .toUpperCase();
 
 
     if (!codigo) {
@@ -1299,6 +1623,7 @@ async function validatePurchaseCode(code) {
         );
 
         return;
+
     }
 
 
@@ -1309,12 +1634,13 @@ async function validatePurchaseCode(code) {
 
 
     /*
-       PW = PROMOCION
-       PR = PREMIO
-    */
+     * PROMOCION
+     */
 
     if (
-        codigo.startsWith("PW-")
+        codigo.startsWith(
+            "PW-"
+        )
     ) {
 
         await validatePromotionCode(
@@ -1322,11 +1648,18 @@ async function validatePurchaseCode(code) {
         );
 
         return;
+
     }
 
 
+    /*
+     * PREMIO
+     */
+
     if (
-        codigo.startsWith("PR-")
+        codigo.startsWith(
+            "PR-"
+        )
     ) {
 
         await validatePrizeCode(
@@ -1334,6 +1667,7 @@ async function validatePurchaseCode(code) {
         );
 
         return;
+
     }
 
 
@@ -1343,6 +1677,7 @@ async function validatePurchaseCode(code) {
     );
 
 }
+
 
 
 /* =========================================================
@@ -1393,6 +1728,7 @@ async function validatePromotionCode(
             );
 
             return;
+
         }
 
 
@@ -1403,10 +1739,6 @@ async function validatePromotionCode(
         const promo =
             promoDoc.data();
 
-
-        /*
-           Guardar promoción
-        */
 
         const customerPromotionRef =
             doc(
@@ -1480,13 +1812,8 @@ async function validatePromotionCode(
             {
                 merge: true
             }
-
         );
 
-
-        /*
-           Mostrar resultado
-        */
 
         document.getElementById(
             "promotionBusiness"
@@ -1526,7 +1853,9 @@ async function validatePromotionCode(
             .getElementById(
                 "promotionFound"
             )
-            .classList.add("show");
+            .classList.add(
+                "show"
+            );
 
 
         showMessage(
@@ -1557,8 +1886,10 @@ async function validatePromotionCode(
 }
 
 
+
 /* =========================================================
    VALIDAR PREMIO
+   UN SOLO USO
 ========================================================= */
 
 async function validatePrizeCode(
@@ -1572,6 +1903,10 @@ async function validatePrizeCode(
             "success"
         );
 
+
+        /*
+         * 1. BUSCAR CAMPAÑA
+         */
 
         const premiosRef =
             collection(
@@ -1605,6 +1940,7 @@ async function validatePrizeCode(
             );
 
             return;
+
         }
 
 
@@ -1617,8 +1953,8 @@ async function validatePrizeCode(
 
 
         /*
-           Validar estado
-        */
+         * 2. VALIDAR ESTADO
+         */
 
         if (
             campana.activo === false ||
@@ -1631,76 +1967,18 @@ async function validatePrizeCode(
             );
 
             return;
-        }
-
-
-        /*
-           Validar fecha
-        */
-
-        const hoy =
-            new Date();
-
-
-        if (
-            campana.fechaInicio
-        ) {
-
-            const inicio =
-                new Date(
-                    campana.fechaInicio +
-                    "T00:00:00"
-                );
-
-
-            if (
-                hoy < inicio
-            ) {
-
-                showMessage(
-                    "Esta campaña todavía no ha comenzado.",
-                    "error"
-                );
-
-                return;
-            }
-
-        }
-
-
-        if (
-            campana.fechaFin
-        ) {
-
-            const fin =
-                new Date(
-                    campana.fechaFin +
-                    "T23:59:59"
-                );
-
-
-            if (
-                hoy > fin
-            ) {
-
-                showMessage(
-                    "Esta campaña ya finalizó.",
-                    "error"
-                );
-
-                return;
-            }
 
         }
 
 
         /*
-           Validar disponibilidad
-        */
+         * 3. VALIDAR DISPONIBILIDAD
+         */
 
         if (
             campana.cantidadDisponible !==
-            undefined &&
+            undefined
+            &&
             Number(
                 campana.cantidadDisponible
             ) <= 0
@@ -1712,12 +1990,13 @@ async function validatePrizeCode(
             );
 
             return;
+
         }
 
 
         /*
-           Obtener opciones
-        */
+         * 4. OPCIONES
+         */
 
         const opciones =
             Array.isArray(
@@ -1737,49 +2016,54 @@ async function validatePrizeCode(
             );
 
             return;
+
         }
 
 
         /*
-           Limpiar opciones
-        */
+         * 5. OPCIONES VALIDAS
+         */
 
         const opcionesValidas =
             opciones
-                .map(opcion => ({
+                .map(
+                    (opcion) => ({
 
-                    id:
-                        opcion.id ||
-                        crypto.randomUUID(),
+                        id:
+                            opcion.id ||
+                            crypto.randomUUID(),
 
-                    nombre:
-                        opcion.nombre ||
-                        "Premio",
+                        nombre:
+                            opcion.nombre ||
+                            "Premio",
 
-                    descripcion:
-                        opcion.descripcion ||
-                        "",
+                        descripcion:
+                            opcion.descripcion ||
+                            "",
 
-                    probabilidad:
-                        Number(
-                            opcion.probabilidad || 0
-                        ),
+                        probabilidad:
+                            Number(
+                                opcion.probabilidad ||
+                                0
+                            ),
 
-                    puntos:
-                        Number(
-                            opcion.puntos || 0
-                        )
+                        puntos:
+                            Number(
+                                opcion.puntos ||
+                                0
+                            )
 
-                }))
+                    })
+                )
                 .filter(
-                    opcion =>
+                    (opcion) =>
                         opcion.probabilidad > 0
                 );
 
 
         /*
-           Validar total
-        */
+         * 6. TOTAL PROBABILIDADES
+         */
 
         const total =
             opcionesValidas.reduce(
@@ -1800,22 +2084,26 @@ async function validatePrizeCode(
         ) {
 
             showMessage(
-                "La configuración de probabilidades de esta campaña no es válida. El total debe ser 100%.",
+                "Las probabilidades de esta campaña deben sumar 100%. Actualmente suman " +
+                total +
+                "%.",
                 "error"
             );
 
-            console.error(
-                "Total probabilidades:",
-                total
-            );
-
             return;
+
         }
 
 
         /*
-           SORTEO PONDERADO
-        */
+         * 7. SORTEO
+         *
+         * Lo hacemos antes de la transacción.
+         *
+         * Si el código ya fue usado,
+         * la transacción no permitirá
+         * guardar otro resultado.
+         */
 
         const premioGanado =
             seleccionarPremio(
@@ -1831,12 +2119,34 @@ async function validatePrizeCode(
             );
 
             return;
+
         }
 
 
         /*
-           ID DE REDENCION
-        */
+         * 8. REFERENCIA DEL CODIGO
+         *
+         * Estructura:
+         *
+         * premios
+         *   └── ID_CAMPAÑA
+         *        └── codigos
+         *             └── PR-C2Y6JN
+         */
+
+        const codigoRef =
+            doc(
+                db,
+                "premios",
+                premioDoc.id,
+                "codigos",
+                codigo
+            );
+
+
+        /*
+         * 9. REFERENCIA DE REDENCION
+         */
 
         const redemptionRef =
             doc(
@@ -1850,65 +2160,134 @@ async function validatePrizeCode(
 
 
         /*
-           GUARDAR PREMIO
-        */
+         * 10. TRANSACCION
+         *
+         * Esto es lo importante.
+         *
+         * Si dos usuarios intentan usar
+         * el mismo código al mismo tiempo,
+         * solamente uno podrá crearlo.
+         */
 
-        await setDoc(
-            redemptionRef,
-            {
+        await runTransaction(
+            db,
+            async (transaction) => {
 
-                premioCampanaId:
-                    premioDoc.id,
+                const codigoSnapshot =
+                    await transaction.get(
+                        codigoRef
+                    );
 
-                codigoPremio:
-                    campana.codigoPremio ||
-                    codigo,
 
-                negocioId:
-                    campana.negocioId ||
-                    "",
+                /*
+                 * EL CODIGO YA EXISTE
+                 */
 
-                nombreNegocio:
-                    campana.nombreNegocio ||
-                    "Negocio",
+                if (
+                    codigoSnapshot.exists()
+                ) {
 
-                campanaNombre:
-                    campana.nombre ||
-                    "Campaña de premios",
+                    throw new Error(
+                        "CODIGO_YA_UTILIZADO"
+                    );
 
-                premioId:
-                    premioGanado.id,
+                }
 
-                premioGanado:
-                    premioGanado.nombre,
 
-                descripcionPremio:
-                    premioGanado.descripcion,
+                /*
+                 * REGISTRAR CODIGO
+                 */
 
-                puntos:
-                    Number(
-                        premioGanado.puntos || 0
-                    ),
+                transaction.set(
+                    codigoRef,
+                    {
 
-                probabilidad:
-                    Number(
-                        premioGanado.probabilidad || 0
-                    ),
+                        codigo:
+                            codigo,
 
-                estado:
-                    "ganado",
+                        usado:
+                            true,
 
-                fechaRedencion:
-                    serverTimestamp()
+                        clienteId:
+                            currentUser.uid,
+
+                        premioGanado:
+                            premioGanado.nombre,
+
+                        premioId:
+                            premioGanado.id,
+
+                        fechaUso:
+                            serverTimestamp()
+
+                    }
+                );
+
+
+                /*
+                 * GUARDAR PREMIO DEL CLIENTE
+                 */
+
+                transaction.set(
+                    redemptionRef,
+                    {
+
+                        premioCampanaId:
+                            premioDoc.id,
+
+                        codigoPremio:
+                            campana.codigoPremio ||
+                            codigo,
+
+                        negocioId:
+                            campana.negocioId ||
+                            "",
+
+                        nombreNegocio:
+                            campana.nombreNegocio ||
+                            "Negocio",
+
+                        campanaNombre:
+                            campana.nombre ||
+                            "Campaña de premios",
+
+                        premioId:
+                            premioGanado.id,
+
+                        premioGanado:
+                            premioGanado.nombre,
+
+                        descripcionPremio:
+                            premioGanado.descripcion,
+
+                        puntos:
+                            Number(
+                                premioGanado.puntos ||
+                                0
+                            ),
+
+                        probabilidad:
+                            Number(
+                                premioGanado.probabilidad ||
+                                0
+                            ),
+
+                        estado:
+                            "ganado",
+
+                        fechaRedencion:
+                            serverTimestamp()
+
+                    }
+                );
 
             }
-
         );
 
 
         /*
-           MOSTRAR PREMIO
-        */
+         * 11. MOSTRAR PREMIO
+         */
 
         document.getElementById(
             "prizeBusiness"
@@ -1942,7 +2321,8 @@ async function validatePrizeCode(
 
         const puntos =
             Number(
-                premioGanado.puntos || 0
+                premioGanado.puntos ||
+                0
             );
 
 
@@ -1971,7 +2351,7 @@ async function validatePrizeCode(
         document.getElementById(
             "prizeCode"
         ).textContent =
-            "Código: " +
+            "Código utilizado: " +
             codigo;
 
 
@@ -1979,7 +2359,9 @@ async function validatePrizeCode(
             .getElementById(
                 "prizeFound"
             )
-            .classList.add("show");
+            .classList.add(
+                "show"
+            );
 
 
         showMessage(
@@ -1989,8 +2371,8 @@ async function validatePrizeCode(
 
 
         /*
-           Actualizar contador visual
-        */
+         * ACTUALIZAR CONTADOR VISUAL
+         */
 
         const prizeCounter =
             document.getElementById(
@@ -2000,21 +2382,46 @@ async function validatePrizeCode(
 
         const actual =
             Number(
-                prizeCounter.textContent || 0
+                prizeCounter.textContent ||
+                0
             );
 
 
         prizeCounter.textContent =
             actual + 1;
 
+
     }
     catch (error) {
 
         console.error(
-            "Error validando premio:",
+            "Error procesando premio:",
             error
         );
 
+
+        /*
+         * CODIGO YA UTILIZADO
+         */
+
+        if (
+            error.message ===
+            "CODIGO_YA_UTILIZADO"
+        ) {
+
+            showMessage(
+                "❌ Este código ya fue utilizado. Cada código de premio solo puede utilizarse una vez.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * OTRO ERROR
+         */
 
         showMessage(
             "No fue posible procesar el premio: " +
@@ -2025,6 +2432,7 @@ async function validatePrizeCode(
     }
 
 }
+
 
 
 /* =========================================================
@@ -2039,21 +2447,25 @@ function seleccionarPremio(
         Math.random() * 100;
 
 
-    let acumulado = 0;
+    let acumulado =
+        0;
 
 
     for (
-        const opcion of opciones
+        const opcion
+        of opciones
     ) {
 
         acumulado +=
             Number(
-                opcion.probabilidad || 0
+                opcion.probabilidad ||
+                0
             );
 
 
         if (
-            random < acumulado
+            random <
+            acumulado
         ) {
 
             return opcion;
@@ -2064,9 +2476,8 @@ function seleccionarPremio(
 
 
     /*
-       Protección contra
-       errores de precisión
-    */
+     * Protección por precisión
+     */
 
     return opciones[
         opciones.length - 1
@@ -2075,8 +2486,9 @@ function seleccionarPremio(
 }
 
 
+
 /* =========================================================
-   RESET UI
+   RESET
 ========================================================= */
 
 function resetScannerUI() {
@@ -2100,7 +2512,8 @@ function resetScannerUI() {
 
     document.getElementById(
         "manualCode"
-    ).value = "";
+    ).value =
+        "";
 
 }
 
@@ -2111,16 +2524,21 @@ function resetResults() {
         .getElementById(
             "promotionFound"
         )
-        .classList.remove("show");
+        .classList.remove(
+            "show"
+        );
 
 
     document
         .getElementById(
             "prizeFound"
         )
-        .classList.remove("show");
+        .classList.remove(
+            "show"
+        );
 
 }
+
 
 
 /* =========================================================
@@ -2149,46 +2567,56 @@ function showMessage(
 }
 
 
+
 /* =========================================================
    ESCAPE HTML
 ========================================================= */
 
-function escapeHtml(value) {
+function escapeHtml(
+    value
+) {
 
-    return String(value || "")
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+    return String(
+        value || ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
 
 }
+
 
 
 /* =========================================================
    LOGOUT
 ========================================================= */
 
-window.logout = async function() {
+window.logout =
+async function() {
 
     try {
 
-        await signOut(auth);
+        await signOut(
+            auth
+        );
+
 
         window.location.href =
             "login.html";
@@ -2206,8 +2634,9 @@ window.logout = async function() {
 };
 
 
+
 /* =========================================================
-   ENTER EN CODIGO MANUAL
+   ENTER
 ========================================================= */
 
 document
@@ -2219,7 +2648,8 @@ document
         function(event) {
 
             if (
-                event.key === "Enter"
+                event.key ===
+                "Enter"
             ) {
 
                 validateManualCode();
@@ -2229,8 +2659,10 @@ document
         }
     );
 
+
 </script>
 
 </body>
+
 </html>
 ```
