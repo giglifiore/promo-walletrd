@@ -1178,15 +1178,18 @@
 
 
     import {
-        initializeFirestore,
-        doc,
-        getDoc,
-        collection,
-        addDoc,
-        serverTimestamp
-    }
-    from
-    "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+		initializeFirestore,
+		doc,
+		getDoc,
+		getDocs,
+		collection,
+		addDoc,
+		query,
+		where,
+		serverTimestamp
+	}
+	from
+	"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
 
@@ -1373,7 +1376,48 @@
 
     }
 
+// =====================================================
+// GENERAR CODIGO UNICO
+// =====================================================
 
+async function generarCodigoUnico() {
+
+    let codigo;
+    let existe = true;
+
+    while (existe) {
+
+        codigo =
+            generarCodigoPromocion();
+
+
+        const codigoQuery =
+            query(
+                collection(
+                    db,
+                    "promociones"
+                ),
+                where(
+                    "codigoPromocion",
+                    "==",
+                    codigo
+                )
+            );
+
+
+        const resultado =
+            await getDocs(
+                codigoQuery
+            );
+
+
+        existe =
+            !resultado.empty;
+
+    }
+
+    return codigo;
+}
 
     // =====================================================
     // LOADING
@@ -1545,7 +1589,31 @@
 
     }
 
+// =====================================================
+// GENERAR CODIGO UNICO DE PROMOCION
+// =====================================================
 
+function generarCodigoPromocion() {
+
+    const caracteres =
+        "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+    let codigo = "PW-";
+
+    for (let i = 0; i < 6; i++) {
+
+        const posicion =
+            Math.floor(
+                Math.random() *
+                caracteres.length
+            );
+
+        codigo += caracteres[posicion];
+
+    }
+
+    return codigo;
+}
 
     // =====================================================
     // VALIDAR FORMULARIO
@@ -2079,100 +2147,124 @@
                 // CREAR PROMOCION
                 // =================================================
 
-                const promocion = {
+                // =====================================================
+// GENERAR CODIGO DE LA PROMOCION
+// =====================================================
 
-                    // ---------------------------------------------
-                    // NEGOCIO
-                    // ---------------------------------------------
-
-                    negocioId:
-                        user.uid,
-
-                    nombreNegocio:
-                        negocio.nombreNegocio ||
-                        "",
+const codigoPromocion =
+    await generarCodigoUnico();
 
 
-                    // ---------------------------------------------
-                    // INFORMACION
-                    // ---------------------------------------------
-
-                    nombre:
-                        nombre,
-
-                    descripcion:
-                        descripcion,
-
-                    categoria:
-                        categoria,
+console.log(
+    "Código generado:",
+    codigoPromocion
+);
 
 
-                    // ---------------------------------------------
-                    // PRECIOS
-                    // ---------------------------------------------
+// =====================================================
+// CREAR PROMOCION
+// =====================================================
 
-                    precioNormal:
-                        precioNormal,
+const promocion = {
 
-                    precioPromo:
-                        precioPromo,
+    // ---------------------------------------------
+    // IDENTIFICACION
+    // ---------------------------------------------
 
-                    descuento:
-                        descuento,
+    codigoPromocion:
+        codigoPromocion,
 
+    // ---------------------------------------------
+    // NEGOCIO
+    // ---------------------------------------------
 
-                    // ---------------------------------------------
-                    // PUNTOS / CANTIDAD
-                    // ---------------------------------------------
+    negocioId:
+        user.uid,
 
-                    puntos:
-                        puntos,
-
-                    cantidadDisponible:
-                        cantidad,
-
-
-                    // ---------------------------------------------
-                    // VIGENCIA
-                    // ---------------------------------------------
-
-                    fechaInicio:
-                        fechaInicio,
-
-                    fechaFin:
-                        fechaFin,
+    nombreNegocio:
+        negocio.nombreNegocio || "",
 
 
-                    // ---------------------------------------------
-                    // ESTADO
-                    // ---------------------------------------------
+    // ---------------------------------------------
+    // INFORMACION
+    // ---------------------------------------------
 
-                    estado:
-                        "activa",
+    nombre:
+        nombre,
 
-                    activa:
-                        true,
+    descripcion:
+        descripcion,
 
-
-                    // ---------------------------------------------
-                    // CONTADORES
-                    // ---------------------------------------------
-
-                    vistas:
-                        0,
-
-                    redenciones:
-                        0,
+    categoria:
+        categoria,
 
 
-                    // ---------------------------------------------
-                    // CREACION
-                    // ---------------------------------------------
+    // ---------------------------------------------
+    // PRECIOS
+    // ---------------------------------------------
 
-                    fechaCreacion:
-                        serverTimestamp()
+    precioNormal:
+        precioNormal,
 
-                };
+    precioPromo:
+        precioPromo,
+
+    descuento:
+        descuento,
+
+
+    // ---------------------------------------------
+    // PUNTOS / CANTIDAD
+    // ---------------------------------------------
+
+    puntos:
+        puntos,
+
+    cantidadDisponible:
+        cantidad,
+
+
+    // ---------------------------------------------
+    // VIGENCIA
+    // ---------------------------------------------
+
+    fechaInicio:
+        fechaInicio,
+
+    fechaFin:
+        fechaFin,
+
+
+    // ---------------------------------------------
+    // ESTADO
+    // ---------------------------------------------
+
+    estado:
+        "activa",
+
+    activa:
+        true,
+
+
+    // ---------------------------------------------
+    // CONTADORES
+    // ---------------------------------------------
+
+    vistas:
+        0,
+
+    redenciones:
+        0,
+
+
+    // ---------------------------------------------
+    // CREACION
+    // ---------------------------------------------
+
+    fechaCreacion:
+        serverTimestamp()
+
+};
 
 
                 console.log(
@@ -2208,21 +2300,51 @@
                 // GUARDAR EN FIRESTORE
                 // =================================================
 
-                const promocionRef =
-                    await addDoc(
-                        collection(
-                            db,
-                            "promociones"
-                        ),
-                        promocion
-                    );
+               // =====================================================
+// GENERAR CODIGO DE LA PROMOCION
+// =====================================================
+
+const codigoPromocion =
+    generarCodigoPromocion();
 
 
-                console.log(
-                    "Promoción creada:",
-                    promocionRef.id
-                );
+console.log(
+    "Código de promoción:",
+    codigoPromocion
+);
 
+
+// =====================================================
+// AGREGAR CODIGO AL OBJETO
+// =====================================================
+
+promocion.codigoPromocion =
+    codigoPromocion;
+
+
+// =====================================================
+// GUARDAR EN FIRESTORE
+// =====================================================
+
+const promocionRef =
+    await addDoc(
+        collection(
+            db,
+            "promociones"
+        ),
+        promocion
+    );
+
+
+console.log(
+    "Promoción creada:",
+    promocionRef.id
+);
+
+console.log(
+    "Código para el cliente:",
+    codigoPromocion
+);
 
 
                 // =================================================
