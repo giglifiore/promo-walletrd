@@ -1,6 +1,9 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
 
     <meta name="viewport"
@@ -10,17 +13,24 @@
                    user-scalable=no">
 
     <meta name="theme-color" content="#0f9d72">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <meta name="apple-mobile-web-app-capable"
+          content="yes">
+
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="default">
 
     <title>PromoWallet</title>
 
+
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
+
 
         html,
         body {
@@ -28,69 +38,103 @@
             min-height: 100%;
         }
 
+
         body {
-            font-family: Inter, -apple-system, BlinkMacSystemFont,
-                         "Segoe UI", Roboto, Arial, sans-serif;
+
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Arial,
+                sans-serif;
 
             background: #f5f7fb;
+
             color: #172033;
 
             -webkit-font-smoothing: antialiased;
+
             padding-bottom: 90px;
         }
+
 
         button {
             font-family: inherit;
         }
+
 
         a {
             text-decoration: none;
             color: inherit;
         }
 
+
         /* =========================
            LOADING
         ========================= */
 
         #loading {
+
             position: fixed;
+
             inset: 0;
+
             background: #ffffff;
+
             z-index: 9999;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             flex-direction: column;
+
             gap: 15px;
         }
 
+
         .loading-logo {
+
             width: 62px;
             height: 62px;
+
             border-radius: 18px;
 
             background: #0f9d72;
+
             color: white;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
             font-size: 28px;
+
             font-weight: 800;
         }
 
+
         .loading-text {
+
             font-size: 14px;
+
             color: #6b7280;
         }
 
+
         .spinner {
+
             width: 24px;
             height: 24px;
 
             border: 3px solid #e5e7eb;
+
             border-top-color: #0f9d72;
 
             border-radius: 50%;
@@ -98,11 +142,15 @@
             animation: spin .8s linear infinite;
         }
 
+
         @keyframes spin {
+
             to {
                 transform: rotate(360deg);
             }
+
         }
+
 
         /* =========================
            APP
@@ -112,16 +160,21 @@
             display: none;
         }
 
+
         /* =========================
            HEADER
         ========================= */
 
         .topbar {
+
             background: #ffffff;
+
             height: 68px;
 
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
 
             padding: 0 18px;
@@ -129,78 +182,109 @@
             border-bottom: 1px solid #e8ebf0;
 
             position: sticky;
+
             top: 0;
+
             z-index: 100;
         }
 
+
         .brand {
+
             display: flex;
+
             align-items: center;
+
             gap: 9px;
         }
 
+
         .brand-icon {
+
             width: 38px;
             height: 38px;
 
             border-radius: 11px;
 
             background: #0f9d72;
+
             color: white;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
             font-size: 19px;
+
             font-weight: 800;
         }
 
+
         .brand-name {
+
             font-size: 18px;
+
             font-weight: 800;
+
             letter-spacing: -.4px;
         }
+
 
         .brand-name span {
             color: #0f9d72;
         }
 
+
         .user-area {
+
             display: flex;
+
             align-items: center;
+
             gap: 10px;
         }
 
+
         .avatar {
+
             width: 38px;
             height: 38px;
 
             border-radius: 50%;
 
             background: #e7f7f1;
+
             color: #087957;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
             font-weight: 800;
+
             font-size: 14px;
         }
+
 
         /* =========================
            MAIN
         ========================= */
 
         .container {
+
             width: 100%;
+
             max-width: 760px;
 
             margin: auto;
 
             padding: 22px 16px 30px;
         }
+
 
         /* =========================
            WELCOME
@@ -210,19 +294,27 @@
             margin-bottom: 18px;
         }
 
+
         .welcome-small {
+
             color: #7a8494;
+
             font-size: 13px;
+
             font-weight: 700;
 
             text-transform: uppercase;
+
             letter-spacing: .7px;
 
             margin-bottom: 5px;
         }
 
+
         .welcome h1 {
+
             font-size: 25px;
+
             line-height: 1.2;
 
             letter-spacing: -.7px;
@@ -230,19 +322,25 @@
             margin-bottom: 6px;
         }
 
+
         .welcome p {
+
             color: #687386;
+
             font-size: 14px;
         }
+
 
         /* =========================
            SCAN CARD
         ========================= */
 
         .scan-card {
+
             position: relative;
 
             background: #0f9d72;
+
             color: white;
 
             border-radius: 22px;
@@ -251,12 +349,16 @@
 
             overflow: hidden;
 
-            box-shadow: 0 12px 30px rgba(15, 157, 114, .20);
+            box-shadow:
+                0 12px 30px
+                rgba(15, 157, 114, .20);
 
             margin-bottom: 18px;
         }
 
+
         .scan-card::after {
+
             content: "";
 
             position: absolute;
@@ -269,19 +371,27 @@
 
             border-radius: 50%;
 
-            background: rgba(255,255,255,.08);
+            background:
+                rgba(255,255,255,.08);
         }
 
+
         .scan-card-content {
+
             position: relative;
+
             z-index: 2;
         }
 
+
         .scan-label {
+
             font-size: 12px;
+
             font-weight: 700;
 
             text-transform: uppercase;
+
             letter-spacing: .7px;
 
             opacity: .85;
@@ -289,8 +399,11 @@
             margin-bottom: 5px;
         }
 
+
         .scan-title {
+
             font-size: 23px;
+
             font-weight: 800;
 
             letter-spacing: -.5px;
@@ -298,8 +411,11 @@
             margin-bottom: 6px;
         }
 
+
         .scan-description {
+
             font-size: 14px;
+
             line-height: 1.5;
 
             opacity: .9;
@@ -307,12 +423,15 @@
             margin-bottom: 18px;
         }
 
+
         .scan-button {
+
             width: 100%;
 
             border: none;
 
             background: white;
+
             color: #087957;
 
             border-radius: 15px;
@@ -320,34 +439,44 @@
             min-height: 58px;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
             gap: 10px;
 
             font-size: 16px;
+
             font-weight: 800;
 
             cursor: pointer;
 
-            box-shadow: 0 5px 15px rgba(0,0,0,.10);
+            box-shadow:
+                0 5px 15px
+                rgba(0,0,0,.10);
 
-            transition: transform .15s ease;
+            transition:
+                transform .15s ease;
         }
+
 
         .scan-button:active {
             transform: scale(.98);
         }
 
+
         .scan-icon {
             font-size: 23px;
         }
+
 
         /* =========================
            POINTS
         ========================= */
 
         .points-card {
+
             background: white;
 
             border: 1px solid #e7ebf0;
@@ -359,32 +488,41 @@
             margin-bottom: 18px;
         }
 
+
         .points-top {
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
 
             margin-bottom: 14px;
         }
 
+
         .points-label {
+
             color: #707b8c;
+
             font-size: 13px;
+
             font-weight: 600;
         }
 
+
         .points-number {
+
             font-size: 26px;
+
             font-weight: 800;
 
             color: #172033;
         }
 
-        .points-star {
-            color: #f59e0b;
-        }
 
         .progress-container {
+
             height: 9px;
 
             background: #edf0f3;
@@ -396,7 +534,9 @@
             margin-bottom: 9px;
         }
 
+
         .progress {
+
             height: 100%;
 
             width: 0%;
@@ -408,10 +548,14 @@
             transition: width .5s ease;
         }
 
+
         .progress-text {
+
             color: #788294;
+
             font-size: 12px;
         }
+
 
         /* =========================
            SECTION
@@ -421,36 +565,53 @@
             margin-bottom: 22px;
         }
 
+
         .section-header {
+
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
 
             margin-bottom: 11px;
         }
 
+
         .section-title {
+
             font-size: 17px;
+
             font-weight: 800;
         }
 
+
         .section-link {
+
             color: #0f9d72;
+
             font-size: 13px;
+
             font-weight: 700;
         }
 
+
         /* =========================
-           OPPORTUNITIES
+           PROMOTIONS
         ========================= */
 
         .promo-list {
+
             display: flex;
+
             flex-direction: column;
+
             gap: 10px;
         }
 
+
         .promo-card {
+
             background: white;
 
             border: 1px solid #e8ebf0;
@@ -460,12 +621,15 @@
             padding: 15px;
 
             display: flex;
+
             align-items: center;
 
             gap: 13px;
         }
 
+
         .promo-icon {
+
             width: 46px;
             height: 46px;
 
@@ -476,39 +640,57 @@
             background: #eef8f5;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
             font-size: 22px;
         }
 
+
         .promo-info {
+
             flex: 1;
+
             min-width: 0;
         }
 
+
         .promo-name {
+
             font-size: 14px;
+
             font-weight: 800;
 
             margin-bottom: 3px;
         }
 
+
         .promo-description {
+
             font-size: 12px;
+
             color: #737d8c;
 
             white-space: nowrap;
+
             overflow: hidden;
+
             text-overflow: ellipsis;
         }
 
+
         .promo-arrow {
+
             color: #9ba4b1;
+
             font-size: 18px;
         }
 
+
         .empty-promos {
+
             background: white;
 
             border: 1px dashed #d8dee7;
@@ -524,11 +706,13 @@
             font-size: 13px;
         }
 
+
         /* =========================
            MISSION
         ========================= */
 
         .mission-card {
+
             background: white;
 
             border: 1px solid #e8ebf0;
@@ -542,7 +726,9 @@
             gap: 14px;
         }
 
+
         .mission-icon {
+
             width: 48px;
             height: 48px;
 
@@ -553,24 +739,32 @@
             background: #fff7e6;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
             font-size: 23px;
         }
 
+
         .mission-content {
             flex: 1;
         }
 
+
         .mission-title {
+
             font-weight: 800;
+
             font-size: 14px;
 
             margin-bottom: 4px;
         }
 
+
         .mission-description {
+
             color: #737d8c;
 
             font-size: 12px;
@@ -580,7 +774,9 @@
             margin-bottom: 10px;
         }
 
+
         .mission-reward {
+
             display: inline-flex;
 
             align-items: center;
@@ -594,14 +790,17 @@
             padding: 5px 9px;
 
             font-size: 11px;
+
             font-weight: 800;
         }
+
 
         /* =========================
            LEVEL
         ========================= */
 
         .level-card {
+
             background: white;
 
             border: 1px solid #e8ebf0;
@@ -611,22 +810,31 @@
             padding: 18px;
         }
 
+
         .level-top {
+
             display: flex;
 
             justify-content: space-between;
+
             align-items: center;
 
             margin-bottom: 14px;
         }
 
+
         .level-info {
+
             display: flex;
+
             align-items: center;
+
             gap: 10px;
         }
 
+
         .level-badge {
+
             width: 43px;
             height: 43px;
 
@@ -635,30 +843,43 @@
             background: #eef4ff;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
             font-size: 21px;
         }
 
+
         .level-name {
+
             font-size: 14px;
+
             font-weight: 800;
         }
 
+
         .level-sub {
+
             font-size: 11px;
+
             color: #7b8492;
 
             margin-top: 2px;
         }
 
+
         .level-points {
+
             font-size: 13px;
+
             font-weight: 800;
         }
 
+
         .level-progress {
+
             height: 8px;
 
             background: #edf0f3;
@@ -668,7 +889,9 @@
             overflow: hidden;
         }
 
+
         .level-progress-fill {
+
             height: 100%;
 
             width: 0%;
@@ -678,19 +901,24 @@
             border-radius: 20px;
         }
 
+
         /* =========================
-           WALLET MINI
+           WALLET
         ========================= */
 
         .wallet-grid {
+
             display: grid;
 
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns:
+                1fr 1fr;
 
             gap: 10px;
         }
 
+
         .wallet-mini {
+
             background: white;
 
             border: 1px solid #e8ebf0;
@@ -700,52 +928,71 @@
             padding: 16px;
         }
 
+
         .wallet-mini-label {
+
             color: #7b8492;
+
             font-size: 12px;
 
             margin-bottom: 6px;
         }
 
+
         .wallet-mini-value {
+
             font-size: 19px;
+
             font-weight: 800;
         }
+
 
         /* =========================
            BOTTOM NAV
         ========================= */
 
         .bottom-nav {
+
             position: fixed;
 
             bottom: 0;
+
             left: 0;
+
             right: 0;
 
             height: 72px;
 
-            background: rgba(255,255,255,.97);
+            background:
+                rgba(255,255,255,.97);
 
-            border-top: 1px solid #e6e9ee;
+            border-top:
+                1px solid #e6e9ee;
 
             display: grid;
 
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns:
+                repeat(5, 1fr);
 
             z-index: 500;
 
-            padding-bottom: env(safe-area-inset-bottom);
+            padding-bottom:
+                env(safe-area-inset-bottom);
         }
 
+
         .nav-item {
+
             border: none;
+
             background: transparent;
 
             display: flex;
+
             flex-direction: column;
 
             align-items: center;
+
             justify-content: center;
 
             gap: 3px;
@@ -759,20 +1006,27 @@
             cursor: pointer;
         }
 
+
         .nav-item span:first-child {
             font-size: 20px;
         }
+
 
         .nav-item.active {
             color: #0f9d72;
         }
 
+
         .nav-scan {
+
             position: relative;
+
             top: -14px;
         }
 
+
         .nav-scan-circle {
+
             width: 52px;
             height: 52px;
 
@@ -783,26 +1037,34 @@
             color: white;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
             font-size: 23px;
 
-            box-shadow: 0 7px 18px rgba(15,157,114,.30);
+            box-shadow:
+                0 7px 18px
+                rgba(15,157,114,.30);
 
-            border: 4px solid #f5f7fb;
+            border:
+                4px solid #f5f7fb;
         }
 
+
         /* =========================
-           SCAN MODAL
+           MODAL
         ========================= */
 
         .modal {
+
             position: fixed;
 
             inset: 0;
 
-            background: rgba(20,28,40,.50);
+            background:
+                rgba(20,28,40,.50);
 
             z-index: 1000;
 
@@ -813,34 +1075,48 @@
             justify-content: center;
         }
 
+
         .modal.show {
             display: flex;
         }
 
+
         .modal-content {
+
             width: 100%;
+
             max-width: 760px;
 
             background: white;
 
-            border-radius: 25px 25px 0 0;
+            border-radius:
+                25px 25px 0 0;
 
-            padding: 25px 20px 30px;
+            padding:
+                25px 20px 30px;
 
-            animation: slideUp .22s ease;
+            animation:
+                slideUp .22s ease;
         }
 
+
         @keyframes slideUp {
+
             from {
-                transform: translateY(100%);
+                transform:
+                    translateY(100%);
             }
 
             to {
-                transform: translateY(0);
+                transform:
+                    translateY(0);
             }
+
         }
 
+
         .modal-handle {
+
             width: 40px;
             height: 4px;
 
@@ -848,17 +1124,23 @@
 
             border-radius: 10px;
 
-            margin: -5px auto 20px;
+            margin:
+                -5px auto 20px;
         }
 
+
         .modal-title {
+
             font-size: 20px;
+
             font-weight: 800;
 
             margin-bottom: 7px;
         }
 
+
         .modal-description {
+
             font-size: 13px;
 
             color: #737d8c;
@@ -868,16 +1150,24 @@
             margin-bottom: 20px;
         }
 
+
+        /* =========================
+           INPUT CODE
+        ========================= */
+
         .code-input {
+
             width: 100%;
 
             height: 58px;
 
-            border: 1px solid #dce1e7;
+            border:
+                1px solid #dce1e7;
 
             border-radius: 14px;
 
-            padding: 0 15px;
+            padding:
+                0 15px;
 
             font-size: 18px;
 
@@ -886,14 +1176,23 @@
             letter-spacing: 3px;
 
             outline: none;
+
+            text-transform: uppercase;
         }
+
 
         .code-input:focus {
+
             border-color: #0f9d72;
-            box-shadow: 0 0 0 3px rgba(15,157,114,.10);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(15,157,114,.10);
         }
 
+
         .validate-button {
+
             width: 100%;
 
             height: 55px;
@@ -915,7 +1214,15 @@
             cursor: pointer;
         }
 
+
+        .validate-button:active {
+
+            transform: scale(.98);
+        }
+
+
         .close-button {
+
             width: 100%;
 
             height: 50px;
@@ -937,7 +1244,9 @@
             cursor: pointer;
         }
 
+
         .modal-message {
+
             display: none;
 
             padding: 11px;
@@ -955,6 +1264,401 @@
             text-align: center;
         }
 
+
+        /* =========================
+           QR SCANNER
+        ========================= */
+
+        .scan-modal-content {
+
+            max-width: 500px;
+
+            padding-bottom: 24px;
+        }
+
+
+        .scan-modal-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-start;
+
+            gap: 15px;
+        }
+
+
+        .scan-close {
+
+            width: 38px;
+            height: 38px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #f2f4f7;
+
+            color: #667085;
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            flex-shrink: 0;
+        }
+
+
+        .qr-reader {
+
+            width: 100%;
+
+            margin-top: 10px;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            background: #111;
+
+            min-height: 280px;
+        }
+
+
+        .qr-reader video {
+
+            width: 100% !important;
+
+            height: auto !important;
+
+            border-radius: 18px;
+        }
+
+
+        .qr-reader img {
+
+            display: none !important;
+        }
+
+
+        .qr-reader__dashboard {
+
+            padding: 8px !important;
+        }
+
+
+        .qr-reader__dashboard_section {
+
+            padding: 0 !important;
+        }
+
+
+        .qr-reader__dashboard_section_csr {
+
+            display: none !important;
+        }
+
+
+        .qr-reader button {
+
+            border: none;
+
+            background: #0f9d72;
+
+            color: white;
+
+            border-radius: 10px;
+
+            padding: 9px 13px;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           SCANNER STATUS
+        ========================= */
+
+        .scanner-status {
+
+            margin-top: 12px;
+
+            padding: 11px 13px;
+
+            border-radius: 11px;
+
+            background: #eef8f5;
+
+            color: #087957;
+
+            font-size: 12px;
+
+            text-align: center;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+        }
+
+
+        .status-dot {
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #0f9d72;
+
+            animation:
+                scannerPulse 1.3s infinite;
+        }
+
+
+        @keyframes scannerPulse {
+
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: .3;
+            }
+
+            100% {
+                opacity: 1;
+            }
+
+        }
+
+
+        /* =========================
+           RESULT
+        ========================= */
+
+        .scan-result {
+
+            display: none;
+
+            margin-top: 12px;
+
+            padding: 14px;
+
+            border-radius: 14px;
+
+            background: #eef8f5;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .scan-result-icon {
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            background: #0f9d72;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 22px;
+
+            font-weight: 800;
+        }
+
+
+        .scan-result-title {
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            color: #087957;
+        }
+
+
+        .scan-result-code {
+
+            margin-top: 3px;
+
+            font-size: 12px;
+
+            color: #657180;
+
+            word-break: break-all;
+        }
+
+
+        /* =========================
+           PROMOTION FOUND
+        ========================= */
+
+        .promotion-found {
+
+            display: none;
+
+            margin-top: 14px;
+
+            padding: 17px;
+
+            border-radius: 16px;
+
+            background: #f8fffc;
+
+            border: 1px solid #d7f1e7;
+        }
+
+
+        .promotion-found.show {
+            display: block;
+        }
+
+
+        .promotion-found-title {
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            color: #087957;
+
+            margin-bottom: 10px;
+        }
+
+
+        .promotion-business {
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            color: #172033;
+
+            margin-bottom: 5px;
+        }
+
+
+        .promotion-name {
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            color: #172033;
+
+            margin-bottom: 5px;
+        }
+
+
+        .promotion-description {
+
+            font-size: 12px;
+
+            line-height: 1.5;
+
+            color: #737d8c;
+
+            margin-bottom: 10px;
+        }
+
+
+        .promotion-points {
+
+            display: inline-flex;
+
+            padding: 6px 10px;
+
+            border-radius: 20px;
+
+            background: #fff7e6;
+
+            color: #b87500;
+
+            font-size: 11px;
+
+            font-weight: 800;
+        }
+
+
+        /* =========================
+           ERROR
+        ========================= */
+
+        .scanner-error {
+
+            display: none;
+
+            margin-top: 10px;
+
+            padding: 10px;
+
+            border-radius: 10px;
+
+            background: #fff2f2;
+
+            color: #b42318;
+
+            font-size: 12px;
+
+            text-align: center;
+        }
+
+
+        /* =========================
+           MANUAL CODE
+        ========================= */
+
+        .manual-code-button {
+
+            width: 100%;
+
+            margin-top: 14px;
+
+            border: none;
+
+            background: transparent;
+
+            color: #0f9d72;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            padding: 8px;
+
+            cursor: pointer;
+        }
+
+
+        .manual-code-container {
+
+            display: none;
+
+            margin-top: 5px;
+        }
+
+
+        .manual-code-container.show {
+
+            display: block;
+        }
+
+
         /* =========================
            DESKTOP
         ========================= */
@@ -965,305 +1669,43 @@
                 padding-bottom: 0;
             }
 
+
             .container {
                 padding-top: 35px;
             }
+
 
             .bottom-nav {
                 display: none;
             }
 
+
             .modal {
                 align-items: center;
             }
 
+
             .modal-content {
+
                 border-radius: 24px;
+
                 max-width: 480px;
             }
+
 
             .scan-card {
                 padding: 30px;
             }
-			
-			
-/* =========================
-   QR SCANNER
-========================= */
-
-.scan-modal-content {
-    max-width: 500px;
-    padding-bottom: 24px;
-}
-
-.scan-modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 15px;
-}
-
-.scan-close {
-    width: 38px;
-    height: 38px;
-
-    border: none;
-    border-radius: 50%;
-
-    background: #f2f4f7;
-    color: #667085;
-
-    font-size: 18px;
-
-    cursor: pointer;
-
-    flex-shrink: 0;
-}
-
-.qr-reader {
-    width: 100%;
-
-    margin-top: 10px;
-
-    border-radius: 18px;
-
-    overflow: hidden;
-
-    background: #111;
-
-    min-height: 280px;
-}
-
-.qr-reader video {
-    width: 100% !important;
-    height: auto !important;
-
-    border-radius: 18px;
-}
-
-.qr-reader img {
-    display: none !important;
-}
-
-/* Evita que la UI de la librería se vea demasiado grande */
-
-.qr-reader__dashboard {
-    padding: 8px !important;
-}
-
-.qr-reader__dashboard_section {
-    padding: 0 !important;
-}
-
-.qr-reader__dashboard_section_csr {
-    display: none !important;
-}
-
-.qr-reader button {
-    border: none;
-
-    background: #0f9d72;
-
-    color: white;
-
-    border-radius: 10px;
-
-    padding: 9px 13px;
-
-    font-size: 12px;
-}
-
-
-/* =========================
-   SCANNER STATUS
-========================= */
-
-.scanner-status {
-
-    margin-top: 12px;
-
-    padding: 11px 13px;
-
-    border-radius: 11px;
-
-    background: #eef8f5;
-
-    color: #087957;
-
-    font-size: 12px;
-
-    text-align: center;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 7px;
-}
-
-.status-dot {
-
-    width: 7px;
-    height: 7px;
-
-    border-radius: 50%;
-
-    background: #0f9d72;
-
-    animation: scannerPulse 1.3s infinite;
-}
-
-@keyframes scannerPulse {
-
-    0% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: .3;
-    }
-
-    100% {
-        opacity: 1;
-    }
-
-}
-
-
-/* =========================
-   RESULT
-========================= */
-
-.scan-result {
-
-    display: none;
-
-    margin-top: 12px;
-
-    padding: 14px;
-
-    border-radius: 14px;
-
-    background: #eef8f5;
-
-    align-items: center;
-
-    gap: 12px;
-}
-
-.scan-result-icon {
-
-    width: 42px;
-    height: 42px;
-
-    border-radius: 50%;
-
-    background: #0f9d72;
-
-    color: white;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 22px;
-
-    font-weight: 800;
-}
-
-.scan-result-title {
-
-    font-size: 13px;
-
-    font-weight: 800;
-
-    color: #087957;
-
-}
-
-.scan-result-code {
-
-    margin-top: 3px;
-
-    font-size: 12px;
-
-    color: #657180;
-
-    word-break: break-all;
-}
-
-
-/* =========================
-   ERROR
-========================= */
-
-.scanner-error {
-
-    display: none;
-
-    margin-top: 10px;
-
-    padding: 10px;
-
-    border-radius: 10px;
-
-    background: #fff2f2;
-
-    color: #b42318;
-
-    font-size: 12px;
-
-    text-align: center;
-}
-
-
-/* =========================
-   MANUAL CODE
-========================= */
-
-.manual-code-button {
-
-    width: 100%;
-
-    margin-top: 14px;
-
-    border: none;
-
-    background: transparent;
-
-    color: #0f9d72;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-    padding: 8px;
-
-    cursor: pointer;
-}
-
-.manual-code-container {
-
-    display: none;
-
-    margin-top: 5px;
-}
-
-.manual-code-container.show {
-
-    display: block;
-}
-
 
         }
+
     </style>
+
 </head>
 
+
 <body>
+
 
 <!-- =========================
      LOADING
@@ -1290,6 +1732,7 @@
 
 <div class="app" id="app">
 
+
     <!-- HEADER -->
 
     <header class="topbar">
@@ -1306,6 +1749,7 @@
 
         </div>
 
+
         <div class="user-area">
 
             <div class="avatar" id="avatar">
@@ -1321,6 +1765,7 @@
 
     <main class="container">
 
+
         <!-- WELCOME -->
 
         <section class="welcome">
@@ -1330,7 +1775,13 @@
             </div>
 
             <h1>
-                Hola, <span id="nombreUsuario">Cliente</span> 👋
+
+                Hola,
+                <span id="nombreUsuario">
+                    Cliente
+                </span>
+                👋
+
             </h1>
 
             <p>
@@ -1355,9 +1806,13 @@
                 </div>
 
                 <div class="scan-description">
-                    Escanea el código de tu compra y descubre
-                    tu premio.
+
+                    Escanea el código de tu compra
+                    o introduce el código manualmente
+                    para descubrir tu premio.
+
                 </div>
+
 
                 <button
                     class="scan-button"
@@ -1391,16 +1846,22 @@
                     </div>
 
                     <div class="points-number">
-                        <span id="points">0</span>
+
+                        <span id="points">
+                            0
+                        </span>
+
                     </div>
 
                 </div>
+
 
                 <div style="font-size:34px;">
                     ⭐
                 </div>
 
             </div>
+
 
             <div class="progress-container">
 
@@ -1411,12 +1872,13 @@
 
             </div>
 
+
             <div
                 class="progress-text"
                 id="pointsProgressText">
 
-                Comienza a acumular puntos para desbloquear
-                premios.
+                Comienza a acumular puntos
+                para desbloquear premios.
 
             </div>
 
@@ -1472,11 +1934,13 @@
 
             </div>
 
+
             <div class="mission-card">
 
                 <div class="mission-icon">
                     🛍️
                 </div>
+
 
                 <div class="mission-content">
 
@@ -1485,9 +1949,12 @@
                     </div>
 
                     <div class="mission-description">
+
                         Realiza una compra y escanea
                         tu código para comenzar a ganar.
+
                     </div>
+
 
                     <div class="mission-reward">
                         ⭐ +20 puntos
@@ -1512,6 +1979,7 @@
 
             </div>
 
+
             <div class="level-card">
 
                 <div class="level-top">
@@ -1526,6 +1994,7 @@
 
                         </div>
 
+
                         <div>
 
                             <div
@@ -1535,6 +2004,7 @@
                                 Novato
 
                             </div>
+
 
                             <div
                                 class="level-sub"
@@ -1547,6 +2017,7 @@
                         </div>
 
                     </div>
+
 
                     <div class="level-points">
 
@@ -1563,6 +2034,7 @@
                     </div>
 
                 </div>
+
 
                 <div class="level-progress">
 
@@ -1590,7 +2062,9 @@
 
             </div>
 
+
             <div class="wallet-grid">
+
 
                 <div class="wallet-mini">
 
@@ -1632,16 +2106,22 @@
     </main>
 
 
-    <!-- BOTTOM NAV -->
+    <!-- =========================
+         BOTTOM NAV
+    ========================= -->
 
     <nav class="bottom-nav">
+
 
         <button
             class="nav-item active"
             onclick="goHome()">
 
             <span>🏠</span>
-            <span>Inicio</span>
+
+            <span>
+                Inicio
+            </span>
 
         </button>
 
@@ -1651,7 +2131,10 @@
             onclick="showPromos()">
 
             <span>🎁</span>
-            <span>Promos</span>
+
+            <span>
+                Promos
+            </span>
 
         </button>
 
@@ -1676,7 +2159,10 @@
             onclick="showHistory()">
 
             <span>⭐</span>
-            <span>Premios</span>
+
+            <span>
+                Premios
+            </span>
 
         </button>
 
@@ -1686,14 +2172,16 @@
             onclick="showProfile()">
 
             <span>👤</span>
-            <span>Perfil</span>
+
+            <span>
+                Perfil
+            </span>
 
         </button>
 
     </nav>
 
 </div>
-
 
 
 <!-- =========================
@@ -1704,11 +2192,16 @@
     class="modal"
     id="scanModal">
 
-    <div class="modal-content scan-modal-content">
+
+    <div
+        class="modal-content scan-modal-content">
+
 
         <div class="modal-handle"></div>
 
+
         <div class="scan-modal-header">
+
 
             <div>
 
@@ -1716,11 +2209,16 @@
                     📷 Escanear compra
                 </div>
 
+
                 <div class="modal-description">
-                    Apunta la cámara al código QR de tu compra.
+
+                    Apunta la cámara al código QR
+                    de tu compra.
+
                 </div>
 
             </div>
+
 
             <button
                 class="scan-close"
@@ -1733,7 +2231,9 @@
         </div>
 
 
-        <!-- SCANNER -->
+        <!-- =========================
+             QR READER
+        ========================= -->
 
         <div
             id="reader"
@@ -1741,7 +2241,9 @@
         </div>
 
 
-        <!-- ESTADO -->
+        <!-- =========================
+             STATUS
+        ========================= -->
 
         <div
             id="scannerStatus"
@@ -1754,21 +2256,26 @@
         </div>
 
 
-        <!-- RESULTADO -->
+        <!-- =========================
+             RESULT
+        ========================= -->
 
         <div
             id="scanResult"
             class="scan-result">
 
+
             <div class="scan-result-icon">
                 ✓
             </div>
+
 
             <div>
 
                 <div class="scan-result-title">
                     Código detectado
                 </div>
+
 
                 <div
                     id="scanResultCode"
@@ -1780,7 +2287,49 @@
         </div>
 
 
-        <!-- ERROR -->
+        <!-- =========================
+             PROMOTION FOUND
+        ========================= -->
+
+        <div
+            id="promotionFound"
+            class="promotion-found">
+
+
+            <div class="promotion-found-title">
+                🎉 Promoción encontrada
+            </div>
+
+
+            <div
+                id="promotionBusiness"
+                class="promotion-business">
+            </div>
+
+
+            <div
+                id="promotionName"
+                class="promotion-name">
+            </div>
+
+
+            <div
+                id="promotionDescription"
+                class="promotion-description">
+            </div>
+
+
+            <div
+                id="promotionPoints"
+                class="promotion-points">
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             ERROR
+        ========================= -->
 
         <div
             id="scannerError"
@@ -1788,13 +2337,15 @@
         </div>
 
 
-        <!-- MANUAL -->
+        <!-- =========================
+             MANUAL
+        ========================= -->
 
         <button
             class="manual-code-button"
             id="manualCodeButton">
 
-            Introducir código manualmente
+            ✍️ Introducir código manualmente
 
         </button>
 
@@ -1803,23 +2354,26 @@
             id="manualCodeContainer"
             class="manual-code-container">
 
+
             <input
                 type="text"
                 id="purchaseCode"
                 class="code-input"
-                placeholder="CÓDIGO"
+                placeholder="PW-XXXXXX"
                 maxlength="50"
                 autocomplete="off">
+
 
             <button
                 class="validate-button"
                 id="validateButton">
 
-                VALIDAR COMPRA
+                VALIDAR CÓDIGO
 
             </button>
 
         </div>
+
 
     </div>
 
@@ -1827,32 +2381,71 @@
 
 
 <!-- =========================
+     HTML5 QR CODE
+========================= -->
+
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js">
+</script>
+
+
+<!-- =========================
      FIREBASE
 ========================= -->
-<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+
 <script type="module">
+
+
+    /* =========================
+       FIREBASE APP
+    ========================= */
 
     import {
         initializeApp
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    }
+    from
+        "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
+
+    /* =========================
+       FIREBASE AUTH
+    ========================= */
 
     import {
+
         getAuth,
-        onAuthStateChanged,
-        signOut
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+        onAuthStateChanged,
+
+        signOut
+
+    }
+    from
+        "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+    /* =========================
+       FIRESTORE
+    ========================= */
 
     import {
+
         initializeFirestore,
+
         doc,
+
         getDoc,
+
         collection,
+
         query,
+
         where,
+
         getDocs
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    }
+    from
+        "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
     /* =========================
@@ -1861,34 +2454,52 @@
 
     const firebaseConfig = {
 
-        apiKey: "AIzaSyA_5TT1VTLkDSjYfrzTGWZ1Uv_o1yZqQYQ",
+        apiKey:
+            "AIzaSyA_5TT1VTLkDSjYfrzTGWZ1Uv_o1yZqQYQ",
 
-        authDomain: "promo-walletrd.firebaseapp.com",
+        authDomain:
+            "promo-walletrd.firebaseapp.com",
 
-        projectId: "promo-walletrd",
+        projectId:
+            "promo-walletrd",
 
-        storageBucket: "promo-walletrd.firebasestorage.app",
+        storageBucket:
+            "promo-walletrd.firebasestorage.app",
 
-        messagingSenderId: "933468918139",
+        messagingSenderId:
+            "933468918139",
 
-        appId: "1:933468918139:web:5bf2ec7e4dc37d7c3e2dde",
+        appId:
+            "1:933468918139:web:5bf2ec7e4dc37d7c3e2dde",
 
-        measurementId: "G-DYXCNPBH62"
+        measurementId:
+            "G-DYXCNPBH62"
 
     };
 
 
-    const app = initializeApp(firebaseConfig);
+    /* =========================
+       INIT FIREBASE
+    ========================= */
+
+    const app =
+        initializeApp(
+            firebaseConfig
+        );
 
 
-    const auth = getAuth(app);
+    const auth =
+        getAuth(app);
 
 
-    const db = initializeFirestore(app, {
-
-        experimentalForceLongPolling: true
-
-    });
+    const db =
+        initializeFirestore(
+            app,
+            {
+                experimentalForceLongPolling:
+                    true
+            }
+        );
 
 
     /* =========================
@@ -1896,249 +2507,370 @@
     ========================= */
 
     const loading =
-        document.getElementById("loading");
+        document.getElementById(
+            "loading"
+        );
+
 
     const appContainer =
-        document.getElementById("app");
+        document.getElementById(
+            "app"
+        );
+
 
     const nombreUsuario =
-        document.getElementById("nombreUsuario");
+        document.getElementById(
+            "nombreUsuario"
+        );
+
 
     const avatar =
-        document.getElementById("avatar");
+        document.getElementById(
+            "avatar"
+        );
+
 
     const points =
-        document.getElementById("points");
+        document.getElementById(
+            "points"
+        );
+
 
     const saldo =
-        document.getElementById("saldo");
+        document.getElementById(
+            "saldo"
+        );
+
 
     const premios =
-        document.getElementById("premios");
+        document.getElementById(
+            "premios"
+        );
 
 
     /* =========================
        AUTH
     ========================= */
 
-    onAuthStateChanged(auth, async (user) => {
+    onAuthStateChanged(
+        auth,
+        async (user) => {
 
-        if (!user) {
-
-            window.location.href = "login.html";
-
-            return;
-        }
-
-
-        try {
-
-            const clienteRef =
-                doc(db, "clientes", user.uid);
-
-
-            const clienteSnap =
-                await getDoc(clienteRef);
-
-
-            if (!clienteSnap.exists()) {
-
-                alert(
-                    "No encontramos la información de tu cuenta."
-                );
-
-                await signOut(auth);
+            if (!user) {
 
                 window.location.href =
                     "login.html";
 
                 return;
+
             }
 
 
-            const cliente =
-                clienteSnap.data();
+            try {
+
+                const clienteRef =
+                    doc(
+                        db,
+                        "clientes",
+                        user.uid
+                    );
 
 
-            /* =========================
-               NOMBRE
-            ========================= */
-
-            const nombre =
-                cliente.nombre ||
-                cliente.nombreCompleto ||
-                "Cliente";
+                const clienteSnap =
+                    await getDoc(
+                        clienteRef
+                    );
 
 
-            nombreUsuario.textContent =
-                nombre.split(" ")[0];
+                if (
+                    !clienteSnap.exists()
+                ) {
+
+                    alert(
+                        "No encontramos la información de tu cuenta."
+                    );
 
 
-            /* =========================
-               AVATAR
-            ========================= */
-
-            const inicial =
-                nombre
-                    .trim()
-                    .charAt(0)
-                    .toUpperCase();
+                    await signOut(
+                        auth
+                    );
 
 
-            avatar.textContent =
-                inicial;
+                    window.location.href =
+                        "login.html";
 
 
-            /* =========================
-               PUNTOS
-            ========================= */
+                    return;
 
-            const puntosActuales =
-                Number(cliente.puntos || 0);
+                }
 
 
-            points.textContent =
-                puntosActuales.toLocaleString("es-DO");
+                const cliente =
+                    clienteSnap.data();
 
 
-            updateLevel(puntosActuales);
+                /* =========================
+                   NOMBRE
+                ========================= */
+
+                const nombre =
+                    cliente.nombre ||
+                    cliente.nombreCompleto ||
+                    "Cliente";
 
 
-            /* =========================
-               SALDO
-            ========================= */
-
-            const saldoActual =
-                Number(cliente.saldoWallet || 0);
+                nombreUsuario.textContent =
+                    nombre
+                        .split(" ")[0];
 
 
-            saldo.textContent =
-                formatMoney(saldoActual);
+                /* =========================
+                   AVATAR
+                ========================= */
+
+                const inicial =
+                    nombre
+                        .trim()
+                        .charAt(0)
+                        .toUpperCase();
 
 
-            /* =========================
-               PREMIOS
-            ========================= */
-
-            premios.textContent =
-                Number(cliente.premiosGanados || 0);
+                avatar.textContent =
+                    inicial;
 
 
-            /* =========================
-               PROMOCIONES
-            ========================= */
+                /* =========================
+                   PUNTOS
+                ========================= */
 
-            await loadPromotions();
+                const puntosActuales =
+                    Number(
+                        cliente.puntos || 0
+                    );
 
 
-            /* =========================
-               SHOW APP
-            ========================= */
+                points.textContent =
+                    puntosActuales
+                        .toLocaleString(
+                            "es-DO"
+                        );
 
-            loading.style.display =
-                "none";
 
-            appContainer.style.display =
-                "block";
+                updateLevel(
+                    puntosActuales
+                );
+
+
+                /* =========================
+                   SALDO
+                ========================= */
+
+                const saldoActual =
+                    Number(
+                        cliente.saldoWallet ||
+                        0
+                    );
+
+
+                saldo.textContent =
+                    formatMoney(
+                        saldoActual
+                    );
+
+
+                /* =========================
+                   PREMIOS
+                ========================= */
+
+                premios.textContent =
+                    Number(
+                        cliente.premiosGanados ||
+                        0
+                    );
+
+
+                /* =========================
+                   PROMOCIONES
+                ========================= */
+
+                await loadPromotions();
+
+
+                /* =========================
+                   SHOW APP
+                ========================= */
+
+                loading.style.display =
+                    "none";
+
+
+                appContainer.style.display =
+                    "block";
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Error cargando cliente:",
+                    error
+                );
+
+
+                loading.style.display =
+                    "none";
+
+
+                appContainer.style.display =
+                    "block";
+
+            }
 
         }
-        catch (error) {
-
-            console.error(
-                "Error cargando cliente:",
-                error
-            );
-
-            loading.style.display =
-                "none";
-
-            appContainer.style.display =
-                "block";
-
-        }
-
-    });
+    );
 
 
     /* =========================
        LEVEL
     ========================= */
 
-    function updateLevel(puntos) {
+    function updateLevel(
+        puntos
+    ) {
 
-        let nombre = "Novato";
-        let badge = "🥉";
-        let max = 100;
-        let previous = 0;
+        let nombre =
+            "Novato";
+
+        let badge =
+            "🥉";
+
+        let max =
+            100;
+
+        let previous =
+            0;
 
 
         if (puntos >= 700) {
 
-            nombre = "VIP";
-            badge = "💎";
-            previous = 700;
-            max = 1000;
+            nombre =
+                "VIP";
+
+            badge =
+                "💎";
+
+            previous =
+                700;
+
+            max =
+                1000;
 
         }
+
         else if (puntos >= 300) {
 
-            nombre = "Fan";
-            badge = "🥇";
-            previous = 300;
-            max = 700;
+            nombre =
+                "Fan";
+
+            badge =
+                "🥇";
+
+            previous =
+                300;
+
+            max =
+                700;
 
         }
+
         else if (puntos >= 100) {
 
-            nombre = "Explorador";
-            badge = "🥈";
-            previous = 100;
-            max = 300;
+            nombre =
+                "Explorador";
+
+            badge =
+                "🥈";
+
+            previous =
+                100;
+
+            max =
+                300;
 
         }
 
 
         document.getElementById(
             "levelName"
-        ).textContent = nombre;
+        ).textContent =
+            nombre;
 
 
         document.getElementById(
             "levelBadge"
-        ).textContent = badge;
+        ).textContent =
+            badge;
 
 
         document.getElementById(
             "levelCurrent"
-        ).textContent = puntos;
+        ).textContent =
+            puntos;
 
 
         document.getElementById(
             "levelNext"
-        ).textContent = max;
+        ).textContent =
+            max;
 
 
         const porcentaje =
+
             puntos >= max
+
                 ? 100
-                : ((puntos - previous) /
-                   (max - previous)) * 100;
+
+                :
+
+                (
+                    (
+                        puntos -
+                        previous
+                    ) /
+                    (
+                        max -
+                        previous
+                    )
+                ) * 100;
 
 
         document.getElementById(
             "levelProgress"
         ).style.width =
-            Math.max(0, porcentaje) + "%";
+
+            Math.max(
+                0,
+                porcentaje
+            ) + "%";
 
 
         const faltan =
-            Math.max(0, max - puntos);
+            Math.max(
+                0,
+                max - puntos
+            );
 
 
         document.getElementById(
             "pointsProgress"
         ).style.width =
-            Math.min(100, (puntos / max) * 100) + "%";
+
+            Math.min(
+                100,
+                (
+                    puntos /
+                    max
+                ) * 100
+            ) + "%";
 
 
         if (faltan > 0) {
@@ -2146,14 +2878,17 @@
             document.getElementById(
                 "pointsProgressText"
             ).textContent =
+
                 `Te faltan ${faltan} puntos para alcanzar el próximo nivel.`;
 
         }
+
         else {
 
             document.getElementById(
                 "pointsProgressText"
             ).textContent =
+
                 "¡Has alcanzado este nivel! 🎉";
 
         }
@@ -2165,16 +2900,30 @@
        MONEY
     ========================= */
 
-    function formatMoney(value) {
+    function formatMoney(
+        value
+    ) {
 
         return new Intl.NumberFormat(
+
             "es-DO",
+
             {
-                style: "currency",
-                currency: "DOP",
-                minimumFractionDigits: 2
+
+                style:
+                    "currency",
+
+                currency:
+                    "DOP",
+
+                minimumFractionDigits:
+                    2
+
             }
-        ).format(value);
+
+        ).format(
+            value
+        );
 
     }
 
@@ -2186,132 +2935,212 @@
     async function loadPromotions() {
 
         const promoList =
-            document.getElementById("promoList");
+            document.getElementById(
+                "promoList"
+            );
 
 
         try {
 
             const promocionesQuery =
                 query(
-                    collection(db, "promociones"),
-                    where("activa", "==", true)
+
+                    collection(
+                        db,
+                        "promociones"
+                    ),
+
+                    where(
+                        "activa",
+                        "==",
+                        true
+                    )
+
                 );
 
 
             const snapshot =
-                await getDocs(promocionesQuery);
+                await getDocs(
+                    promocionesQuery
+                );
 
 
-            if (snapshot.empty) {
+            if (
+                snapshot.empty
+            ) {
 
                 return;
 
             }
 
 
-            promoList.innerHTML = "";
+            promoList.innerHTML =
+                "";
 
 
-            let count = 0;
+            let count =
+                0;
 
 
-            snapshot.forEach((docSnap) => {
-
-                if (count >= 5) return;
-
-
-                const promo =
-                    docSnap.data();
+            snapshot.forEach(
+                (docSnap) => {
 
 
-                const card =
-                    document.createElement("div");
+                    if (
+                        count >= 5
+                    ) {
+                        return;
+                    }
 
 
-                card.className =
-                    "promo-card";
+                    const promo =
+                        docSnap.data();
 
 
-                const categoria =
-                    String(
-                        promo.categoria || ""
-                    ).toLowerCase();
+                    const card =
+                        document.createElement(
+                            "div"
+                        );
 
 
-                let icon = "🎁";
+                    card.className =
+                        "promo-card";
 
 
-                if (categoria.includes("café") ||
-                    categoria.includes("cafe")) {
-
-                    icon = "☕";
-
-                }
-                else if (
-                    categoria.includes("comida") ||
-                    categoria.includes("restaurante")
-                ) {
-
-                    icon = "🍔";
-
-                }
-                else if (
-                    categoria.includes("tecnología") ||
-                    categoria.includes("tecnologia")
-                ) {
-
-                    icon = "📱";
-
-                }
-                else if (
-                    categoria.includes("ropa")
-                ) {
-
-                    icon = "👕";
-
-                }
+                    const categoria =
+                        String(
+                            promo.categoria ||
+                            ""
+                        ).toLowerCase();
 
 
-                card.innerHTML = `
+                    let icon =
+                        "🎁";
 
-                    <div class="promo-icon">
-                        ${icon}
-                    </div>
 
-                    <div class="promo-info">
+                    if (
 
-                        <div class="promo-name">
-                            ${escapeHtml(
-                                promo.nombreNegocio ||
-                                "Negocio"
-                            )}
+                        categoria.includes(
+                            "café"
+                        )
+
+                        ||
+
+                        categoria.includes(
+                            "cafe"
+                        )
+
+                    ) {
+
+                        icon =
+                            "☕";
+
+                    }
+
+                    else if (
+
+                        categoria.includes(
+                            "comida"
+                        )
+
+                        ||
+
+                        categoria.includes(
+                            "restaurante"
+                        )
+
+                    ) {
+
+                        icon =
+                            "🍔";
+
+                    }
+
+                    else if (
+
+                        categoria.includes(
+                            "tecnología"
+                        )
+
+                        ||
+
+                        categoria.includes(
+                            "tecnologia"
+                        )
+
+                    ) {
+
+                        icon =
+                            "📱";
+
+                    }
+
+                    else if (
+
+                        categoria.includes(
+                            "ropa"
+                        )
+
+                    ) {
+
+                        icon =
+                            "👕";
+
+                    }
+
+
+                    card.innerHTML = `
+
+                        <div class="promo-icon">
+
+                            ${icon}
+
                         </div>
 
-                        <div class="promo-description">
 
-                            ${escapeHtml(
-                                promo.nombre ||
-                                promo.descripcion ||
-                                "Nueva oportunidad"
-                            )}
+                        <div class="promo-info">
+
+                            <div class="promo-name">
+
+                                ${escapeHtml(
+                                    promo.nombreNegocio ||
+                                    "Negocio"
+                                )}
+
+                            </div>
+
+
+                            <div class="promo-description">
+
+                                ${escapeHtml(
+                                    promo.nombre ||
+                                    promo.descripcion ||
+                                    "Nueva oportunidad"
+                                )}
+
+                            </div>
 
                         </div>
 
-                    </div>
 
-                    <div class="promo-arrow">
-                        ›
-                    </div>
+                        <div class="promo-arrow">
 
-                `;
+                            ›
 
+                        </div>
 
-                promoList.appendChild(card);
+                    `;
 
 
-                count++;
+                    promoList.appendChild(
+                        card
+                    );
 
-            });
+
+                    count++;
+
+                }
+            );
 
 
         }
@@ -2331,351 +3160,111 @@
        ESCAPE HTML
     ========================= */
 
-    function escapeHtml(value) {
+    function escapeHtml(
+        value
+    ) {
 
         return String(value)
-            .replaceAll("&", "&amp;")
-            .replaceAll("<", "&lt;")
-            .replaceAll(">", "&gt;")
-            .replaceAll('"', "&quot;")
-            .replaceAll("'", "&#039;");
+
+            .replaceAll(
+                "&",
+                "&amp;"
+            )
+
+            .replaceAll(
+                "<",
+                "&lt;"
+            )
+
+            .replaceAll(
+                ">",
+                "&gt;"
+            )
+
+            .replaceAll(
+                '"',
+                "&quot;"
+            )
+
+            .replaceAll(
+                "'",
+                "&#039;"
+            );
 
     }
 
 
+    /* =========================
+       QR SCANNER
+    ========================= */
 
-/* =========================
-   QR SCANNER
-========================= */
-
-let qrScanner = null;
-
-let scannerRunning = false;
-
-let lastScannedCode = null;
+    let qrScanner =
+        null;
 
 
-/* =========================
-   OPEN SCANNER
-========================= */
-
-window.openScan = async function () {
-
-    const modal =
-        document.getElementById("scanModal");
-
-    modal.classList.add("show");
-
-    resetScannerUI();
-
-    await startQRScanner();
-
-};
+    let scannerRunning =
+        false;
 
 
-/* =========================
-   START QR SCANNER
-========================= */
-
-async function startQRScanner() {
-
-    const reader =
-        document.getElementById("reader");
-
-    const status =
-        document.getElementById(
-            "scannerStatus"
-        );
-
-    const error =
-        document.getElementById(
-            "scannerError"
-        );
+    let lastScannedCode =
+        null;
 
 
-    error.style.display = "none";
+    /* =========================
+       OPEN SCANNER
+    ========================= */
 
-    status.innerHTML = `
-        <span class="status-dot"></span>
-        Activando cámara...
-    `;
+    window.openScan =
+        async function () {
+
+            const modal =
+                document.getElementById(
+                    "scanModal"
+                );
 
 
-    try {
-
-        /*
-         * Creamos el lector solamente
-         * cuando el usuario presiona
-         * ESCANEAR COMPRA.
-         */
-
-        qrScanner =
-            new Html5Qrcode(
-                "reader"
+            modal.classList.add(
+                "show"
             );
 
 
-        const config = {
+            resetScannerUI();
 
-            fps: 10,
 
-            qrbox: {
-                width: 250,
-                height: 250
-            },
-
-            aspectRatio: 1.0,
-
-            formatsToSupport: [
-                Html5QrcodeSupportedFormats.QR_CODE
-            ]
+            await startQRScanner();
 
         };
 
 
-        /*
-         * environment =
-         * cámara trasera del teléfono.
-         */
+    /* =========================
+       SCAN BUTTON
+    ========================= */
 
-        await qrScanner.start(
+    document
+        .getElementById(
+            "scanButton"
+        )
+        .addEventListener(
+            "click",
+            async () => {
 
-            {
-                facingMode: "environment"
-            },
+                await window.openScan();
 
-            config,
-
-            onQRDetected,
-
-            onQRScanError
-
+            }
         );
 
 
-        scannerRunning = true;
+    /* =========================
+       START QR SCANNER
+    ========================= */
 
+    async function startQRScanner() {
 
-        status.innerHTML = `
-            <span class="status-dot"></span>
-            Apunta la cámara al código QR
-        `;
-
-
-    }
-    catch (err) {
-
-        console.error(
-            "No se pudo iniciar la cámara:",
-            err
-        );
-
-
-        scannerRunning = false;
-
-
-        status.innerHTML =
-            "📷 No se pudo activar la cámara";
-
-
-        error.textContent =
-            getCameraErrorMessage(err);
-
-
-        error.style.display =
-            "block";
-
-    }
-
-}
-
-
-/* =========================
-   QR DETECTED
-========================= */
-
-async function onQRDetected(
-    decodedText,
-    decodedResult
-) {
-
-    /*
-     * Evita procesar el mismo QR
-     * varias veces.
-     */
-
-    if (
-        lastScannedCode === decodedText
-    ) {
-
-        return;
-
-    }
-
-
-    lastScannedCode =
-        decodedText;
-
-
-    console.log(
-        "QR detectado:",
-        decodedText
-    );
-
-
-    /*
-     * Detenemos inmediatamente
-     * la cámara.
-     */
-
-    await stopQRScanner();
-
-
-    /*
-     * Mostramos resultado.
-     */
-
-    showScanResult(
-        decodedText
-    );
-
-
-    /*
-     * AQUÍ conectaremos posteriormente
-     * la validación Firebase.
-     */
-
-    await validatePurchaseCode(
-        decodedText
-    );
-
-}
-
-
-/* =========================
-   QR SCAN ERROR
-========================= */
-
-function onQRScanError(errorMessage) {
-
-    /*
-     * No mostramos errores continuamente.
-     *
-     * html5-qrcode llama esta función
-     * mientras busca un QR.
-     */
-
-}
-
-
-/* =========================
-   STOP SCANNER
-========================= */
-
-async function stopQRScanner() {
-
-    if (
-        qrScanner &&
-        scannerRunning
-    ) {
-
-        try {
-
-            await qrScanner.stop();
-
-        }
-        catch (error) {
-
-            console.warn(
-                "Error deteniendo scanner:",
-                error
+        const reader =
+            document.getElementById(
+                "reader"
             );
 
-        }
-
-        scannerRunning = false;
-
-    }
-
-}
-
-
-/* =========================
-   SHOW RESULT
-========================= */
-
-function showScanResult(code) {
-
-    const result =
-        document.getElementById(
-            "scanResult"
-        );
-
-    const resultCode =
-        document.getElementById(
-            "scanResultCode"
-        );
-
-    const status =
-        document.getElementById(
-            "scannerStatus"
-        );
-
-
-    resultCode.textContent =
-        code;
-
-
-    result.style.display =
-        "flex";
-
-
-    status.innerHTML = `
-        ✓ Código leído correctamente
-    `;
-
-}
-
-
-/* =========================
-   VALIDATE PURCHASE
-========================= */
-
-async function validatePurchaseCode(code) {
-
-    /*
-     * POR AHORA:
-     *
-     * Solo demostramos que el QR
-     * fue leído correctamente.
-     *
-     * En el siguiente paso este
-     * código se buscará en Firebase:
-     *
-     * compras/{compraId}
-     *
-     * y validaremos:
-     *
-     * - clienteId
-     * - negocioId
-     * - usado
-     * - fecha
-     * - promoción
-     * - premio
-     */
-
-
-    console.log(
-        "Código para validar:",
-        code
-    );
-
-
-    /*
-     * Simulación temporal.
-     */
-
-    setTimeout(() => {
 
         const status =
             document.getElementById(
@@ -2683,206 +3272,455 @@ async function validatePurchaseCode(code) {
             );
 
 
-        status.innerHTML =
-            "🎁 Código recibido. Preparando tu recompensa...";
+        const error =
+            document.getElementById(
+                "scannerError"
+            );
 
 
-    }, 500);
-
-}
-
-
-/* =========================
-   CAMERA ERROR
-========================= */
-
-function getCameraErrorMessage(error) {
-
-    const text =
-        String(error || "")
-            .toLowerCase();
+        error.style.display =
+            "none";
 
 
-    if (
-        text.includes("permission") ||
-        text.includes("notallowed")
+        status.innerHTML = `
+
+            <span class="status-dot"></span>
+
+            Activando cámara...
+
+        `;
+
+
+        try {
+
+
+            if (
+                qrScanner
+            ) {
+
+                try {
+
+                    await stopQRScanner();
+
+                }
+                catch (e) {}
+
+            }
+
+
+            qrScanner =
+                new Html5Qrcode(
+                    "reader"
+                );
+
+
+            const config = {
+
+                fps:
+                    10,
+
+                qrbox: {
+
+                    width:
+                        250,
+
+                    height:
+                        250
+
+                },
+
+                aspectRatio:
+                    1.0,
+
+                formatsToSupport: [
+
+                    Html5QrcodeSupportedFormats
+                        .QR_CODE
+
+                ]
+
+            };
+
+
+            await qrScanner.start(
+
+                {
+                    facingMode:
+                        "environment"
+                },
+
+                config,
+
+                onQRDetected,
+
+                onQRScanError
+
+            );
+
+
+            scannerRunning =
+                true;
+
+
+            status.innerHTML = `
+
+                <span class="status-dot"></span>
+
+                Apunta la cámara al código QR
+
+            `;
+
+
+        }
+        catch (err) {
+
+
+            console.error(
+                "No se pudo iniciar la cámara:",
+                err
+            );
+
+
+            scannerRunning =
+                false;
+
+
+            status.innerHTML =
+                "📷 No se pudo activar la cámara";
+
+
+            error.textContent =
+                getCameraErrorMessage(
+                    err
+                );
+
+
+            error.style.display =
+                "block";
+
+        }
+
+    }
+
+
+    /* =========================
+       QR DETECTED
+    ========================= */
+
+    async function onQRDetected(
+
+        decodedText,
+        decodedResult
+
     ) {
 
-        return `
-            Debes permitir el acceso a la cámara
-            para escanear tu compra.
+
+        if (
+            lastScannedCode ===
+            decodedText
+        ) {
+
+            return;
+
+        }
+
+
+        lastScannedCode =
+            decodedText;
+
+
+        console.log(
+            "QR detectado:",
+            decodedText
+        );
+
+
+        await stopQRScanner();
+
+
+        showScanResult(
+            decodedText
+        );
+
+
+        await validatePurchaseCode(
+            decodedText
+        );
+
+    }
+
+
+    /* =========================
+       QR ERROR
+    ========================= */
+
+    function onQRScanError(
+        errorMessage
+    ) {
+
+        /*
+         * No mostramos errores
+         * mientras la cámara busca.
+         */
+
+    }
+
+
+    /* =========================
+       STOP SCANNER
+    ========================= */
+
+    async function stopQRScanner() {
+
+
+        if (
+
+            qrScanner &&
+
+            scannerRunning
+
+        ) {
+
+
+            try {
+
+                await qrScanner.stop();
+
+            }
+            catch (error) {
+
+                console.warn(
+                    "Error deteniendo scanner:",
+                    error
+                );
+
+            }
+
+
+            scannerRunning =
+                false;
+
+        }
+
+    }
+
+
+    /* =========================
+       SHOW RESULT
+    ========================= */
+
+    function showScanResult(
+        code
+    ) {
+
+        const result =
+            document.getElementById(
+                "scanResult"
+            );
+
+
+        const resultCode =
+            document.getElementById(
+                "scanResultCode"
+            );
+
+
+        const status =
+            document.getElementById(
+                "scannerStatus"
+            );
+
+
+        resultCode.textContent =
+            code;
+
+
+        result.style.display =
+            "flex";
+
+
+        status.innerHTML = `
+
+            ✓ Código leído correctamente
+
         `;
 
     }
 
 
-    if (
-        text.includes("notfound") ||
-        text.includes("device")
+    /* =========================
+       VALIDATE PURCHASE CODE
+    ========================= */
+
+    async function validatePurchaseCode(
+        code
     ) {
 
-        return `
-            No encontramos una cámara disponible
-            en este dispositivo.
-        `;
 
-    }
-
-
-    if (
-        text.includes("secure") ||
-        text.includes("https")
-    ) {
-
-        return `
-            La cámara necesita una conexión segura HTTPS.
-        `;
-
-    }
+        const error =
+            document.getElementById(
+                "scannerError"
+            );
 
 
-    return `
-        No fue posible iniciar la cámara.
-        Verifica los permisos del navegador.
-    `;
-
-}
+        const status =
+            document.getElementById(
+                "scannerStatus"
+            );
 
 
-/* =========================
-   RESET UI
-========================= */
-
-function resetScannerUI() {
-
-    lastScannedCode =
-        null;
+        const result =
+            document.getElementById(
+                "scanResult"
+            );
 
 
-    document
-        .getElementById(
-            "scanResult"
-        )
-        .style.display =
-        "none";
+        const resultCode =
+            document.getElementById(
+                "scanResultCode"
+            );
 
 
-    document
-        .getElementById(
-            "scannerError"
-        )
-        .style.display =
-        "none";
+        const promotionFound =
+            document.getElementById(
+                "promotionFound"
+            );
 
 
-    document
-        .getElementById(
-            "manualCodeContainer"
-        )
-        .classList.remove(
+        const promotionBusiness =
+            document.getElementById(
+                "promotionBusiness"
+            );
+
+
+        const promotionName =
+            document.getElementById(
+                "promotionName"
+            );
+
+
+        const promotionDescription =
+            document.getElementById(
+                "promotionDescription"
+            );
+
+
+        const promotionPoints =
+            document.getElementById(
+                "promotionPoints"
+            );
+
+
+        /* =========================
+           LIMPIAR
+        ========================= */
+
+        error.style.display =
+            "none";
+
+
+        promotionFound.classList.remove(
             "show"
         );
 
 
-    document
-        .getElementById(
-            "scannerStatus"
-        )
-        .innerHTML = `
-            <span class="status-dot"></span>
-            Preparando cámara...
+        /* =========================
+           NORMALIZAR
+        ========================= */
+
+        let codigo =
+            String(
+                code || ""
+            )
+            .trim()
+            .toUpperCase();
+
+
+        /*
+         * Si el QR contiene espacios
+         * al principio o al final,
+         * también los eliminamos.
+         */
+
+
+        if (!codigo) {
+
+
+            error.textContent =
+                "Introduce el código de tu promoción.";
+
+
+            error.style.display =
+                "block";
+
+
+            return;
+
+        }
+
+
+        console.log(
+            "Buscando código:",
+            codigo
+        );
+
+
+        /* =========================
+           BUSCANDO
+        ========================= */
+
+        status.innerHTML = `
+
+            🔎 Buscando promoción...
+
         `;
 
 
-}
+        try {
 
 
-/* =========================
-   CLOSE MODAL
-========================= */
+            const promocionesQuery =
+                query(
 
-document
-    .getElementById("closeModal")
-    .addEventListener(
-        "click",
-        async () => {
+                    collection(
+                        db,
+                        "promociones"
+                    ),
 
-            await stopQRScanner();
+                    where(
+                        "codigoPromocion",
+                        "==",
+                        codigo
+                    )
 
-            document
-                .getElementById(
-                    "scanModal"
-                )
-                .classList.remove(
-                    "show"
-                );
-
-        }
-    );
-
-
-/* =========================
-   MANUAL CODE
-========================= */
-
-document
-    .getElementById(
-        "manualCodeButton"
-    )
-    .addEventListener(
-        "click",
-        () => {
-
-            const container =
-                document.getElementById(
-                    "manualCodeContainer"
                 );
 
 
-            container.classList.toggle(
-                "show"
-            );
-
-        }
-    );
-
-
-/* =========================
-   MANUAL VALIDATION
-========================= */
-
-document
-    .getElementById(
-        "validateButton"
-    )
-    .addEventListener(
-        "click",
-        async () => {
-
-            const input =
-                document.getElementById(
-                    "purchaseCode"
+            const snapshot =
+                await getDocs(
+                    promocionesQuery
                 );
 
 
-            const code =
-                input.value.trim();
+            /* =========================
+               NO ENCONTRADO
+            ========================= */
 
-
-            if (!code) {
-
-                const error =
-                    document.getElementById(
-                        "scannerError"
-                    );
+            if (
+                snapshot.empty
+            ) {
 
 
                 error.textContent =
-                    "Introduce el código de tu compra.";
+                    "El código no existe o no es válido.";
 
 
                 error.style.display =
                     "block";
+
+
+                status.innerHTML =
+                    "❌ Código no encontrado";
 
 
                 return;
@@ -2890,93 +3728,603 @@ document
             }
 
 
-            await validatePurchaseCode(
-                code
+            /* =========================
+               PROMOCION
+            ========================= */
+
+            const promoDoc =
+                snapshot.docs[0];
+
+
+            const promo =
+                promoDoc.data();
+
+
+            console.log(
+                "Promoción encontrada:",
+                promo
             );
 
+
+            /* =========================
+               RESULTADO
+            ========================= */
+
+            resultCode.textContent =
+                promo.codigoPromocion ||
+                codigo;
+
+
+            result.style.display =
+                "flex";
+
+
+            status.innerHTML =
+                "✅ Promoción encontrada";
+
+
+            /* =========================
+               MOSTRAR DATOS
+            ========================= */
+
+            promotionBusiness.textContent =
+
+                "🏪 " +
+                (
+                    promo.nombreNegocio ||
+                    "Negocio"
+                );
+
+
+            promotionName.textContent =
+
+                promo.nombre ||
+                "Promoción";
+
+
+            promotionDescription.textContent =
+
+                promo.descripcion ||
+                "Promoción disponible";
+
+
+            const puntos =
+                Number(
+                    promo.puntos || 0
+                );
+
+
+            promotionPoints.textContent =
+
+                "⭐ +" +
+                puntos +
+                " puntos";
+
+
+            promotionFound.classList.add(
+                "show"
+            );
+
+
+            console.log(
+                "ID promoción:",
+                promoDoc.id
+            );
+
+
+            console.log(
+                "Negocio:",
+                promo.nombreNegocio
+            );
+
+
+            console.log(
+                "Promoción:",
+                promo.nombre
+            );
+
+
+            console.log(
+                "Descripción:",
+                promo.descripcion
+            );
+
+
+            console.log(
+                "Puntos:",
+                promo.puntos
+            );
+
+
         }
-    );
+        catch (errorFirebase) {
 
 
-/* =========================
-   CLOSE WHEN CLICK OUTSIDE
-========================= */
+            console.error(
+                "Error validando código:",
+                errorFirebase
+            );
 
-document
-    .getElementById(
-        "scanModal"
-    )
-    .addEventListener(
-        "click",
-        async (event) => {
 
-            if (
-                event.target.id ===
-                "scanModal"
-            ) {
+            error.textContent =
+
+                "No fue posible validar el código. " +
+                "Verifica tu conexión e intenta nuevamente.";
+
+
+            error.style.display =
+                "block";
+
+
+            status.innerHTML =
+                "⚠️ Error de conexión";
+
+        }
+
+    }
+
+
+    /* =========================
+       CAMERA ERROR
+    ========================= */
+
+    function getCameraErrorMessage(
+        error
+    ) {
+
+
+        const text =
+            String(
+                error || ""
+            )
+            .toLowerCase();
+
+
+        if (
+
+            text.includes(
+                "permission"
+            )
+
+            ||
+
+            text.includes(
+                "notallowed"
+            )
+
+        ) {
+
+
+            return `
+
+                Debes permitir el acceso
+                a la cámara para escanear
+                tu compra.
+
+            `;
+
+        }
+
+
+        if (
+
+            text.includes(
+                "notfound"
+            )
+
+            ||
+
+            text.includes(
+                "device"
+            )
+
+        ) {
+
+
+            return `
+
+                No encontramos una cámara
+                disponible en este dispositivo.
+
+            `;
+
+        }
+
+
+        if (
+
+            text.includes(
+                "secure"
+            )
+
+            ||
+
+            text.includes(
+                "https"
+            )
+
+        ) {
+
+
+            return `
+
+                La cámara necesita una
+                conexión segura HTTPS.
+
+            `;
+
+        }
+
+
+        return `
+
+            No fue posible iniciar la cámara.
+            Verifica los permisos del navegador.
+
+        `;
+
+    }
+
+
+    /* =========================
+       RESET SCANNER UI
+    ========================= */
+
+    function resetScannerUI() {
+
+
+        lastScannedCode =
+            null;
+
+
+        document
+            .getElementById(
+                "scanResult"
+            )
+            .style.display =
+            "none";
+
+
+        document
+            .getElementById(
+                "scannerError"
+            )
+            .style.display =
+            "none";
+
+
+        document
+            .getElementById(
+                "promotionFound"
+            )
+            .classList
+            .remove(
+                "show"
+            );
+
+
+        document
+            .getElementById(
+                "manualCodeContainer"
+            )
+            .classList
+            .remove(
+                "show"
+            );
+
+
+        document
+            .getElementById(
+                "purchaseCode"
+            )
+            .value =
+            "";
+
+
+        document
+            .getElementById(
+                "scannerStatus"
+            )
+            .innerHTML = `
+
+                <span class="status-dot"></span>
+
+                Preparando cámara...
+
+            `;
+
+    }
+
+
+    /* =========================
+       CLOSE MODAL
+    ========================= */
+
+    document
+        .getElementById(
+            "closeModal"
+        )
+        .addEventListener(
+
+            "click",
+
+            async () => {
+
 
                 await stopQRScanner();
 
-                event.target
+
+                document
+                    .getElementById(
+                        "scanModal"
+                    )
                     .classList
-                    .remove("show");
+                    .remove(
+                        "show"
+                    );
 
             }
 
-        }
-    );
+        );
 
+
+    /* =========================
+       MANUAL CODE BUTTON
+    ========================= */
+
+    document
+        .getElementById(
+            "manualCodeButton"
+        )
+        .addEventListener(
+
+            "click",
+
+            () => {
+
+
+                const container =
+                    document.getElementById(
+                        "manualCodeContainer"
+                    );
+
+
+                container.classList.toggle(
+                    "show"
+                );
+
+
+                if (
+                    container.classList.contains(
+                        "show"
+                    )
+                ) {
+
+
+                    document
+                        .getElementById(
+                            "purchaseCode"
+                        )
+                        .focus();
+
+                }
+
+            }
+
+        );
+
+
+    /* =========================
+       MANUAL VALIDATION
+    ========================= */
+
+    document
+        .getElementById(
+            "validateButton"
+        )
+        .addEventListener(
+
+            "click",
+
+            async () => {
+
+
+                const input =
+                    document.getElementById(
+                        "purchaseCode"
+                    );
+
+
+                const code =
+                    input.value
+                        .trim()
+                        .toUpperCase();
+
+
+                const error =
+                    document.getElementById(
+                        "scannerError"
+                    );
+
+
+                if (!code) {
+
+
+                    error.textContent =
+                        "Introduce el código de tu compra.";
+
+
+                    error.style.display =
+                        "block";
+
+
+                    input.focus();
+
+
+                    return;
+
+                }
+
+
+                error.style.display =
+                    "none";
+
+
+                await validatePurchaseCode(
+                    code
+                );
+
+            }
+
+        );
+
+
+    /* =========================
+       ENTER EN INPUT
+    ========================= */
+
+    document
+        .getElementById(
+            "purchaseCode"
+        )
+        .addEventListener(
+
+            "keydown",
+
+            async (event) => {
+
+
+                if (
+                    event.key ===
+                    "Enter"
+                ) {
+
+
+                    event.preventDefault();
+
+
+                    document
+                        .getElementById(
+                            "validateButton"
+                        )
+                        .click();
+
+                }
+
+            }
+
+        );
+
+
+    /* =========================
+       CLOSE OUTSIDE
+    ========================= */
+
+    document
+        .getElementById(
+            "scanModal"
+        )
+        .addEventListener(
+
+            "click",
+
+            async (event) => {
+
+
+                if (
+
+                    event.target.id ===
+                    "scanModal"
+
+                ) {
+
+
+                    await stopQRScanner();
+
+
+                    event.target
+                        .classList
+                        .remove(
+                            "show"
+                        );
+
+                }
+
+            }
+
+        );
 
 
     /* =========================
        NAVIGATION
     ========================= */
 
-    window.goHome = function () {
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    };
+    window.goHome =
+        function () {
 
 
-    window.showPromos = function () {
+            window.scrollTo({
 
-        const element =
-            document.querySelector(
-                ".promo-list"
+                top:
+                    0,
+
+                behavior:
+                    "smooth"
+
+            });
+
+        };
+
+
+    window.showPromos =
+        function () {
+
+
+            const element =
+                document.querySelector(
+                    ".promo-list"
+                );
+
+
+            element.scrollIntoView({
+
+                behavior:
+                    "smooth",
+
+                block:
+                    "center"
+
+            });
+
+        };
+
+
+    window.showHistory =
+        function () {
+
+
+            alert(
+                "La sección de premios estará disponible próximamente."
             );
 
-        element.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-
-    };
+        };
 
 
-    window.showHistory = function () {
-
-        alert(
-            "La sección de premios estará disponible próximamente."
-        );
-
-    };
+    window.showProfile =
+        function () {
 
 
-    window.showProfile = function () {
+            alert(
+                "La sección de perfil estará disponible próximamente."
+            );
 
-        alert(
-            "La sección de perfil estará disponible próximamente."
-        );
-
-    };
+        };
 
 
 </script>
 
-</body>
-</html>
 
+</body>
+
+</html>
+```
